@@ -1,0 +1,2973 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang=""xmlns:th="http://www.thymeleaf.org">
+<!--<![endif]-->
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Packing</title>
+	<meta name="description" content="Sufee Admin - HTML5 Admin Template">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+	<link rel="apple-touch-icon" href="apple-icon.png">
+	<link rel="shortcut icon" href="favicon.ico">
+
+    <link rel="stylesheet"th:href="@{/css/normalize.css}" href="../../static/css/normalize.css">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"href="../../static/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}"href="../../static/css/font-awesome.min.css">
+    <link rel="stylesheet"th:href="@{/css/themify-icons.css}" href="../../static/css/themify-icons.css">
+    <link rel="stylesheet"th:href="@{/css/flag-icon.min.css}" href="../../static/css/flag-icon.min.css">
+    <link rel="stylesheet" th:href="@{/css/cs-skin-elastic.css}"href="../../static/css/cs-skin-elastic.css">
+	<!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
+	<link rel="stylesheet"th:href="@{/scss/style.css}" href="../../static/scss/style.css">
+
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+	<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+	<style type="text/css">
+		.modal-backdrop.show {
+			display: none;
+		}
+
+		td {
+			border: 1px #DDD solid;
+			padding: 5px;
+			cursor: pointer;
+		}
+
+		.selected {
+			background: red;
+		}
+
+		.dataTables_filter {
+			text-align: right;
+		}
+		
+		.col-md-7{
+			padding-left: 78%;
+		}
+		.pagination {
+			
+		}
+
+		.modal {
+			z-index: 999999999;
+		}
+	</style>
+	<script>
+	
+
+	</script>
+	
+	 <style>
+.custom-header-panel{
+    background-color: #004b8e !important;
+    border-color: #004b8e !important;
+    color: white;
+}
+
+
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading {
+  padding: 10px 15px;
+  margin: -15px -15px 15px;
+  font-size: 17.5px;
+  font-weight: 500;      
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-footer {
+  padding: 10px 15px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+} 
+
+.panel-primary {
+  border-color: #428bca;
+}
+
+.panel-primary .panel-heading {
+  color: #ffffff;
+  background-color: #428bca;
+  border-color: #428bca;
+}
+/* This kinda of works but now 
+.panel, .panel-group .panel-heading+.panel-collapse>.panel-body{
+    border: none;
+}
+*/
+.card-header{
+    /* background-color: #004b8e !important; */
+    background-color: #004b8e !important;
+    border-color: #004b8e !important;
+    color: white;
+
+    padding: 10px 15px;
+  /*margin: -15px -15px 15px; */
+
+  font-size: 17.5px;
+  font-weight: 500;      
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+
+ <style type="text/css">
+       
+       #calculate{
+      display:none;
+     }
+    
+        .modal-backdrop.show {
+            display: none;
+        }
+
+        .modal-backdrop.fade {
+            display: none;
+        }
+
+/*
+        div.dataTables_wrapper {
+            width: 100%;
+        }
+*/
+		.selected{
+			background-color: #eee;
+			color: #000;
+		}
+		
+		.dataTables_length, .dataTables_filter {
+			display: none !important;
+		}
+    </style>
+</head>
+
+<body>
+	<!-- Left Panel -->
+
+	<aside id="left-panel" class="left-panel">
+		<nav class="navbar navbar-expand-sm navbar-default">
+
+			<div class="navbar-header">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+					<i class="fa fa-bars"></i>
+				</button>
+				<a class="navbar-brand" href="./">Mas</a>
+				<a class="navbar-brand hidden" href="./">BD</a>
+			</div>
+
+			<div id="main-menu" class="main-menu collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+
+					<h3 class="menu-title">Inquery Info</h3><!-- /.menu-title -->
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Inquery</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="inquery_table.html">Inquery</a></li>
+							<li><a href="inquery_ms_details.html">Inquery Master Details</a></li>
+							<li><a href="inquery_verification.html">Inquery Verification</a></li>
+						</ul>
+					</li>
+
+					<h3 class="menu-title">Buyer Info</h3><!-- /.menu-title -->
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Buyer</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="buyer_data_upload.html">Buyer upload</a></li>
+							<li><a href="buyer_search_design.html">Buyer Search</a></li>
+						</ul>
+					</li>
+
+					<h3 class="menu-title">Design Info</h3><!-- /.menu-title -->
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Design</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="design_table.html">Design</a></li>
+							<li><a href="design_search.html">Design Search</a></li>
+						</ul>
+					</li>
+
+
+
+
+
+					<h3 class="menu-title">Machine Info</h3><!-- /.menu-title -->
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Machine</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="Machine_search.html">Machine List</a></li>
+							<li><a href="Machine_data_upload.html">Machine Upload</a></li>
+						</ul>
+					</li>
+
+					<h3 class="menu-title">Cost Info</h3><!-- /.menu-title -->
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Cost</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="cost_head_search.html">Cost List</a></li>
+							<li><a href="cost_calculation.html">Cost Calculation</a></li>
+							<li><a href="cost_head.html">Cost Head</a></li>
+						</ul>
+					</li>
+
+					<h3 class="menu-title">Item Info</h3><!-- /.menu-title -->
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Item</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="Item_list.html">Item List</a></li>
+							<li><a href="item_type_list.html">Item Type List</a></li>
+							<li><a href="item_type%20(category).html">Item Type Category</a></li>
+							<li><a href="item_entry.html">Item Upload</a></li>
+						</ul>
+					</li>
+					<h3 class="menu-title">Purchase Info</h3><!-- /.menu-title -->
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Purchase</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="Purchase_price_data_upload.html">Purchase Upload</a></li>
+						</ul>
+					</li>
+					<h3 class="menu-title">Specification Info</h3><!-- /.menu-title -->
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Specification</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="Specification_data_upload%20.html">Specification Data Upload</a></li>
+						</ul>
+					</li>
+					<h3 class="menu-title">Supplier Info</h3><!-- /.menu-title -->
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Supplier</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="Supplier_data_upload%20.html">Supplier Data Upload</a></li>
+						</ul>
+					</li>
+					<h3 class="menu-title">UOM Info</h3><!-- /.menu-title -->
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>UOM</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="uom_list.html">UOM List</a></li>
+							<li><a href="uom_upload.html">UOM Upload</a></li>
+						</ul>
+					</li>
+
+
+
+
+				</ul>
+			</div><!-- /.navbar-collapse -->
+		</nav>
+	</aside><!-- /#left-panel -->
+
+	<!-- Left Panel -->
+
+	<!-- Right Panel -->
+
+	<div id="right-panel" class="right-panel">
+
+		<!-- Header-->
+		<header id="header" class="header">
+
+			<div class="header-menu">
+
+				<div class="col-sm-7">
+					<a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
+					<div class="header-left">
+						<button class="search-trigger"><i class="fa fa-search"></i></button>
+						<div class="form-inline">
+							<form class="search-form">
+								<input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
+								<button class="search-close" type="submit"><i class="fa fa-close"></i></button>
+							</form>
+						</div>
+
+
+
+					</div>
+				</div>
+
+				<div class="col-sm-5">
+					<div class="user-area dropdown float-right">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">
+						</a>
+
+						<div class="user-menu dropdown-menu">
+							<a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
+							<a class="nav-link" href="#"><i class="fa fa-power -off"></i>Logout</a>
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+
+		</header><!-- /header -->
+		<!-- Header-->
+		
+		<div class="up-msg">
+			<div class="col-sm-6 text-left">
+				<input type="text" id="display-message" name=""  readonly style="color: limegreen; display: block;border:0px">
+			</div>
+		</div>
+
+		<div class="breadcrumbs">
+			<!--  <div class="col-sm-4">
+				<div class="page-header float-left">
+					<div class="page-title">
+						<h1>Packing From</h1>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-8">
+				<div class="page-header float-right">
+					<div class="page-title">
+						<ol class="breadcrumb text-right">
+							<li><a href="#">Dashboard</a></li>
+							<li><a href="#">Packing Info</a></li>
+							<li class="active">Packing From</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>-->
+<!--		
+=============================================================================
+Search Part
+================================================================================		
+-->		
+<div class="card">
+	<div class="card-header">
+		<strong class="card-title">Packing Search</strong>
+	</div>
+	<div class="card-body">
+					<form id="searchForm"  class="needs-validation" novalidate>
+					
+						<div class="modal-body">
+                				<div class="row">
+									<div class="col-3">
+										<div class="form-group">
+											<label >OrderOwner Type</label>
+											<select class="form-control" id="buyerTypeId" name ="buyerType" placeholder="BuyerType"  >
+												<option value="">Select Type</option>
+												<option	th:each="buyerTypeList:${modelOrderOwnerTypeList}"
+														th:value="${buyerTypeList.orderOwnerTypeId}"
+														th:utext="${buyerTypeList.orderOwnerTypeName}"/>
+			
+											</select>
+										</div>
+									</div>
+								
+									<div class="col-3">
+										<div class="form-group">
+											<label >Buyer/Other Name</label>
+											<select class="form-control" id="buyerId" name ="buyerName" placeholder="BuyerName"  >
+		
+											</select>
+		
+										</div>
+									</div>
+									
+									<div class="col-2">
+										<div class="form-group">
+											<label >Order Type<span style="color:red">*</span></label>
+											<select class="form-control" id="orderTypeId" name="orderType" placeholder="orderType" required >
+												<option value="2">workOrder</option>
+												<option value="1">inquiryOrder</option>
+												
+			
+											</select>
+										</div>
+									</div>
+											
+									<div class="col-2">
+										<div class="form-group">
+											<label class="control-label mb-1">Inquiry/ WorkOrder ID</label>
+											<input  type="text" id="inquiryId" class="form-control" aria-required="true" aria-invalid="false"  name ="inquiryId" placeholder="InquiryId" >
+										</div>
+									</div>
+									
+									<div class="col-2">
+										<div class="form-group">
+										<label >Item</label>
+											<select class="form-control" id="itemId" name ="item" placeholder="Item"  >
+												<option value="">Select Item</option>
+												<option	th:each="itemList:${modelItemList}"
+														th:value="${itemList.itemId}"
+														th:utext="${itemList.itemName}"/>
+			
+											</select>
+										</div>
+									</div>
+									
+								</div>
+								<div class="row">	
+									
+									<div class="col-2">
+										<div class="form-group">
+											<label>From Date</label>
+											<input  type="date" id="startDate" class="form-control"  name ="From Date" >
+											Inquiry/WO Date
+										</div>
+									</div>
+									
+									<div class="col-2">
+										<div class="form-group">
+											<label>To Date</label>
+											<input  type="date" id="endDate" class="form-control"  name ="To Date"  >
+											Inquiry/WO Date
+										</div>
+									</div>
+									
+								<div class="col-1">
+									<div class="form-group">
+											<label class="control-label mb-1">New/Pending</label>
+														<!-- Default checked -->
+										<div class="custom-control custom-checkbox">
+											<input type="checkbox" class="custom-control-input" onClick="onLoadBody()" id="active" name ="active" checked>
+											<label class="custom-control-label" for="active"></label>
+										</div>
+														<!--<input type="checkbox" class="form-control" aria-required="true" aria-invalid="false" th:field="*{active}"-->
+									</div>
+								</div>
+								
+								<div class="col-2">
+										<div class="form-group">
+											<label>Packed From Date</label>
+											<input  type="date" id="packedStartDate" class="form-control"  name ="packed From Date" >
+								
+										</div>
+									</div>
+									
+									<div class="col-2">
+										<div class="form-group">
+											<label>Packed To Date</label>
+											<input  type="date" id="packedEndDate" class="form-control"  name ="packed To Date" >
+									
+										</div>
+									</div>
+								
+
+									<div class="col-3">
+										<div class="form-group">
+											<label >Packed By</label>
+											<select class="form-control" id="packedById" name ="User" placeholder="User"  >
+												<option value="">Select User</option>
+												<option	th:each="userList:${userList}"
+														th:value="${userList.userId}"
+														th:utext="${userList.userName}"/>
+			
+											</select>
+										</div>
+									</div>
+									
+								</div>
+								<div class="row">	
+
+								
+								
+								<div class="col-sm-12 text-right">
+									
+										<input type="submit" value="Populate" class="btn btn-primary" style="margin-top: 24px;">
+										<INPUT TYPE="button" style="margin-top: 24px;" class="btn btn-success" onClick="history.go(0)" value="Refresh" >
+								
+								</div>	
+										
+
+							
+							</div>
+						</div>
+				</form>
+			</div>
+		</div>
+
+		<!-- =======================================  Packing Table-1========================== -->
+<!--
+		<div class="content mt-3">
+			<div class="animated fadeIn">
+				<div class="row">
+					<div class="col-lg-12">
+-->					
+						<div class="card" style="width: 1200px; overflow-y:scroll">
+							<div class="card-header">
+								<strong class="card-title">Packing Data Search</strong>
+							</div>
+							<div class="card-body">
+							<div class="text-right">
+								<input type="text" id="myInput1" onkeyup="myFunction()" placeholder="Search for names">
+							</div>
+							
+								<table id="packingSearchTable" class="table table-striped table-bordered" style="width: 1500px">
+									<thead>
+										<tr>
+											<th scope="col">Order Type</th>
+											<th scope="col">Inquiry ID</th>
+											<th scope="col">Inquiry Date (<span style="font-size:15px">yyyy/mm/dd</span>)</th>
+											<th scope="col">Buyer Name</th>
+											<th scope="col">Inquiry Item ID</th>
+											<th scope="col">Item Name</th>
+											<th scope="col">Inquiry Item Quantity</th>
+											<th scope="col">Production Date (<span style="font-size:15px">yyyy/mm/dd</span>)</th>
+											<th scope="col">Production Qty</th>
+											<th scope="col">Action</th>
+											<th scope="col">Q.C Qty</th>
+											<th scope="col">Mending Qty</th>
+											<th scope="col">Washing Qty</th>
+											<th scope="col">Dying Qty</th>
+											<th scope="col">Finishing Qty</th>
+											<th scope="col">Packing Qty</th>
+											<th scope="col">Packed Qty</th>
+											<th scope="col">UOM</th>
+											<th scope="col">Pending (<span style="font-size:15px">P/Pending, C/Completed</span>)</th>
+											
+											
+									
+											
+										</tr>
+									</thead>
+									<tbody>
+						<!--			
+										<tr >
+											<td scope="row"><a type="text" ></a></td>
+											<td scope="row"><span ></span></td>
+											<td><span ></span></td>
+											<td><span ></span></td>
+											<td><span ></span></td>
+											<td><span ></span></td>
+											<td><span ></span></td>
+											
+											<td>
+												 <a  data-toggle="modal" data-target="#largeModal15"  >Packing Qty</a> 
+											</td>
+											<td><span ></span></td>
+											<td><span ></span></td>
+											<td><span ></span></td>
+											<td><span ></span></td>
+											<td><span ></span></td>
+											<td><span ></span></td>
+											<td class="text-center">
+												<input type="checkbox"  ? 'checked' readonly>
+											</td>
+											<td>
+												<a  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#largeModal" >Packing</a>
+											</td>
+										
+										</tr>
+						-->				
+									</tbody>
+								</table>
+							</div>
+						</div>
+	<!--				
+					</div>
+				</div>
+			</div><!-- .animated -->
+		</div><!-- .content -->
+-->
+		
+		
+		
+		
+		
+	</div><!-- /#right-panel -->
+
+	<!-- Right Panel -->
+
+
+<!--=====================================================================
+			Edit Packing Show Inquiry modal
+=====================================================================-->
+	<div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-md" role="document">
+			<div class="modal-content" style="z-index: 1000000000000">
+				<div class="modal-header">
+					<h5 class="modal-title" id="largeModalLabel">Packing Entry</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form  class="needs-validation" method="post" novalidate="novalidate">
+
+						<div class="row">
+							
+						
+							<div class="col-6">
+								<div class="form-group">
+									<label class="control-label mb-1">Item Name</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="itemName" id="packingItemName" placeholder="ItemName"  readonly>	
+								</div>
+							</div>
+							
+							<div class="col-3" hidden>
+								<div class="form-group">
+									<label class="control-label mb-1">Prod. ID</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" id="packingProductionId"  name="productionId"   placeholder="ProductionId" readonly>	
+								</div>
+							</div>
+													
+						</div>
+
+						<div class="row">
+							
+							<div class="col-5">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Quantity</label>
+									<input type="text" name="packedQty"  class="form-control" aria-required="true" aria-invalid="false" id="packedQty" placeholder="Quantity" >
+								</div>
+							</div>
+							
+							<div class="col-5">
+								<div class="form-group">
+									<label  class="control-label mb-1">UOM</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="uom" id="packingUOMName" placeholder="UOM"  >
+
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							
+							<div class="col-8">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Remarks</label>
+									<textarea rows="3" cols="60" name="Remarks" placeholder="Write Message Here" id="packedRemarks" class="form-control" aria-required="true" aria-invalid="false" >
+									</textarea>
+								</div>
+							</div>
+							
+							<div class="col-3" hidden>
+								<div class="form-group">
+									<label class="control-label mb-1">Packed Qty Max</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" id="packedQtyMax"  name="packedQtyMax"  placeholder="Packed Qty Max" readonly>	
+								</div>
+							</div>
+							
+							
+						</div>
+						<div class="modal-footer">
+							<div class="row">
+								<div class="col-3">
+									<div class="form-group">
+									<label></label>
+									<input type="submit" id="savePacking" value="Done" class="btn btn-primary"  >
+								
+									</div>
+								</div>
+								<div class="col-3">
+									<div class="form-group">
+									<label></label>
+									
+				<!--				<button type="button" class="btn btn-primary btn-sm" value="Cancel" data-dismiss="modal">
+				-->
+									<a href="#" class="btn btn-success" value="Cancel" data-dismiss="modal" style="margin-left: 13px">Cancel</a>
+									</div>
+								</div>
+								
+								
+							</div>
+
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<!--=====================================================================
+				Packing Quantity inquiry modal
+=====================================================================-->
+	
+						<div class="modal fade" id="largeModal15" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+													<div class="modal-dialog modal-lg" role="document">
+														<div class="modal-content">
+															<div class="modal-header">
+																<h5 class="modal-title" id="largeModalLabel">Packing Quantity</h5>
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																	<span aria-hidden="true">&times;</span>
+																</button>
+															</div>
+															<div class="modal-body" style="text-align: left">
+																<form  class="needs-validation" method="post"  novalidate>
+                                            					
+                                             					
+                                             					<!-- =======================================  Packing Quantity Modal Table========================== -->
+																	<div class="content mt-3">
+																		<div class="animated fadeIn">
+																			<div class="row">
+																				<div class="col-lg-12">
+																					<div class="card" style="width: 750px; height:200px; overflow-y:scroll">
+																						<div class="card-header">
+																							<strong class="card-title">Packing Quantity</strong>
+																						</div>
+																						<div class="card-body">
+																							<table id="packingQtyTable" class="table table-striped table-bordered" style="min-width: 700px">
+																								<thead>
+																									<tr>
+																										<th scope="col">Packing Date</th>
+																										<th scope="col">Packing Quantity</th>
+																										<th scope="col">Packing By</th>
+																										<th scope="col">Remarks</th>
+																										<th scope="col">Active</th>
+																										<th scope="col">Action</th>
+																									</tr>
+																								</thead>
+																								<tbody>
+																									<tr >
+																										<td scope="row"><a type="text" ></a></td>
+																										<td scope="row"><span ></span></td>
+																										<td><span ></span></td>
+																									</tr>
+																								</tbody>
+																							</table>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																		</div><!-- .animated -->
+																	</div><!-- .content -->
+                                             	
+                                             	
+                                             	
+                                             	
+                                           <!--				<div class="text-right">
+																<button type="submit" class="btn btn-primary btn-md">
+                                                     			Save
+                                                				</button>
+											-->				</div>
+											
+														
+													<div class="row">
+														<div class="col-4"></div>
+															<div class="col-3">
+																<div class="form-group">
+																	<label  class="control-label mb-1">Total</label>
+																	<input type="text" class="form-control" id="packingResult" name="total" placeholder="total" readonly>
+																</div>
+															</div>
+														<div class="col-4"></div>
+													</div>
+														
+											
+											
+											
+                                        				</form>
+													</div>
+												</div>
+											</div>
+										</div>
+<!--=====================================================================
+				Finishing Quantity inquiry modal
+=====================================================================-->
+	
+						<div class="modal fade" id="largeModal30" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+													<div class="modal-dialog modal-lg" role="document">
+														<div class="modal-content">
+															<div class="modal-header">
+																<h5 class="modal-title" id="largeModalLabel">Finishing Quantity</h5>
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																	<span aria-hidden="true">&times;</span>
+																</button>
+															</div>
+															<div class="modal-body" style="text-align: left">
+																<form  class="needs-validation" method="post"  novalidate>
+                                            					
+                                             					
+                                             					<!-- =======================================  Finishing Quantity Modal Table========================== -->
+																	<div class="content mt-3">
+																		<div class="animated fadeIn">
+																			<div class="row">
+																				<div class="col-lg-12">
+																					<div class="card" style="width: 750px; height:200px; overflow-y:scroll">
+																						<div class="card-header">
+																							<strong class="card-title">Finishing Quantity</strong>
+																						</div>
+																						<div class="card-body">
+																							<table id="finishingQtyTable" class="table table-striped table-bordered" style="min-width: 700px">
+																								<thead>
+																									<tr>
+																										<th scope="col">Finishing Date</th>
+																										<th scope="col">Finished Quantity</th>
+																										<th scope="col">Finished By</th>
+																									</tr>
+																								</thead>
+																								<tbody>
+																				<!--				
+																									<tr >
+																										<td scope="row"><a type="text" ></a></td>
+																										<td scope="row"><span ></span></td>
+																										<td><span ></span></td>
+																									</tr>
+																				-->					
+																								</tbody>
+																							</table>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																		</div><!-- .animated -->
+																	</div><!-- .content -->
+                                             	
+                                             	
+                                             	
+                                             	
+                                           <!--				<div class="text-right">
+																<button type="submit" class="btn btn-primary btn-md">
+                                                     			Save
+                                                				</button>
+											-->				</div>
+											
+														
+													<div class="row">
+														<div class="col-4"></div>
+															<div class="col-3">
+																<div class="form-group">
+																	<label  class="control-label mb-1">Total</label>
+																	<input type="text" class="form-control" id="finishingResult" name="total" placeholder="total" readonly>
+																</div>
+															</div>
+														<div class="col-4"></div>
+													</div>
+														
+											
+											
+											
+                                        				</form>
+													</div>
+												</div>
+											</div>
+										</div>
+												
+<!--=====================================================================
+				Dying Quantity inquiry modal
+=====================================================================-->
+	
+						<div class="modal fade" id="largeModal45" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+													<div class="modal-dialog modal-lg" role="document">
+														<div class="modal-content">
+															<div class="modal-header">
+																<h5 class="modal-title" id="largeModalLabel">Dying Quantity</h5>
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																	<span aria-hidden="true">&times;</span>
+																</button>
+															</div>
+															<div class="modal-body" style="text-align: left">
+																<form  class="needs-validation" method="post"  novalidate>
+                                            					
+                                             					
+                                             					<!-- =======================================  Dying Quantity Modal Table========================== -->
+																	<div class="content mt-3">
+																		<div class="animated fadeIn">
+																			<div class="row">
+																				<div class="col-lg-12">
+																					<div class="card" style="width: 750px; height:200px; overflow-y:scroll">
+																						<div class="card-header">
+																							<strong class="card-title">Dying Quantity</strong>
+																						</div>
+																						<div class="card-body">
+																							<table id="dyingQtyTable" class="table table-striped table-bordered" style="min-width: 700px">
+																								<thead>
+																									<tr>
+																										<th scope="col">Dying Date</th>
+																										<th scope="col">Dying Quantity</th>
+																										<th scope="col">Dying By</th>
+																									</tr>
+																								</thead>
+																								<tbody>
+																		<!--						
+																									<tr >
+																										<td scope="row"><a type="text" ></a></td>
+																										<td scope="row"><span ></span></td>
+																										<td><span ></span></td>
+																									</tr>
+																			-->						
+																								</tbody>
+																							</table>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																		</div><!-- .animated -->
+																	</div><!-- .content -->
+                                             	
+                                             	
+                                             	
+                                             	
+                                           <!--				<div class="text-right">
+																<button type="submit" class="btn btn-primary btn-md">
+                                                     			Save
+                                                				</button>
+											-->				</div>
+											
+														
+													<div class="row">
+														<div class="col-4"></div>
+															<div class="col-3">
+																<div class="form-group">
+																	<label  class="control-label mb-1">Total</label>
+																	<input type="text" class="form-control" name="total" id="dyingResult" placeholder="total" readonly>
+																</div>
+															</div>
+														<div class="col-4"></div>
+													</div>
+														
+											
+											
+											
+                                        				</form>
+													</div>
+												</div>
+											</div>
+										</div>
+												
+<!--=====================================================================
+				Washing Quantity inquiry modal
+=====================================================================-->
+	
+						<div class="modal fade" id="largeModal60" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+													<div class="modal-dialog modal-lg" role="document">
+														<div class="modal-content">
+															<div class="modal-header">
+																<h5 class="modal-title" id="largeModalLabel">Washed Quantity</h5>
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																	<span aria-hidden="true">&times;</span>
+																</button>
+															</div>
+															<div class="modal-body" style="text-align: left">
+																<form  class="needs-validation" method="post"  novalidate>
+                                            					
+                                             					
+                                             					<!-- =======================================  Washing Quantity Modal Table========================== -->
+																	<div class="content mt-3">
+																		<div class="animated fadeIn">
+																			<div class="row">
+																				<div class="col-lg-12">
+																					<div class="card" style="width: 750px; height:200px; overflow-y:scroll">
+																						<div class="card-header">
+																							<strong class="card-title">Washing Quantity</strong>
+																						</div>
+																						<div class="card-body">
+																							<table id="washingQtyTable" class="table table-striped table-bordered" style="min-width: 700px">
+																								<thead>
+																									<tr>
+																										<th scope="col">Washing Date</th>
+																										<th scope="col">Washed Quantity</th>
+																										<th scope="col">Washed By</th>
+																									</tr>
+																								</thead>
+																								<tbody>
+																<!--								
+																									<tr >
+																										<td scope="row"><a type="text" ></a></td>
+																										<td scope="row"><span ></span></td>
+																										<td><span ></span></td>
+																									</tr>
+																	-->								
+																								</tbody>									
+																							</table>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																		</div><!-- .animated -->
+																	</div><!-- .content -->
+                                            <!--				<div class="text-right">
+																<button type="submit" class="btn btn-primary btn-md">
+                                                     			Save
+                                                				</button>
+											-->				</div>	
+											
+														
+													<div class="row">
+														<div class="col-4"></div>
+															<div class="col-3">
+																<div class="form-group">
+																	<label  class="control-label mb-1">Total</label>
+																	<input type="text" class="form-control" name="total" id="washingResult" placeholder="total" readonly>
+																</div>
+															</div>
+														<div class="col-4"></div>
+													</div>
+													
+                                        		</form>
+											</div>
+										</div>
+									</div>
+								</div>
+
+<!--=====================================================================
+				Mending Quantity inquiry modal
+=====================================================================-->
+	
+						<div class="modal fade" id="largeModal75" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+													<div class="modal-dialog modal-lg" role="document">
+														<div class="modal-content">
+															<div class="modal-header">
+																<h5 class="modal-title" id="largeModalLabel">Mended Quantity</h5>
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																	<span aria-hidden="true">&times;</span>
+																</button>
+															</div>
+															<div class="modal-body" style="text-align: left">
+																<form  class="needs-validation" method="post"  novalidate>
+                                            					
+                                             					
+                                             					<!-- =======================================  Mending Quantity Modal Table========================== -->
+																	<div class="content mt-3">
+																		<div class="animated fadeIn">
+																			<div class="row">
+																				<div class="col-lg-12">
+																					<div class="card" style="width: 750px; height:200px; overflow-y:scroll">
+																						<div class="card-header">
+																							<strong class="card-title">Mended Quantity</strong>
+																						</div>
+																						<div class="card-body">
+																							<table id="mendingQtyTable" class="table table-striped table-bordered" style="min-width: 700px">
+																								<thead>
+																									<tr>
+																										<th scope="col">Mended Date</th>
+																										<th scope="col">Mended Quantity</th>
+																										<th scope="col">Mended By</th>
+																									</tr>
+																								</thead>
+																								<tbody>
+																			<!--
+																									<tr >
+																										<td scope="row"><a type="text" ></a></td>
+																										<td scope="row"><span ></span></td>
+																										<td><span ></span></td>
+																									</tr>
+																			-->
+																								</tbody>
+																							</table>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																		</div><!-- .animated -->
+																	</div><!-- .content -->
+											<!--				<div class="text-right">
+																<button type="submit" class="btn btn-primary btn-md">
+                                                     			Save
+                                                				</button>
+											-->				</div>	
+											
+													<div class="row">
+														<div class="col-4"></div>
+															<div class="col-3">
+																<div class="form-group">
+																	<label  class="control-label mb-1">Total</label>
+																	<input type="text" class="form-control" name="total" id="mendingResult"  placeholder="total" readonly>
+																</div>
+															</div>
+														<div class="col-4"></div>
+													</div>
+
+                                        		</form>
+											</div>
+										</div>
+									</div>
+								</div>
+
+<!--=====================================================================
+				QC Quantity inquiry modal
+=====================================================================-->
+	
+						<div class="modal fade" id="largeModal90" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+													<div class="modal-dialog modal-lg" role="document">
+														<div class="modal-content">
+															<div class="modal-header">
+																<h5 class="modal-title" id="largeModalLabel">QC Quantity</h5>
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																	<span aria-hidden="true">&times;</span>
+																</button>
+															</div>
+															<div class="modal-body" style="text-align: left">
+																<form  class="needs-validation" method="post"  novalidate>
+                                            					
+                                             					
+                                             					<!-- =======================================  QC Quantity Modal Table========================== -->
+																	<div class="content mt-3">
+																		<div class="animated fadeIn">
+																			<div class="row">
+																				<div class="col-lg-12">
+																					<div class="card" style="width: 750px; height:200px; overflow-y:scroll">
+																						<div class="card-header">
+																							<strong class="card-title">QC Quantity</strong>
+																						</div>
+																						<div class="card-body">
+																							<table id="qCQtyTable" class="table table-striped table-bordered" style="min-width: 700px">
+																								<thead>
+																									<tr>
+																										<th scope="col">QC Date</th>
+																										<th scope="col">QC Quantity</th>
+																										<th scope="col">QC By</th>
+																									</tr>
+																								</thead>
+																								<tbody>
+																			<!--
+																									<tr >
+																										<td scope="row"><a type="text" ></a></td>
+																										<td scope="row"><span ></span></td>
+																										<td><span ></span></td>
+																									</tr>
+																			-->
+																								</tbody>
+																							</table>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																		</div><!-- .animated -->
+																	</div><!-- .content -->
+										<!--				<div class="text-right">
+																<button type="submit" class="btn btn-primary btn-md">
+                                                     			Save
+                                                				</button>
+											-->				</div>	
+											
+													<div class="row">
+														<div class="col-4"></div>
+															<div class="col-3">
+																<div class="form-group">
+																	<label  class="control-label mb-1">Total</label>
+																	<input type="text" class="form-control" name="total" id="qCResult"  placeholder="total" readonly>
+																</div>
+															</div>
+														<div class="col-4"></div>
+													</div>
+
+                                        		</form>
+											</div>
+										</div>
+									</div>
+								</div>												
+
+
+
+
+
+
+
+
+					
+		
+	<script src="/js/vendor/jquery-2.1.4.min.js"></script>
+	<script src="/js/popper.min.js"></script>
+	<script src="/js/plugins.js"></script>
+	<script src="/js/main.js"></script>
+	<script src="/js/order.js"></script>
+	<script src="/js/lib/data-table/datatables.min.js"></script>
+	<script src="/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+	<script src="/js/lib/data-table/dataTables.buttons.min.js"></script>
+	<script src="/js/lib/data-table/buttons.bootstrap.min.js"></script>
+	<script src="/js/lib/data-table/jszip.min.js"></script>
+	<script src="/js/lib/data-table/pdfmake.min.js"></script>
+	<script src="/js/lib/data-table/vfs_fonts.js"></script>
+	<script src="/js/lib/data-table/buttons.html5.min.js"></script>
+	<script src="/js/lib/data-table/buttons.print.min.js"></script>
+	<script src="/js/lib/data-table/buttons.colVis.min.js"></script>
+	<script src="/js/lib/data-table/datatables-init.js"></script>
+
+
+	<script type="text/javascript">
+	
+/*
+script for Packing table's scroll & filter search
+
+*/
+
+
+/*
+	   $(document).ready(function() {
+           $('#packingSearchTable').DataTable({
+                "scrollX": true,
+              
+           });      
+	});
+*/	
+
+$(document).ready(function(){
+  $("#myInput1").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#packingSearchTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});	
+
+
+
+		
+		
+/*
+script for buyerlist through buyerTypeList
+
+*/
+			
+$('#buyerTypeId').change(
+		        function() {
+		            $.getJSON("/packingSearchList/buyers", {
+		                buyerType : $(this).val(),   
+		                ajax : 'true'
+		            }, function(data) {
+		                var html = '<option value=" ">Select Buyer</option>';
+		                var len = data.length;
+		                
+		                for ( var i = 0; i < len; i++) {
+		                    html += '<option value="' + data[i].orderOwnerId + '">'
+		                            + data[i].ownerName + '</option>';
+		                }
+		                html += '</option>';
+		                $('#buyerId').html(html);
+		            });
+		        });			
+
+/*
+script for saving Packing Data
+
+*/
+		
+	    $("#packingSearchTable").on('click','.tdPackingSearch',function(){
+	    var $row = $(this).closest("tr");   
+	    var itemName = $row.find(".itemName").text();
+	    var productionId = $row.find(".productionId").text();
+	    var buyerId = $row.find(".buyerId").text();
+	    var uomId = $row.find(".uomName").text();
+	    var max = $row.find(".packingQty").text();
+	    
+	     $(".modal-body #packingItemName").val( itemName );
+	     $(".modal-body #packingProductionId").val( productionId );
+	     $(".modal-body #packedQtyMax").val( max );
+	     $(".modal-body #packingUOMName").val( uomId );
+	     //$("#qcItemName").text(id);
+	 	
+		
+		});
+		
+		$('#savePacking').click(function(e) {
+		
+		
+		
+
+			if($("#packedQty").val()<=$("#packedQtyMax").val()){
+		
+		
+			
+			 var formData= { 
+     				 		"packedQty" :$("#packedQty").val(),
+        					"packingProductionId" :$("#packingProductionId").val(),
+        					"packedRemarks" : $("#packedRemarks").val()
+       	 					
+						};
+			 $.ajax({
+		            type : "POST",	    		           
+		             url:"/packingEntry/save",
+		            dataType : 'json',
+			        data: formData,
+		            success: function(result){
+		            	
+		               
+		            	
+		            },
+			 });
+			 
+	}
+	else{
+
+	alert("Quantity cannot cross it's limit. Try Again");
+
+} 		 
+
+			   });
+			   
+			   
+		 $("#packingQtyTable").on('click','.saveEditPackingQty',function(){
+   	     
+	    	
+	    		 var $row = $(this).closest("tr");    // Find the row
+	    		 
+	    		 
+	    		       
+		            
+		               var packingId = $row.find('.packingId').text();
+		               var packedQty = $row.find('.packedQty').text();
+		               var packingActive =  $row.find('.Selectbox').text();
+		               var packedRemarks = $row.find('.packingRemarks').text();
+		        
+		            
+		               
+		               var formData= { 
+		                               //alert("now formdata");
+	    		                       "packingId" : packingId,
+	    			                   "packedQty" : packedQty,
+	    			            	   "packingActive" : packingActive,
+	    			            	   "packedRemarks" : packedRemarks
+	    			                   
+	    			                 };
+	    			         
+	    			          $.ajax({
+	    			          
+   		                               type : "POST",	    		           
+   		                               url:"/packingEditSave/ajax",
+   		                               dataType : 'json',
+   			                           data: formData,
+   		                               success: function(result){  },
+   		                               
+   			                         });   //ajax
+	    		 
+
+
+				$(this).closest("tr").remove();
+        });    //function(packingQtyTable)	   
+			   
+			   
+
+/*
+script for search Packing data
+
+*/	
+
+	
+	
+		$(function () {
+    $('#searchForm').submit(function(e) {
+     // prevent default for submission
+      e.preventDefault();
+      
+   
+	
+		//search();
+		 if($("#buyerTypeId").val()!='' && $("#buyerId").val()!=0 && $("#orderTypeId").val()!='')
+		{
+	
+		search();
+		}
+		else if($("#orderTypeId").val()!='' && $("#startDate").val()!='' && $("#endDate").val()!='')
+		{
+	
+		search();
+		}
+		else if($("#orderTypeId").val()!='' && $("#packedStartDate").val()!='' && $("#packedEndDate").val()!='')
+		{
+
+		searchByPackingDate();
+		}
+		else if($("#orderTypeId").val()!='' && $("#startDate").val()!='')
+		{
+
+		search();
+		}
+		else if($("#orderTypeId").val()!='' && $("#endDate").val()!='')
+		{
+
+		search();
+		}
+		else if($("#orderTypeId").val()!='' && $("#packedStartDate").val()!='')
+		{
+
+		searchByPackingDate();
+		}
+		else if($("#orderTypeId").val()!='' && $("#packedEndDate").val()!='')
+		{
+	
+		searchByPackingDate();
+		}
+		else if($("#orderTypeId").val()!='' && $("#itemId").val()!='')
+		{
+
+		search();
+		}
+		else if($("#orderTypeId").val()!='' && $("#packedById").val()!='')
+		{
+	
+		search();
+		}
+		else if($("#orderTypeId").val()!='' && $("#inquiryId").val()!='')
+		{
+	
+		search();
+		}
+		else
+		{
+		text="Please chose another data";
+		document.getElementById("display-message").value=text;
+		}
+		
+	  });  // submit
+   });   // function	
+	
+	function search()
+	{
+	text="";
+	document.getElementById("display-message").value=text;
+	if($("#orderTypeId").val()==2)
+      {
+         
+      var check=document.getElementById("active");
+      	
+      	if(check.checked==true){      	
+      	pendingWOChdSearch();      	
+      	}	//end nested if
+      	
+      	else{
+      	completedWOChdSearch();     	
+      	} 	//end nested else     	  		
+      }		// end if      
+     
+      else {
+      //orderSearch
+    if($("#orderTypeId").val()==1){
+    	
+      var check=document.getElementById("active");
+      	
+      	if(check.checked==true){
+      	pendingOrderSearch();     	
+      	} 	//end nested if   
+      	
+      	else{      	
+      	completedOrderSearch();    
+        }	// end nested else        
+        
+        }	//end if        
+        
+        }  //  end else
+	
+	}
+	
+	function searchByPackingDate()
+	{
+	text="";
+	document.getElementById("display-message").value=text;
+	if($("#orderTypeId").val()==2)
+      {
+         
+      var check=document.getElementById("active");
+      	
+      	if(check.checked==true){      	
+      	pendingWOChdSearchByPackingDate();      	
+      	}	//end nested if
+      	
+      	else{
+      	completedWOChdSearchByPackingDate();     	
+      	} 	//end nested else     	  		
+      }		// end if      
+     
+      else {
+      //orderSearch
+    if($("#orderTypeId").val()==1){
+    
+      var check=document.getElementById("active");
+      	
+      	if(check.checked==true){
+      	pendingOrderSearchByPackingDate();     	
+      	} 	//end nested if   
+      	
+      	else{      	
+      	completedOrderSearchByPackingDate();    
+        }	// end nested else        
+        
+        }	//end if        
+        
+        }  //  end else
+	
+	}
+
+/*
+	search functions By inquiry/wo date
+*/	
+	
+			
+		function pendingOrderSearch(){
+		
+		
+		// form data capture
+      if($("#startDate").val()!='' & $("#endDate").val()=='')
+		{
+		var formData= { 
+      	"buyerTypeId" :$("#buyerTypeId").val(),
+        "buyerId" :$("#buyerId").val(),
+        "inquiryId" : $("#inquiryId").val(),
+        "packedById" : $("#packedById").val(),
+        "startDate" : $("#startDate").val(),
+        "endDate" : $("#startDate").val(),
+		"itemId"  : $("#itemId").val()
+		
+        
+        };
+		
+		}
+		else if($("#startDate").val()=='' & $("#endDate").val()!='')
+		{
+		 var formData= { 
+      	"buyerTypeId" :$("#buyerTypeId").val(),
+        "buyerId" :$("#buyerId").val(),
+        "inquiryId" : $("#inquiryId").val(),
+        "packedById" : $("#packedById").val(),
+        "startDate" : $("#endDate").val(),
+        "endDate" : $("#endDate").val(),
+		"itemId"  : $("#itemId").val()
+		
+        
+        };        
+		
+		}
+		else{
+		
+		// form data capture
+      var formData= { 
+      	"buyerTypeId" :$("#buyerTypeId").val(),
+        "buyerId" :$("#buyerId").val(),
+        "inquiryId" : $("#inquiryId").val(),
+        "packedById" : $("#packedById").val(),
+        "startDate" : $("#startDate").val(),
+        "endDate" : $("#endDate").val(),
+		"itemId"  : $("#itemId").val()
+		
+        
+        };
+        
+        }
+        
+        //  $('#table tbody').html('');
+        $('#packingSearchTable tbody').empty();
+           
+            $.ajax({
+            type : "GET",
+           // url :  "/api/inquiry_search",
+           url:"/packingController/pendingOrderSearch",
+            dataType : 'json',
+	    data: formData,
+            success: function(result){
+            
+            if(result===null||result.length==0)
+            {
+            alert("No Records are found");
+            
+            }else{
+            
+	     $.each(result, function(i,modelPackingCustomList){
+	     					
+	    var customerRow = '<tr>' +
+	    	'<td>' + '<a>Inquiry Order</a>' + '</td>' +
+			'<td>' + modelPackingCustomList.inquiryId + '</td>' +   			
+			'<td>' + modelPackingCustomList.inquiryDate + '</td>' +
+			'<td>' + modelPackingCustomList.buyerName + '</td>' +
+			'<td class="buyerId" hidden>' + modelPackingCustomList.buyerId + '</td>' + 
+			'<td>' + modelPackingCustomList.inquiryItemQtyId+'</td>' +
+			'<td class="itemName">' + modelPackingCustomList.itemName+'</td>' +
+			'<td>' + modelPackingCustomList.inquiryItemQty +'</td>' +
+			'<td class="productionId" hidden>' + modelPackingCustomList.productionId + '</td>' + 
+			'<td>' + modelPackingCustomList.productionDate + '</td>' +
+			'<td>' + modelPackingCustomList.productionQty + '</td>' +
+	        '<td class="tdPackingSearch">' + '<a  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#largeModal"  > Packing </a>'+ '</td>' +
+			'<td class="tdQCQtySearch" data-toggle="modal" data-target="#largeModal90">' +modelPackingCustomList.qCQtySum + '</td>' +
+			'<td class="tdMendingQtySearch" data-toggle="modal" data-target="#largeModal75">' + modelPackingCustomList.mendingQtySum + '</td>' +
+			'<td class="tdWashingQtySearch" data-toggle="modal" data-target="#largeModal60">' + modelPackingCustomList.washingQtySum + '</td>' +
+			'<td class="tdDyingQtySearch" data-toggle="modal" data-target="#largeModal45">' + modelPackingCustomList.dyingQtySum + '</td>' +
+			'<td class="tdFinishingQtySearch" data-toggle="modal" data-target="#largeModal30">' + modelPackingCustomList.finishedQtySum + '</td>' +
+			'<td class="packingQty">' + modelPackingCustomList.packingQty + '</td>' +
+			'<td class="tdPackingQtySearch" data-toggle="modal" data-target="#largeModal15">' + modelPackingCustomList.packedQtySum + '</td>' +
+			'<td class="uomName">' + modelPackingCustomList.uomName +'</td>' +					        
+			'<td>' +modelPackingCustomList.packingStatus +  '</td>' +
+								         								        
+			'</tr>';
+ 						
+	      $('#packingSearchTable tbody').append(customerRow);
+	   	   					
+		});        // each
+		
+		}
+					 
+		},   // end success
+	error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+										
+        });   // end ajax		
+
+		}	
+		
+		
+		function completedOrderSearch()
+		{
+	
+      
+     // form data capture
+      if($("#startDate").val()!='' & $("#endDate").val()=='')
+		{
+		var formData= { 
+      	"buyerTypeId" :$("#buyerTypeId").val(),
+        "buyerId" :$("#buyerId").val(),
+        "inquiryId" : $("#inquiryId").val(),
+        "packedById" : $("#packedById").val(),
+        "startDate" : $("#startDate").val(),
+        "endDate" : $("#startDate").val(),
+		"itemId"  : $("#itemId").val()
+		
+        
+        };
+		
+		}
+		else if($("#startDate").val()=='' & $("#endDate").val()!='')
+		{
+		 var formData= { 
+      	"buyerTypeId" :$("#buyerTypeId").val(),
+        "buyerId" :$("#buyerId").val(),
+        "inquiryId" : $("#inquiryId").val(),
+        "packedById" : $("#packedById").val(),
+        "startDate" : $("#endDate").val(),
+        "endDate" : $("#endDate").val(),
+		"itemId"  : $("#itemId").val()
+		
+        
+        };        
+		
+		}
+		else{
+		
+		// form data capture
+      var formData= { 
+      	"buyerTypeId" :$("#buyerTypeId").val(),
+        "buyerId" :$("#buyerId").val(),
+        "inquiryId" : $("#inquiryId").val(),
+        "packedById" : $("#packedById").val(),
+        "startDate" : $("#startDate").val(),
+        "endDate" : $("#endDate").val(),
+		"itemId"  : $("#itemId").val()
+		
+        
+        };
+        
+        }
+        
+        //  $('#table tbody').html('');
+        $('#packingSearchTable tbody').empty();
+           
+            $.ajax({
+            type : "GET",
+           // url :  "/api/inquiry_search",
+           url:"/packingController/completedOrderSearch",
+            dataType : 'json',
+	    data: formData,
+            success: function(result){
+            
+               if(result===null||result.length==0)
+            {
+            alert("No Records are found");
+            
+            }else{
+            
+	     $.each(result, function(i,modelPackingCustomList){
+	     
+	   			
+	    var customerRow = '<tr>' +
+	    	'<td>' + '<a>Inquiry Order</a>' + '</td>' +
+			'<td>' + modelPackingCustomList.inquiryId + '</td>' +   			
+			'<td>' + modelPackingCustomList.inquiryDate + '</td>' +
+			'<td>' + modelPackingCustomList.buyerName + '</td>' +
+			'<td class="buyerId" hidden>' + modelPackingCustomList.buyerId + '</td>' + 
+			'<td>' + modelPackingCustomList.inquiryItemQtyId+'</td>' +
+			'<td class="itemName">' + modelPackingCustomList.itemName+'</td>' +
+			'<td>' + modelPackingCustomList.inquiryItemQty +'</td>' +
+			'<td class="productionId" hidden>' + modelPackingCustomList.productionId + '</td>' + 
+			'<td>' + modelPackingCustomList.productionDate + '</td>' +
+			'<td>' + modelPackingCustomList.productionQty + '</td>' +
+	        '<td class="tdPackingSearch">' + '<a  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#largeModal"  > Packing </a>'+ '</td>' +
+			'<td class="tdQCQtySearch" data-toggle="modal" data-target="#largeModal90">' +modelPackingCustomList.qCQtySum + '</td>' +
+			'<td class="tdMendingQtySearch" data-toggle="modal" data-target="#largeModal75">' + modelPackingCustomList.mendingQtySum + '</td>' +
+			'<td class="tdWashingQtySearch" data-toggle="modal" data-target="#largeModal60">' + modelPackingCustomList.washingQtySum + '</td>' +
+			'<td class="tdDyingQtySearch" data-toggle="modal" data-target="#largeModal45">' + modelPackingCustomList.dyingQtySum + '</td>' +
+			'<td class="tdFinishingQtySearch" data-toggle="modal" data-target="#largeModal30">' + modelPackingCustomList.finishedQtySum + '</td>' +
+			'<td class="packingQty">' + modelPackingCustomList.packingQty + '</td>' +
+			'<td class="tdPackingQtySearch" data-toggle="modal" data-target="#largeModal15">' + modelPackingCustomList.packedQtySum + '</td>' +
+			'<td class="uomName">' + modelPackingCustomList.uomName +'</td>' +					        
+			'<td>' +modelPackingCustomList.packingStatus +  '</td>' +
+			
+								        
+			'</tr>';
+									  
+								
+	      $('#packingSearchTable tbody').append(customerRow);
+	   
+			
+		});        // each
+		
+		}
+					 
+		},   // end success
+	error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+								
+        });   // end ajax
+		
+		}
+		
+		
+		function pendingWOChdSearch()
+		{
+	
+	  			 // form data capture
+      if($("#startDate").val()!='' & $("#endDate").val()=='')
+		{
+		var formData= { 
+      	"buyerTypeId" :$("#buyerTypeId").val(),
+        "buyerId" :$("#buyerId").val(),
+        "inquiryId" : $("#inquiryId").val(),
+        "packedById" : $("#packedById").val(),
+        "startDate" : $("#startDate").val(),
+        "endDate" : $("#startDate").val(),
+		"itemId"  : $("#itemId").val()
+		
+        
+        };
+		
+		}
+		else if($("#startDate").val()=='' & $("#endDate").val()!='')
+		{
+		 var formData= { 
+      	"buyerTypeId" :$("#buyerTypeId").val(),
+        "buyerId" :$("#buyerId").val(),
+        "inquiryId" : $("#inquiryId").val(),
+        "packedById" : $("#packedById").val(),
+        "startDate" : $("#endDate").val(),
+        "endDate" : $("#endDate").val(),
+		"itemId"  : $("#itemId").val()
+		
+        
+        };        
+		
+		}
+		else{
+		
+		// form data capture
+      var formData= { 
+      	"buyerTypeId" :$("#buyerTypeId").val(),
+        "buyerId" :$("#buyerId").val(),
+        "inquiryId" : $("#inquiryId").val(),
+        "packedById" : $("#packedById").val(),
+        "startDate" : $("#startDate").val(),
+        "endDate" : $("#endDate").val(),
+		"itemId"  : $("#itemId").val()
+		
+        
+        };
+        
+        }
+        
+         			//  $('#table tbody').html('');
+        			$('#packingSearchTable tbody').empty();
+           
+            		$.ajax({
+            			type : "GET",
+           				// url :  "/api/inquiry_search",
+           				   url:"/packingController/pendingWOSearch",
+            			   dataType : 'json',
+	    				   data: formData,
+            			   success: function(result){
+            			   
+            if(result===null||result.length==0)
+            {
+            alert("No Records are found");
+            
+            }else{
+            			   
+	     				   $.each(result, function(i,modelPackingCustomList){
+					
+	    var customerRow = '<tr>' +
+	    	'<td>' + '<a>Work Order</a>' + '</td>' +
+			'<td>' + modelPackingCustomList.inquiryId + '</td>' +   			
+			'<td>' + modelPackingCustomList.inquiryDate + '</td>' +
+			'<td>' + modelPackingCustomList.buyerName + '</td>' +
+			'<td class="buyerId" hidden>' + modelPackingCustomList.buyerId + '</td>' + 
+			'<td>' + modelPackingCustomList.inquiryItemQtyId+'</td>' +
+			'<td class="itemName">' + modelPackingCustomList.itemName+'</td>' +
+			'<td>' + modelPackingCustomList.inquiryItemQty +'</td>' +
+			'<td class="productionId" hidden>' + modelPackingCustomList.productionId + '</td>' + 
+			'<td>' + modelPackingCustomList.productionDate + '</td>' +
+			'<td>' + modelPackingCustomList.productionQty + '</td>' +
+	        '<td class="tdPackingSearch">' + '<a  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#largeModal"  > Packing </a>'+ '</td>' +
+			'<td class="tdQCQtySearch" data-toggle="modal" data-target="#largeModal90">' +modelPackingCustomList.qCQtySum + '</td>' +
+			'<td class="tdMendingQtySearch" data-toggle="modal" data-target="#largeModal75">' + modelPackingCustomList.mendingQtySum + '</td>' +
+			'<td class="tdWashingQtySearch" data-toggle="modal" data-target="#largeModal60">' + modelPackingCustomList.washingQtySum + '</td>' +
+			'<td class="tdDyingQtySearch" data-toggle="modal" data-target="#largeModal45">' + modelPackingCustomList.dyingQtySum + '</td>' +
+			'<td class="tdFinishingQtySearch" data-toggle="modal" data-target="#largeModal30">' + modelPackingCustomList.finishedQtySum + '</td>' +
+			'<td class="packingQty">' + modelPackingCustomList.packingQty + '</td>' +
+			'<td class="tdPackingQtySearch" data-toggle="modal" data-target="#largeModal15">' + modelPackingCustomList.packedQtySum + '</td>' +
+			'<td class="uomName">' + modelPackingCustomList.uomName +'</td>' +					        
+			'<td>' +modelPackingCustomList.packingStatus +  '</td>' +
+											        
+			'</tr>';
+									  					
+	      $('#packingSearchTable tbody').append(customerRow);
+	      				
+		});        // each
+		
+		}
+					 
+		},   // end success
+	error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+									
+        });   // end ajax 
+              
+		}
+		
+		function completedWOChdSearch()
+		{
+
+	  			// form data capture
+      if($("#startDate").val()!='' & $("#endDate").val()=='')
+		{
+		var formData= { 
+      	"buyerTypeId" :$("#buyerTypeId").val(),
+        "buyerId" :$("#buyerId").val(),
+        "inquiryId" : $("#inquiryId").val(),
+        "packedById" : $("#packedById").val(),
+        "startDate" : $("#startDate").val(),
+        "endDate" : $("#startDate").val(),
+		"itemId"  : $("#itemId").val()
+		
+        
+        };
+		
+		}
+		else if($("#startDate").val()=='' & $("#endDate").val()!='')
+		{
+		 var formData= { 
+      	"buyerTypeId" :$("#buyerTypeId").val(),
+        "buyerId" :$("#buyerId").val(),
+        "inquiryId" : $("#inquiryId").val(),
+        "packedById" : $("#packedById").val(),
+        "startDate" : $("#endDate").val(),
+        "endDate" : $("#endDate").val(),
+		"itemId"  : $("#itemId").val()
+		
+        
+        };        
+		
+		}
+		else{
+		
+		// form data capture
+      var formData= { 
+      	"buyerTypeId" :$("#buyerTypeId").val(),
+        "buyerId" :$("#buyerId").val(),
+        "inquiryId" : $("#inquiryId").val(),
+        "packedById" : $("#packedById").val(),
+        "startDate" : $("#startDate").val(),
+        "endDate" : $("#endDate").val(),
+		"itemId"  : $("#itemId").val()
+		
+        
+        };
+        
+        }
+        
+         			//  $('#table tbody').html('');
+        			$('#packingSearchTable tbody').empty();
+           
+            		$.ajax({
+            			type : "GET",
+           				// url :  "/api/inquiry_search",
+           				   url:"/packingController/completedWOSearch",
+            			   dataType : 'json',
+	    				   data: formData,
+            			   success: function(result){
+            			   
+           if(result===null||result.length==0)
+            {
+            alert("No Records are found");
+            
+            }else{
+            			   
+	     				   $.each(result, function(i,modelPackingCustomList){
+					
+	    var customerRow = '<tr>' +
+	    	'<td>' + '<a>Work Order</a>' + '</td>' +
+			'<td>' + modelPackingCustomList.inquiryId + '</td>' +   			
+			'<td>' + modelPackingCustomList.inquiryDate + '</td>' +
+			'<td>' + modelPackingCustomList.buyerName + '</td>' +
+			'<td class="buyerId" hidden>' + modelPackingCustomList.buyerId + '</td>' + 
+			'<td>' + modelPackingCustomList.inquiryItemQtyId+'</td>' +
+			'<td class="itemName">' + modelPackingCustomList.itemName+'</td>' +
+			'<td>' + modelPackingCustomList.inquiryItemQty +'</td>' +
+			'<td class="productionId" hidden>' + modelPackingCustomList.productionId + '</td>' + 
+			'<td>' + modelPackingCustomList.productionDate + '</td>' +
+			'<td>' + modelPackingCustomList.productionQty + '</td>' +
+	        '<td class="tdPackingSearch">' + '<a  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#largeModal"  > Packing </a>'+ '</td>' +
+			'<td class="tdQCQtySearch" data-toggle="modal" data-target="#largeModal90">' +modelPackingCustomList.qCQtySum + '</td>' +
+			'<td class="tdMendingQtySearch" data-toggle="modal" data-target="#largeModal75">' + modelPackingCustomList.mendingQtySum + '</td>' +
+			'<td class="tdWashingQtySearch" data-toggle="modal" data-target="#largeModal60">' + modelPackingCustomList.washingQtySum + '</td>' +
+			'<td class="tdDyingQtySearch" data-toggle="modal" data-target="#largeModal45">' + modelPackingCustomList.dyingQtySum + '</td>' +
+			'<td class="tdFinishingQtySearch" data-toggle="modal" data-target="#largeModal30">' + modelPackingCustomList.finishedQtySum + '</td>' +
+			'<td class="packingQty">' + modelPackingCustomList.packingQty + '</td>' +
+			'<td class="tdPackingQtySearch" data-toggle="modal" data-target="#largeModal15">' + modelPackingCustomList.packedQtySum + '</td>' +
+			'<td class="uomName">' + modelPackingCustomList.uomName +'</td>' +					        
+			'<td>' +modelPackingCustomList.packingStatus +  '</td>' +
+			
+								        
+			'</tr>';
+									  
+									  			
+	      $('#packingSearchTable tbody').append(customerRow);
+	      
+	     			
+		});        // each
+		
+		}
+					 
+		},   // end success
+	error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+					
+					
+        });   // end ajax 
+		
+		
+		}
+		
+/*
+	search By Packing Date
+
+*/		
+		function pendingOrderSearchByPackingDate(){
+		
+		
+		// form data capture
+      if($("#packedStartDate").val()!='' & $("#packedEndDate").val()=='')
+		{
+		var formData= { 
+      	"buyerTypeId" :$("#buyerTypeId").val(),
+        "buyerId" :$("#buyerId").val(),
+        "inquiryId" : $("#inquiryId").val(),
+        "packedById" : $("#packedById").val(),
+        "startDate" : $("#packedStartDate").val(),
+        "endDate" : $("#packedStartDate").val(),
+		"itemId"  : $("#itemId").val()
+		
+        
+        };
+		
+		}
+		else if($("#packedStartDate").val()=='' & $("#packedEndDate").val()!='')
+		{
+		 var formData= { 
+      	"buyerTypeId" :$("#buyerTypeId").val(),
+        "buyerId" :$("#buyerId").val(),
+        "inquiryId" : $("#inquiryId").val(),
+        "packedById" : $("#packedById").val(),
+        "startDate" : $("#packedEndDate").val(),
+        "endDate" : $("#packedEndDate").val(),
+		"itemId"  : $("#itemId").val()
+		
+        
+        };        
+		
+		}
+		else{
+		
+		// form data capture
+      var formData= { 
+      	"buyerTypeId" :$("#buyerTypeId").val(),
+        "buyerId" :$("#buyerId").val(),
+        "inquiryId" : $("#inquiryId").val(),
+         "packedById" : $("#packedById").val(),
+        "startDate" : $("#packedStartDate").val(),
+        "endDate" : $("#packedEndDate").val(),
+		"itemId"  : $("#itemId").val()
+		
+        
+        };
+        
+        }
+        
+        //  $('#table tbody').html('');
+        $('#packingSearchTable tbody').empty();
+           
+            $.ajax({
+            type : "GET",
+           // url :  "/api/inquiry_search",
+           url:"/packingController/pendingOrderSearchByPackingDate",
+            dataType : 'json',
+	    data: formData,
+            success: function(result){
+            
+            if(result===null||result.length==0)
+            {
+            alert("No Records are found");
+            
+            }else{
+            
+	     $.each(result, function(i,modelPackingCustomList){
+	     					
+	    var customerRow = '<tr>' +
+	    	'<td>' + '<a>Inquiry Order</a>' + '</td>' +
+			'<td>' + modelPackingCustomList.inquiryId + '</td>' +   			
+			'<td>' + modelPackingCustomList.inquiryDate + '</td>' +
+			'<td>' + modelPackingCustomList.buyerName + '</td>' +
+			'<td class="buyerId" hidden>' + modelPackingCustomList.buyerId + '</td>' + 
+			'<td>' + modelPackingCustomList.inquiryItemQtyId+'</td>' +
+			'<td class="itemName">' + modelPackingCustomList.itemName+'</td>' +
+			'<td>' + modelPackingCustomList.inquiryItemQty +'</td>' +
+			'<td class="productionId" hidden>' + modelPackingCustomList.productionId + '</td>' + 
+			'<td>' + modelPackingCustomList.productionDate + '</td>' +
+			'<td>' + modelPackingCustomList.productionQty + '</td>' +
+	        '<td class="tdPackingSearch">' + '<a  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#largeModal"  > Packing </a>'+ '</td>' +
+			'<td class="tdQCQtySearch" data-toggle="modal" data-target="#largeModal90">' +modelPackingCustomList.qCQtySum + '</td>' +
+			'<td class="tdMendingQtySearch" data-toggle="modal" data-target="#largeModal75">' + modelPackingCustomList.mendingQtySum + '</td>' +
+			'<td class="tdWashingQtySearch" data-toggle="modal" data-target="#largeModal60">' + modelPackingCustomList.washingQtySum + '</td>' +
+			'<td class="tdDyingQtySearch" data-toggle="modal" data-target="#largeModal45">' + modelPackingCustomList.dyingQtySum + '</td>' +
+			'<td class="tdFinishingQtySearch" data-toggle="modal" data-target="#largeModal30">' + modelPackingCustomList.finishedQtySum + '</td>' +
+			'<td class="packingQty">' + modelPackingCustomList.packingQty + '</td>' +
+			'<td class="tdPackedQtySearch" data-toggle="modal" data-target="#largeModal15">' + modelPackingCustomList.packedQtySum + '</td>' +
+			'<td class="uomName">' + modelPackingCustomList.uomName +'</td>' +					        
+			'<td>' +modelPackingCustomList.packingStatus +  '</td>' +
+								         								        
+			'</tr>';
+ 						
+	      $('#packingSearchTable tbody').append(customerRow);
+	   	   					
+		});        // each
+		
+		}
+					 
+		},   // end success
+	error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+										
+        });   // end ajax		
+
+		}	
+		
+		
+		function completedOrderSearchByPackingDate()
+		{
+		
+      
+    	// form data capture
+      if($("#packedStartDate").val()!='' & $("#packedEndDate").val()=='')
+		{
+		var formData= { 
+      	"buyerTypeId" :$("#buyerTypeId").val(),
+        "buyerId" :$("#buyerId").val(),
+        "inquiryId" : $("#inquiryId").val(),
+        "packedById" : $("#packedById").val(),
+        "startDate" : $("#packedStartDate").val(),
+        "endDate" : $("#packedStartDate").val(),
+		"itemId"  : $("#itemId").val()
+		
+        
+        };
+		
+		}
+		else if($("#packedStartDate").val()=='' & $("#packedEndDate").val()!='')
+		{
+		 var formData= { 
+      	"buyerTypeId" :$("#buyerTypeId").val(),
+        "buyerId" :$("#buyerId").val(),
+        "inquiryId" : $("#inquiryId").val(),
+        "packedById" : $("#packedById").val(),
+        "startDate" : $("#packedEndDate").val(),
+        "endDate" : $("#packedEndDate").val(),
+		"itemId"  : $("#itemId").val()
+		
+        
+        };        
+		
+		}
+		else{
+		
+		// form data capture
+      var formData= { 
+      	"buyerTypeId" :$("#buyerTypeId").val(),
+        "buyerId" :$("#buyerId").val(),
+        "inquiryId" : $("#inquiryId").val(),
+         "packedById" : $("#packedById").val(),
+        "startDate" : $("#packedStartDate").val(),
+        "endDate" : $("#packedEndDate").val(),
+		"itemId"  : $("#itemId").val()
+		
+        
+        };
+        
+        }
+        
+        //  $('#table tbody').html('');
+        $('#packingSearchTable tbody').empty();
+           
+            $.ajax({
+            type : "GET",
+           // url :  "/api/inquiry_search",
+           url:"/packingController/completedOrderSearchByPackingDate",
+            dataType : 'json',
+	    data: formData,
+            success: function(result){
+            
+               if(result===null||result.length==0)
+            {
+            alert("No Records are found");
+            
+            }else{
+            
+	     $.each(result, function(i,modelPackingCustomList){
+	     
+	   			
+	    var customerRow = '<tr>' +
+	    	'<td>' + '<a>Inquiry Order</a>' + '</td>' +
+			'<td>' + modelPackingCustomList.inquiryId + '</td>' +   			
+			'<td>' + modelPackingCustomList.inquiryDate + '</td>' +
+			'<td>' + modelPackingCustomList.buyerName + '</td>' +
+			'<td class="buyerId" hidden>' + modelPackingCustomList.buyerId + '</td>' + 
+			'<td>' + modelPackingCustomList.inquiryItemQtyId+'</td>' +
+			'<td class="itemName">' + modelPackingCustomList.itemName+'</td>' +
+			'<td>' + modelPackingCustomList.inquiryItemQty +'</td>' +
+			'<td class="productionId" hidden>' + modelPackingCustomList.productionId + '</td>' + 
+			'<td>' + modelPackingCustomList.productionDate + '</td>' +
+			'<td>' + modelPackingCustomList.productionQty + '</td>' +
+	        '<td class="tdPackingSearch">' + '<a  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#largeModal"  > Packing </a>'+ '</td>' +
+			'<td class="tdQCQtySearch" data-toggle="modal" data-target="#largeModal90">' +modelPackingCustomList.qCQtySum + '</td>' +
+			'<td class="tdMendingQtySearch" data-toggle="modal" data-target="#largeModal75">' + modelPackingCustomList.mendingQtySum + '</td>' +
+			'<td class="tdWashingQtySearch" data-toggle="modal" data-target="#largeModal60">' + modelPackingCustomList.washingQtySum + '</td>' +
+			'<td class="tdDyingQtySearch" data-toggle="modal" data-target="#largeModal45">' + modelPackingCustomList.dyingQtySum + '</td>' +
+			'<td class="tdFinishingQtySearch" data-toggle="modal" data-target="#largeModal30">' + modelPackingCustomList.finishedQtySum + '</td>' +
+			'<td class="packingQty">' + modelPackingCustomList.packingQty + '</td>' +
+			'<td class="tdPackedQtySearch" data-toggle="modal" data-target="#largeModal15">' + modelPackingCustomList.packedQtySum + '</td>' +
+			'<td class="uomName">' + modelPackingCustomList.uomName +'</td>' +					        
+			'<td>' +modelPackingCustomList.packingStatus +  '</td>' +
+			
+								        
+			'</tr>';
+									  
+								
+	      $('#packingSearchTable tbody').append(customerRow);
+	   
+			
+		});        // each
+		
+		}
+					 
+		},   // end success
+	error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+								
+        });   // end ajax
+		
+		}
+		
+		
+		function pendingWOChdSearchByPackingDate()
+		{
+			
+	  	// form data capture
+      if($("#packedStartDate").val()!='' & $("#packedEndDate").val()=='')
+		{
+		var formData= { 
+      	"buyerTypeId" :$("#buyerTypeId").val(),
+        "buyerId" :$("#buyerId").val(),
+        "inquiryId" : $("#inquiryId").val(),
+        "packedById" : $("#packedById").val(),
+        "startDate" : $("#packedStartDate").val(),
+        "endDate" : $("#packedStartDate").val(),
+		"itemId"  : $("#itemId").val()
+		
+        
+        };
+		
+		}
+		else if($("#packedStartDate").val()=='' & $("#packedEndDate").val()!='')
+		{
+		 var formData= { 
+      	"buyerTypeId" :$("#buyerTypeId").val(),
+        "buyerId" :$("#buyerId").val(),
+        "inquiryId" : $("#inquiryId").val(),
+        "packedById" : $("#packedById").val(),
+        "startDate" : $("#packedEndDate").val(),
+        "endDate" : $("#packedEndDate").val(),
+		"itemId"  : $("#itemId").val()
+		
+        
+        };        
+		
+		}
+		else{
+		
+		// form data capture
+      var formData= { 
+      	"buyerTypeId" :$("#buyerTypeId").val(),
+        "buyerId" :$("#buyerId").val(),
+        "inquiryId" : $("#inquiryId").val(),
+         "packedById" : $("#packedById").val(),
+        "startDate" : $("#packedStartDate").val(),
+        "endDate" : $("#packedEndDate").val(),
+		"itemId"  : $("#itemId").val()
+		
+        
+        };
+        
+        }
+        
+         			//  $('#table tbody').html('');
+        			$('#packingSearchTable tbody').empty();
+           
+            		$.ajax({
+            			type : "GET",
+           				// url :  "/api/inquiry_search",
+           				   url:"/packingController/pendingWOSearchByPackingDate",
+            			   dataType : 'json',
+	    				   data: formData,
+            			   success: function(result){
+            			   
+           if(result===null||result.length==0)
+            {
+            alert("No Records are found");
+            
+            }else{    			   
+            			   
+	     				   $.each(result, function(i,modelPackingCustomList){
+					
+	    var customerRow = '<tr>' +
+	    	'<td>' + '<a>Work Order</a>' + '</td>' +
+			'<td>' + modelPackingCustomList.inquiryId + '</td>' +   			
+			'<td>' + modelPackingCustomList.inquiryDate + '</td>' +
+			'<td>' + modelPackingCustomList.buyerName + '</td>' +
+			'<td class="buyerId" hidden>' + modelPackingCustomList.buyerId + '</td>' + 
+			'<td>' + modelPackingCustomList.inquiryItemQtyId+'</td>' +
+			'<td class="itemName">' + modelPackingCustomList.itemName+'</td>' +
+			'<td>' + modelPackingCustomList.inquiryItemQty +'</td>' +
+			'<td class="productionId" hidden>' + modelPackingCustomList.productionId + '</td>' + 
+			'<td>' + modelPackingCustomList.productionDate + '</td>' +
+			'<td>' + modelPackingCustomList.productionQty + '</td>' +
+	        '<td class="tdPackingSearch">' + '<a  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#largeModal"  > Packing </a>'+ '</td>' +
+			'<td class="tdQCQtySearch" data-toggle="modal" data-target="#largeModal90">' +modelPackingCustomList.qCQtySum + '</td>' +
+			'<td class="tdMendingQtySearch" data-toggle="modal" data-target="#largeModal75">' + modelPackingCustomList.mendingQtySum + '</td>' +
+			'<td class="tdWashingQtySearch" data-toggle="modal" data-target="#largeModal60">' + modelPackingCustomList.washingQtySum + '</td>' +
+			'<td class="tdDyingQtySearch" data-toggle="modal" data-target="#largeModal45">' + modelPackingCustomList.dyingQtySum + '</td>' +
+			'<td class="tdFinishingQtySearch" data-toggle="modal" data-target="#largeModal30">' + modelPackingCustomList.finishedQtySum + '</td>' +
+			'<td class="packingQty">' + modelPackingCustomList.packingQty + '</td>' +
+			'<td class="tdPackedQtySearch" data-toggle="modal" data-target="#largeModal15">' + modelPackingCustomList.packedQtySum + '</td>' +
+			'<td class="uomName">' + modelPackingCustomList.uomName +'</td>' +					        
+			'<td>' +modelPackingCustomList.packingStatus +  '</td>' +
+											        
+			'</tr>';
+									  					
+	      $('#packingSearchTable tbody').append(customerRow);
+	      				
+		});        // each
+		
+		
+		}
+					 
+		},   // end success
+	error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+									
+        });   // end ajax 
+              
+		}
+		
+		function completedWOChdSearchByPackingDate()
+		{
+	
+	  			// form data capture
+      if($("#packedStartDate").val()!='' & $("#packedEndDate").val()=='')
+		{
+		var formData= { 
+      	"buyerTypeId" :$("#buyerTypeId").val(),
+        "buyerId" :$("#buyerId").val(),
+        "inquiryId" : $("#inquiryId").val(),
+        "packedById" : $("#packedById").val(),
+        "startDate" : $("#packedStartDate").val(),
+        "endDate" : $("#packedStartDate").val(),
+		"itemId"  : $("#itemId").val()
+		
+        
+        };
+		
+		}
+		else if($("#packedStartDate").val()=='' & $("#packedEndDate").val()!='')
+		{
+		 var formData= { 
+      	"buyerTypeId" :$("#buyerTypeId").val(),
+        "buyerId" :$("#buyerId").val(),
+        "inquiryId" : $("#inquiryId").val(),
+        "packedById" : $("#packedById").val(),
+        "startDate" : $("#packedEndDate").val(),
+        "endDate" : $("#packedEndDate").val(),
+		"itemId"  : $("#itemId").val()
+		
+        
+        };        
+		
+		}
+		else{
+		
+		// form data capture
+      var formData= { 
+      	"buyerTypeId" :$("#buyerTypeId").val(),
+        "buyerId" :$("#buyerId").val(),
+        "inquiryId" : $("#inquiryId").val(),
+         "packedById" : $("#packedById").val(),
+        "startDate" : $("#packedStartDate").val(),
+        "endDate" : $("#packedEndDate").val(),
+		"itemId"  : $("#itemId").val()
+		
+        
+        };
+        
+        }
+        
+         			//  $('#table tbody').html('');
+        			$('#packingSearchTable tbody').empty();
+           
+            		$.ajax({
+            			type : "GET",
+           				// url :  "/api/inquiry_search",
+           				   url:"/packingController/completedWOSearchByPackingDate",
+            			   dataType : 'json',
+	    				   data: formData,
+            			   success: function(result){
+            			   
+           if(result===null||result.length==0)
+            {
+            alert("No Records are found");
+            
+            }else{    			   
+            			   
+	     				   $.each(result, function(i,modelPackingCustomList){
+					
+	    var customerRow = '<tr>' +
+	    	'<td>' + '<a>Work Order</a>' + '</td>' +
+			'<td>' + modelPackingCustomList.inquiryId + '</td>' +   			
+			'<td>' + modelPackingCustomList.inquiryDate + '</td>' +
+			'<td>' + modelPackingCustomList.buyerName + '</td>' +
+			'<td class="buyerId" hidden>' + modelPackingCustomList.buyerId + '</td>' + 
+			'<td>' + modelPackingCustomList.inquiryItemQtyId+'</td>' +
+			'<td class="itemName">' + modelPackingCustomList.itemName+'</td>' +
+			'<td>' + modelPackingCustomList.inquiryItemQty +'</td>' +
+			'<td class="productionId" hidden>' + modelPackingCustomList.productionId + '</td>' + 
+			'<td>' + modelPackingCustomList.productionDate + '</td>' +
+			'<td>' + modelPackingCustomList.productionQty + '</td>' +
+	        '<td class="tdPackingSearch">' + '<a  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#largeModal"  > Packing </a>'+ '</td>' +
+			'<td class="tdQCQtySearch" data-toggle="modal" data-target="#largeModal90">' +modelPackingCustomList.qCQtySum + '</td>' +
+			'<td class="tdMendingQtySearch" data-toggle="modal" data-target="#largeModal75">' + modelPackingCustomList.mendingQtySum + '</td>' +
+			'<td class="tdWashingQtySearch" data-toggle="modal" data-target="#largeModal60">' + modelPackingCustomList.washingQtySum + '</td>' +
+			'<td class="tdDyingQtySearch" data-toggle="modal" data-target="#largeModal45">' + modelPackingCustomList.dyingQtySum + '</td>' +
+			'<td class="tdFinishingQtySearch" data-toggle="modal" data-target="#largeModal30">' + modelPackingCustomList.finishedQtySum + '</td>' +
+			'<td class="packingQty">' + modelPackingCustomList.packingQty + '</td>' +
+			'<td class="tdPackedQtySearch" data-toggle="modal" data-target="#largeModal15">' + modelPackingCustomList.packedQtySum + '</td>' +
+			'<td class="uomName">' + modelPackingCustomList.uomName +'</td>' +					        
+			'<td>' +modelPackingCustomList.packingStatus +  '</td>' +
+			
+								        
+			'</tr>';
+									  
+									  			
+	      $('#packingSearchTable tbody').append(customerRow);
+	      
+	     			
+		});        // each
+		
+		
+		}
+					 
+		},   // end success
+	error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+					
+					
+        });   // end ajax 
+		
+		
+		}
+		
+		
+		
+	/*
+script for searching QC,Mending,Washing,Dying,Finishing & Packing  QTY data in ajax's search
+
+*/	
+
+	$("#packingSearchTable").on('click','.tdPackedQtySearch',function(){
+	
+	    var $row = $(this).closest("tr");   
+	    var id = $row.find(".productionId").text();
+	
+		if($("#packedStartDate").val()!='' & $("#packedEndDate").val()=='')
+		{
+		   var formData={
+	    	"id":id,
+	    	"startDate" : $("#packedStartDate").val(),
+        	"endDate" : $("#packedStartDate").val()
+	    
+	    };
+		}
+		else if($("#packedStartDate").val()=='' & $("#packedEndDate").val()!='')
+		{
+		 var formData={
+	    	"id":id,
+	    	"startDate" : $("#packedEndDate").val(),
+        	"endDate" : $("#packedEndDate").val()
+	    
+	    };
+		}
+		else{
+	    var formData={
+	    	"id":id,
+	    	"startDate" : $("#packedStartDate").val(),
+        	"endDate" : $("#packedEndDate").val()
+	    
+	    };
+		}
+	   	    
+	    //  $('#table tbody').html('');
+        $('#packingQtyTable tbody').empty();
+		
+		$.ajax({
+		
+		 type : "GET",
+           // url :  "/api/inquiry_search",
+            url:"/packedQuantity/",
+            dataType : 'json',
+	    	data: formData,
+		 success: function(result){
+	     $.each(result, function(i,modelPackingList){
+	     
+	         var customerRow = '<tr>' +
+	    	
+	    	'<td class="packingId" hidden>' +modelPackingList.packingId+  '</td>' +
+			'<td>' +modelPackingList.packingDate+  '</td>' +
+			'<td class="form-control packedQty"  onclick = "update(this.id)" contentEditable>' +modelPackingList.packedQty+  '</td>' +
+			'<td>' +modelPackingList.userName+'('+modelPackingList.packedBy+')' + '</td>' +  
+			'<td class="form-control packingRemarks"  onclick = "update(this.id)" contentEditable>' +modelPackingList.packedRemarks + '</td>' +
+			'<td class="Selectbox text-center" >' +modelPackingList.active+ '</td>' +
+			'<td class="saveEditPackingQty"> <button id="" class="btn btn-success btn-sm" >Save</button>'+'</td>' +  
+								        
+			'</tr>';						
+	      $('#packingQtyTable tbody').append(customerRow);
+	   		//function test();
+	   	     
+	     
+	     	     		
+		});        // each
+		
+		$(calculateSumPacking);
+											 
+		},   // end success
+		error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+							
+		});   // end ajax
+		
+		});
+		
+		
+		
+		$("#packingQtyTable").on('click','.form-control packedQty',function(){
+        function update(id){
+        document.getElementById(id).innerHTML = "<input type = 'text' name = 'txtNewInput' id = 'txtNewInput' value = '" + content + "'/>";
+        }
+    });
+    
+    $("#packingQtyTable").on('click','.form-control packingRemarks',function(){
+        function update(id){
+        document.getElementById(id).innerHTML = "<input type = 'text' name = 'txtNewInput' id = 'txtNewInput' value = '" + content + "'/>";
+        }
+    });
+		
+		
+		
+		
+		$("#packingSearchTable").on('click','.tdPackingQtySearch',function(){
+	
+	    var $row = $(this).closest("tr");   
+	    var id = $row.find(".productionId").text();
+	
+		if($("#packedStartDate").val()!='' & $("#packedEndDate").val()=='')
+		{
+		   var formData={
+	    	"id":id,
+	    	"startDate" : $("#packedStartDate").val(),
+        	"endDate" : $("#packedStartDate").val()
+	    
+	    };
+		}
+		else if($("#packedStartDate").val()=='' & $("#packedEndDate").val()!='')
+		{
+		 var formData={
+	    	"id":id,
+	    	"startDate" : $("#packedEndDate").val(),
+        	"endDate" : $("#packedEndDate").val()
+	    
+	    };
+		}
+		else{
+	    var formData={
+	    	"id":id,
+	    	"startDate" : $("#packedStartDate").val(),
+        	"endDate" : $("#packedEndDate").val()
+	    
+	    };
+		}
+	   	    
+	    //  $('#table tbody').html('');
+        $('#packingQtyTable tbody').empty();
+		
+		$.ajax({
+		
+		 type : "GET",
+           // url :  "/api/inquiry_search",
+            url:"/packingQuantity/",
+            dataType : 'json',
+	    	data: formData,
+		 success: function(result){
+	     $.each(result, function(i,modelPackingList){
+	     
+	         var customerRow = '<tr>' +
+	    	
+			'<td class="packingId" hidden>' +modelPackingList.packingId+  '</td>' +
+			'<td>' +modelPackingList.packingDate+  '</td>' +
+			'<td class="form-control packedQty"  onclick = "update(this.id)" contentEditable>' +modelPackingList.packedQty+  '</td>' +
+			'<td>' +modelPackingList.userName+'('+modelPackingList.packedBy+')' + '</td>' +  
+			'<td class="form-control packingRemarks"  onclick = "update(this.id)" contentEditable>' +modelPackingList.packedRemarks + '</td>' +
+			'<td class="Selectbox text-center" >' +modelPackingList.active+ '</td>' +
+			'<td class="saveEditPackingQty"> <button id="" class="btn btn-success btn-sm" >Save</button>'+'</td>' +   
+								        
+			'</tr>';						
+	      $('#packingQtyTable tbody').append(customerRow);
+	   		//function test();
+	   	     
+	     
+	     	     		
+		});        // each
+		
+		$(calculateSumPacking);
+											 
+		},   // end success
+		error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+							
+		});   // end ajax
+		
+		});
+		
+		
+		
+		
+		
+		$("#packingSearchTable").on('click','.tdFinishingQtySearch',function(){
+	
+	    var $row = $(this).closest("tr");   
+	    var id = $row.find(".productionId").text();
+	
+	    var formData={
+	    	"id":id
+	    	
+	    
+	    };
+
+	   	    
+	    //  $('#table tbody').html('');
+        $('#finishingQtyTable tbody').empty();
+		
+		$.ajax({
+		
+		 type : "GET",
+           // url :  "/api/inquiry_search",
+            url:"/finishingQuantity/",
+            dataType : 'json',
+	    	data: formData,
+		 success: function(result){
+	     $.each(result, function(i,modelFinishingList){
+	     
+	         var customerRow = '<tr>' +
+	    	
+			'<td>' +modelFinishingList.finishingDate+  '</td>' +
+			'<td class="finishedQty">' +modelFinishingList.finishedQty+  '</td>' +
+			'<td>' +modelFinishingList.userName+'('+modelFinishingList.finishedBy+')' + '</td>' +  
+								        
+			'</tr>';						
+	      $('#finishingQtyTable tbody').append(customerRow);
+	   		//function test();
+	   	     
+	     
+	     	     		
+		});        // each
+		
+		$(calculateSumFinishing);
+											 
+		},   // end success
+		error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+							
+		});   // end ajax
+		
+		});
+		
+				
+		
+		$("#packingSearchTable").on('click','.tdDyingQtySearch',function(){
+	
+	    var $row = $(this).closest("tr");   
+	    var id = $row.find(".productionId").text();
+	
+	    var formData={
+	    	"id":id
+	    	
+	    
+	    };
+
+	   	    
+	    //  $('#table tbody').html('');
+        $('#dyingQtyTable tbody').empty();
+		
+		$.ajax({
+		
+		 type : "GET",
+           // url :  "/api/inquiry_search",
+            url:"/dyingQuantity/",
+            dataType : 'json',
+	    	data: formData,
+		 success: function(result){
+	     $.each(result, function(i,modelDyingList){
+	     
+	         var customerRow = '<tr>' +
+	    	
+			'<td>' +modelDyingList.dyingDate+  '</td>' +
+			'<td class="dyingQty">' +modelDyingList.dyingQty+  '</td>' +
+			'<td>' +modelDyingList.userName+'('+modelDyingList.dyingBy+')' + '</td>' +   
+								        
+			'</tr>';						
+	      $('#dyingQtyTable tbody').append(customerRow);
+	   		//function test();
+	   	     
+	     
+	     	     		
+		});        // each
+		
+		$(calculateSumDying);
+											 
+		},   // end success
+		error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+							
+		});   // end ajax
+		
+		});
+
+
+$("#packingSearchTable").on('click','.tdWashingQtySearch',function(){
+	
+	    var $row = $(this).closest("tr");   
+	    var id = $row.find(".productionId").text();
+		
+	    var formData={
+	    	"id":id
+	    	
+	    
+	    };
+
+	   	    
+	    //  $('#table tbody').html('');
+        $('#washingQtyTable tbody').empty();
+		
+		$.ajax({
+		
+		 type : "GET",
+           // url :  "/api/inquiry_search",
+            url:"/washingQuantity/",
+            dataType : 'json',
+	    	data: formData,
+		 success: function(result){
+	     $.each(result, function(i,modelWashingList){
+	     
+	         var customerRow = '<tr>' +
+	    	
+			'<td>' +modelWashingList.washingDate+  '</td>' +
+			'<td class="washedQty">' +modelWashingList.washedQty+  '</td>' +
+			'<td>' +modelWashingList.userName+'('+modelWashingList.washedBy+')' + '</td>' +   
+								        
+			'</tr>';						
+	      $('#washingQtyTable tbody').append(customerRow);
+	   		//function test();
+	   	     
+	     
+	     	     		
+		});        // each
+		
+		$(calculateSumWashing);
+											 
+		},   // end success
+		error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+							
+		});   // end ajax
+		
+		});
+	
+	
+	
+	$("#packingSearchTable").on('click','.tdMendingQtySearch',function(){
+	    var $row = $(this).closest("tr");   
+	    var id = $row.find(".productionId").text();
+	    
+	   
+	    var formData={
+	    	"id":id
+	    
+	    };
+	   	    
+	    //  $('#table tbody').html('');
+        $('#mendingQtyTable tbody').empty();
+		
+		$.ajax({
+		
+		 type : "GET",
+           // url :  "/api/inquiry_search",
+            url:"/mendingQuantity/",
+            dataType : 'json',
+	    	data: formData,
+		 success: function(result){
+	     $.each(result, function(i,modelMendingList){
+	     
+	         var customerRow = '<tr>' +
+	    	
+			'<td>' +modelMendingList.mendingDate+  '</td>' +
+			'<td class="mendedQty">' +modelMendingList.mendedQty+  '</td>' +
+			'<td>' +modelMendingList.userName+'('+modelMendingList.mendedBy+')'+ '</td>' +     
+								        
+			'</tr>';						
+	      $('#mendingQtyTable tbody').append(customerRow);
+	   		//function test();
+	   	     
+	     
+	     	     		
+		});        // each
+		
+		$(calculateSumMending);
+											 
+		},   // end success
+		error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+							
+		});   // end ajax
+		
+		});
+	
+	$("#packingSearchTable").on('click','.tdQCQtySearch',function(){
+	    var $row = $(this).closest("tr");   
+	    var id = $row.find(".productionId").text();
+	    
+	
+	    var formData={
+	    	"id":id
+	    
+	    };
+	   	    
+	    //  $('#table tbody').html('');
+        $('#qCQtyTable tbody').empty();
+		
+		$.ajax({
+		
+		 type : "GET",
+           // url :  "/api/inquiry_search",
+            url:"/qCQuantity/",
+            dataType : 'json',
+	    	data: formData,
+		 success: function(result){
+	     $.each(result, function(i,modelQCList){
+	     
+	         var customerRow = '<tr>' +
+	    	
+			'<td>' +modelQCList.qCDate+  '</td>' +
+			'<td class="qCQty">' +modelQCList.qCQty+  '</td>' +
+			'<td>' +modelQCList.userName+'('+modelQCList.qCBy+')' + '</td>' +   
+								        
+			'</tr>';						
+	      $('#qCQtyTable tbody').append(customerRow);
+	   		//function test();
+	   	     
+	     
+	     	     		
+		});        // each
+		
+		$(calculateSumQC);
+											 
+		},   // end success
+		error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+							
+		});   // end ajax
+		
+		});
+		
+		
+		
+		function calculateSumPacking() {
+		
+			var sum = 0;
+			// iterate through each td based on class and add the values
+			$(".packedQty").each(function(i) {
+				
+    			var value = $(this).text();
+    			if(!isNaN(value) && value.length != 0){
+    			sum+=parseFloat(value);
+    			}
+    		
+				});	
+			
+			document.getElementById("packingResult").value=sum; 
+			};
+		
+		
+		
+		
+		function calculateSumFinishing() {
+		
+			var sum = 0;
+			// iterate through each td based on class and add the values
+			$(".finishedQty").each(function(i) {
+				
+    			var value = $(this).text();
+    			if(!isNaN(value) && value.length != 0){
+    			sum+=parseFloat(value);
+    			}
+    		
+				});	
+			
+			document.getElementById("finishingResult").value=sum; 
+			};
+		
+		
+		
+		
+		
+		function calculateSumDying() {
+		
+			var sum = 0;
+			// iterate through each td based on class and add the values
+			$(".dyingQty").each(function(i) {
+				
+    			var value = $(this).text();
+    			if(!isNaN(value) && value.length != 0){
+    			sum+=parseFloat(value);
+    			}
+    		
+				});	
+			
+			document.getElementById("dyingResult").value=sum; 
+			};
+		
+		function calculateSumWashing() {
+		
+			var sum = 0;
+			// iterate through each td based on class and add the values
+			$(".washedQty").each(function(i) {
+				
+    			var value = $(this).text();
+    			if(!isNaN(value) && value.length != 0){
+    			sum+=parseFloat(value);
+    			}
+    		
+				});	
+			
+			document.getElementById("washingResult").value=sum; 
+			};
+		
+		function calculateSumMending() {
+		
+			var sum = 0;
+			// iterate through each td based on class and add the values
+			$(".mendedQty").each(function(i) {
+				
+    			var value = $(this).text();
+    			if(!isNaN(value) && value.length != 0){
+    			sum+=parseFloat(value);
+    			}
+    		
+				});	
+			
+			document.getElementById("mendingResult").value=sum; 
+			};	
+			
+			function calculateSumQC() {
+		
+			var sum = 0;
+			// iterate through each td based on class and add the values
+			$(".qCQty").each(function(i) {
+				
+    			var value = $(this).text();
+    			if(!isNaN(value) && value.length != 0){
+    			sum+=parseFloat(value);
+    			}
+    		
+				});	
+			
+			document.getElementById("qCResult").value=sum; 
+			};	
+
+
+		
+	
+		</script>
+		
+		
+		
+		
+	
+     
+												
+
+</body>
+
+</html>

@@ -1,0 +1,232 @@
+ <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+    <link th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}"
+          href="http://cdn.jsdelivr.net/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css"
+          rel="stylesheet" media="screen" />
+    <link rel="stylesheet" th:href="@{/css/style1.css}" href="../../static/css/style1.css" />
+
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="../../static/css/bootstrap.min.css">
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="../../static/images">
+
+<style type="text/css">
+fieldset, .preview_sql {
+    margin-top: 1em;
+    border-radius: 4px 4px 0 0;
+    -moz-border-radius: 4px 4px 0 0;
+    -webkit-border-radius: 4px 4px 0 0;
+    border: #aaa solid 1px;
+    padding: 0.5em;
+    background: #eee;
+    text-shadow: 1px 1px 2px #fff inset;
+    -moz-box-shadow: 1px 1px 2px #fff inset;
+    -webkit-box-shadow: 1px 1px 2px #fff inset;
+    box-shadow: 1px 1px 2px #fff inset;
+    width:80%;
+   
+}
+
+fieldset,.height{
+   
+   height:50%
+   
+}
+
+
+
+.btn {
+    position: absolute;
+   
+}
+
+
+body  {
+
+  background-image: url("ttt.png");
+
+  background-color: #cccccc;
+}
+</style>
+
+
+
+
+
+</head>
+
+
+
+<body class="background">
+
+<div id="login">
+    <h3 class="text-center text-white pt-5"></h3>
+    <div class="container">
+        <div id="login-row" class="row justify-content-center align-items-center">
+            <div id="login-column" class="col-md-6">
+                <div class="login-box col-md-12">
+                
+                
+	<img src="../../static/images/Mas-Logo.png" style="max-width:200px;max-height:500px; margin-top:0px;" class="mx-auto d-block"
+                     th:src="@{/images/Mas-Logo.png}" />
+                
+                    <form id="login-form"  class="form" th:action="@{/logoncontroller/validateuserpassword}" method="post">
+                       
+                      <center> <fieldset class="">
+                        
+                           <div class="form-group">
+                               <label for="username" class="text-info">User Name:</label>
+                               <input type="text" th:value="${uname}" name="username" id="username" class="form-control" required>
+                               
+                               
+                          </div>
+                        
+                        
+                       
+                           <div class="form-group">
+                            <label for="password" class="text-info">Password:</label><br>
+                            <input type="password" th:value="${password}" name="password" id="password" class="form-control" required>
+                          </div>
+                        
+                     
+                      
+                        
+                        <div class="form-group">
+                        
+							<div classs="row">                              
+                              <div class="col-sm-4 text-right" >
+                        
+                      
+		                              <input type="submit" name="submit" class="checkUserDataBtn btn btn-info btn-md" value="OK">
+		                       
+		                        </div>
+		                    
+		                     <div class="col-sm-8 text-right" >
+		                        
+		                      <a class="btn btn-info btn-md" th:href="@{/logoncontroller/init}">Cancel</a>
+		             				  
+		                        </div>
+		                        
+		                      </div>
+		                      <br/>
+                              
+                          </div>
+                      </div>
+                     
+                        
+             <!--         </div>    -->
+                        </fieldset></center> 
+                        
+                      <center><span th:text="${message}"readonly style="color: red; display:block" role="alert"></span>
+                     
+                      </center>
+                        
+                      
+                        
+                      </form>
+                      
+                      
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+  
+
+
+
+       
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!--    <script type="text/javascript" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>-->
+
+    <script src="/js/vendor/jquery-2.1.4.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/plugins.js"></script>
+    <script src="/js/main.js"></script>
+
+
+    <script src="/js/lib/data-table/datatables.min.js"></script>
+    <script src="/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+    <script src="/js/lib/data-table/dataTables.buttons.min.js"></script>
+    <script src="/js/lib/data-table/buttons.bootstrap.min.js"></script>
+    <script src="/js/lib/data-table/jszip.min.js"></script>
+    <script src="/js/lib/data-table/pdfmake.min.js"></script>
+    <script src="/js/lib/data-table/vfs_fonts.js"></script>
+    <script src="/js/lib/data-table/buttons.html5.min.js"></script>
+    <script src="/js/lib/data-table/buttons.print.min.js"></script>
+    <script src="/js/lib/data-table/buttons.colVis.min.js"></script>
+    <script src="/js/lib/data-table/datatables-init.js"></script>
+
+
+
+
+
+
+
+
+<script>
+/*
+ $('.checkUserDataBtn').click(function(e) {
+ 
+  
+   
+    var userName = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+    
+    
+  
+  
+   var formData= { 
+        
+   			     "userName" : userName,
+   			     "password" : password
+   			  
+   			   };
+   			   
+   			   
+   			   
+   			    $.ajax({
+		            type : "GET",	    		           
+		             url:"/logoncontroller/validateuserpassword",
+		            dataType : 'json',
+			        data: formData,
+		            success: function(result){
+		            
+		            
+		          
+		            
+		             	
+		             
+		             
+		            	
+		            }
+		            
+		            
+			 });
+
+ 		       
+   	 });
+  */ 	 
+</script>
+
+
+			<script>
+			
+			  window.onload = function() {
+				  document.getElementById("username").focus();
+				};
+			   
+			</script>
+
+
+
+</body>
+
+
+</html>

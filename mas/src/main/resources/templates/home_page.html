@@ -1,0 +1,329 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html xmlns:th="http://www.thymeleaf.org">
+<!--<![endif]-->
+
+<head>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="../../static/css/bootstrap.min.css">
+
+<style type="text/css">
+
+.w3-left {
+    float: left!important;
+}
+
+.w3-bar {
+    width: 100%;
+    overflow: hidden;
+}
+
+a.topnav-icons.fa-menu {
+    font-size: 22px !important;
+}
+
+.w3-bar .w3-button {
+    white-space: normal;
+}
+
+.w3-bar .w3-bar-item {
+    padding: 8px 16px;
+    float: left;
+    width: auto;
+    border: none;
+    display: block;
+    outline: 0;
+}
+
+.w3-left {
+    float: left!important;
+}
+
+
+.w3-container:after, .w3-container:before, .w3-panel:after, .w3-panel:before, .w3-row:after, .w3-row:before, .w3-row-padding:after, .w3-row-padding:before, .w3-cell-row:before, .w3-cell-row:after, .w3-clear:after, .w3-clear:before, .w3-bar:before, .w3-bar:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.topnav {
+    position: relative;
+    z-index: 2;
+    font-size: 17px;
+    background-color: #5f5f5f;
+    color: #f1f1f1;
+    width: 100%;
+    padding: 0;
+    letter-spacing: 1px;
+    font-family: "Segoe UI",Arial,sans-serif;
+}
+
+
+
+
+</style>
+
+</head>
+
+
+
+<body>
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+   <div class="collapse navbar-collapse w3-card-2 topnav notranslate" id="navbarSupportedContent" style="position: relative;">
+  
+    <ul class="navbar-nav mr-auto">
+ 
+  <li class="nav-item dropdown" >
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Set Up
+        </a>
+        
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <div th:each="s:${listModelUserObjectSetup}"
+              th:value="${s.userObjectId}">
+              <a class="dropdown-item" th:href="${s.modelObject.filePath}"> 
+              <span th:utext="${s.modelObject.objectName}">
+              </span></a>
+        </div>
+          
+        </div>
+        
+   </li>
+  
+   
+   
+      <li class="nav-item dropdown">
+     
+       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Transaction
+        </a>
+        
+         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <div th:each="t:${listModelUserObjectTransaction}"
+              th:value="${t.userObjectId}">
+              <a class="dropdown-item" th:href="${t.modelObject.filePath}"> 
+              <span th:utext="${t.modelObject.objectName}">
+              </span></a>
+        </div>
+          
+        </div>
+      </li>
+      
+      
+          <li class="nav-item dropdown">
+     
+       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Tools
+        </a>
+        
+         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <div th:each="u:${listModelUserObjectTool}"
+              th:value="${u.userObjectId}">
+              <a class="dropdown-item" th:href="${u.modelObject.filePath}"> 
+              <span th:utext="${u.modelObject.objectName}">
+              </span></a>
+        </div>
+          
+        </div>
+      </li>
+      
+      
+      
+         <li class="nav-item dropdown">
+     
+       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Report
+        </a>
+        
+         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <div th:each="r:${listModelUserObjectReport}"
+              th:value="${r.userObjectId}">
+              <a class="dropdown-item" th:href="${r.modelObject.filePath}"> 
+              <span th:utext="${r.modelObject.objectName}">
+              </span></a>
+        </div>
+          
+        </div>
+      </li>
+     
+      
+     <!--
+       <li class="nav-item">
+        <a class="nav-link" href="#">Tools</a>
+      </li>
+      -->
+      
+      <!--
+       <li class="nav-item">
+        <a class="nav-link" href="#">Report</a>
+      </li>
+      -->
+      
+          
+      <li class="nav-item">
+        <a class="nav-link disabled" href="/logoncontroller/init">Logout</a>
+      </li>
+      
+      
+       <!--  
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+   --> 
+  
+  
+   </ul>
+  </div>
+  
+  
+ 
+
+</nav>
+
+
+<!--
+
+
+<div class="w3-card-2 topnav notranslate" id="topnav" style="position: relative;">
+  <div style="overflow:auto;">
+    <div class="w3-bar w3-left" style="width:100%;overflow:hidden;height:44px">
+      
+      <a class="w3-bar-item w3-button" href="" title="">Set Up</a>
+      <a class="w3-bar-item w3-button" href="" title="">Transaction</a>
+      <a class="w3-bar-item w3-button" href="" title="">Tools</a>
+      <a class="w3-bar-item w3-button" href="" title="">Report</a>
+      <a class="w3-bar-item w3-button" href="/logoncontroller/init" title="">Log Out</a></div>
+   
+   </div>
+  
+  </div>
+</div>
+
+
+-->
+
+	<div id="home">
+    <h3 class="text-center text-white pt-5">Home</h3>
+    <div class="container">
+       
+       <form  >
+   
+          <li th:each="modelUserObject:${listModelUserObject}"
+              th:value="${modelUserObject.userObjectId}">
+              <a th:href="${modelUserObject.modelObject.filePath}">
+              <span th:utext="${modelUserObject.modelObject.objectName}">
+              </span>
+              </a>
+          </li> 
+        
+       </form>
+       
+        
+        
+       </div>   <!-- end container -->
+       
+       
+    </div>  <!-- end home -->
+            
+
+
+
+  
+
+
+
+       
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!--    <script type="text/javascript" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>-->
+
+    <script src="/js/vendor/jquery-2.1.4.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/plugins.js"></script>
+    <script src="/js/main.js"></script>
+
+
+    <script src="/js/lib/data-table/datatables.min.js"></script>
+    <script src="/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+    <script src="/js/lib/data-table/dataTables.buttons.min.js"></script>
+    <script src="/js/lib/data-table/buttons.bootstrap.min.js"></script>
+    <script src="/js/lib/data-table/jszip.min.js"></script>
+    <script src="/js/lib/data-table/pdfmake.min.js"></script>
+    <script src="/js/lib/data-table/vfs_fonts.js"></script>
+    <script src="/js/lib/data-table/buttons.html5.min.js"></script>
+    <script src="/js/lib/data-table/buttons.print.min.js"></script>
+    <script src="/js/lib/data-table/buttons.colVis.min.js"></script>
+    <script src="/js/lib/data-table/datatables-init.js"></script>
+
+
+
+
+
+
+
+
+<script>
+/*
+ $('.checkUserDataBtn').click(function(e) {
+ 
+  
+   
+    var userName = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+    
+    
+  
+  
+   var formData= { 
+        
+   			     "userName" : userName,
+   			     "password" : password
+   			  
+   			   };
+   			   
+   			   
+   			   
+   			    $.ajax({
+		            type : "GET",	    		           
+		             url:"/logoncontroller/validateuserpassword",
+		            dataType : 'json',
+			        data: formData,
+		            success: function(result){
+		            
+		            
+		          
+		            
+		             	
+		             
+		             
+		            	
+		            }
+		            
+		            
+			 });
+
+ 		       
+   	 });
+  */ 	 
+</script>
+
+
+
+
+
+
+</body>
+
+
+</html>

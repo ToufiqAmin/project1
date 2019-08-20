@@ -1,0 +1,2661 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html xmlns:th="http://www.thymeleaf.org">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Production</title>
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+   
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/themify-icons.css">
+    <link rel="stylesheet" href="/css/flag-icon.min.css">
+    <link rel="stylesheet" href="/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="/css/lib/datatable/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="/scss/style.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+   
+       
+
+    <style type="text/css">
+    
+    .pagination li:first-child(active){
+    background-color: #Red
+}
+
+.pagination li:hover{
+    cursor: pointer;
+    color:red;
+     border: 1px solid #4CAF50;
+    
+}
+	
+       
+       .pagination-container ul{
+        float:left;
+        padding:8 px 16px;
+        text-decoration: none;       
+
+        color:black;
+     }
+     
+     .pagination-container ul.active{
+        background-color: #Red;             
+        border: 1px solid #4CAF50;
+        color:white;
+     }
+       
+       #calculate{
+     display:none;
+     }
+    
+        .modal-backdrop.show {
+            display: none;
+        }
+
+        .modal-backdrop.fade {
+            display: none;
+        }
+
+/*
+        div.dataTables_wrapper {
+            width: 100%;
+        }
+*/
+		.selected{
+			background-color: #eee;
+			color: #000;
+		}
+		
+		.dataTables_length, .dataTables_filter {
+			display: none !important;
+		}
+    </style>
+    
+    
+    <style>
+.custom-header-panel{
+    background-color: #004b8e !important;
+    border-color: #004b8e !important;
+    color: white;
+}
+
+
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading {
+  padding: 10px 15px;
+  margin: -15px -15px 15px;
+  font-size: 17.5px;
+  font-weight: 500;      
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-footer {
+  padding: 10px 15px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+} 
+
+.panel-primary {
+  border-color: #428bca;
+}
+
+.panel-primary .panel-heading {
+  color: #ffffff;
+  background-color: #428bca;
+  border-color: #428bca;
+}
+/* This kinda of works but now 
+.panel, .panel-group .panel-heading+.panel-collapse>.panel-body{
+    border: none;
+}
+*/
+.card-header{
+    /* background-color: #004b8e !important; */
+    background-color: #004b8e !important;
+    border-color: #004b8e !important;
+    color: white;
+
+    padding: 10px 15px;
+  /*margin: -15px -15px 15px; */
+
+  font-size: 17.5px;
+  font-weight: 500;      
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+
+ <style type="text/css">
+       
+       #calculate{
+      display:none;
+     }
+    
+        .modal-backdrop.show {
+            display: none;
+        }
+
+        .modal-backdrop.fade {
+            display: none;
+        }
+
+/*
+        div.dataTables_wrapper {
+            width: 100%;
+        }
+*/
+		.selected{
+			background-color: #eee;
+			color: #000;
+		}
+		
+		.dataTables_length, .dataTables_filter {
+			display: none !important;
+		}
+    </style>
+
+
+</head>
+
+<body>
+
+
+
+
+<!-- Left Panel -->
+
+	<aside id="left-panel" class="left-panel">
+		<nav class="navbar navbar-expand-sm navbar-default">
+
+			<div class="navbar-header">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+					<i class="fa fa-bars"></i>
+				</button>
+				<a class="navbar-brand" href="./">MLFM</a>
+				<a class="navbar-brand hidden" href="./">BD</a>
+			</div>
+
+			<div id="main-menu" class="main-menu collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+				
+			
+                
+   <li class="menu-item-has-children dropdown" >
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <i class="menu-icon fa fa-laptop"></i>    Set Up
+          </a>
+        
+       <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown" >
+             <li th:each="s:${listModelUserObjectSetup}" 
+                   th:value="${s.userObjectId}">
+            <a class="dropdown-item" th:href="@{${s.modelObject.filePath}+'/'+${s.modelUser.userId}}" >
+               
+                    <span th:utext="${s.modelObject.objectName}">
+                   </span>
+                </a>
+            </li>
+          
+        </ul>
+        
+   </li>
+   
+      
+	 <li class="menu-item-has-children dropdown">
+     
+       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="menu-icon fa fa-laptop"></i> Transaction
+        </a>
+        
+           <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown">
+              <li th:each="t:${listModelUserObjectTransaction}"
+                   th:value="${t.userObjectId}">
+                   
+                   <a class="dropdown-item" th:href="@{${t.modelObject.filePath}+'/'+${t.modelUser.userId}}" >
+                 
+                         <span th:utext="${t.modelObject.objectName}">
+                         </span>
+                      </a>
+              </li>
+          </ul>
+      </li>			
+				
+        	
+		   	
+		<li class="menu-item-has-children dropdown">
+     
+             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="menu-icon fa fa-laptop"></i>   Tools
+             </a>
+        
+            <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown">
+                <li th:each="u:${listModelUserObjectTool}"
+                     th:value="${u.userObjectId}">
+                     
+                           <a class="dropdown-item" th:href="@{${u.modelObject.filePath}+'/'+${u.modelUser.userId}}" >
+                 
+                    <span th:utext="${u.modelObject.objectName}">
+                    </span>
+                 </a>
+               </li>
+          
+            </ul>
+       </li>	
+
+
+		<li class="menu-item-has-children dropdown">
+     
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="menu-icon fa fa-laptop"></i> Report
+              </a>
+        
+              <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown">
+                   <li th:each="r:${listModelUserObjectReport}"
+                        th:value="${r.userObjectId}">
+                        <a class="dropdown-item" th:href="@{${r.modelObject.filePath}+'/'+${r.modelUser.userId}}" >
+                     <!--  <a class="dropdown-item" th:href="${r.modelObject.filePath}"> -->
+                           <span th:utext="${r.modelObject.objectName}">
+                           </span>
+                       </a>
+                   </li>
+          
+              </ul>
+        </li>	
+					
+					
+					
+	             </ul>
+			</div>
+		</nav>
+	</aside>
+
+
+
+	<!-- Left Panel -->
+
+
+
+
+
+    <!-- Left Panel -->
+<!--
+    <aside id="left-panel" class="left-panel">
+		<nav class="navbar navbar-expand-sm navbar-default">
+
+			<div class="navbar-header">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+					<i class="fa fa-bars"></i>
+				</button>
+				<a class="navbar-brand" href="./">Mas</a>
+				<a class="navbar-brand hidden" href="./">BD</a>
+			</div>
+
+			<div id="main-menu" class="main-menu collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					
+					<h3 class="menu-title">Inquery Info</h3>
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Inquery</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="inquery_table.html">Inquery</a></li>
+							<li><a href="inquery_data_upload.html">Inquery Upload</a></li>
+							<li><a href="inquery_ms_details.html">Inquery Master Details</a></li>
+							<li><a href="inquery_verification.html">Inquery Verification</a></li>
+						</ul>
+					</li>
+
+
+					<h3 class="menu-title">Buyer Info</h3>
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Buyer</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="buyer_data_upload.html">Buyer upload</a></li>
+							<li><a href="buyer_search_design.html">Buyer Search</a></li>
+						</ul>
+					</li>
+
+					<h3 class="menu-title">Design Info</h3>
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Design</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="design_table.html">Design</a></li>
+							<li><a href="design_search.html">Design Search</a></li>
+						</ul>
+					</li>
+
+					
+
+					
+					
+					<h3 class="menu-title">Machine Info</h3>
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Machine</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="Machine_search.html">Machine List</a></li>
+							<li><a href="Machine_data_upload.html">Machine Upload</a></li>
+						</ul>
+					</li>
+					
+					<h3 class="menu-title">Cost Info</h3>
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Cost</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="cost_head_search.html">Cost List</a></li>
+							<li><a href="cost_calculation.html">Cost Calculation</a></li>
+							<li><a href="cost_head.html">Cost Head</a></li>
+						</ul>
+					</li>
+					
+					<h3 class="menu-title">Item Info</h3>
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Item</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="Item_list.html">Item List</a></li>
+							<li><a href="item_type_list.html">Item Type List</a></li>
+							<li><a href="item_type%20(category).html">Item Type Category</a></li>
+							<li><a href="item_entry.html">Item Upload</a></li>
+						</ul>
+					</li>
+					<h3 class="menu-title">Purchase Info</h3>
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Purchase</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="Purchase_price_data_upload.html">Purchase Upload</a></li>
+						</ul>
+					</li>
+					<h3 class="menu-title">Specification Info</h3>
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Specification</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="Specification_data_upload%20.html">Specification Data Upload</a></li>
+						</ul>
+					</li>
+					<h3 class="menu-title">Supplier Info</h3>
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Supplier</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="Supplier_data_upload%20.html">Supplier Data Upload</a></li>
+						</ul>
+					</li>
+					<h3 class="menu-title">UOM Info</h3>
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>UOM</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="uom_list.html">UOM List</a></li>
+							<li><a href="uom_upload.html">UOM Upload</a></li>
+						</ul>
+					</li>
+					
+
+
+
+				</ul>
+			</div>
+		</nav>
+	</aside>
+	
+	
+	-->
+
+    <!-- Left Panel -->
+
+    <!-- Right Panel -->
+
+    <div id="" class="right-panel">
+
+        <!-- Header-->
+		<header id="header" class="header">
+
+			<div class="header-menu">
+<!--
+				<div class="col-sm-4">
+					<a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
+					<div class="header-left">
+						<button class="search-trigger"><i class="fa fa-search"></i></button>
+						<div class="form-inline">
+							<form class="search-form">
+								<input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
+								<button class="search-close" type="submit"><i class="fa fa-close"></i></button>
+							</form>
+						</div>
+
+					</div>
+				</div>
+-->
+		<!--
+				<div class="col-sm-5">
+					<div class="user-area dropdown float-right">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">
+                        </a>
+
+						<div class="user-menu dropdown-menu">
+							<a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
+							
+							<input type="text" class="nav-link" th:value="${userId}" id="accessUserId" readonly>
+
+							<a class="nav-link" href="/logoncontroller/init"><i class="fa fa-power -off"></i>Logout</a>
+						</div>
+					</div>
+                </div>
+         -->       
+                  
+                        <div class="col-sm-4 text-right" >
+                         
+                      </div> 
+               
+                    <div class="col-sm-8 text-right" >
+                          
+                           <a class="nav-link" href="/logoncontroller/init"  style="float:right;" ><i class="fa fa-power -off"></i>Logout</a>
+                            <span class="nav-link" th:text="${name}"readonly style="color: black; float:right; padding-left:5px;"></span>  
+                            <span class="nav-link" style="color: black; float:right; padding-right:0px;">User : </span>  
+                           
+                          
+                         
+                       </div>
+                 
+			</div>
+
+		</header><!-- /header -->
+		<!-- Header-->
+		
+        <!--
+        <div class="up-msg">
+			<div class="col-sm-6 text-left">
+				<input type="text" id="displayMessage" name=""  readonly style="color: limegreen; display: block;border:0px">
+			</div>
+		</div>     
+        -->
+        
+        <div class="container">
+
+ <!-- <div class="row">  -->
+
+
+<!-- <div class="col-md-offset-2 col-md-8"> -->
+	
+    <div class="panel">
+      <div class="panel-heading custom-header-panel">
+          <h5 class="panel-title roboto">Search</h3>
+      </div>
+  <div class="panel-body">
+
+  
+  
+  <form id="productionFromSearchId" class="needs-validation" method="post"  novalidate>
+    <div class="modal-body">
+        <div class="row">
+                                       <div class="col-3">
+										    <div class="form-group">
+												<label class="control-label mb-1">Buyer Type</label>
+												<select name="order_owner_Type" id="buyerTypeId" class="form-control" aria-required="true" aria-invalid="false">
+									           <option value="">Choose Type</option> 
+									                      <option th:each="type:${ownerTypeList}"
+											                         th:value="${type.orderOwnerTypeId}"
+											                         th:utext="${type.orderOwnerTypeName}"
+									                       />
+									                   
+							                      </select>
+											</div>
+										</div>
+										
+										 <div class="col-3">
+										    <div class="form-group">
+												<label class="control-label mb-1">Buyer/Other</label>
+												 <select  name="buyer" id="buyerOrOtherId" class="form-control" placeholder="Select" >
+									                     <option value=""> Select Buyer Name</option>
+									
+							                        </select>
+												
+											</div>
+										</div>
+						<!--
+										 <div class="col-3">
+										    <div class="form-group">
+												<label>Ultimate Buyer</label>
+												<select  id="ultimateBuyerId" name="ultimateBuyerName" class="form-control">
+														<option value=""> Select Ultimate Buyer</option>
+														<option th:each="owner:${ownerList}"
+																th:value="${owner.orderOwnerId}"
+																th:text="${owner.ownerName + '-' + owner.orderOwnerType.orderOwnerTypeName}"
+														/option>
+												 </select>
+											</div>
+										</div>
+   						-->
+   						
+   						<!--
+                               	        <div class="col-3">
+										      <div class="form-group">
+												  <label>Order Type</label>
+											  	  <Select  class="form-control"  name="order_type" id="orderTypeId">
+											  	        <Option value="2">Work Order</option>
+												        <Option value="1">Inquiry</option>
+												        
+												  </select>
+									     	  </div>
+										</div>
+							-->			
+										<div class="col-3">
+										
+											<div class="form-group">
+												<label class="control-label mb-1">Inq Id/WO Id</label>
+												<input type="number" class="form-control" placeholder="Inq ID" id="inquiryOrWOId" name="inquery_ID">
+											</div>
+											
+										</div>
+										
+							
+
+			                            <div class="col-3">
+			                              	<div class="form-group">
+					                             <label class="control-label mb-1">PO Date From</label>
+					 	                         <input type="date" class="form-control" id="planStartDateId" value="" name="start_date">
+				                            </div>
+			                            </div>
+			                            
+			                            
+			                         </div>
+			                         
+			                        <div class="row">    
+			                            
+				                        <div class="col-3">
+				                         	<div class="form-group">
+					                        	<label class="control-label mb-1">PO Date To</label>
+						                    	<input type="date" class="form-control" id="planEndDateId" name="end_date">
+					                        </div>
+				                        </div>
+				                        
+
+				                        
+				
+				
+				                       <div class="col-3">
+												
+												<div class="form-group">
+													<label class="control-label mb-1">New/Pending Production</label>
+													<div class="custom-control custom-checkbox">
+														<input type="checkbox" class="custom-control-input" id="plannedId" checked>
+														<label class="custom-control-label" for="plannedId"></label>
+													</div>
+												</div>
+												
+										</div>
+										<div class="col-3">
+								     	</div>
+		                                <div class="col-3">
+	                                        <div class="form-group">
+	                                              <label class="control-label mb-1"></label>
+	                                              <input type="submit" value="Search" class="btn btn-primary" style="margin-top: 24px;">
+	                                              
+	                                               <a class="btn btn-success" style="margin-top: 24px" th:href="@{'/production/'+${userId}}">Refresh</a>									
+	                                        </div>
+                                        </div>
+                                     
+                       </div>
+                                        
+                                     
+		  </div>							
+     </div>
+     
+     
+     
+</form>
+
+
+<!--    ################################################################################ 
+        #                                                                              #
+        #                         Start Inquiry Data table                             #
+        #                                                                              #
+        ################################################################################ 
+-->
+
+
+   <h5> Select </h5>
+				<div class="form-group">
+				 	<select  name="state" id="maxRows" class="form-control" style="width:150px;">
+						
+						<option value="5"> 5</option>
+											
+						<option value="10"> 10</option>
+						<option value="20"> 20</option>
+						<option value="30"> 30</option>
+						<option value="50"> 50</option>
+						<option value="100"> 100</option>
+						<option value="5000"> Show All</option>	
+				 	</select>
+				</div>
+
+ <div class="row">
+			    <div class="col-12">
+                    	<div class="card table-container" style="width: 1070px;">
+                    	        <div class="card-header">
+								<strong class="card-title">Search result</strong>
+								</div>
+							
+                    		<div class="card-body" style="overflow-y: scroll">
+     
+				<table id="inquiryDataTableId" class="table table-striped table-bordered display nowrap" style="width:100%">
+				 <h6 style="color:red; font-size:12px;margin-left:20px" id="ProductionTableSearchMassage" >Click PO Id to get Work Production data</h6>
+					<thead>
+						<tr>
+							<th> PO Id </th>
+						    <th scope="col">PO Date(<span style="font-size:9px">yy-mm-dd</span>)</th>
+						    <th scope="col">Buyer Name</th>
+							<th scope="col">Machine Type</th>
+							<th scope="col" width="200px">Design Id</th>							
+							<th scope="col">Item Name</th>
+							<th scope="col">Febric Type</th>
+							<th scope="col">DTM</th>
+							<th scope="col">PO Qty</th>
+							<th scope="col">Remarks</th>
+							<th scope="col">Active Status</th>
+							<th scope="col">Action</th>
+						    <th scope="col">Action</th>
+						    <th scope="col">Action</th>
+						</tr>
+					</thead>
+						
+					<tbody>
+					<!--
+					     <tr>
+					        <td hidden></td>
+					        <td></td>
+					        <td></td>
+					        <td></td>
+					        <td></td>
+					        <td></td>
+					        <td></td>
+					        <td></td>
+					        <td><a class="btn btn-primary btn-sm">Populate Plan Data</a>	</td>
+					        <td><a type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#manualButtonModal">Manual</a></td>
+						</tr>
+					-->	
+					</tbody>
+						
+				</table>
+				
+				<div class="pagination-container">
+	           			<nav>
+	           			    <ul id="paginationInResultData" class="pagination"></ul>
+				        </nav>
+				</div>
+				
+
+		
+		 </div>
+     </div>
+</div>
+</div>
+
+<!--    ################################################################################ 
+        #                                                                              #
+        #                         End Inquiry Data table                               #
+        #                                                                              #
+        ################################################################################ 
+-->
+
+
+
+
+<!--    ################################################################################ 
+        #                                                                              #
+        #                         Start Production table                               #
+        #                                                                              #
+        ################################################################################ -->
+
+<!--
+<div class="card">
+		<div class="card-header">
+			<strong class="card-title">Production Table </strong>
+		</div>
+	<div class="card-body">
+		
+		<div id="">
+			<div class="card-body">
+		-->	
+			<h5> Select </h5>
+				<div class="form-group">
+				           <select  name="state" id="maxRows2" class="form-control" style="width:150px;">
+									
+									<option value="5"> 5</option>
+																	
+									<option value="10"> 10</option>
+									<option value="20"> 20</option>
+									<option value="30"> 30</option>
+						            <option value="50"> 50</option>
+						            <option value="100"> 100</option>
+									<option value="5000"> Show All</option>	
+				          </select>
+				</div> 
+			
+			 <div class="row">
+			    <div class="col-12">
+                    	<div class="card table-container" style="width: 1070px; ">
+                    	        <div class="card-header">
+								<strong class="card-title">Production Table</strong>
+								</div>
+							
+                    	<div class="card-body" style="overflow-x: scroll">
+                   		
+			<table id="productionTableId" class="table table-striped table-bordered display nowrap" style="width:100%">
+				
+					<thead>
+								
+						<tr>
+						<!--	<th>Production Method</th>  -->
+						    <th scope="col">production Id</th>
+						    <th scope="col">Date(<span style="font-size:9px">yy-mm-dd</span>)</th>
+							<th scope="col">Machine</th>
+							<th scope="col">shift</th>
+					        <th scope="col">Quantity</th>
+					        <th scope="col">Production Ref No</th>
+					        <th scope="col">No Of Stitches</th>
+					        
+					        <th scope="col">Remarks</th>
+					        <th scope="col">Status</th>
+					        <th scope="col">Action</th> 
+					    </tr>
+					</thead>
+						
+					<tbody>
+					     
+					</tbody>
+						
+				</table>
+				<div class="pagination-container">
+	           			<nav>
+	           			    <ul id="paginationInProductionTable" class="pagination"></ul>
+				        </nav>
+				</div>
+				
+				<div class="row">
+                     <div class="col-md-10">                              
+                     </div>
+                   <!--  
+                     <div class="col-md-2">
+                          <form class="form-inline">
+                               <div class="form-group">
+                                   <label for="exampleInputName2">Total Qty:  </label>
+                                   <input type="text" class="form-control" aria-required="true" aria-invalid="false" id="totalQtyId" style="float:right; width:100px" placeholder="Total" readonly/>
+                                </div>
+                           </form>                        	         
+                     </div>
+                     
+                     -->
+                </div>
+				
+<!--    ################################################################################ 
+        #                                                                              #
+        #                         Start Production table                               #
+        #                                                                              #
+        ################################################################################ -->
+        
+        
+
+			</div>
+		</div>
+
+    </div>
+</div>
+
+
+
+<!--    ################################################################################ 
+        #                                                                              #
+        #      Production Button Click Popup Open(Production From)-Start               #
+        #                                                                              #
+        ################################################################################ 
+-->
+<div class="modal fade bd-example-modal-lg" id="productionButtonModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <div class="modal-dialog modal-lg" role="document">
+         <div class="modal-content">
+         
+             <div class="modal-header">
+                  <h5 class="modal-title" id="">Production From</h5>
+                  
+                 <!--  <center><p id="productionSaveMessage" style="color: limegreen; display: block"></p></center>
+                  -->
+                  <h5 class="modal-title" id="productionSaveMessage" style="color: limegreen; font-size:15px; margin-left:150px"></h5>
+                  
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+             </div>
+      
+             <div class="col-md-12">
+	              <div class="productionModalFrom">
+	              
+	              
+	
+   
+               <form class="needs-validation" method="post" novalidate>
+								
+								<div class="row">
+								
+								<div class="col-3" hidden>
+										<div class="form-group">
+											<label class="control-label mb-1">WO Chd Id</label>
+											<input type="text" class="form-control" aria-required="true" aria-invalid="false" id="modalOrderItemQtyId" name="" placeholder=""  readonly>
+											<input type="text" class="form-control" aria-required="true" aria-invalid="false" id="modalProductionPlanChdId" name="" placeholder=""  readonly>
+											<input type="text" class="form-control" aria-required="true" aria-invalid="false" id="modalPOId" name="" placeholder=""  readonly>
+											<input type="text" class="form-control" aria-required="true" aria-invalid="false" id="modalWOChdId" name="" placeholder=""  readonly>
+											<input type="text" class="form-control" aria-required="true" aria-invalid="false" id="modalMachineShiftIdId" name="" placeholder=""  readonly>
+											<input type="text" class="form-control" aria-required="true" aria-invalid="false" id="modalOrderId" name="" placeholder="" readonly>
+											<input type="text" class="form-control" aria-required="true" aria-invalid="false" id="modalDesignId" name="" placeholder="" readonly>
+										</div>
+								</div>
+								
+											<div class="col-3">
+													<div class="form-group">
+														<label class="control-label mb-1">Production Id</label>
+														<input type="text" class="form-control" aria-required="true" aria-invalid="false" id="modalProductionId" name="" placeholder=""  readonly>
+													</div>
+												</div>
+												
+												
+												<div class="col-3">
+                                                    <div class="form-group">
+                                                         <label class="control-label mb-1">Machine Type</label>
+                                                                <select name="machineTypeId" class="form-control" aria-required="true" aria-invalid="false" id="modalMachineTypeId" readonly>
+                                                                        <option value="">Choose Type</option>
+								                                        <option th:each="machine:${machineTypeList}"
+										                                        th:value="${machine.machineTypeId}"
+										                                        th:utext="${machine.machineTypeName}"
+							                                    />
+                                                                </select>
+                                                      </div>
+                                                 </div>
+                                    
+                                                 <div class="col-3">
+                                                     <div class="form-group">
+                                                          <label class="control-label mb-1">Machine Name</label>
+                                                                 <select class="form-control" aria-required="true" aria-invalid="false" id="machineId" name="machineId" >
+                                                                        <option value="">Select Machine</option>
+                                                                  </select>
+                                                      </div>
+                                                 </div>
+                                    
+                                                 <div class="col-3">
+                                                     <div class="form-group">
+                                                          <label class="control-label mb-1">Machine Shift</label>
+                                                                 <select class="form-control" id="machineShiftId" name="machineShiftId" >
+                                                                        <option value="">Select Shift</option>
+                                                                 </select>
+                                                      </div>
+                                                 </div>
+                                                 
+                                           <!--      
+												<div class="col-3">
+													<div class="form-group">
+														<label class="control-label mb-1">Item Name</label>
+														<input type="text" class="form-control" aria-required="true" aria-invalid="false" id="itemNameId" name="" placeholder=""  readonly>
+													</div>
+												</div>
+											-->	
+												<div class="col-3">
+													<div class="form-group">
+														<label class="control-label mb-1">PO Qty</label>
+														<input type="text" class="form-control" aria-required="true" aria-invalid="false" id="modalPOQty" name="" placeholder=""  readonly>
+													</div>
+												</div>
+												
+						        				<!--		
+												<div class="col-3">
+													<div class="form-group">
+														<label class="control-label mb-1">Production Done Qty</label>
+														<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="" placeholder=""  readonly>
+													</div>
+												</div>
+												-->
+												
+												<div class="col-3">
+													<div class="form-group">
+														<label class="control-label mb-1">Production Qty</label>
+														<input type="number" class="form-control" aria-required="true" aria-invalid="false" id="modalProductionQty" name="" placeholder="Qty">
+													</div>
+												</div>
+												
+												<div class="col-3">
+													<div class="form-group">
+														<label class="control-label mb-1">Production Ref No</label>
+														<input type="text" class="form-control" id="modalProductionRefNo" aria-required="true" aria-invalid="false" name="" placeholder="">
+													</div>
+												</div>
+												
+												<div class="col-3">
+													<div class="form-group">
+														<label class="control-label mb-1">No of Stitches(machine) </label>
+														<input type="number" class="form-control" aria-required="true" aria-invalid="false" id="modalNoOfStitchesMachine" name="" placeholder="">
+													</div>
+												</div>
+												
+												<div class="col-3">
+													<div class="form-group">
+														<label class="control-label mb-1">No of Stitches(design) </label>
+														<input type="text" class="form-control" aria-required="true" aria-invalid="false" id="modalNoOfStitches" name="" placeholder="" readonly>
+													</div>
+												</div>
+												
+												<div class="col-3">
+													<div class="form-group">
+														<label>Production Date<span class="req" style="color:red">*</span></label>
+														<input type="date" id="modalProductionDate" class="form-control" name="start_date" required> 
+													</div>
+												</div>
+											
+												<div class="col-4">
+			                                        <div class="form-group">
+			                                        	<label for="" class="control-label mb-1">Remarks</label>
+				                                        	<textarea rows="2" id="modalRemarks" placeholder="Remarks here..."  class="form-control" style="width: 100%" ></textarea>
+			                                        </div>
+		                                        </div>
+												
+												<div class="col-2">
+									                <div class="form-group">
+										                 <label class="control-label mb-1">Active</label>
+														<!-- Default checked -->
+									                  	<div class="custom-control custom-checkbox">
+											                 <input type="checkbox" class="custom-control-input" id="modalActive" name ="active" checked>
+											                 <label class="custom-control-label" for="modalActive"></label>
+										                </div>
+														<!--<input type="checkbox" class="form-control" aria-required="true" aria-invalid="false" th:field="*{active}"-->
+									                </div>
+								                </div>
+								                
+												<div class="col-8">
+												</div>
+												
+												<div class="col-4">
+													<div class="form-group">
+														<label></label>
+													<!--	<input type="button" id="modalProductionSaveBtn" value="Save" class="btn btn-primary" style="margin-top: 24px;"> -->
+													     
+													      <button type="button" class="btn btn-primary" id="modalProductionSaveBtn">Save</button>
+													      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+													</div>
+												</div>
+											
+												
+								   </div>
+				</form>
+										
+										
+             </div>
+             
+          </div>
+          
+       </div>
+       
+    </div>
+    
+</div>
+
+
+
+<!--    ################################################################################ 
+        #                                                                              #
+        #              Production Button Click Popup Open(Production From)-Start       #
+        #                                                                              #
+        ################################################################################ 
+-->
+
+
+<!--    ################################################################################ 
+        #                                                                              #
+        #      Production Button Edit Click Popup Open(Production From)-Start          #
+        #                                                                              #
+        ################################################################################ 
+-->
+<div class="modal fade bd-example-modal-lg" id="productionButtonEditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <div class="modal-dialog modal-lg" role="document">
+         <div class="modal-content">
+         
+             <div class="modal-header">
+                  <h5 class="modal-title" id="">Production From(Edit)</h5>
+                  
+                  <h5 class="modal-title" id="productionEditSaveMessage" style="color: limegreen; font-size:15px; margin-left:150px"></h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+             </div>
+      
+             <div class="col-md-12">
+	              <div class="productionModalFrom">
+	              
+	              
+	
+   
+               <form class="needs-validation" method="post" novalidate>
+								
+								<div class="row">
+								
+								
+											<div class="col-3">
+													<div class="form-group">
+														<label class="control-label mb-1">Production Id</label>
+														<input type="text" class="form-control" aria-required="true" aria-invalid="false" id="modalEditProductionId" name="" placeholder=""  readonly>
+													</div>
+												</div>
+												
+												
+												<div class="col-3">
+                                                    <div class="form-group">
+                                                         <label class="control-label mb-1">Machine Type</label>
+                                                                <select name="machineTypeId" class="form-control" aria-required="true" aria-invalid="false" id="modalMachineTypeId" readonly>
+                                                                        <option value="">Choose Type</option>
+								                                        <option th:each="machine:${machineTypeList}"
+										                                        th:value="${machine.machineTypeId}"
+										                                        th:utext="${machine.machineTypeName}"
+							                                    />
+                                                                </select>
+                                                      </div>
+                                                 </div>
+                                    
+                                                 <div class="col-3">
+                                                     <div class="form-group">
+                                                          <label class="control-label mb-1">Machine Name</label>
+                                                                 <select class="form-control" aria-required="true" aria-invalid="false" id="machineId" name="machineId" >
+                                                                        <option value="">Select Machine</option>
+                                                                  </select>
+                                                      </div>
+                                                 </div>
+                                    
+                                                 <div class="col-3">
+                                                     <div class="form-group">
+                                                          <label class="control-label mb-1">Machine Shift</label>
+                                                                 <select class="form-control" id="machineShiftId" name="machineShiftId" >
+                                                                        <option value="">Select Shift</option>
+                                                                 </select>
+                                                      </div>
+                                                 </div>
+                                                 
+                                      <!--
+												<div class="col-3">
+													<div class="form-group">
+														<label class="control-label mb-1">PO Qty</label>
+														<input type="text" class="form-control" aria-required="true" aria-invalid="false" id="modalEditPOQty" name="" placeholder=""  readonly>
+													</div>
+												</div>
+										-->		
+						        			
+												
+												<div class="col-3">
+													<div class="form-group">
+														<label class="control-label mb-1">Production Qty</label>
+														<input type="number" class="form-control" aria-required="true" aria-invalid="false" id="modalEditProductionQty" name="" placeholder="Qty">
+													</div>
+												</div>
+												
+												<div class="col-3">
+													<div class="form-group">
+														<label class="control-label mb-1">Production Ref No</label>
+														<input type="text" class="form-control" id="modalEditProductionRefNo" aria-required="true" aria-invalid="false" name="" placeholder="">
+													</div>
+												</div>
+												
+												<div class="col-3">
+													<div class="form-group">
+														<label class="control-label mb-1">No of Stitches(machine) </label>
+														<input type="number" class="form-control" aria-required="true" aria-invalid="false" id="modalEditNoOfStitchesMachine" name="" placeholder="">
+													</div>
+												</div>
+												<!--
+												<div class="col-3">
+													<div class="form-group">
+														<label class="control-label mb-1">No of Stitches(design) </label>
+														<input type="text" class="form-control" aria-required="true" aria-invalid="false" id="modalEditNoOfStitches" name="" placeholder="" readonly>
+													</div>
+												</div>
+												-->
+												<div class="col-3">
+													<div class="form-group">
+														<label>Production Date<span class="req" style="color:red">*</span></label>
+														<input type="date" id="modalEditProductionDate" class="form-control" name="start_date" required> 
+													</div>
+												</div>
+											
+												<div class="col-5">
+			                                        <div class="form-group">
+			                                        	<label for="" class="control-label mb-1">Remarks</label>
+				                                        	<textarea rows="2" id="modalEditRemarks" placeholder="Remarks here..."  class="form-control" style="width: 100%" ></textarea>
+			                                        </div>
+		                                        </div>
+												
+												<div class="col-2">
+									                <div class="form-group">
+										                 <label class="control-label mb-1">Active</label>
+											             <div class="custom-control custom-checkbox">
+											                 <input type="checkbox" class="custom-control-input" id="modalEditActive" name ="active">
+											                 <label class="custom-control-label" for="modalEditActive"></label>
+										                </div>
+													 </div>
+								                </div>
+												
+												
+												<div class="col-2">
+													<div class="form-group">
+														<label></label>
+														<input type="button" id="modalEditProductionSaveBtn" value="Save" class="btn btn-primary" style="margin-top: 24px;">
+													</div>
+												</div>
+											
+												
+								   </div>
+				</form>
+										
+										
+             </div>
+             
+          </div>
+          
+       </div>
+       
+    </div>
+    
+</div>
+
+
+
+<!--    ################################################################################ 
+        #                                                                              #
+        #         Production Button Edit Click Popup Open(Production From)-End         #
+        #                                                                              #
+        ################################################################################ 
+-->
+
+
+<!--=====================================================================
+	|                                                                   |
+	|                         Design view Modal(From)-Start             |                                                           
+	|			                                                        |
+    =====================================================================
+-->
+         
+<div class="modal fade" id="designViewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Design View</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+            </button>
+      </div>
+      
+      <div class="modal-body">
+        ...
+      </div>
+      
+    </div>
+  </div>
+</div>
+<!--=====================================================================
+	|                                                                   |
+	|                  Design view Modal(From)-End                      |                                                           
+	|			                                                        |
+    =====================================================================
+-->
+
+
+
+
+<!--    ################################################################################ 
+        #                                                                              #
+        #                               Raw Material Modal(From)-Start                 #
+        #                                                                              #
+        ################################################################################ 
+-->
+<div class="modal fade bd-example-modal-lg" id="rawMaterialModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <div class="modal-dialog modal-lg" role="document">
+         <div class="modal-content">
+         
+             <div class="modal-header">
+                  <h5 class="modal-title" id="">PO Consume</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+             </div>
+      
+             <div class="col-md-12">
+	              <div class="p">
+	              
+	              
+	              			
+<!--    ################################################################################ 
+        #                                                                              #
+        #                         Start raw material table                             #
+        #                                                                              #
+        ################################################################################ -->
+	              
+	                <div class="card">
+		<div class="card-header">
+			<strong class="card-title">PO Consume Table</strong>
+		</div>
+	<div class="card-body">
+		
+		<div id="">
+			<div class="card-body">
+			
+			
+
+        
+				<table id="pOConsumeTableId" class="table table-striped table-bordered" style="min-width:200px">
+					<thead>
+								
+						<tr>
+						    <th scope="col">PO Mst Id</th>
+						    <th scope="col">PO Consum Item Id</th>
+						    <th scope="col">Item Id</th>
+							<th scope="col">Item Qty</th>
+							<th scope="col">Status </th>
+					        <th scope="col">Remarks</th>
+					        
+					    </tr>
+					</thead>
+						
+					<tbody>
+					     
+					</tbody>
+						
+				</table>
+				
+		    </div>
+		</div>
+
+    </div>
+</div>
+	
+<!--    ################################################################################ 
+        #                                                                              #
+        #                         end raw material table                               #
+        #                                                                              #
+        ################################################################################ -->
+               
+										
+										
+             </div>
+             
+          </div>
+          
+       </div>
+       
+    </div>
+    
+</div>
+
+
+
+<!--    ################################################################################ 
+        #                                                                              #
+        #                           Raw Material Modal(From)-End                       #
+        #                                                                              #
+        ################################################################################ 
+-->
+
+            
+
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!--    <script type="text/javascript" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>-->
+
+    <script src="/js/vendor/jquery-2.1.4.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/plugins.js"></script>
+    <script src="/js/main.js"></script>
+
+
+    <script src="/js/lib/data-table/datatables.min.js"></script>
+    <script src="/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+    <script src="/js/lib/data-table/dataTables.buttons.min.js"></script>
+    <script src="/js/lib/data-table/buttons.bootstrap.min.js"></script>
+    <script src="/js/lib/data-table/jszip.min.js"></script>
+    <script src="/js/lib/data-table/pdfmake.min.js"></script>
+    <script src="/js/lib/data-table/vfs_fonts.js"></script>
+    <script src="/js/lib/data-table/buttons.html5.min.js"></script>
+    <script src="/js/lib/data-table/buttons.print.min.js"></script>
+    <script src="/js/lib/data-table/buttons.colVis.min.js"></script>
+    <script src="/js/lib/data-table/datatables-init.js"></script>
+    <script type="text/javascript">
+    
+    
+    function codeAddress() {
+   
+    
+		            $.getJSON("/production/owner", {
+		                ownerType : $('#buyerTypeId').val(),
+		                ajax : 'true'
+		            }, function(data) {
+		                var html = '<option value="">Select Buyer Name</option>';
+		                var len = data.length;
+		                for ( var i = 0; i < len; i++) {
+		             
+		                      html += '<option value="' + data[i].orderOwnerId + '">'
+		                            + data[i].ownerName + '</option>';
+		                }
+		                html += '</option>';
+		                $('#buyerOrOtherId').html(html);
+		            });
+		            
+		            
+		            
+		    document.getElementById("ProductionTableSearchMassage").hidden=true;
+           // alert('ok');
+        }
+        window.onload = codeAddress;
+        
+        
+  /*      
+   function codeAddress1() {
+        
+        alert(machineTypeId);
+	        	
+	            $.getJSON("/production/machine/type", {
+	            	
+	                machine : $('#machineTypeId').val(),
+	                
+	                ajax : 'true'
+	            }, function(data) {
+	                var html = '<option value="">Select Machine</option>';
+	                var len = data.length;
+	                alert(len);
+	                for ( var i = 0; i < len; i++) {
+	                    html += '<option value="' + data[i].machineId + '">'
+	                            + data[i].machineName + '</option>';
+	                }
+	               html += '</option>';
+	                $('#machineId').html(html);
+	            });
+	         
+    }
+    
+    window.onload = codeAddress1;
+  */  
+    
+		$(document).ready(function() {
+			$('#myTable').DataTable({
+				"scrollX": true
+			});
+			$('#sub-close').submit(function(e) {
+				e.preventDefault();
+				// Coding
+				//$('#umodal').modal('toggle'); 
+				$('#umodal').modal('hide');
+				return false;
+			});
+		});
+
+
+     $(document).ready(function() {
+            $('#inquiryDataTableId').DataTable({
+               "scrollX": false
+           });
+
+        });
+        
+        
+        
+        
+        
+         $(document).ready(function() {
+            $('#productionTableId').DataTable({
+              "scrollX": false
+           });
+
+        });
+		
+	</script>
+	
+	
+<!--    ################################################################################ 
+        #                                                                              #
+        #                         Start Script for list (input field)                  #
+        #                                                                              #
+        ################################################################################ -->
+	<script>
+	
+	
+	
+	
+	
+	 
+
+	$('#buyerTypeId').change(
+		        function() {
+		            $.getJSON("/production/owner", {
+		                ownerType : $(this).val(),
+		                ajax : 'true'
+		            }, function(data) {
+		                var html = '<option value="">Select Buyer Name</option>';
+		                var len = data.length;
+		                for ( var i = 0; i < len; i++) {
+		             
+		                      html += '<option value="' + data[i].orderOwnerId + '">'
+		                            + data[i].ownerName + '</option>';
+		                }
+		                html += '</option>';
+		                $('#buyerOrOtherId').html(html);
+		            });
+		        });
+	
+	</script>
+	
+	<script>
+	
+	
+     $('#machineTypeId').change(
+	        function() {
+	        	
+	            $.getJSON("/production/machine/type", {
+	            	
+	                machine : $(this).val(),
+	                
+	                ajax : 'true'
+	            }, function(data) {
+	                var html = '<option value="">Select Machine</option>';
+	                var len = data.length;
+	                alert(len);
+	                for ( var i = 0; i < len; i++) {
+	                    html += '<option value="' + data[i].machineId + '">'
+	                            + data[i].machineName + '</option>';
+	                }
+	               html += '</option>';
+	                $('#machineId').html(html);
+	            });
+	        }); 
+    
+    $('#machineId').change(
+	        function() {
+	        	
+	            $.getJSON("/production/machine/shift/type", {
+	            	
+	                machineId : $(this).val(),
+	                
+	                ajax : 'true'
+	            }, function(data) {
+	                var html = '<option value="">Select Shift</option>';
+	                var len = data.length;
+	                alert(len);
+	                for ( var i = 0; i < len; i++) {
+	                    html += '<option value="' + data[i].machineShiftId + '">'
+                                                  + data[i].machineShiftName + '</option>';
+	                }
+	               html += '</option>';
+	                $('#machineShiftId').html(html);
+	            });
+	        });
+	</script>
+	
+<!--    ################################################################################ 
+        #                                                                              #
+        #                         End Script for list  input field)                    #
+        #                                                                              #
+        ################################################################################ -->
+        
+        
+        
+<!--    ################################################################################ 
+        #                                                                              #
+        #                         Start search button script                           #
+        #                                                                              #
+        ################################################################################ -->	
+	
+	<script>
+	
+	$(function () {
+	$('#productionFromSearchId').submit(function(e) {
+	
+	
+	/*
+	
+	var id=document.getElementById("orderTypeId");
+	var selectOrderType = id.options[id.selectedIndex].value;
+	
+	
+	  if(selectOrderType==1){
+	  
+	  
+	
+	  
+	  var check=document.getElementById("plannedId");
+	  
+	
+       
+                    if(check.checked==true){
+                                              
+			                                       // alert("inquiry checked planned");
+			                                        
+			                                        $('#inquiryDataTableId tbody').empty();
+       
+                                                    e.preventDefault();
+                                                    
+                                                    
+                                                    var formData= { 
+                                                                  
+                                                                   "buyerId" : $("#buyerOrOtherId").val(),
+                                                                   "ultimateBuyerId" : $("#ultimateBuyerId").val(),
+                                                                   "inqueryId" : $("#inquiryOrWOId").val(),
+                                                                   "inqFromDate" : $("#planStartDateId").val(),
+                                                                   "inqToDate" : $("#planEndDateId").val()
+                      
+                                                                  };
+                                                                  
+                               $.ajax({
+                                       type : "GET",
+                                       url:"/productioncontroller/getorderdatanotdoneproduction",
+                                       dataType : 'json',
+	                                   data: formData,
+                                       success: function(result){
+	                                   $.each(result, function(i,modelOrderList){
+	                
+
+	           var customerRow = '<tr>' +      
+	                                    
+							            '<td>' +'Inquiry'+ '</td>' +
+							            '<td class="orderItemQuantityIdTd">' +modelOrderList.orderItemQuantityId+ '</td>' +
+							            '<td>' +modelOrderList.orderId+'</td>' +
+										'<td>' +modelOrderList.orderDate+'</td>' +
+										'<td class="itemNameTdId">' +modelOrderList.itemName+ '</td>' +
+										'<td class="itemQtyRowClass">' +modelOrderList.itemQty+ '</td>' +
+										'<td>' + '</td>' +
+										'<td>' + '</td>' +
+										'<td>' +'yes'+'</td>' +
+										'<td class="populatePlanDataBtn"><button class=" btn btn-success" >Populate Plan Data</button>'+ '</td>' +
+										//'<td>' +'<a class="btn btn-primary btn-sm">Populate Plan Data</a>'+ '</td>' +
+										'<td class="manualBtn">' +'<a type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#manualButtonModal">Manual</a>'+ ' </td>' +
+								  '</tr>';
+								  
+				                       $('#inquiryDataTableId tbody').append(customerRow);
+					
+		                                                                         });        // each
+					 
+		                                                          },   // end success
+		                     
+	                                     error : function(e) {
+		                                                      alert("ERROR: ", e);
+	                                                        	console.log("ERROR: ", e);
+		                                                   	  }
+					
+		                             });   // end ajax
+		                             
+		                              // $(this).closest("tr").remove();
+		                             
+			                                       
+			                               }//if (Select Inquiry and Checked Planned)
+			                           else{
+			                           
+			                           
+			                           
+			                                 alert("Inquiry Unchecked planned");
+			                                 
+			                                 $('#inquiryDataTableId tbody').empty();
+       
+                                                    e.preventDefault();
+                                                    
+                                                    
+                                                    var formData= { 
+                                                                  
+                                                                   "buyerId" : $("#buyerOrOtherId").val(),
+                                                                   "ultimateBuyerId" : $("#ultimateBuyerId").val(),
+                                                                   "inqueryId" : $("#inquiryOrWOId").val(),
+                                                                   "inqFromDate" : $("#planStartDateId").val(),
+                                                                   "inqToDate" : $("#planEndDateId").val()
+                      
+                                                                  };
+                                                                  
+                               $.ajax({
+                                       type : "GET",
+                                       url:"/production/getOrderDataNewPandingProductionUnchecked",
+                                       dataType : 'json',
+	                                   data: formData,
+                                       success: function(result){
+                                       
+                                       
+                                        
+	                                   $.each(result, function(i,modelOrderList){
+	                                   
+	                                   
+	                
+
+	           var customerRow = '<tr>' +      
+	                                    
+							            '<td>' +'Inquiry'+ '</td>' +
+							            '<td class="orderItemQuantityIdTd">' +modelOrderList.orderItemQuantityId+ '</td>' +
+							            '<td>' +modelOrderList.orderId+'</td>' +
+										'<td>' +modelOrderList.orderDate+'</td>' +
+										'<td>' +modelOrderList.itemName+ '</td>' +
+										'<td>' + modelOrderList.itemQty+'</td>' +
+										'<td>' + '</td>' +
+										'<td>' + '</td>' +
+										'<td>' +'yes'+'</td>' +
+										//'<td>' +'<a class="btn btn-primary btn-sm">Populate Plan Data</a>'+ '</td>' +
+										'<td class="populatePlanDataBtn"><button class=" btn btn-success" >Populate Plan Data</button>'+ '</td>' +
+										'<td class="manualBtn">' +'<a type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#manualButtonModal">Manual</a>'+ ' </td>' +
+								  '</tr>';
+								  
+				                       $('#inquiryDataTableId tbody').append(customerRow);
+					
+		                                                                         });        // each
+					 
+		                                                          },   // end success
+		                     
+	                                     error : function(e) {
+		                                                      alert("ERROR: ", e);
+	                                                        	console.log("ERROR: ", e);
+		                                                   	  }
+					
+		                             });   // end ajax
+			                                 
+			                               
+			                           
+			                               }  //else (Select Inquiry and Unchecked Planned)       
+	  
+	  
+	                      }  //if (Select Inquiry)
+	                      
+	                      
+	                      // select Work Order Checked New/Pending Production
+	                  else{
+	                  
+	             */       
+	                      var check=document.getElementById("plannedId");
+	                      
+	                      if(check.checked==true){
+                                                    //alert("Wotk Order Checked New/Pending Production");
+                                                    
+                                                    $('#inquiryDataTableId tbody').empty();
+                                                    $('#productionTableId tbody').empty();
+       
+                                                    e.preventDefault();
+                                                    
+                                                    
+                                                    var formData= { 
+                                                                  
+                                                                   "orderOwnerId" : $("#buyerOrOtherId").val(),
+                                                                   //"ultimateBuyerId" : $("#ultimateBuyerId").val(),
+                                                                   "wOId" : $("#inquiryOrWOId").val(),
+                                                                   "pOStartDate" : $("#planStartDateId").val(),
+                                                                   "pOEndDate" : $("#planEndDateId").val()
+                      
+                                                                  };
+                                                                  
+                               $.ajax({
+                                       type : "GET",
+                                       url:"/productioncontroller/getsearchdatapendingproduction",
+                                       dataType : 'json',
+	                                   data: formData,
+                                       success: function(result){
+                                       
+                                       document.getElementById("ProductionTableSearchMassage").hidden=true;
+	                                   $.each(result, function(i,searchList){
+	                
+
+	           var customerRow = '<tr>' +      
+	                                    
+							            '<td class="pOIdTd">' +searchList.pOId+ '</td>' +
+							            '<td>' +searchList.pODate+ '</td>' +
+							            '<td>' +searchList.ownerName+ '</td>' +
+							            '<td>' +searchList.machineTypeName+'</td>' +
+										'<td class="designIdTd">' +searchList.designId+'</td>' +
+										'<td>' +searchList.itemName+ '</td>' +
+										'<td>' +searchList.fabricTypeName+'</td>' +
+										'<td>' +searchList.dTM +'</td>' +
+										'<td class="pOQtyTd">' +searchList.pOQty+ '</td>' +
+										'<td>' +searchList.remarks+'</td>' +
+										'<td>' +searchList.activeStatus+ '</td>' +
+										
+										'<td class="designViewBtn"><button class=" btn btn-success" data-toggle="modal" data-target="#designViewModal">Design View</button>' + '</td>' +
+										'<td class="rawMaterialBtn"><button class=" btn btn-success" data-toggle="modal" data-target="#rawMaterialModal" >Raw Material</button>' + '</td>' +
+										'<td class="productionBtn">' +'<a type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#productionButtonModal">Production</a>'+ ' </td>' +
+										
+										'<td class="orderItemQtyIdTd" hidden>' +searchList.orderItemQtyId+ '</td>' +
+										'<td class="productionPlanChdIdTd" hidden>' +searchList.productionPlanChdId+ '</td>' +
+										'<td class="noOfStitchesTd" hidden>' +searchList.noOfStitches+ '</td>' +
+										'<td class="wOChdIdTd" hidden>' +searchList.wOChdId+ '</td>' +
+										'<td class="machineShiftIdTd" hidden>' +searchList.machineShiftId+ '</td>' +
+										'<td class="machineTypeIdTd" hidden>' +searchList.machineTypeId+ '</td>' +
+										'<td class="orderIdTd" hidden>' +searchList.orderId+ '</td>' +
+										
+										
+								  '</tr>';
+								  
+				                       $('#inquiryDataTableId tbody').append(customerRow);
+					
+		                                                                         });        // each
+		                                                                         
+		                                                                         
+		                                                                         
+		                                                                         // for default 10 data   
+	                                       		                                    
+		                         		                                       	var table='#inquiryDataTableId';
+		                         		                                       	
+		                         		                                       	$(".pagination").html('');
+		                         		                                       	
+		                         		                                       	var trnum =0;
+		                         		                                       	var maxRows =parseInt(5);
+		                         		                                       	var  totalRows=$(table+' tbody tr').length;
+		                         		                                       	
+		                         		                                       	$(table+' tr:gt(0)').each(function(e) {
+		                         		                                       	
+		                         		                                       	              trnum++;
+		                         		                                       	              
+		                         		                                       	              if(trnum > maxRows)
+		                         		                                       	              {
+		                         		                                       	                 $(this).hide();
+		                         		                                       	              }
+		                         		                                       	              if(trnum <= maxRows)
+		                         		                                       	              {
+		                         		                                       	                 $(this).show();
+		                         		                                       	              }
+		                         		                                       	    
+		                         		                                       	
+		                         		                                       	
+		                         		                                       	});   //each function
+		                         		                                       	
+		                         		                                       	 if(totalRows > maxRows)
+		                         		                                       	              {
+		                         		                                       	              
+		                         		                                       	              
+		                         		                                       	              var pagenum =Math.ceil(totalRows/maxRows);
+		                         		                                       	              
+		                         		                                       	              for(var i=1;i<=pagenum;)
+		                         		                                       	              {
+		                         		                                       	                 $("#paginationInResultData").append('<li class="btn-sm" data-page="'+i+'">\<span>'+ i++ +'</span></li>').show();
+		                         		                                       	              }  //for
+		                         		                                       	                
+		                         		                                       	              }   //if
+		                         		                                       	              
+		                         		                                       	              
+		                         		                                       	              $('.pagination li:first-child').addClass('active');
+		                         		                                       	             $('.pagination li').on('click',function(){
+		                         		                                       	             
+		                         		                                       	             var pageNum =  $(this).attr('data-page');
+		                         		                                       	             var trIndex= 0;
+		                         		                                       	             
+		                         		                                       	             $('.pagination li').removeClass('active');
+		                         		                                       	              $(this).addClass('active');
+		                         		                                       	             $(table+' tr:gt(0)').each(function(e) {
+		                         		                                       	             
+		                         		                                       	                trIndex++;
+		                         		                                       	                if(trIndex >(maxRows*pageNum) || trIndex<=((maxRows*pageNum)-maxRows))
+		                         		                                       	                {
+		                         		                                       	                    $(this).hide();
+		                         		                                       	                }
+		                         		                                       	                else
+		                         		                                       	                {
+		                         		                                       	                $(this).show();
+		                         		                                       	                }
+		                         		                                       	             
+		                         		                                       	             
+		                         		                                       	             
+		                         		                                       	                }); // each function
+		                         		                                       	             
+		                         		                                       	             });  //  click function
+		                         		                                       	             
+		                         		                                       	             
+		                         		                                       	
+		                         		                                       		                                       
+		                         		                                       		                // default 10 data - end  
+					 
+		                                                          },   // end success
+		                     
+	                                     error : function(e) {
+		                                                      alert("ERROR: ", e);
+	                                                        	console.log("ERROR: ", e);
+		                                                   	  }
+					
+		                             });   // end ajax
+                                                    
+                                                   }
+                                                   
+                                                   
+                                               else
+                                               
+                                               
+                                               {
+                                                   
+                                                    $('#inquiryDataTableId tbody').empty();
+                                                     $('#productionTableId tbody').empty();
+       
+                                                    e.preventDefault();
+                                                    
+                                                    var formData= { 
+                                                    
+                                                    
+                                                                  
+                                                                   "orderOwnerId" : $("#buyerOrOtherId").val(),
+                                                                   //"ultimateBuyerId" : $("#ultimateBuyerId").val(),
+                                                                   "wOId" : $("#inquiryOrWOId").val(),
+                                                                   "pOStartDate" : $("#planStartDateId").val(),
+                                                                   "pOEndDate" : $("#planEndDateId").val()
+                      
+                                                                  };
+                                                                  
+                               $.ajax({
+                                       type : "GET",
+                                       url:"/productioncontroller/getsearchdatadoneproduction",
+                                       dataType : 'json',
+	                                   data: formData,
+                                       success: function(result){
+	                                   $.each(result, function(i,searchList){
+	                                   document.getElementById("ProductionTableSearchMassage").hidden=false;
+
+	           var customerRow = '<tr>' +      
+	                                    
+							            '<td class="pOIdTd">' +searchList.pOId+ '</td>' +
+							            '<td>' +searchList.pODate+ '</td>' +
+							            '<td>' +searchList.ownerName+ '</td>' +
+							            '<td>' +searchList.machineTypeName+'</td>' +
+										'<td>' +searchList.designId+'</td>' +
+										'<td>' +searchList.itemName+ '</td>' +
+										'<td>' +searchList.fabricTypeName+ '</td>' +
+										'<td>' +searchList.dTM+ '</td>' +
+										'<td>' +searchList.pOQty+ '</td>' +
+										'<td>' +searchList.remarks+'</td>' +
+										'<td>' +searchList.activeStatus+ '</td>' +
+										//'<td class="manualBtn">' +'<a type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#manualButtonModal">Manual</a>'+ ' </td>' +
+										
+										//'<td class="designViewBtn"><button class=" btn btn-success" >Design View</button>' + '</td>' +
+										//'<td class="populatePlanDataBtn"><button class=" btn btn-success" >Raw Material</button>' + '</td>' +
+										//'<td class="rawMaterialBtn"><button class=" btn btn-success" >Production</button>' + '</td>' +
+										
+										'<td class="designViewBtn"><button class=" btn btn-success" data-toggle="modal" data-target="#designViewModal">Design View</button>' + '</td>' +
+										'<td class="rawMaterialBtn"><button class=" btn btn-success" data-toggle="modal" data-target="#rawMaterialModal" >Raw Material</button>' + '</td>' +
+										'<td class="productionBtn">' +'<a type="button" onClick="showMessage()" class="btn btn-success btn-sm" >Production</a>'+ ' </td>' +
+										
+										
+										//'<td class="orderItemQuantityIdTd" hidden>' +modelOrderList.orderItemQuantityId+ '</td>' +
+										
+										
+								  '</tr>';
+								  
+				                       $('#inquiryDataTableId tbody').append(customerRow);
+					
+		                                                                         });        // each
+		                                                                         
+		                                                           
+		                                                                         
+
+		                                       		                          // for default 10 data   
+		                                       		                                    
+		                                       	var table='#inquiryDataTableId';
+		                                       	
+		                                       	$(".pagination").html('');
+		                                       	
+		                                       	var trnum =0;
+		                                       	var maxRows =parseInt(5);
+		                                       	var  totalRows=$(table+' tbody tr').length;
+		                                       	
+		                                       	$(table+' tr:gt(0)').each(function(e) {
+		                                       	
+		                                       	              trnum++;
+		                                       	              
+		                                       	              if(trnum > maxRows)
+		                                       	              {
+		                                       	                 $(this).hide();
+		                                       	              }
+		                                       	              if(trnum <= maxRows)
+		                                       	              {
+		                                       	                 $(this).show();
+		                                       	              }
+		                                       	    
+		                                       	
+		                                       	
+		                                       	});   //each function
+		                                       	
+		                                       	 if(totalRows > maxRows)
+		                                       	              {
+		                                       	              
+		                                       	              
+		                                       	              var pagenum =Math.ceil(totalRows/maxRows);
+		                                       	              
+		                                       	              for(var i=1;i<=pagenum;)
+		                                       	              {
+		                                       	                 $("#paginationInResultData").append('<li class="btn-sm" data-page="'+i+'">\<span>'+ i++ +'</span></li>').show();
+		                                       	              }  //for
+		                                       	                
+		                                       	              }   //if
+		                                       	              
+		                                       	              
+		                                       	              $('.pagination li:first-child').addClass('active');
+		                                       	             $('.pagination li').on('click',function(){
+		                                       	             
+		                                       	             var pageNum =  $(this).attr('data-page');
+		                                       	             var trIndex= 0;
+		                                       	             
+		                                       	             $('.pagination li').removeClass('active');
+		                                       	              $(this).addClass('active');
+		                                       	             $(table+' tr:gt(0)').each(function(e) {
+		                                       	             
+		                                       	                trIndex++;
+		                                       	                if(trIndex >(maxRows*pageNum) || trIndex<=((maxRows*pageNum)-maxRows))
+		                                       	                {
+		                                       	                    $(this).hide();
+		                                       	                }
+		                                       	                else
+		                                       	                {
+		                                       	                $(this).show();
+		                                       	                }
+		                                       	             
+		                                       	             
+		                                       	             
+		                                       	                }); // each function
+		                                       	             
+		                                       	             });  //  click function
+		                                       	             
+		                                       	             
+		                                       	
+		                                       		                                       
+		                                       		                // default 10 data - end  
+		                                                                         
+		                                                                        
+		                                                                         
+		                                                                         
+					 
+		                                                          },   // end success
+		                     
+	                                     error : function(e) {
+		                                                      alert("ERROR: ", e);
+	                                                        	console.log("ERROR: ", e);
+		                                                   	  }
+					
+		                             });   // end ajax
+                                                    
+                                                    
+                                                   }
+	  
+	                     /*     
+	  
+	                      } // else (Select Work Order)
+	                      
+	                    */
+	
+	
+	  $('#maxRows').on('change',function(){
+	  
+	  var table='#inquiryDataTableId';
+	
+	$('.pagination').html('');
+	
+	var trnum =0;
+	var maxRows =parseInt($(this).val());
+	var  totalRows=$(table+' tbody tr').length;
+	
+	$(table+' tr:gt(0)').each(function(e) {
+	
+	              trnum++;
+	              
+	              if(trnum > maxRows)
+	              {
+	                 $(this).hide();
+	              }
+	              if(trnum <= maxRows)
+	              {
+	                 $(this).show();
+	              }
+	    
+	
+	
+	});   //each function
+	
+	 if(totalRows > maxRows)
+	              {
+	              
+	              
+	              var pagenum =Math.ceil(totalRows/maxRows);
+	              
+	              for(var i=1;i<=pagenum;)
+	              {
+	                 $('#paginationInResultData').append('<li class="btn-sm" data-page="'+i+'">\<span>'+ i++ +'</span></li>').show();
+	              }  //for
+	                
+	              }   //if
+	              
+	              
+	              $('.pagination li:first-child').addClass('active');
+	             $('.pagination li').on('click',function(){
+	             
+	             var pageNum =  $(this).attr('data-page');
+	             var trIndex= 0;
+	             
+	             $('.pagination li').removeClass('active');
+	              $(this).addClass('active');
+	             $(table+' tr:gt(0)').each(function(e) {
+	             
+	                trIndex++;
+	                if(trIndex >(maxRows*pageNum) || trIndex<=((maxRows*pageNum)-maxRows))
+	                {
+	                    $(this).hide();
+	                }
+	                else
+	                {
+	                $(this).show();
+	                }
+	             
+	             
+	             
+	                }); // each function
+	             
+	             });  //  click function
+	             
+	             
+	      });   //on change function
+	                      
+	                      
+	                      
+	  
+	     });  //Submit
+	  });  //function
+	
+	function showMessage()
+	{
+	var text="Production done"
+	
+	document.getElementById("displayMessage").value=text;
+	
+	}
+	
+	
+	</script>
+	        
+<!--    ################################################################################ 
+        #                                                                              #
+        #                         End search button script                             #
+        #                                                                              #
+        ################################################################################ -->
+        
+        <script>
+             
+         $("#inquiryDataTableId").on('click','.pOIdTd',function(){
+         
+          var $row = $(this).closest("tr"); 
+          var pOMstId = $row.find(".pOIdTd").text();
+         
+          var formData= { 
+       
+	                        "pOMstId" :pOMstId
+	                        
+			            };
+	     
+	      $('#productionTableId tbody').empty();
+			
+			$.ajax({
+	    			          
+   		                               type : "GET",	    		           
+   		                               url:"/productioncontroller/getproductiondonelist",
+   		                               dataType : 'json',
+   			                           data: formData,
+   		                               success: function(result){ 
+   		                               
+   		                                $.each(result, function(i,modelProductionList){
+   		                          
+   		                                var customRow;
+   		                                 customRow= '<tr>'+
+   		                                                  '<td class="proIdTd">' + modelProductionList.productionId + '</td>' +
+					                                      '<td class="productionDateTd">' + modelProductionList.productionDate + '</td>' +	
+					       		                          '<td>' + modelProductionList.machineName + '</td>' +
+					                                      '<td>' + modelProductionList.shiftName +'</td>' +
+					                                      '<td>' + modelProductionList.productionQty + '</td>' +
+					                                      
+					                                      '<td>' + modelProductionList.refNo +'</td>' +
+					                                      '<td>' + modelProductionList.noOfStitches + '</td>' +
+					                                      
+					                                      '<td>' + modelProductionList.remarks +'</td>' +
+					                                      '<td>'+modelProductionList.activeStatus+ '</td>'+
+   		                                                  //'<td class="productionEditBtn">' +'<a type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#productionButtonEditModal">Edit</a>'+ ' </td>' +
+   		                                                  '<td class="productionEditBtn">' +'<a type="button" class="btn btn-success btn-sm">Edit</a>'+ ' </td>' +
+   		                                   
+	    			                                 '</tr>';
+	    			                                 
+	    			                   $('#productionTableId tbody').append(customRow); 
+	    			                   
+	    			                   
+                             });    // end .each
+   		                               
+   		                                
+   		                               
+		            		
+   		                                                        }   // end success
+   		                               
+   			   });   //ajax
+   
+	
+	
+	  $('#maxRows2').on('change',function(){
+	  
+	  var table='#productionTableId';
+	
+	$('.pagination').html('');
+	
+	var trnum =0;
+	var maxRows =parseInt($(this).val());
+	var  totalRows=$(table+' tbody tr').length;
+	
+	$(table+' tr:gt(0)').each(function(e) {
+	
+	              trnum++;
+	              
+	              if(trnum > maxRows)
+	              {
+	                 $(this).hide();
+	              }
+	              if(trnum <= maxRows)
+	              {
+	                 $(this).show();
+	              }
+	    
+	
+	
+	});   //each function
+	
+	 if(totalRows > maxRows)
+	              {
+	              
+	              
+	              var pagenum =Math.ceil(totalRows/maxRows);
+	              
+	              for(var i=1;i<=pagenum;)
+	              {
+	                 $('#paginationInProductionTable').append('<li class="btn-sm" data-page="'+i+'">\<span>'+ i++ +'</span></li>').show();
+	              }  //for
+	                
+	              }   //if
+	              
+	              
+	              $('.pagination li:first-child').addClass('active');
+	             $('.pagination li').on('click',function(){
+	             
+	             var pageNum =  $(this).attr('data-page');
+	             var trIndex= 0;
+	             
+	             $('.pagination li').removeClass('active');
+	              $(this).addClass('active');
+	             $(table+' tr:gt(0)').each(function(e) {
+	             
+	                trIndex++;
+	                if(trIndex >(maxRows*pageNum) || trIndex<=((maxRows*pageNum)-maxRows))
+	                {
+	                    $(this).hide();
+	                }
+	                else
+	                {
+	                $(this).show();
+	                }
+	             
+	             
+	             
+	                }); // each function
+	             
+	             });  //  click function
+	             
+	             
+	      });   //on change function   
+         
+         
+         
+          });  //function
+          
+          </script>
+        
+<!--    ################################################################################ 
+        #                                                                              #
+        #             Start Manual button script  and modal save button                #
+        #                                                                              #
+        ################################################################################ -->
+        
+        
+<script>
+             
+         Date.prototype.toDateInputValue = (function() {
+		    var local = new Date(this);
+		    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+		    return local.toJSON().slice(0,10);
+		});
+
+         document.getElementById('modalProductionDate').value = new Date().toDateInputValue();
+
+         $("#inquiryDataTableId").on('click','.productionBtn',function(){
+         
+        // alert("Production modal Working ");
+         
+         var $row = $(this).closest("tr"); 
+         
+         var pOMstId = $row.find(".pOIdTd").text();
+         
+         var orderItemQtyId = $row.find(".orderItemQtyIdTd").text();
+         var productionPlanChdId = $row.find(".productionPlanChdIdTd").text();
+         var POQty = $row.find(".pOQtyTd").text();
+         var wOChdId = $row.find(".wOChdIdTd").text();
+         var machineShiftId = $row.find(".machineShiftIdTd").text();
+         var machineTypeId = $row.find(".machineTypeIdTd").text();
+         var noOfStitches = $row.find(".noOfStitchesTd").text();
+         
+         var designId = $row.find(".designIdTd").text();
+          var orderId = $row.find(".orderIdTd").text();
+         
+       
+         
+         $(".productionModalFrom #modalPOId").val( pOMstId );
+         $(".productionModalFrom #modalOrderItemQtyId").val( orderItemQtyId );
+         $(".productionModalFrom #modalProductionPlanChdId").val( productionPlanChdId );
+         $(".productionModalFrom #modalMachineShiftIdId").val( machineShiftId );
+         $(".productionModalFrom #modalWOChdId").val( wOChdId );
+         $(".productionModalFrom #modalDesignId").val( designId );
+          $(".productionModalFrom #modalOrderId").val( orderId );
+         
+         
+         $(".productionModalFrom #modalPOQty").val( POQty );
+	     $(".productionModalFrom #modalMachineTypeId").val( machineTypeId );
+	     $(".productionModalFrom #modalNoOfStitches").val( noOfStitches );
+	     
+	     });
+	     
+	     
+	     
+$('#modalProductionSaveBtn').click(function(e) {
+	     
+	     
+	 //  alert("working save");
+	     
+	     var orderItemQtyId= $("#modalOrderItemQtyId").val();
+	     var productionPlanChdId= $("#modalProductionPlanChdId").val();
+	     var machineShiftId= $("#modalMachineShiftIdId").val();
+	     var wOChdId= $("#modalWOChdId").val();
+	     var designId= $("#modalDesignId").val();
+	     var pOMstId= $("#modalPOId").val();
+	      var orderId= $("#modalOrderId").val();
+	     
+	     var status = document.getElementById("modalActive");
+	     
+	     var active;
+		    		 
+		    		 if (status.checked == true){
+		    			 active='1';
+		    		 }
+		    		 else{
+		    			 active='0';
+		    		 }
+	     
+	  //    alert(designId);
+	  //    alert(pOMstId);
+	   //   alert(wOChdId);
+	      var formData= { 
+	                        "pOMstId" :$("#modalPOId").val(),
+			                "orderItemQtyId" :orderItemQtyId,
+			                "machineShiftId" :machineShiftId,
+			                "wOChdId" :wOChdId,
+			                "productionPlanChdId" :productionPlanChdId,
+			                "designId" :designId,
+			                "orderId" :orderId,
+			                "productionDate" :$("#modalProductionDate").val(),
+     				 		"productionQty" :$("#modalProductionQty").val(),
+     				 		"productionRefNo" :$("#modalProductionRefNo").val(),	
+     				 		"remarks" :$("#modalRemarks").val(),
+        					"noOfStitches" :$("#modalNoOfStitchesMachine").val(),
+        					"activeStatus" :active
+			            };
+	     
+	    $('#productionTableId tbody').empty();
+			
+			$.ajax({
+	    			          
+   		                               type : "POST",	    		           
+   		                               url:"/productioncontroller/saveproduction",
+   		                               dataType : 'json',
+   			                           data: formData,
+   		                               success: function(result){  
+   		                               
+   		                               
+   		                               var text="Data saved successfully,press close button";
+		                               document.getElementById("productionSaveMessage").innerHTML=text;
+   		                               
+   		                               $.each(result, function(i,modelProductionList){
+   		                          
+   		                             var customRow;
+   		                                 customRow= '<tr>'+
+   		                                                  '<td class="proIdTd">' + modelProductionList.productionId + '</td>' +
+					                                      '<td class="productionDateTd">' + modelProductionList.productionDate + '</td>' +	
+					       		                          '<td>' + modelProductionList.machineName + '</td>' +
+					                                      '<td>' + modelProductionList.shiftName +'</td>' +
+					                                      
+					                                      '<td>' + modelProductionList.productionQty + '</td>' +
+					                                      
+					                                      '<td>' + modelProductionList.refNo +'</td>' +
+					                                      
+					                                      '<td>' + modelProductionList.noOfStitches + '</td>' +
+					                                      
+					                                      
+					                                      '<td>' + modelProductionList.remarks +'</td>' +
+					                                      
+					                                     // '<td class="productionUpdateQty"><input type="text" name="productionUpdateQty" value=' + modelProductionList.productionQty + ' size="3px">' + '</td>' +
+					                                   // '<td class="productionUpdateRemarks"><input type="text" name="productionUpdateRemarks" value=' + modelProductionList.remarks + '>' + '</td>' +        
+   		                                                  
+   		                                                  '<td>'+modelProductionList.activeStatus+ '</td>'+
+   		                                                  //'<td class="productionUpdateSaveBtn">'+'<a class="btn btn-primary btn-sm">Save</a>'+ '</td>'+
+   		                                                  '<td class="productionEditBtn">' +'<a type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#productionButtonEditModal">Edit</a>'+ ' </td>' +
+   		                                   
+	    			                                 '</tr>';
+	    			                                 
+	    			                   $('#productionTableId tbody').append(customRow); 
+	    			                   
+	    			                   
+   		                                 
+   		                              //    $('#productionButtonModal').modal('hide');
+   		                               
+   		                                 });    // end .each
+   		                               
+   		                                                        }   // end success
+   		                               
+   			   });   //ajax
+       	 				    
+       	 				     
+       	 		
+		});	  //end click function
+	     
+   </script>  
+   
+   
+   <script>
+             
+      $("#productionTableId").on('click','.productionEditBtn',function(){
+      
+         var $row = $(this).closest("tr"); 
+         var productionId = $row.find(".proIdTd").text();
+      
+       var formData= { 
+       
+	                        "productionId" :productionId
+	                        
+			         };
+	     
+	    
+			
+			$.ajax({
+	    			          
+   		                               type : "GET",	    		           
+   		                               url:"/productioncontroller/getproductionlist",
+   		                               dataType : 'json',
+   			                           data: formData,
+   		                               success: function(result){  
+   		                               $.each(result, function(i,productionList){
+   		                               
+   		                              
+		                        
+		            	    document.getElementById("modalEditProductionId").value=productionList.productionId;
+		            		document.getElementById("modalEditProductionDate").value=productionList.productionDate;
+		            		document.getElementById("modalEditProductionQty").value=productionList.productionQty;
+		            		document.getElementById("modalEditProductionRefNo").value=productionList.refNo;
+		            		document.getElementById("modalEditNoOfStitchesMachine").value=productionList.noOfStitches;
+		            		document.getElementById("modalEditRemarks").value=productionList.remarks;
+		            		
+		            		
+		            		if(productionList.activeStatus==1)
+		            		{
+		            		
+		            	//	alert("active");
+		            		
+		            		
+		            		document.getElementById("modalEditActive").checked=true;
+		            		
+		            		}
+		            		else
+		            		{
+		            		
+		            		
+		            	//	alert("In active");
+		            		document.getElementById("modalEditActive").checked=false;
+		            		
+		            		}
+		            		
+		            		//document.getElementById("modalEditActive").value=productionPlanMstList.activeStatus;
+		            		
+		            		
+		            		
+		            		});
+   		                               
+   		                                                        }   // end success
+   		                               
+   			   });   //ajax
+      
+      
+      
+      	});	  //end click function
+	     
+   </script>  
+   
+   <script> 
+   $('#modalEditProductionSaveBtn').click(function(e) {
+	     
+	    
+	     
+	     var status = document.getElementById("modalEditActive");
+	     
+	     var active;
+		    		 
+		    		 if (status.checked == true){
+		    			 active='1';
+		    		 }
+		    		 else{
+		    			 active='0';
+		    		 }
+	     
+	
+	      var formData= { 
+	                        "productionId" :$("#modalEditProductionId").val(),
+			 
+			                "productionDate" :$("#modalEditProductionDate").val(),
+     				 		
+     				 		"productionQty" :$("#modalEditProductionQty").val(),
+     				 		
+     				 		"productionRefNo" :$("#modalEditProductionRefNo").val(),	
+     				 		
+        					"remarks" :$("#modalEditRemarks").val(),
+        					
+        					"noOfStitches" :$("#modalEditNoOfStitchesMachine").val(),
+        					
+        					"activeStatus" :active
+			            };
+	     
+	     $('#productionTableId tbody').empty();
+			
+			$.ajax({
+	    			          
+   		                               type : "POST",	    		           
+   		                               url:"/productioncontroller/saveeditproduction",
+   		                               dataType : 'json',
+   			                           data: formData,
+   		                               success: function(result){  
+   		                               
+   		                               var text="Data updated successfully,press close button";
+                                       document.getElementById("productionEditSaveMessage").innerHTML=text;
+   		                               
+   		                               
+   		                               
+   		                               $.each(result, function(i,modelProductionList){
+   		                          
+   		                             var customRow;
+   		                                 customRow= '<tr>'+
+   		                                                   '<td class="proIdTd">' + modelProductionList.productionId + '</td>' +
+					                                      '<td class="productionDateTd">' + modelProductionList.productionDate + '</td>' +	
+					       		                          '<td>' + modelProductionList.machineName + '</td>' +
+					                                      '<td>' + modelProductionList.shiftName +'</td>' +
+					                                      '<td>' + modelProductionList.productionQty + '</td>' +
+					                                      
+					                                      '<td>' + modelProductionList.refNo +'</td>' +
+					                                      '<td>' + modelProductionList.noOfStitches + '</td>' +
+					                                      
+					                                      '<td>' + modelProductionList.remarks +'</td>' +
+					                                      '<td>'+modelProductionList.activeStatus+ '</td>'+
+   		                                                  '<td class="productionEditBtn">' +'<a type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#productionButtonEditModal">Edit</a>'+ ' </td>' +
+   		                                   
+	    			                                 '</tr>';
+	    			                                 
+	    			                   $('#productionTableId tbody').append(customRow); 
+	    			                   
+	    			                   
+   		                                 
+   		                                  $('#productionButtonModal').modal('hide');
+   		                               
+   		                                 });    // end .each
+   		                               
+   		                                                        }   // end success
+   		                               
+   			   });   //ajax
+       	 				    
+       	 				     
+       	 		
+		});	  //end click function
+	     
+   </script>
+   
+   
+<!--    ################################################################################ 
+        #                                                                              #
+        #              end Manual button script  and modal save button                 #
+        #                                                                              #
+        ################################################################################ -->
+        
+     <script>
+     
+     $("#productionTableId").on('click','.productionUpdateSaveBtn',function(){
+           alert("nice");
+           
+           $("#productionTableId").each(function(){
+
+            var id=$(this).find('.proIdTd').text();
+            let productionUpdateQty = $(this).find('input[name="productionUpdateQty"]').val();
+            let productionUpdateRemarks = $(this).find('input[name="productionUpdateRemarks"]').val();
+            
+           // alert("find table");
+           // alert(id);
+            
+           // alert(productionUpdateQty);
+           // alert(productionUpdateRemarks);
+           
+             var formData= { 
+		                      "productionId" : id,
+		                      
+		                       "productionQty" : productionUpdateQty,
+		                       
+		                       "productionRemarks" : productionUpdateRemarks
+		                       
+	    		           };
+	    		           
+	    		   $.ajax({
+	    			          type : "POST",	    		           
+   		                      url:"/production/updateproduction",
+   		                      dataType : 'json',
+   			                  data: formData,
+   		                      success: function(result){
+   		                      
+   		                                               },
+	    		           
+            
+                          });
+                          
+                          $(this).closest("tr").remove();
+            
+             });//each
+             
+      });//function	   
+        
+     </script>  
+     
+     
+      <script>  
+     
+       $("#inquiryDataTableId").on('click','.rawMaterialBtn',function(){
+           //alert("nice");
+           //rawMaterialTableId
+           
+            var $row = $(this).closest("tr"); 
+            var pOMstId = $row.find(".pOIdTd").text();
+            
+          //  alert(pOMstId);
+            
+            var formData= { 
+		                      "pOMstId" : pOMstId
+		                      
+		                  };
+		                  
+		    $('#pOConsumeTableId tbody').empty();
+            
+            $.ajax({
+	    			          type : "GET",	    		           
+   		                      url:"/productioncontroller/getpoconsumitemdetailsbypomstId",
+   		                      dataType : 'json',
+   			                  data: formData,
+   		                      success: function(result){
+   		                      
+   		                      $.each(result, function(i,pOConsumItemList){
+   		                          
+   		                             var customRow;
+   		                                 customRow= '<tr>'+
+   		                                                   '<td>' + pOConsumItemList.modelPOMst.pOMstId + '</td>' +
+					                                       '<td>' + pOConsumItemList.pOConsumItemId + '</td>' +	
+					                                       '<td>' + pOConsumItemList.itemId + '</td>' +
+					       		                           '<td>' + pOConsumItemList.itemQty + '</td>' +
+					                                       '<td>' + pOConsumItemList.activeStatus + '</td>'+
+					                                       '<td>' + pOConsumItemList.remarks + '</td>' +
+					                                 '</tr>';
+	    			                                 
+	    			                   $('#pOConsumeTableId tbody').append(customRow); 
+	    			                   
+	    			                 });    // end .each
+   		                      
+   		                                               },
+	    		  });
+            
+           
+             });
+         </script>  
+         
+         
+         
+         				                        
+	<script type="text/javascript" th:inline="javascript">
+		
+		var now = new Date();
+		var day = ("0" + now.getDate()).slice(-2);
+		var month = ("0" + (now.getMonth() + 1)).slice(-2);
+	    var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+	    document.getElementById('planEndDateId').value = today;
+    
+    </script>
+    
+    
+     <style>
+   
+    .table td {
+    padding: 0 5px;
+}
+
+   </style>
+   
+         
+</body>
+
+</html>

@@ -1,0 +1,1793 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang=""xmlns:th="http://www.thymeleaf.org">
+<!--<![endif]-->
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Mending</title>
+	<meta name="description" content="Sufee Admin - HTML5 Admin Template">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+	<link rel="apple-touch-icon" href="apple-icon.png">
+	<link rel="shortcut icon" href="favicon.ico">
+
+    <link rel="stylesheet"th:href="@{/css/normalize.css}" href="../../static/css/normalize.css">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"href="../../static/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}"href="../../static/css/font-awesome.min.css">
+    <link rel="stylesheet"th:href="@{/css/themify-icons.css}" href="../../static/css/themify-icons.css">
+    <link rel="stylesheet"th:href="@{/css/flag-icon.min.css}" href="../../static/css/flag-icon.min.css">
+    <link rel="stylesheet" th:href="@{/css/cs-skin-elastic.css}"href="../../static/css/cs-skin-elastic.css">
+	<!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
+	<link rel="stylesheet"th:href="@{/scss/style.css}" href="../../static/scss/style.css">
+
+
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+	<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+	<style type="text/css">
+		.modal-backdrop.show {
+			display: none;
+		}
+
+		td {
+			border: 1px #DDD solid;
+			padding: 5px;
+			cursor: pointer;
+		}
+
+		.selected {
+			background: red;
+		}
+
+		.dataTables_filter {
+			text-align: right;
+		}
+		
+		.col-md-7{
+			padding-left: 78%;
+		}
+		.pagination {
+			
+		}
+
+		.modal {
+			z-index: 999999999;
+		}
+	</style>
+	<script>
+	
+
+	</script>
+	
+	
+	 <style>
+.custom-header-panel{
+    background-color: #004b8e !important;
+    border-color: #004b8e !important;
+    color: white;
+}
+
+
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading {
+  padding: 10px 15px;
+  margin: -15px -15px 15px;
+  font-size: 17.5px;
+  font-weight: 500;      
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-footer {
+  padding: 10px 15px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+} 
+
+.panel-primary {
+  border-color: #428bca;
+}
+
+.panel-primary .panel-heading {
+  color: #ffffff;
+  background-color: #428bca;
+  border-color: #428bca;
+}
+/* This kinda of works but now 
+.panel, .panel-group .panel-heading+.panel-collapse>.panel-body{
+    border: none;
+}
+*/
+.card-header{
+    /* background-color: #004b8e !important; */
+    background-color: #004b8e !important;
+    border-color: #004b8e !important;
+    color: white;
+
+    padding: 10px 15px;
+  /*margin: -15px -15px 15px; */
+
+  font-size: 17.5px;
+  font-weight: 500;      
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+
+ <style type="text/css">
+       
+       #calculate{
+      display:none;
+     }
+    
+        .modal-backdrop.show {
+            display: none;
+        }
+
+        .modal-backdrop.fade {
+            display: none;
+        }
+
+/*
+        div.dataTables_wrapper {
+            width: 100%;
+        }
+*/
+		.selected{
+			background-color: #eee;
+			color: #000;
+		}
+		
+		.dataTables_length, .dataTables_filter {
+			display: none !important;
+		}
+    </style>
+</head>
+
+<body>
+	<!-- Left Panel -->
+
+	<aside id="left-panel" class="left-panel">
+		<nav class="navbar navbar-expand-sm navbar-default">
+
+			<div class="navbar-header">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+					<i class="fa fa-bars"></i>
+				</button>
+				<a class="navbar-brand" href="./">MLFM</a>
+				<a class="navbar-brand hidden" href="./">BD</a>
+			</div>
+
+			<div id="main-menu" class="main-menu collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+				
+			
+                
+   <li class="menu-item-has-children dropdown" >
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <i class="menu-icon fa fa-laptop"></i>    Set Up
+          </a>
+        
+       <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown" >
+             <li th:each="s:${listModelUserObjectSetup}" 
+                   th:value="${s.userObjectId}">
+            <a class="dropdown-item" th:href="@{${s.modelObject.filePath}+'/'+${s.modelUser.userId}}" >
+               
+                    <span th:utext="${s.modelObject.objectName}">
+                   </span>
+                </a>
+            </li>
+          
+        </ul>
+        
+   </li>
+   
+      
+	 <li class="menu-item-has-children dropdown">
+     
+       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="menu-icon fa fa-laptop"></i> Transaction
+        </a>
+        
+           <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown">
+              <li th:each="t:${listModelUserObjectTransaction}"
+                   th:value="${t.userObjectId}">
+                   
+                   <a class="dropdown-item" th:href="@{${t.modelObject.filePath}+'/'+${t.modelUser.userId}}" >
+                 
+                         <span th:utext="${t.modelObject.objectName}">
+                         </span>
+                      </a>
+              </li>
+          </ul>
+      </li>			
+				
+        	
+		   	
+		<li class="menu-item-has-children dropdown">
+     
+             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="menu-icon fa fa-laptop"></i>   Tools
+             </a>
+        
+            <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown">
+                <li th:each="u:${listModelUserObjectTool}"
+                     th:value="${u.userObjectId}">
+                     
+                           <a class="dropdown-item" th:href="@{${u.modelObject.filePath}+'/'+${u.modelUser.userId}}" >
+                 
+                    <span th:utext="${u.modelObject.objectName}">
+                    </span>
+                 </a>
+               </li>
+          
+            </ul>
+       </li>	
+
+
+		<li class="menu-item-has-children dropdown">
+     
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="menu-icon fa fa-laptop"></i> Report
+              </a>
+        
+              <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown">
+                   <li th:each="r:${listModelUserObjectReport}"
+                        th:value="${r.userObjectId}">
+                        <a class="dropdown-item" th:href="@{${r.modelObject.filePath}+'/'+${r.modelUser.userId}}" >
+                     <!--  <a class="dropdown-item" th:href="${r.modelObject.filePath}"> -->
+                           <span th:utext="${r.modelObject.objectName}">
+                           </span>
+                       </a>
+                   </li>
+          
+              </ul>
+        </li>	
+					
+					
+					
+	             </ul>
+			</div>
+		</nav>
+	</aside>
+
+
+
+	<!-- Left Panel -->
+
+	<!-- Right Panel -->
+
+	<div id="right-panel" class="right-panel">
+
+	<!-- Header-->
+		<header id="header" class="header">
+
+			<div class="header-menu">
+<!--
+				<div class="col-sm-4">
+					<a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
+					<div class="header-left">
+						<button class="search-trigger"><i class="fa fa-search"></i></button>
+						<div class="form-inline">
+							<form class="search-form">
+								<input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
+								<button class="search-close" type="submit"><i class="fa fa-close"></i></button>
+							</form>
+						</div>
+
+					</div>
+				</div>
+-->
+		<!--
+				<div class="col-sm-5">
+					<div class="user-area dropdown float-right">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">
+                        </a>
+
+						<div class="user-menu dropdown-menu">
+							<a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
+							
+							<input type="text" class="nav-link" th:value="${userId}" id="accessUserId" readonly>
+
+							<a class="nav-link" href="/logoncontroller/init"><i class="fa fa-power -off"></i>Logout</a>
+						</div>
+					</div>
+                </div>
+         -->       
+                  
+                        <div class="col-sm-4 text-right" >
+                         
+                      </div> 
+               
+                       <div class="col-sm-8 text-right" >
+                          
+                           <a class="nav-link" href="/logoncontroller/init"  style="float:right;" ><i class="fa fa-power -off"></i>Logout</a>
+                            <span class="nav-link" th:text="${name}"readonly style="color: black; float:right; padding-left:5px;"></span>  
+                            <span class="nav-link" style="color: black; float:right; padding-right:0px;">User : </span>  
+                           
+                          
+                         
+                       </div>
+                 
+			</div>
+
+		</header><!-- /header -->
+		<!-- Header-->
+		
+		<div class="up-msg">
+			<div class="col-sm-6 text-left">
+			<!--	<input type="text" id="displayMessage" name=""  readonly style="color: limegreen; display: block;border:0px">  -->
+			
+			  <h5 class="modal-title" id="displayMessage" style="color: limegreen; font-size:15px; margin-left:0px"></h5>
+			</div>
+		</div>
+		
+
+		<div class="breadcrumbs">
+		<!--  	<div class="col-sm-4">
+				<div class="page-header float-left">
+					<div class="page-title">
+						<h1>Mending From</h1>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-8">
+				<div class="page-header float-right">
+					<div class="page-title">
+						<ol class="breadcrumb text-right">
+							<li><a href="#">Dashboard</a></li>
+							<li><a href="#">Mending Info</a></li>
+							<li class="active">Mending From</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>-->
+		
+		
+	
+		
+		
+<!--		
+=============================================================================
+Search Part
+================================================================================		
+-->		
+<div class="card">
+	<div class="card-header">
+		<strong class="card-title">Mending Search </strong>
+	</div>
+	<div class="card-body">
+					<form id="searchForm"  class="needs-validation" novalidate>
+						
+							<div class="modal-body">
+                				<div class="row">
+								
+									<div class="col-3">
+										<div class="form-group">
+											<label >Client Type</label>
+											<select class="form-control" id="buyerTypeId" name ="buyerType" placeholder="BuyerType" >
+												<option value="">Select Client Type</option>
+												<option	th:each="buyerTypeList:${modelOrderOwnerTypeList}"
+														th:value="${buyerTypeList.orderOwnerTypeId}"
+														th:utext="${buyerTypeList.orderOwnerTypeName}"/>
+			
+											</select>											
+										</div>
+									</div>
+								
+									<div class="col-3">
+										<div class="form-group">
+											<label >Client Name</label>
+											<select class="form-control" id="buyerId" name ="buyerName" placeholder="BuyerName"  >
+		
+											</select>
+										</div>
+									</div>
+									
+									<div class="col-3" hidden>
+										<div class="form-group">
+											<label >Order Type<span style="color:red">*</span></label>
+											<select class="form-control" id="orderTypeId" name="orderType" placeholder="orderType" required>
+												<option value="2">workOrder</option>
+												<option value="1">inquiryOrder</option>
+												
+			
+											</select>	
+										</div>
+									</div>
+											
+									<div class="col-3">
+										<div class="form-group">
+											<label class="control-label mb-1">PO ID</label>
+											<input  type="text" id="inquiryId" class="form-control" aria-required="true" aria-invalid="false"  name ="inquiryId" placeholder="PO ID" >
+										</div>
+									</div>
+									
+									<div class="col-3">
+										<div class="form-group">
+										<label >Item</label>
+											<select class="form-control" id="itemId" name ="item" placeholder="Item"  >
+												<option value="">Select Item</option>
+												<option	th:each="itemList:${modelItemList}"
+														th:value="${itemList.itemId}"
+														th:utext="${itemList.itemName}"/>
+			
+											</select>
+										</div>
+									</div>
+								
+									<div class="col-3">
+										<div class="form-group">
+											<label>Mending Plan From Date</label>
+											<input  type="date" id="startDate" class="form-control"  name ="From Date" >
+										</div>
+									</div>
+									
+									<div class="col-3">
+										<div class="form-group">
+											<label>Mending Plan To Date</label>
+											<input  type="date" id="endDate" class="form-control"  name ="To Date"  >
+										</div>
+									</div>
+									
+									<div class="col-3">
+										<div class="form-group">
+											<label class="control-label mb-1">Mending Done</label>
+														<!-- Default checked -->
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" onClick="onLoadBody()" id="active" name ="active" >
+												<label class="custom-control-label" for="active"></label>
+											</div>
+										</div>
+									</div>
+									
+									<div class="col-3">
+										<div class="form-group">
+											<label>Mending Done From Date</label>
+											<input  type="date" id="mendingDoneStartDate" class="form-control"  name ="Mending Done From Date" >
+										</div>
+									</div>
+									
+									<div class="col-3">
+										<div class="form-group">
+											<label>Mending Done To Date</label>
+											<input  type="date" id="mendingDoneEndDate" class="form-control"  name ="Mending Done To Date" >
+										</div>
+									</div>
+									
+									<div class="col-3">
+										<div class="form-group">
+											<label >Mended By</label>
+											<select class="form-control" id="mendedById" name ="User" placeholder="User"  >
+												<option value="">Select User</option>
+												<option	th:each="userList:${userList}"
+														th:value="${userList.userId}"
+														th:utext="${userList.userName}"/>
+			
+											</select>
+										</div>
+									</div>
+																
+								<div class="col-sm-6 text-right">
+										<input type="submit" value="Search" class="btn btn-primary" style="margin-top: 24px;">
+										<input type="button" style="margin-top: 24px;" class="btn btn-success" onClick="location.reload()" value="Refresh">				
+								</div>
+							
+
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+	
+
+		<!-- =======================================  Mending Table-1========================== -->
+		
+		
+		 <h5 style="margin-top:25px"> Select </h5>
+				<div class="form-group">
+					<select  name="state" id="maxRows" class="form-control" style="width:150px;">
+						<option value="5">5</option>
+						<option value="10">10</option>
+						<option value="15">15</option>
+						<option value="20">20</option>
+						<option value="50">50</option>
+						<option value="70">70</option>
+						<option value="100">100</option>
+						<option value="5000">Show ALL</option>
+				     </select>
+				</div>		
+					
+						<div class="card" style="width: 1070px;height: 500px;  overflow-y:scroll">
+							<div class="card-header">
+								<strong class="card-title">Mending Data Search</strong>
+							</div>
+							<div class="card-body">
+							<div class="text-right">
+								<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names">
+							</div>
+							
+								<table id="mendingSearchTable" class="table table-striped table-bordered" style="width: 2000px">
+									<thead>
+										<tr class="header">
+											<th scope="col">Order Type</th>
+											<th scope="col">WO ID</th>
+											<th scope="col">WO Date (<span style="font-size:15px">yyyy/mm/dd</span>)</th>
+											<th scope="col">PO ID</th>
+											<th scope="col">PO Date (<span style="font-size:15px">yyyy/mm/dd</span>)</th>
+											<th scope="col">Buyer/Other Name</th>
+											<th hidden>Buyer Id</th>
+											<th scope="col">Item Name</th>
+											<th scope="col" hidden>QC Id</th>
+											<th scope="col">QC Date(<span style="font-size:15px">yyyy/mm/dd</span>)</th>
+											<th scope="col" hidden>Mending Plan Id</th>
+											<th scope="col">Mending Plan Date(<span style="font-size:15px">yyyy/mm/dd</span>)</th>
+											<th scope="col">Mending Plan Qty</th>
+											<th scope="col">UOM</th>
+											<th scope="col">Action</th>
+											<th scope="col">Mending Done Qty</th>
+						
+																		
+										</tr>
+									</thead>
+									<tbody>
+			<!--						
+										<tr >
+											<td scope="row"><a type="text" ></a></td>
+											<td scope="row"><span ></span></td>
+											<td><span ></span></td>
+											<td><span ></span></td>
+											<td><span ></span></td>
+											<td><span ></span></td>
+											<td><span ></span></td>
+											
+											<td>
+												 <a  data-toggle="modal" data-target="#largeModal15"  >Mending Qty</a> 
+											</td>
+											<td><span ></span></td>
+											<td><span ></span></td>
+											<td class="text-center">
+												<input type="checkbox"  ? 'checked' readonly>
+											</td>
+											<td>
+												<a  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#largeModal" >Mending</a>
+											</td>
+										
+										</tr>
+					-->					
+									</tbody>
+								</table>
+								
+				<div class="pagination-container">
+	           			<nav>
+	           			    <ul id="pagination" class="pagination"></ul>
+				        </nav>
+				</div> 
+								
+								
+								
+							</div>
+						</div>
+			
+	</div><!-- /#right-panel -->
+
+	<!-- Right Panel -->
+
+
+<!--=====================================================================
+			 Mending Entry Inquiry modal
+=====================================================================-->
+	<div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content" style="z-index: 1000000000000">
+				<div class="modal-header">
+					<h5 class="modal-title" id="largeModalLabel">Mending Entry</h5>
+					
+					 <h5 class="modal-title" id="mendingModalMessage" style="color: limegreen; font-size:15px; margin-left:150px"></h5>
+					
+					
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form   class="needs-validation" method="post" novalidate>
+
+						<div class="row">
+							<div class="col-3">
+								<div class="form-group">
+									<label class="control-label mb-1">Mending ID</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" id="mendingId"  name="mendingId"  placeholder="Mending ID" readonly>	
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label class="control-label mb-1">Mending Plan ID</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" id="mendingPlanId"  name="mendingPlanId"  placeholder="Mending Plan ID" readonly>	
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label class="control-label mb-1">QC ID</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" id="qCId"  name="qCId"  placeholder="QC ID" readonly>	
+								</div>
+							</div>
+														
+							<div class="col-3">
+								<div class="form-group">
+									<label>Date</label>
+									<input  type="date" id="mendingDate" class="form-control" aria-required="true" aria-invalid="false"  name ="Date" >
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label class="control-label mb-1">Mended Qty</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" id="mendedQty"  name="mendedQty"   placeholder="Mended Qty" >	
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label >UOM</label>
+									<select class="form-control" id="uomId" name ="uomId" placeholder="UOM" >
+									<option	th:each="modelUOMList:${modelUOMList}"
+											th:value="${modelUOMList.uomId}"
+											th:utext="${modelUOMList.uomName}"/>
+									</select>											
+								</div>
+							</div>
+														
+							<div class="col-3" hidden>
+								<div class="form-group">
+									<label for="" class="control-label mb-1">MendingQtyMax</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" id="mendingQtyMax" name="mendingQtyMax"  placeholder="MendingQtyMax" readonly>
+								</div>
+							</div>
+	
+					<div class="col-1">
+						<div class="form-group">
+							<label class="control-label mb-1">Active</label>
+								<!-- Default checked -->
+							<div class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input" onClick="onLoadBody()" id="mendingActive" name ="active" checked>
+								<label class="custom-control-label" for="mendingActive"></label>
+							</div>
+						</div>
+					</div>	
+							
+						<div class="col-5">
+							<div class="form-group">
+								<label for="" class="control-label mb-1">Remarks</label>
+								<textarea rows="3" cols="60" name="mendingRemarks" placeholder="Write Message Here" id="mendingRemarks" class="form-control" aria-required="true" aria-invalid="false">
+								</textarea>
+							</div>
+						</div>
+
+								<div class="col-12 text-right">
+									<div class="form-group">
+									<label></label>
+									<!-- <input type="button" id="saveMending" value="Save"  class="btn btn-primary"  >  -->
+									
+									<button type="button" id="saveMending" class="btn btn-primary btn-md">Save</button>
+         	                        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="EditMendingModalCloseBtn">Close</button>
+									</div>
+								</div>
+								
+								
+		
+
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<!--=====================================================================
+				Mending Quantity inquiry modal
+=====================================================================-->
+	
+						<div class="modal fade" id="largeModal15" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+													<div class="modal-dialog modal-lg" role="document">
+														<div class="modal-content">
+															<div class="modal-header">
+																<h5 class="modal-title" id="largeModalLabel">Mended Quantity</h5>
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																	<span aria-hidden="true">&times;</span>
+																</button>
+															</div>
+															<div class="modal-body" style="text-align: left">
+																<form  class="needs-validation" method="post"  novalidate>
+                                            					
+                                             					
+                                             					<!-- =======================================  Mending Quantity Modal Table========================== -->
+																	
+																			<div class="row">
+																				<div class="col-lg-12">
+																					<div class="card" style="width: 780px; height:200px; overflow-y:scroll">
+																						<div class="card-header">
+																							<strong class="card-title">Mending Quantity</strong>
+																						</div>
+																						<div class="card-body">
+																							<table id="mendingQtyTable" class="table table-striped table-bordered" style="min-width: 900px">
+																								<thead>
+																									<tr>
+																										<th scope="col">Mending ID</th>
+																										<th scope="col">Mending Date (<span style="font-size:15px">yyyy/mm/dd</span>)</th>
+																										<th scope="col">Mended Quantity</th>
+																										<th scope="col">UOM</th>
+																										<th scope="col">Mended By</th>
+																										<th scope="col">Remarks</th>
+																										<th scope="col">Status</th>
+																										<th scope="col">Mending Plan ID</th>
+																										<th scope="col">QC ID</th>
+																										<th scope="col">Action</th>
+																									</tr>
+																								</thead>
+																								<tbody>
+																			<!--
+																									<tr >
+																										<td scope="row"><a type="text" ></a></td>
+																										<td scope="row"><span ></span></td>
+																										<td><span ></span></td>
+																									</tr>
+																			-->
+																								</tbody>
+																							</table>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																
+																	
+                                          <!--				<div class="text-right">
+																<button type="submit" class="btn btn-primary btn-md">
+                                                     			Save
+                                                				</button>
+											-->				</div>
+											
+													<div class="row">
+														<div class="col-4"></div>
+															<div class="col-3">
+																<div class="form-group">
+																	<label  class="control-label mb-1">Total</label>
+																	<input type="text" class="form-control" name="total" id="result"  placeholder="total" readonly>
+																</div>
+															</div>
+														<div class="col-4"></div>
+													</div>
+
+                                        				</form>
+													</div>
+												</div>
+											</div>
+										</div>
+												
+					
+		
+	<script src="/js/vendor/jquery-2.1.4.min.js"></script>
+	<script src="/js/popper.min.js"></script>
+	<script src="/js/plugins.js"></script>
+	<script src="/js/main.js"></script>
+	<script src="/js/order.js"></script>
+	<script src="/js/lib/data-table/datatables.min.js"></script>
+	<script src="/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+	<script src="/js/lib/data-table/dataTables.buttons.min.js"></script>
+	<script src="/js/lib/data-table/buttons.bootstrap.min.js"></script>
+	<script src="/js/lib/data-table/jszip.min.js"></script>
+	<script src="/js/lib/data-table/pdfmake.min.js"></script>
+	<script src="/js/lib/data-table/vfs_fonts.js"></script>
+	<script src="/js/lib/data-table/buttons.html5.min.js"></script>
+	<script src="/js/lib/data-table/buttons.print.min.js"></script>
+	<script src="/js/lib/data-table/buttons.colVis.min.js"></script>
+	<script src="/js/lib/data-table/datatables-init.js"></script>
+	
+
+
+
+	<script type="text/javascript">
+
+/*
+	script for getting current Date
+
+*/	
+	
+	
+	Date.prototype.toDateInputValue = (function() {
+		    var local = new Date(this);
+		    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+		    return local.toJSON().slice(0,10);
+		});
+
+         document.getElementById("mendingDate").value = new Date().toDateInputValue();
+
+	
+/*
+script for washing table's scroll & filter search
+
+*/
+/*	
+	 $(document).ready(function() {
+            $('#myTable').DataTable({
+                "scrollX": true,
+              
+            });
+         });
+        
+         
+     $(document).ready(function() {
+           $('#mendingSearchTable').DataTable();
+     
+	});
+*/ 	
+	
+	$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#mendingSearchTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+
+	
+	
+	
+/*
+script for buyerlist through buyerTypeList
+
+*/
+	function codeAddress()
+	{
+	
+	$.getJSON("/mendingcontroller/findowners", {
+		                buyerType : $('#buyerTypeId').val(),   
+		                ajax : 'true'
+		            }, function(data) {
+		                var html = '<option value="">Select Buyer</option>';
+		                var len = data.length;
+		                
+		                for ( var i = 0; i < len; i++) {
+		                    html += '<option value="' + data[i].orderOwnerId + '">'
+		                            + data[i].ownerName + '</option>';
+		                }
+		                html += '</option>';
+		                $('#buyerId').html(html);
+		            });
+		
+	}
+
+	window.onload=codeAddress;
+
+	
+	
+	$('#buyerTypeId').change(
+		        function() {
+		            $.getJSON("/mendingcontroller/findowners", {
+		                buyerType : $(this).val(),   
+		                ajax : 'true'
+		            }, function(data) {
+		                var html = '<option value=" ">Select Buyer</option>';
+		                var len = data.length;
+		                
+		                for ( var i = 0; i < len; i++) {
+		                    html += '<option value="' + data[i].orderOwnerId + '">'
+		                            + data[i].ownerName + '</option>';
+		                }
+		                html += '</option>';
+		                $('#buyerId').html(html);
+		            });
+		        });
+
+/*
+script for washing data search
+
+*/
+	
+	
+	$(function () {
+    $('#searchForm').submit(function(e) {
+     // prevent default for submission
+      e.preventDefault();
+      
+		var check=document.getElementById("active");
+    if(check.checked==true)
+    {
+    //completedSearch();
+    	if($("#orderTypeId").val()!='' && ($("#buyerTypeId").val()!='' && $("#buyerId").val()!=''))
+		{
+		completedSearch();
+		}
+		else if($("#orderTypeId").val()!='' &&( $("#mendingDoneStartDate").val()!='' || $("#mendingDoneEndDate").val()!=''))
+		{
+		completedSearch();
+		}
+		else if($("#orderTypeId").val()!='' && $("#itemId").val()!='')
+		{
+		completedSearch();
+		}
+		else if($("#orderTypeId").val()!='' && $("#mendedById").val()!='')
+		{
+		completedSearch();
+		}
+		else if($("#orderTypeId").val()!='' && $("#inquiryId").val()!='')
+		{
+		completedSearch();
+		}
+		else
+		{
+		text="Please chose another data";
+		// document.getElementById("displayMessage").value=text;
+		document.getElementById("displayMessage").innerHTML=text;
+		}
+    
+    
+    }
+    else
+    {
+    //pendingSearch();
+
+    if($("#orderTypeId").val()!='' && ($("#buyerTypeId").val()!='' && $("#buyerId").val()!='') )
+		{
+	
+		pendingSearch();
+		}
+		else if($("#orderTypeId").val()!='' &&( $("#startDate").val()!='' || $("#endDate").val()!=''))
+		{
+	
+		pendingSearch();
+		}
+		else if($("#orderTypeId").val()!='' && $("#itemId").val()!='')
+		{
+	
+		pendingSearch();
+		}
+		else if($("#orderTypeId").val()!='' && $("#mendedById").val()!='')
+		{
+	
+		pendingSearch();
+		}
+		else if($("#orderTypeId").val()!='' && $("#inquiryId").val()!='')
+		{
+	
+		pendingSearch();
+		}
+		else
+		{
+		
+	
+		text="Please chose another data";
+		//document.getElementById("displayMessage").value=text;
+		document.getElementById("displayMessage").innerHTML=text;
+		}
+    
+    
+    
+    } 
+
+
+
+	  });  // submit
+   });   // function	
+	
+	
+	
+	
+	 function completedSearch()
+   {
+   
+    text="";
+	document.getElementById("displayMessage").value=text;
+   
+   if($("#orderTypeId").val()==1 )
+    	{
+    	completedOrderSearch();
+    	}
+   else if($("#orderTypeId").val()==2)
+    	{
+    	completedWOChdSearch();
+    	}
+   
+   }
+   
+   function pendingSearch()
+   {
+   
+ 
+    text="";
+	document.getElementById("displayMessage").value=text;
+   
+   if($("#orderTypeId").val()==1 )
+    	{
+    	pendingOrderSearch();
+    	}
+   else if($("#orderTypeId").val()==2)
+    	{
+   
+    	pendingWOChdSearch();
+    	}
+   }
+	
+	
+	
+	
+	function pendingWOChdSearch()
+		{
+
+	  			// form data capture
+     				 var formData= { 
+        					"buyerId" :$("#buyerId").val(),
+        					"inquiryId" : $("#inquiryId").val(),
+       	 					"mendedById" : $("#mendedById").val(),
+        					"startDate" : $("#startDate").val(),
+        					"endDate" : $("#endDate").val(),
+        					"itemId"  : $("#itemId").val()
+
+        							};
+        
+         			//  $('#table tbody').html('');
+        			$('#mendingSearchTable tbody').empty();
+           
+            		$.ajax({
+            			type : "GET",
+           				// url :  "/api/inquiry_search",
+           				   url:"/mendingcontroller/getpendingmendingwosearch",
+            			   dataType : 'json',
+	    				   data: formData,
+            			   success: function(result){
+            			   
+            if(result===null||result.length==0)
+            {
+            alert("No Records are found");
+            
+            }else{
+            			   
+	     $.each(result, function(i,modelMendingCustomList){
+					
+	    var customerRow = '<tr>' +
+	    	'<td>' + '<a>Work Order</a>' + '</td>' +
+			'<td class="tdWOMstId">' + modelMendingCustomList.wOMstId + '</td>' +   			
+			'<td class="tdWODate">' + modelMendingCustomList.wODate + '</td>' +
+			'<td class="tdPOMstId">' + modelMendingCustomList.pOMstId + '</td>' +
+			'<td class="tdPODate">' + modelMendingCustomList.pODate + '</td>' +
+			'<td class="buyerId" hidden>' + modelMendingCustomList.buyerId + '</td>' +
+			'<td class="tdBuyerName">' + modelMendingCustomList.buyerName + '</td>' +
+			'<td class="itemId" hidden>' + modelMendingCustomList.itemId+'</td>' +
+			'<td class="tdItemName">' + modelMendingCustomList.itemName+'</td>' +
+			'<td class="tdQCId" hidden>' + modelMendingCustomList.qCId+'</td>' +
+			'<td class="tdQCDate">' + modelMendingCustomList.qCDate +'</td>' +
+			'<td class="tdMendingPlanId" hidden>' + modelMendingCustomList.mendingPlanId+'</td>' +
+			'<td class="tdMendingPlanDate">' + modelMendingCustomList.mendingPlanDate +'</td>' +
+			'<td class="tdMendingPlanQty">' + modelMendingCustomList.mendingPlanQty +'</td>' +
+			'<td class="uomId" hidden>' + modelMendingCustomList.uomId+'</td>' +
+			'<td class="tdUomName">' + modelMendingCustomList.uomName+'</td>' +
+		   	'<td class="tdMendingSearch">' + '<a  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#largeModal"  >Mending</a>'+ '</td>' +
+			//'<td class="tdMendingDate">' + modelMendingCustomList.mendingDate + '</td>' +
+			'<td class="tdMendedQty" data-toggle="modal" data-target="#largeModal15">' + modelMendingCustomList.mendedQty + '</td>' +
+			//'<td class="tdQCQtySearch" data-toggle="modal" data-target="#largeModal30">' + modelMendingCustomList.qCQtySum + '</td>' +
+			
+			//'<td class="tdMendingQtySearch">' + '<a  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#largeModal15"  >Mending</a>' + '</td>' +
+			'<td class="tdMendingQtyMax" hidden>' + modelMendingCustomList.mendingQtyMax + '</td>' +					        
+			
+		
+											        
+			'</tr>';
+									  					
+	      $('#mendingSearchTable tbody').append(customerRow);
+	      				
+		});        // each
+		
+		}		//else
+		
+		
+		
+		
+		// for default 10 data   
+		                                    
+	var table='#mendingSearchTable';
+	
+	$(".pagination").html('');
+	
+	var trnum =0;
+	var maxRows =parseInt(5);
+	var  totalRows=$(table+' tbody tr').length;
+	
+	$(table+' tr:gt(0)').each(function(e) {
+	
+	              trnum++;
+	              
+	              if(trnum > maxRows)
+	              {
+	                 $(this).hide();
+	              }
+	              if(trnum <= maxRows)
+	              {
+	                 $(this).show();
+	              }
+	    
+	
+	
+	});   //each function
+	
+	 if(totalRows > maxRows)
+	              {
+	              
+	              
+	              var pagenum =Math.ceil(totalRows/maxRows);
+	              
+	              for(var i=1;i<=pagenum;)
+	              {
+	                 $("#pagination").append('<li class="btn-sm" data-page="'+i+'">\<span>'+ i++ +'</span></li>').show();
+	              }  //for
+	                
+	              }   //if
+	              
+	              
+	              $('.pagination li:first-child').addClass('active');
+	             $('.pagination li').on('click',function(){
+	             
+	             var pageNum =  $(this).attr('data-page');
+	             var trIndex= 0;
+	             
+	             $('.pagination li').removeClass('active');
+	              $(this).addClass('active');
+	             $(table+' tr:gt(0)').each(function(e) {
+	             
+	                trIndex++;
+	                if(trIndex >(maxRows*pageNum) || trIndex<=((maxRows*pageNum)-maxRows))
+	                {
+	                    $(this).hide();
+	                }
+	                else
+	                {
+	                $(this).show();
+	                }
+	             
+	             
+	             
+	                }); // each function
+	             
+	             });  //  click function
+	             
+	             
+	
+		                                       
+		                // default 10 data - end 
+		
+		
+					 
+		},   // end success
+	error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+									
+        });   // end ajax 
+              
+		}
+		
+		
+		function completedWOChdSearch()
+		{
+
+	  	 var formData= { 
+        					"buyerId" :$("#buyerId").val(),
+        					"inquiryId" : $("#inquiryId").val(),
+       	 					"mendedById" : $("#mendedById").val(),
+        					"startDate" : $("#mendingDoneStartDate").val(),
+        					"endDate" : $("#mendingDoneEndDate").val(),
+        					"itemId"  : $("#itemId").val()
+
+        							};
+        
+         			//  $('#table tbody').html('');
+        			$('#mendingSearchTable tbody').empty();
+           
+            		$.ajax({
+            			type : "GET",
+           				// url :  "/api/inquiry_search",
+           				   url:"/mendingController/completedWOSearch",
+            			   dataType : 'json',
+	    				   data: formData,
+            			   success: function(result){
+            			   
+            if(result===null||result.length==0)
+            {
+            alert("No Records are found");
+            
+            }else{
+            			   
+	     $.each(result, function(i,modelMendingCustomList){
+					
+	    var customerRow = '<tr>' +
+	    	'<td>' + '<a>Work Order</a>' + '</td>' +
+			'<td class="tdWOMstId">' + modelMendingCustomList.wOMstId + '</td>' +   			
+			'<td class="tdWODate">' + modelMendingCustomList.wODate + '</td>' +
+			'<td class="tdPOMstId">' + modelMendingCustomList.pOMstId + '</td>' +
+			'<td class="tdPODate">' + modelMendingCustomList.pODate + '</td>' +
+			'<td class="buyerId" hidden>' + modelMendingCustomList.buyerId + '</td>' +
+			'<td class="tdBuyerName">' + modelMendingCustomList.buyerName + '</td>' +
+			'<td class="itemId" hidden>' + modelMendingCustomList.itemId+'</td>' +
+			'<td class="tdItemName">' + modelMendingCustomList.itemName+'</td>' +
+			'<td class="tdQCId" hidden>' + modelMendingCustomList.qCId+'</td>' +
+			'<td class="tdQCDate">' + modelMendingCustomList.qCDate +'</td>' +
+			'<td class="tdMendingPlanId" hidden>' + modelMendingCustomList.mendingPlanId+'</td>' +
+			'<td class="tdMendingPlanDate">' + modelMendingCustomList.mendingPlanDate +'</td>' +
+			'<td class="tdMendingPlanQty">' + modelMendingCustomList.mendingPlanQty +'</td>' +
+			'<td class="uomId" hidden>' + modelMendingCustomList.uomId+'</td>' +
+			'<td class="tdUomName">' + modelMendingCustomList.uomName+'</td>' +
+		   	'<td class="tdMendingSearch">' + '<a  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#largeModal"  >Mending</a>'+ '</td>' +
+			//'<td class="tdMendingDate">' + modelMendingCustomList.mendingDate + '</td>' +
+			'<td class="tdMendedQty" data-toggle="modal" data-target="#largeModal15">' + modelMendingCustomList.mendedQty + '</td>' +
+			//'<td class="tdQCQtySearch" data-toggle="modal" data-target="#largeModal30">' + modelMendingCustomList.qCQtySum + '</td>' +
+			
+			//'<td class="tdMendingQtySearch">' + '<a  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#largeModal15"  >Mending</a>' + '</td>' +
+			'<td class="tdMendingQtyMax" hidden>' + modelMendingCustomList.mendingQtyMax + '</td>' +
+			
+								        
+			'</tr>';
+									  
+									  			
+	      $('#mendingSearchTable tbody').append(customerRow);
+	      
+	      
+	
+	     			
+		});        // each
+					 
+
+   	 }		//else
+   	 
+   	 
+   	 // for default 10 data   
+		                                    
+	var table='#mendingSearchTable';
+	
+	$(".pagination").html('');
+	
+	var trnum =0;
+	var maxRows =parseInt(5);
+	var  totalRows=$(table+' tbody tr').length;
+	
+	$(table+' tr:gt(0)').each(function(e) {
+	
+	              trnum++;
+	              
+	              if(trnum > maxRows)
+	              {
+	                 $(this).hide();
+	              }
+	              if(trnum <= maxRows)
+	              {
+	                 $(this).show();
+	              }
+	    
+	
+	
+	});   //each function
+	
+	 if(totalRows > maxRows)
+	              {
+	              
+	              
+	              var pagenum =Math.ceil(totalRows/maxRows);
+	              
+	              for(var i=1;i<=pagenum;)
+	              {
+	                 $("#pagination").append('<li class="btn-sm" data-page="'+i+'">\<span>'+ i++ +'</span></li>').show();
+	              }  //for
+	                
+	              }   //if
+	              
+	              
+	              $('.pagination li:first-child').addClass('active');
+	             $('.pagination li').on('click',function(){
+	             
+	             var pageNum =  $(this).attr('data-page');
+	             var trIndex= 0;
+	             
+	             $('.pagination li').removeClass('active');
+	              $(this).addClass('active');
+	             $(table+' tr:gt(0)').each(function(e) {
+	             
+	                trIndex++;
+	                if(trIndex >(maxRows*pageNum) || trIndex<=((maxRows*pageNum)-maxRows))
+	                {
+	                    $(this).hide();
+	                }
+	                else
+	                {
+	                $(this).show();
+	                }
+	             
+	             
+	             
+	                }); // each function
+	             
+	             });  //  click function
+	             
+	             
+	
+		                                       
+		                // default 10 data - end 
+					 
+					 
+		},   // end success
+	error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+					
+					
+        });   // end ajax 
+		
+		
+		}
+	
+	
+			
+	function pendingOrderSearch(){
+		
+		
+		// form data capture
+      var formData= { 
+        "buyerId" :$("#buyerId").val(),
+        "inquiryId" : $("#inquiryId").val(),
+        "mendedById" : $("#mendedById").val(),
+        "startDate" : $("#startDate").val(),
+        "endDate" : $("#endDate").val(),
+		"itemId"  : $("#itemId").val()
+        
+        };
+        
+        //  $('#table tbody').html('');
+        $('#mendingSearchTable tbody').empty();
+           
+            $.ajax({
+            type : "GET",
+           // url :  "/api/inquiry_search",
+           url:"/mendingController/pendingOrderSearch",
+            dataType : 'json',
+	    data: formData,
+            success: function(result){
+            
+             if(result===null||result.length==0)
+            {
+            alert("No Records are found");
+            
+            }else{  
+            
+	     $.each(result, function(i,modelMendingCustomList){
+	     					
+	    var customerRow = '<tr>' +
+	    	'<td>' + '<a>Inquiry Order</a>' + '</td>' +
+			'<td>' + modelMendingCustomList.inquiryId + '</td>' +   			
+			'<td>' + modelMendingCustomList.inquiryDate + '</td>' +
+			'<td class="tdPOMstId">' + modelMendingCustomList.pOMstId + '</td>' +
+			'<td class="tdPODate">' + modelMendingCustomList.pODate + '</td>' +
+			'<td class="buyerId" hidden>' + modelMendingCustomList.buyerId + '</td>' +
+			'<td class="tdBuyerName">' + modelMendingCustomList.buyerName + '</td>' +
+			'<td class="itemId" hidden>' + modelMendingCustomList.itemId+'</td>' +
+			'<td class="tdItemName">' + modelMendingCustomList.itemName+'</td>' +
+			'<td class="tdQCId" hidden>' + modelMendingCustomList.qCId+'</td>' +
+			'<td class="tdQCDate">' + modelMendingCustomList.qCDate +'</td>' +
+			'<td class="tdMendingPlanId" hidden>' + modelMendingCustomList.mendingPlanId+'</td>' +
+			'<td class="tdMendingPlanDate">' + modelMendingCustomList.mendingPlanDate +'</td>' +
+			'<td class="tdMendingPlanQty">' + modelMendingCustomList.mendingPlanQty +'</td>' +
+			'<td class="uomId" hidden>' + modelMendingCustomList.uomId+'</td>' +
+			'<td class="tdUomName">' + modelMendingCustomList.uomName+'</td>' +
+		   	'<td class="tdMendingSearch">' + '<a  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#largeModal"  >Mending</a>'+ '</td>' +
+			'<td class="tdMendingDate">' + modelMendingCustomList.mendingDate + '</td>' +
+			'<td class="tdMendedQty">' + modelMendingCustomList.mendedQty + '</td>' +
+			//'<td class="tdQCQtySearch" data-toggle="modal" data-target="#largeModal30">' + modelMendingCustomList.qCQtySum + '</td>' +
+			
+			'<td class="tdMendingQtySearch">' + '<a  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#largeModal15"  >Mending</a>' + '</td>' +
+			'<td class="tdMendingQtyMax" hidden>' + modelMendingCustomList.mendingQtyMax + '</td>' +
+								         								        
+			'</tr>';
+ 						
+	      $('#mendingSearchTable tbody').append(customerRow);
+	   	   					
+		});        // each
+		
+		}		//else
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+					 
+		},   // end success
+	error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+										
+        });   // end ajax		
+
+		}	
+		
+		function completedOrderSearch()
+		{
+		
+	
+      
+       // form data capture
+      var formData= { 
+        					"buyerId" :$("#buyerId").val(),
+        					"inquiryId" : $("#inquiryId").val(),
+       	 					"mendedById" : $("#mendedById").val(),
+        					"startDate" : $("#mendingDoneStartDate").val(),
+        					"endDate" : $("#mendingDoneEndDate").val(),
+        					"itemId"  : $("#itemId").val()
+
+        							};
+        
+        //  $('#table tbody').html('');
+        $('#mendingSearchTable tbody').empty();
+           
+            $.ajax({
+            type : "GET",
+           // url :  "/api/inquiry_search",
+           url:"/mendingController/completedOrderSearch",
+            dataType : 'json',
+	    data: formData,
+            success: function(result){
+            
+            if(result===null||result.length==0)
+            {
+            alert("No Records are found");
+            
+            }else{
+            
+	     $.each(result, function(i,modelMendingCustomList){
+	     
+	   			
+	    var customerRow = '<tr>' +
+	    	'<td>' + '<a>Inquiry Order</a>' + '</td>' +
+			'<td>' + modelMendingCustomList.inquiryId + '</td>' +   	
+			'<td>' + modelMendingCustomList.inquiryDate + '</td>' +
+			'<td class="tdPOMstId">' + modelMendingCustomList.pOMstId + '</td>' +
+			'<td class="tdPODate">' + modelMendingCustomList.pODate + '</td>' +
+			'<td class="buyerId" hidden>' + modelMendingCustomList.buyerId + '</td>' +
+			'<td class="tdBuyerName">' + modelMendingCustomList.buyerName + '</td>' +
+			'<td class="itemId" hidden>' + modelMendingCustomList.itemId+'</td>' +
+			'<td class="tdItemName">' + modelMendingCustomList.itemName+'</td>' +
+			'<td class="tdQCId" hidden>' + modelMendingCustomList.qCId+'</td>' +
+			'<td class="tdQCDate">' + modelMendingCustomList.qCDate +'</td>' +
+			'<td class="tdMendingPlanId" hidden>' + modelMendingCustomList.mendingPlanId+'</td>' +
+			'<td class="tdMendingPlanDate">' + modelMendingCustomList.mendingPlanDate +'</td>' +
+			'<td class="tdMendingPlanQty">' + modelMendingCustomList.mendingPlanQty +'</td>' +
+			'<td class="uomId" hidden>' + modelMendingCustomList.uomId+'</td>' +
+			'<td class="tdUomName">' + modelMendingCustomList.uomName+'</td>' +
+		   	'<td class="tdMendingSearch">' + '<a  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#largeModal"  >Mending</a>'+ '</td>' +
+			'<td class="tdMendingDate">' + modelMendingCustomList.mendingDate + '</td>' +
+			'<td class="tdMendedQty">' + modelMendingCustomList.mendedQty + '</td>' +
+			//'<td class="tdQCQtySearch" data-toggle="modal" data-target="#largeModal30">' + modelMendingCustomList.qCQtySum + '</td>' +
+			
+			'<td class="tdMendingQtySearch">' + '<a  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#largeModal15"  >Mending</a>' + '</td>' +
+			'<td class="tdMendingQtyMax" hidden>' + modelMendingCustomList.mendingQtyMax + '</td>' +
+			
+								        
+			'</tr>';
+									  
+								
+	      $('#mendingSearchTable tbody').append(customerRow);
+	   
+			
+		});        // each
+		
+		}		//else
+					 
+		},   // end success
+	error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+								
+        });   // end ajax
+		
+		
+		}
+				
+		
+
+/*
+script for saving mending Data
+
+*/		
+		
+			
+	    $("#mendingSearchTable").on('click','.tdMendingSearch',function(){
+	    var $row = $(this).closest("tr");   
+	    var qCId = $row.find(".tdQCId").text();
+	    var mendingPlanId = $row.find(".tdMendingPlanId").text();
+	    var mendingQtyMax = $row.find(".tdMendingQtyMax").text();
+	   	var n="";
+	    
+	     $(".modal-body #qCId").val( qCId );
+	     $(".modal-body #mendingPlanId").val( mendingPlanId );
+	     $(".modal-body #mendingQtyMax").val( mendingQtyMax );
+	     $(".modal-body #mendedQty").val(n);
+	     $(".modal-body #mendingRemarks").val(n);
+	    
+	     //$("#qcItemName").text(id);
+
+		
+		});
+		
+		
+		
+			
+		
+	$('#saveMending').click(function(e) {
+			
+		var mendingPlanId=$("#mendingPlanId").val();
+		var qCId=$("#qCId").val();
+		var mendingDate=$("#mendingDate").val();
+		var mendingQtyMax=$("#mendingQtyMax").val();
+		var mendedQty=$("#mendedQty").val();
+		var uomId=$("#uomId").val();
+		var mendingRemarks=$("#mendingRemarks").val();
+		var check=document.getElementById("mendingActive");
+        if(check.checked==true)
+        {
+        var activeStatus=1;
+        }
+        else
+        {
+        var activeStatus=0; 
+        }	
+
+		if(parseFloat(mendedQty)>parseFloat(mendingQtyMax))
+		{
+		alert("Mended Quantity cannot be higher than "+parseFloat(mendingQtyMax));
+		}
+		else{	
+			
+			 var formData= { 
+     				 		"mendingPlanId" :$("#mendingPlanId").val(),
+        					"qCId" :$("#qCId").val(),
+        					"uomId" :uomId,
+        					"mendingDate" : $("#mendingDate").val(),
+        					"mendedQty" : $("#mendedQty").val(),
+        					"mendingRemarks" : $("#mendingRemarks").val(),
+        					"activeStatus" : activeStatus
+       	 					
+						};
+			 $.ajax({
+		            type : "POST",	    		           
+		             url:"/mendingcontroller/savemendingentry",
+		            dataType : 'json',
+			        data: formData,
+		            success: function(result){
+		            	
+		                var text="Data saved successfully,press close button ";
+		            document.getElementById("mendingModalMessage").innerHTML=text;
+		            	
+		            },
+			 });	// ajax
+			
+			
+	}	// else condition		
+			
+			 });	//click function
+			 
+			 
+			  $("#mendingQtyTable").on('click','.saveEditMendedQty',function(){
+   	     	    	
+	    		 var $row = $(this).closest("tr");    // Find the row
+	    		 	   
+	    		 	   var mendingPlanQty = $row.find('.mendingPlanQty').text();            
+		               var mendingId = $row.find('.mendingId').text();
+		               var mendedQty = $row.find('.mendedQty').text();
+		               var mendedRemarks = $row.find('.mendedRemarks').text();
+		               
+		               //alert("mendingPlanQty: "+mendingPlanQty);
+		           		               
+		               var formData= { 
+		                               //alert("now formdata");
+	    		                       "mendingId" : mendingId,
+	    			                   "mendedQty" : mendedQty,
+	    			            	   "mendedRemarks" : mendedRemarks
+	    			                   
+	    			                 };
+	    			         
+	    			          $.ajax({
+	    			          
+   		                               type : "POST",	    		           
+   		                               url:"/mendingcontroller/mendingupdate",
+   		                               dataType : 'json',
+   			                           data: formData,
+   		                               success: function(result){  },
+   		                               
+   			                         });   //ajax
+	    		 
+                $(this).closest("tr").remove();
+        });    //function(mendingQtyTable)	
+	
+			
+			
+			
+			$('#EditMendingModalCloseBtn').click(function(e) {
+			
+			  document.getElementById("mendingModalMessage").innerHTML=null;
+			
+			});
+/*
+script for searching QC,Mending QTY data in ajax's search
+
+*/		
+			
+	$("#mendingSearchTable").on('click','.tdMendedQty',function(){
+	
+	    var $row = $(this).closest("tr");   
+	    var mendingPlanId = $row.find(".tdMendingPlanId").text();
+		
+		   var formData={
+	    	"mendingPlanId":mendingPlanId
+	    	
+	    	   };	 
+	   	    
+	    //  $('#table tbody').html('');
+        $('#mendingQtyTable tbody').empty();
+		
+		$.ajax({
+		
+		 type : "GET",
+           // url :  "/api/inquiry_search",
+            url:"/mendingcontroller/getmendingbymendingplanid",
+            dataType : 'json',
+	    	data: formData,
+		 success: function(result){
+	     $.each(result, function(i,modelMendingList){
+	     
+	         var customerRow = '<tr>' +
+	    	
+	    	'<td class="mendingId" >' +modelMendingList.mendingId+  '</td>' +
+			'<td>' +modelMendingList.mendingDate+  '</td>' +
+			'<td class="form-control mendedQty"  onclick = "update(this.id)" contentEditable>' +modelMendingList.mendedQty+  '</td>' +
+			'<td>' +modelMendingList.uomName+  '</td>' +
+			'<td>' +modelMendingList.userName+'('+modelMendingList.mendedBy+')' + '</td>' +
+			'<td class="form-control mendedRemarks"  onclick = "update(this.id)" contentEditable>' +modelMendingList.mendingRemarks + '</td>' +
+			'<td class="Selectbox text-center" >' +modelMendingList.sActive+ '</td>' +
+			'<td>' +modelMendingList.mendingPlanId+  '</td>' +
+			'<td>' +modelMendingList.qCId+  '</td>' +
+			'<td class="mendingPlanQty" hidden>' +modelMendingList.mendingPlanQty+  '</td>' +
+			'<td class="saveEditMendedQty"> <button id="" class="btn btn-success btn-sm" >Save</button>'+'</td>' +   
+								        
+			'</tr>';						
+	      $('#mendingQtyTable tbody').append(customerRow);
+	   		//function test();
+	   	     	     	     		
+		});        // each
+		
+		$(calculateSum);
+											 
+		},   // end success
+
+		error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+					
+		});   // end ajax
+		
+		});
+		
+		
+		$("#mendingQtyTable").on('click','.form-control mendedQty',function(){
+        function update(id){
+        document.getElementById(id).innerHTML = "<input type = 'text' name = 'txtNewInput' id = 'txtNewInput' value = '" + content + "'/>";
+        }
+    });
+    
+    $("#mendingQtyTable").on('click','.form-control mendedRemarks',function(){
+        function update(id){
+        document.getElementById(id).innerHTML = "<input type = 'text' name = 'txtNewInput' id = 'txtNewInput' value = '" + content + "'/>";
+        }
+    });
+		
+						
+		function calculateSum() {
+		
+			var sum = 0;
+			// iterate through each td based on class and add the values
+			$(".mendedQty").each(function(i) {
+				
+    			var value = $(this).text();
+    			if(!isNaN(value) && value.length != 0){
+    			sum+=parseFloat(value);
+    			}
+    		
+				});	
+			
+			document.getElementById("result").value=sum; 
+			};	
+			
+			function calculateSumQC() {
+		
+			var sum = 0;
+			// iterate through each td based on class and add the values
+			$(".qCQty").each(function(i) {
+				
+    			var value = $(this).text();
+    			if(!isNaN(value) && value.length != 0){
+    			sum+=parseFloat(value);
+    			}
+    		
+				});	
+			
+			document.getElementById("qCResult").value=sum; 
+			};	
+			
+
+		
+	
+		</script>
+		
+		
+		
+			</script>
+
+
+ <script type="text/javascript" th:inline="javascript">
+		
+		var now = new Date();
+		var day = ("0" + now.getDate()).slice(-2);
+		var month = ("0" + (now.getMonth() + 1)).slice(-2);
+	
+	    var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+	    
+	    document.getElementById('endDate').value = today;
+	    document.getElementById('mendingDoneEndDate').value = today;
+      
+    
+       
+	</script>
+	
+      <style>
+   
+    .table td {
+    padding: 0 5px;
+          }
+
+   </style>
+												
+
+</body>
+
+</html>

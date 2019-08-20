@@ -1,0 +1,5352 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html xmlns:th="http://www.thymeleaf.org">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Production Plan</title>
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/themify-icons.css">
+    <link rel="stylesheet" href="/css/flag-icon.min.css">
+    <link rel="stylesheet" href="/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="/css/lib/datatable/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="/scss/style.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+   
+       
+
+    <style type="text/css">
+       
+       
+       .pagination li:hover{
+    cursor: pointer;
+    color:red;
+     border: 1px solid #4CAF50;
+    
+}
+	
+       
+       .pagination-container ul{
+        float:left;
+        padding:8 px 16px;
+        text-decoration: none;       
+
+        color:black;
+     }
+     
+     .pagination-container ul.active{
+        background-color: #Red;             
+        border: 1px solid #4CAF50;
+        color:white;
+     }
+       
+       
+       #calculate{
+     display:none;
+     }
+    
+        .modal-backdrop.show {
+            display: none;
+        }
+
+        .modal-backdrop.fade {
+            display: none;
+        }
+
+/*
+        div.dataTables_wrapper {
+            width: 100%;
+        }
+*/
+		.selected{
+			background-color: #eee;
+			color: #000;
+		}
+		
+		.dataTables_length, .dataTables_filter {
+			display: none !important;
+		}
+    </style>
+    
+    
+    <style>
+.custom-header-panel{
+    background-color: #004b8e !important;
+    border-color: #004b8e !important;
+    color: white;
+}
+
+
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading {
+  padding: 10px 15px;
+  margin: -15px -15px 15px;
+  font-size: 17.5px;
+  font-weight: 500;      
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-footer {
+  padding: 10px 15px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+} 
+
+.panel-primary {
+  border-color: #428bca;
+}
+
+.panel-primary .panel-heading {
+  color: #ffffff;
+  background-color: #428bca;
+  border-color: #428bca;
+}
+/* This kinda of works but now 
+.panel, .panel-group .panel-heading+.panel-collapse>.panel-body{
+    border: none;
+}
+*/
+.card-header{
+    /* background-color: #004b8e !important; */
+    background-color: #004b8e !important;
+    border-color: #004b8e !important;
+    color: white;
+
+    padding: 10px 15px;
+  /*margin: -15px -15px 15px; */
+
+  font-size: 17.5px;
+  font-weight: 500;      
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+
+ <style type="text/css">
+       
+       #calculate{
+      display:none;
+     }
+    
+        .modal-backdrop.show {
+            display: none;
+        }
+
+        .modal-backdrop.fade {
+            display: none;
+        }
+
+/*
+        div.dataTables_wrapper {
+            width: 100%;
+        }
+*/
+		.selected{
+			background-color: #eee;
+			color: #000;
+		}
+		
+		.dataTables_length, .dataTables_filter {
+			display: none !important;
+		}
+    </style>
+
+
+</head>
+
+<body>
+
+<div class="bootstrap-iso">
+
+  <!-- Left Panel -->
+
+	<aside id="left-panel" class="left-panel">
+		<nav class="navbar navbar-expand-sm navbar-default">
+
+			<div class="navbar-header">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+					<i class="fa fa-bars"></i>
+				</button>
+				<a class="navbar-brand" href="./">MLFM</a>
+				<a class="navbar-brand hidden" href="./">BD</a>
+			</div>
+
+			<div id="main-menu" class="main-menu collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+				
+			
+                
+   <li class="menu-item-has-children dropdown" >
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <i class="menu-icon fa fa-laptop"></i>    Set Up
+          </a>
+        
+       <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown" >
+             <li th:each="s:${listModelUserObjectSetup}" 
+                   th:value="${s.userObjectId}">
+            <a class="dropdown-item" th:href="@{${s.modelObject.filePath}+'/'+${s.modelUser.userId}}" >
+               
+                    <span th:utext="${s.modelObject.objectName}">
+                   </span>
+                </a>
+            </li>
+          
+        </ul>
+        
+   </li>
+   
+      
+	 <li class="menu-item-has-children dropdown">
+     
+       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="menu-icon fa fa-laptop"></i> Transaction
+        </a>
+        
+           <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown">
+              <li th:each="t:${listModelUserObjectTransaction}"
+                   th:value="${t.userObjectId}">
+                   
+                   <a class="dropdown-item" th:href="@{${t.modelObject.filePath}+'/'+${t.modelUser.userId}}" >
+                 
+                         <span th:utext="${t.modelObject.objectName}">
+                         </span>
+                      </a>
+              </li>
+          </ul>
+      </li>			
+				
+        	
+		   	
+		<li class="menu-item-has-children dropdown">
+     
+             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="menu-icon fa fa-laptop"></i>   Tools
+             </a>
+        
+            <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown">
+                <li th:each="u:${listModelUserObjectTool}"
+                     th:value="${u.userObjectId}">
+                     
+                           <a class="dropdown-item" th:href="@{${u.modelObject.filePath}+'/'+${u.modelUser.userId}}" >
+                 
+                    <span th:utext="${u.modelObject.objectName}">
+                    </span>
+                 </a>
+               </li>
+          
+            </ul>
+       </li>	
+
+
+		<li class="menu-item-has-children dropdown">
+     
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="menu-icon fa fa-laptop"></i> Report
+              </a>
+        
+              <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown">
+                   <li th:each="r:${listModelUserObjectReport}"
+                        th:value="${r.userObjectId}">
+                        <a class="dropdown-item" th:href="@{${r.modelObject.filePath}+'/'+${r.modelUser.userId}}" >
+                     <!--  <a class="dropdown-item" th:href="${r.modelObject.filePath}"> -->
+                           <span th:utext="${r.modelObject.objectName}">
+                           </span>
+                       </a>
+                   </li>
+          
+              </ul>
+        </li>	
+					
+					
+					
+	             </ul>
+			</div>
+		</nav>
+	</aside>
+
+
+
+	<!-- Left Panel -->
+
+
+    <!-- Right Panel -->
+
+    <div id="" class="right-panel">
+
+       
+		<!-- Header-->
+		<header id="header" class="header">
+
+			<div class="header-menu">
+<!--
+				<div class="col-sm-4">
+					<a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
+					<div class="header-left">
+						<button class="search-trigger"><i class="fa fa-search"></i></button>
+						<div class="form-inline">
+							<form class="search-form">
+								<input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
+								<button class="search-close" type="submit"><i class="fa fa-close"></i></button>
+							</form>
+						</div>
+
+					</div>
+				</div>
+-->
+		<!--
+				<div class="col-sm-5">
+					<div class="user-area dropdown float-right">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">
+                        </a>
+
+						<div class="user-menu dropdown-menu">
+							<a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
+							
+							
+
+							<a class="nav-link" href="/logoncontroller/init"><i class="fa fa-power -off"></i>Logout</a>
+						</div>
+					</div>
+                </div>
+         -->       
+                  
+                        <div class="col-sm-4 text-right" >
+                         
+                      </div> 
+               
+                   <div class="col-sm-8 text-right" >
+                           
+                           <input type="hidden" class="nav-link" th:value="${userId}" id="accessUserId" readonly>
+                           <a class="nav-link" href="/logoncontroller/init"  style="float:right;" ><i class="fa fa-power -off"></i>Logout</a>
+                            <span class="nav-link" th:text="${name}"readonly style="color: black; float:right; padding-left:5px;"></span>  
+                            <span class="nav-link" style="color: black; float:right; padding-right:0px;">User : </span>  
+                           
+                          
+                         
+                       </div>
+                 
+			</div>
+
+		</header><!-- /header -->
+		<!-- Header-->
+        
+        <div class="container">
+
+ <!-- <div class="row">  -->
+
+
+<!-- <div class="col-md-offset-2 col-md-8"> -->
+	
+    <div class="panel">
+      <div class="panel-heading custom-header-panel">
+          <h5 class="panel-title roboto">Production Plan Search</h3>
+      </div>
+  <div class="panel-body">
+
+
+				
+							
+		<!-- =========================================== search start================================== -->
+		       
+		       
+		        <form  id="productionPlanSearch"  class="needs-validation" novalidate>
+					
+								<div class="col-12">
+									<div class="row">
+							
+						 
+									     <div class="col-3">
+										     <div class="form-group">
+											      <label class="control-label mb-1">Client type</label>
+											     
+												  <select name="order_owner_Type" id="buyerTypeId" class="form-control" aria-required="true" aria-invalid="false">
+									                     <option value="">Choose Type</option>  
+									                      <option th:each="type:${ownerTypeList}"
+											                         th:value="${type.orderOwnerTypeId}"
+											                         th:utext="${type.orderOwnerTypeName}"
+									                       />
+							                      </select>
+										     </div>
+									    </div>
+									
+								         <div class="col-3">
+										     <div class="form-group">
+											      <label class="control-label mb-1">Client Name</label>
+											
+											       <select  name="buyer" id="BuyerOrOtherId" class="form-control" placeholder="Select" >
+									                     <option value=""> Select Buyer Name</option>
+									
+							                        </select>
+							                        
+							                          
+										     </div>
+									    </div>
+									 
+					 
+									
+									 
+									     <div class="col-3">
+											 <div class="form-group">
+												 <label for="ultimateBuyerName" class="control-label mb-1">Ultimate Buyer</label>
+												 <select  id="ultimateBuyerName" name="ultimateBuyerName" class="form-control">
+														<option value=""> Select Ultimate Buyer</option>
+														<option th:each="owner:${ownerList}"
+																th:value="${owner.orderOwnerId}"
+																th:text="${owner.ownerName + '-' + owner.orderOwnerType.orderOwnerTypeName}"
+														/>
+												 </select>
+											 </div>
+										 </div>
+								
+									    
+	                                    
+	                                    <div class="col-3">
+			                                <div class="form-group">
+			                                	<label class="control-label mb-1">Item</label>
+			               	                    <select id="itemId" name="itemName" class="form-control">
+			                                            <option value="">Select Item</option>
+			                                            <option	th:each="itemList:${modelItemList}"
+														th:value="${itemList.itemId}"
+														th:utext="${itemList.itemName}"/>
+			                                    </select>
+			                                </div>									
+	                                   </div>
+	                                   
+	                             </div>
+	                             
+	                            <div class="row">       
+	                                   
+	                                   <div class="col-3">
+											<div class="form-group">
+											      <label class="control-label mb-1">WO Id</label>
+												 <input type="number" class="form-control" placeholder="ID" name="inqueryId" id="inqueryId">
+											</div>
+										</div>
+	                                   
+	                              
+									   <div class="col-3">
+											<div class="form-group">
+												 <label class="control-label mb-1">WO From</label>
+												 <input type="date" value="" class="form-control" id="inqStartDate" name="inqStartDate">
+											</div>
+									   </div>
+									 	  
+									   <div class="col-3">
+											<div class="form-group">
+												<label class="control-label mb-1">WO To</label>
+												<input type="date" value="" class="form-control" id="inqEndDate" name="inqEndDate">
+											</div>
+									   </div>
+									   
+									   
+									   <div class="col-2"> 
+												<div class="form-group">
+													<label class="control-label mb-1">Plan Done </label>
+													<div class="custom-control custom-checkbox">
+														<input type="checkbox" class="custom-control-input" id="notPlanned" unchecked>
+														<label class="custom-control-label" for="notPlanned"></label>
+													</div>
+											   </div>   
+										</div>
+									   
+								</div>
+								
+								<div class="row">
+									
+									
+										
+										<div class="col-3">
+			                                <div class="form-group">
+			               	                    <label class="control-label mb-1">Planned By</label>
+			                                    <select id="userId" name="userId" class="form-control">
+								                        <option value="">Select user</option>
+												        <option th:each="u:${userList}"
+														        th:value="${u.userId}"
+														        th:utext="${u.userName}"																			
+												        /> 
+										        </select>
+			                                </div>									
+	                                    </div>
+
+									    <div class="col-3">
+											<div class="form-group">
+												<label class="control-label mb-1">Plan From</label>
+												<input type="date" value="" class="form-control" name="planStartDate" id="planStartDate">
+											</div>
+										</div>
+										
+										<div class="col-3">
+											<div class="form-group">
+												<label class="control-label mb-1">Plan To</label>
+												<input type="date" value="" class="form-control" name="planEndDate" id="planEndDate">
+											</div>
+										</div>
+										
+										<div class="col-3">
+											   <div class="form-group">
+												   <label></label>
+												   <input type="submit" value="Search" class="btn btn-primary" style="margin-top: 24px;">
+												   <a class="btn btn-success" style="margin-top: 24px" th:href="@{'/production/plan/'+${userId}}">Refresh</a>
+											  </div>
+											
+								     </div>					
+					
+								</div>
+								
+								<div class="row">
+		  
+									     </br>
+									     
+									    
+									    
+									  </div> 
+		 
+								
+							</div>
+							
+					
+						</form>
+		       
+		       
+		       
+		<!-- ================================================ search end============================ -->					
+		  
+		  
+		  
+		 
+		 <h5 style="margin-top:25px"> Select </h5>
+				<div class="form-group">
+					<select  name="state" id="maxRows" class="form-control" style="width:150px;">
+						<option value="10">10</option>
+						<option value="5">5</option>
+						<option value="15">15</option>
+						<option value="20">20</option>
+						<option value="50">50</option>
+						<option value="70">70</option>
+						<option value="100">100</option>
+						<option value="5000">Show ALL</option>
+				     </select>
+				</div>		
+		 								
+         <div class="row">
+					<div class="col-lg-12">
+						<div class="card" style="width: 1100px; overflow: scroll">
+							<div class="card-header">
+								<strong class="card-title">Search Result</strong>
+							</div>
+							<div class="card-body">
+						<!--  		<table id="bootstrap-data-table" class="table table-striped table-bordered" style="min-width: 2000px">  -->
+									
+									  <table id="productionPlanDataTable" class="table table-striped table-bordered display nowrap" style="width:100%">
+								 <h6 style="color:red; font-size:12px;margin-left:20px" id="PPTableMassage" >Click WO Id to get Production Plan Mst data</h6>	  
+									  
+						<thead class="sticky" >
+							  <tr>
+							  <!--  <th hidden>Item Quantity Id</th>  -->
+							  <th scope="col">Order type</th>
+								 <th scope="col">WorkOrder Id </th>
+								 <th scope="col">Inquiry Id </th>
+								 <th scope="col" width="300px">WO Date(<span style="font-size:9px">yy-mm-dd</span>)</th>
+								 <th scope="col">Order Item Qty Id</th>
+								 <th scope="col">Buyer Name</th>
+							     <th class="test">Item Name</th>
+								 <th scope="col">Inq./WO Qty</th>
+								 <th scope="col">UOM Name</th>
+								 <th scope="col">Planned Qty</th>
+								 <th scope="col">Production Qty</th>
+								 <th scope="col">Active Status</th>
+								 <th scope="col">Plan Add</th>
+							  </tr>
+						</thead>
+					      <tbody style="overflow: scroll; ">
+					    
+						 </tbody>
+					</table>
+					<div class="pagination-container">
+	           			<nav>
+	           			    <ul id="pagination" class="pagination"></ul>
+				        </nav>
+					</div>
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+		
+		<input type="hidden" class="from-control" id="titleData1" style="size:5px" readonly>		
+	   
+	 <div class="row" style="float:right">
+	    <div class="col-2">
+             <a type="button" class="btn btn-success btn-sm" > Auto Planned ?</a>
+        </div>
+		
+    </div>	
+    
+    </br>
+     </br>
+  	
+				
+				 <div class="row">
+     
+     
+
+                    <div class="col-12">
+                    <!--
+                    	<h4> Select </h4>
+	 						<div class="form-group">
+								<select  name="state" id="maxRows2" class="form-control" style="width:150px;">
+									<option value="5000"> Show All</option>
+									<option value="5"> 5</option>
+									<option value="10"> 10</option>
+									<option value="20"> 20</option>
+								</select>
+							</div>
+						-->	
+                    	<div class="card" style="width: 1070px;">
+                    	     <div class="card-header">
+								<strong class="card-title">Production Plan MST Table</strong>
+								
+								<input type="hidden" class="form-control" id="datasaved" readonly>
+								
+							</div>
+                    		<div class="card-body" style="overflow-x: scroll">
+                    		
+                    		<table id="pPMstTableId" class="table table-striped table-bordered display nowrap" style="width:100%">
+						
+						 <h6 style="color:red; font-size:12px;margin-left:20px" id="chdTableMassage" >Click Production Plan Mst Id to get Production Plan Chd data</h6>
+						
+						<thead>
+								
+							<tr>
+								<th scope="col">MST Id</th>
+								<th scope="col" width="150px">Date(<span style="font-size:9px">yy-mm-dd</span>)</th>
+								<th scope="col" width="150px">Buyer Name</th>
+								<th scope="col" width="150px">Planned By</th>
+								<th scope="col">Reference</th>
+								<th scope="col">Remarks</th>
+								<th scope="col" >Active Status</th>
+								<th scope="col" >Action</th>
+								<th scope="col">Action</th>
+							<!--		<th scope="col">Action</th>   -->
+							
+							</tr>
+						</thead>
+						
+						
+						
+						<tbody>
+						
+						</tbody>
+				    
+						
+					</table>
+					<div class="pagination-container">
+	 					<nav>
+	 						<ul id="paginationInMstTable" class="pagination"></ul>
+	 					</nav>
+					</div>
+           		</div>
+                    	</div>
+
+                         </div>		
+						
+             </div>
+             
+           	 <div class="row">  
+             
+             
+				 <div class="col-12">
+                    	<div class="card table-container" style="width: 1070px;">
+                    	        <div class="card-header">
+								<strong class="card-title">Production Plan CHD-Table</strong>								
+								<h5 class="panel-title roboto" style="float:right" id="titleData"></h5>
+								</div>
+							
+                    		<div class="card-body" style=" overflow-x: scroll">
+                    		<div id="searchsub">
+				
+				
+				
+				
+					<table id="pPChdTableId" class="table table-striped table-bordered display nowrap" style="width:100%">
+					
+					
+					
+					<h6 style="color:limegreen; font-size:12px;margin-left:20px" id="pPChdTableSaveMessage" ></h6>
+						<thead>
+							<tr>
+								<th hidden >Machine Shift Id</th>
+								<th scope="col">Production Mst Id</th>
+								<th scope="col">Production Chd Id</th>
+								<th scope="col" width="200px">Plan Date(<span style="font-size:9px">yy-mm-dd</span>)</th>
+								<th scope="col">Machine Name</th>
+								<th scope="col">Shift</th>
+								<th scope="col">Plan Qty</th>
+								<!--<th scope="col">Machine Qty</th> -->
+								<th scope="col">UOM</th>
+							
+								<th scope="col">Remarks</th>
+								<th scope="col">Action</th>
+								<th scope="col">Action</th>
+							</tr>
+						</thead>
+						
+						<tbody>
+						    
+						</tbody>
+						
+	   
+						
+					</table>
+					
+					<div class="col-10">
+					</div>
+					
+					
+					
+					 <form class="form-inline" style="float:right">
+                                     <div class="form-group text-right">
+                                    
+                                     <input type="hidden" class="form-control" aria-required="true" aria-invalid="false" name="qtyGrandTotal" id="qtyGrandTotal" style="float:right; width:100px" placeholder="Total" readonly/>
+                                    </div>
+                                    </form>
+                    
+                    
+
+				  </div>
+			  </div>
+		 </div>
+	 </div>  
+	</div>	
+	
+	
+	<div class="row">			
+	  
+           
+            	<!--####### work order CHD table save Button-start ##########-->
+					<div class="col-8">
+					</div>
+					
+					<div class="col-4">
+	                          <div class="form-group">
+	                              <label></label>
+	                             <a type="button" id="savePPChd" class=" btn btn-success" style="float:right"> Save PP Chd </a>								
+	                          </div>
+	                 </div>
+					
+					<!--####### work order CHD table save Button-End ##########-->
+                
+ </div>		
+						         
+
+        </div>   <!-- <div class="panel-body">  -->
+
+        </div>   <!-- <div class="panel">  -->
+        
+        
+        
+        
+          <!--############# saj- production plan upload form popup - start ########## --> 
+      
+<div class="modal fade bd-example-modal-lg" id="productionPlanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="productionPlanModal">Production Plan From</h5>
+        
+         <center><p id="productionPlanSaveMessage" style="color: limegreen; display: block;font-size:15px; margin-left:150px"></p></center>
+        
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+<div class="col-md-12">
+	<div class="productionPlanModalFrom">
+	  
+	
+  
+       <form id="productionPlanFromId" class="needs-validation"  method="post" novalidate>
+										<div Class="row">	
+										     <div class="col-4">
+													<div class="form-group">
+														<label class="control-label mb-1">Production Plan MST ID</label>
+														<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="Production_Plan_MST_ID" placeholder="ID"  readonly>
+														<input name="" id="modalOrderItemQtyId" type="text" class="form-control" hidden>
+				        			                    <input name="" id="modalwOChdId" type="text" class="form-control" hidden>
+												  </div>
+											</div>
+												
+											<div class="col-4">
+													<div class="form-group">
+														<label>Date<span class="req" style="color:red">*</span></label>
+														<input type="date"  class="form-control" id="modalProductionPlanDate" name="inquery_start_date" required> 
+												    </div>
+											</div>
+												
+												<div class="col-4">
+													<div class="form-group">
+														<label for="validationCustom03" class="control-label mb-1">Planned By<span class="req" style="color:red">*</span></label>
+														<select  name="" id="modalUsarId" class="form-control" aria-required="true" aria-invalid="false" required>
+																		<option value="">Choose Type</option>
+																		<option th:each="type:${userList}"
+																				th:value="${type.userId}"
+																				th:utext="${type.userName}"
+																		/>
+														</select>
+													</div>
+												</div>
+												
+											</div>	
+											
+											<div Class="row">		
+											    <div class="col-4">
+								                    <div class="form-group">
+								                        <label class="control-label mb-1">Reference No</label>
+								                        <input type="text" class="form-control" aria-required="true" aria-invalid="false" id="modalRefNo" name="" placeholder="Type.....">
+								                    </div>
+							                    </div>
+											<!--
+												<div class="col-4">
+													<div class="form-group">
+														<label class="control-label mb-1">Remarks</label>
+												            <textarea rows="2" cols="40" placeholder="Type you message here..." name="remarks1" id="modalRemarks" class="form-control" aria-required="true" aria-invalid="false">
+                                                        </textarea>
+													</div>
+												</div>
+										-->		
+												<div class="col-4">
+			                                        <div class="form-group">
+			                                        	<label for="" class="control-label mb-1">Remarks</label>
+				                                        	<textarea rows="2" placeholder="Remarks here..."  class="form-control" id="modalRemarks" style="width: 100%" ></textarea>
+			                                        </div>
+		                                        </div>
+												
+												<div class="col-2">
+													<div class="form-group">
+														<label class="control-label mb-1">Active</label>
+													    <div class="custom-control custom-checkbox">
+														      <input type="checkbox" class="custom-control-input" id="modalActive" checked>
+														      <label class="custom-control-label" for="modalActive"></label>
+													   </div>
+													</div>
+												</div>
+												
+												<div class="col-8">
+												</div>
+												
+												<div class="col-4">
+													<div class="form-group">
+														<label></label>
+														<!--<input type="button" id="" value="Save" class="btn btn-primary" style="margin-top: 24px;">-->
+													    <button type="button" class="btn btn-primary" id="modalSaveBtn">Save</button>
+													    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="productionPlanModalCloseBtn">Close</button>
+													</div>
+												</div>
+												
+										</div>	
+										
+												
+										
+
+										</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!--############# saj- production plan upload form popup - end ########## -->
+
+
+
+
+
+<!--############# saj- production plan Mst Edit popup - start ########## --> 
+      
+<div class="modal fade bd-example-modal-lg" id="editProductionPlanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editProductionPlanModal">Production Plan From (Edit)</h5>
+        
+         <center><p id="pPMstPopupEditSaveMessage" style="color: limegreen; display: block;font-size:15px; margin-left:150px"></p></center>
+        
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+<div class="col-md-12">
+	<div class="editProductionPlanModalFrom">
+	  
+	
+  
+       <form class="needs-validation"  method="post" novalidate>
+								<div Class="row">	
+										     <div class="col-4">
+													<div class="form-group">
+														<label class="control-label mb-1">Production Plan MST ID</label>
+														<input id="modalEditProductionPlanMstId" type="text" class="form-control" aria-required="true" aria-invalid="false" name="Production_Plan_MST_ID" placeholder="ID"  readonly>
+														<input name="" id="modalOrderItemQtyId" type="text" class="form-control" hidden>
+				        			                    <input name="" id="modalwOChdId" type="text" class="form-control" hidden>
+												  </div>
+											</div>
+												
+											<div class="col-4">
+													<div class="form-group">
+														<label>Date<span class="req" style="color:red">*</span></label>
+														<input type="date"  class="form-control" id="modalEditProductionPlanDate" name="inquery_start_date" required> 
+												    </div>
+											</div>
+												
+												<div class="col-4">
+													<div class="form-group">
+														<label for="validationCustom03" class="control-label mb-1">Planned By<span class="req" style="color:red">*</span></label>
+														<select  name="" id="modalEditUsarId" class="form-control" aria-required="true" aria-invalid="false" required>
+																		<option value="">Choose Type</option>
+																		<option th:each="type:${userList}"
+																				th:value="${type.userId}"
+																				th:utext="${type.userName}"
+																		/>
+														</select>
+													</div>
+												</div>
+												
+									</div>	
+											
+									<div Class="row">		
+											    <div class="col-4">
+								                    <div class="form-group">
+								                        <label class="control-label mb-1">Reference No</label>
+								                        <input type="text" class="form-control" aria-required="true" aria-invalid="false" id="modalEditRefNo" name="" placeholder="Type.....">
+								                    </div>
+							                    </div>
+											
+												<div class="col-5">
+													<div class="form-group">
+														<label class="control-label mb-1">Remarks</label>
+												            <textarea rows="2" cols="40" placeholder="Type you message here..." name="remarks1" id="modalEditRemarks" class="form-control" aria-required="true" aria-invalid="false">
+                                                        </textarea>
+													</div>
+												</div>
+												
+												<div class="col-3">
+													<div class="form-group">
+														<label class="control-label mb-1">Active</label>
+													    <div class="custom-control custom-checkbox">
+														      <input type="checkbox" class="custom-control-input" id="modalEditActive" checked>
+														      <label class="custom-control-label" for="modalEditActive"></label>
+													   </div>
+													</div>
+												</div>
+								</div>	
+								
+						<div Class="row">
+							
+									
+									<div class="col-8">
+								</div>	
+												
+												<div class="modal-footer">
+										                        
+													<button type="button" class="btn btn-primary" id="modalEditSaveBtn">Save</button>
+													<button type="button" class="btn btn-secondary" data-dismiss="modal" id="modalEditCloseBtn">Close</button>
+														        
+												</div>
+												
+												
+										
+						</div>	
+										
+												
+										
+
+										</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!--############# saj- production plan Mst Edit popup - end ########## --> 
+
+
+
+
+
+
+<!--############# saj- production plan Mst Edit (already Done) popup - start ########## --> 
+      
+<div class="modal fade bd-example-modal-lg" id="editProductionPlanModalDone" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editProductionPlanModal">Production Plan From (Edit)</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+<div class="col-md-12">
+	<div class="editProductionPlanModalFromDone">
+	  
+	
+  
+       <form class="needs-validation"  method="post" novalidate>
+								<div Class="row">	
+										     <div class="col-4">
+													<div class="form-group">
+														<label class="control-label mb-1">Production Plan MST ID</label>
+														<input id="modalEditProductionPlanMstIdDone" type="text" class="form-control" aria-required="true" aria-invalid="false" name="Production_Plan_MST_ID" placeholder="ID"  readonly>
+														<input name="" id="modalOrderItemQtyIdDone" type="text" class="form-control" hidden>
+				        			                    <input name="" id="modalwOChdIdDone" type="text" class="form-control" hidden>
+												  </div>
+											</div>
+												
+											<div class="col-4">
+													<div class="form-group">
+														<label>Date<span class="req" style="color:red">*</span></label>
+														<input type="date"  class="form-control" id="modalEditProductionPlanDateDone" name="inquery_start_date" required> 
+												    </div>
+											</div>
+												
+												<div class="col-4">
+													<div class="form-group">
+														<label for="validationCustom03" class="control-label mb-1">Palanned By<span class="req" style="color:red">*</span></label>
+														<select  name="" id="modalEditUsarIdDone" class="form-control" aria-required="true" aria-invalid="false" required>
+																		<option value="">Choose Type</option>
+																		<option th:each="type:${userList}"
+																				th:value="${type.userId}"
+																				th:utext="${type.userName}"
+																		/>
+														</select>
+													</div>
+												</div>
+												
+									</div>	
+											
+									<div Class="row">		
+											    <div class="col-4">
+								                    <div class="form-group">
+								                        <label class="control-label mb-1">Reference No</label>
+								                        <input type="text" class="form-control" aria-required="true" aria-invalid="false" id="modalEditRefNoDone" name="" placeholder="Type.....">
+								                    </div>
+							                    </div>
+											
+												<div class="col-5">
+													<div class="form-group">
+														<label class="control-label mb-1">Remarks</label>
+												            <textarea rows="2" cols="40" placeholder="Type you message here..." name="remarks1" id="modalEditRemarksDone" class="form-control" aria-required="true" aria-invalid="false">
+                                                        </textarea>
+													</div>
+												</div>
+												
+												<div class="col-3">
+													<div class="form-group">
+														<label class="control-label mb-1">Active</label>
+													    <div class="custom-control custom-checkbox">
+														      <input type="checkbox" class="custom-control-input" id="modalEditActiveDone" checked>
+														      <label class="custom-control-label" for="modalEditActiveDone"></label>
+													   </div>
+													</div>
+												</div>
+								</div>	
+								
+						<div Class="row">
+							
+									
+									<div class="col-8">
+								</div>	
+												
+												<div class="modal-footer">
+										                        
+													<button type="button" class="btn btn-primary" id="modalEditSaveBtnDone">Save</button>
+													<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+														        
+												</div>
+												
+												
+												
+												
+						</div>	
+										
+												
+										
+
+										</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!--############# saj- production plan Mst Edit (already Done) popup - end ########## --> 
+
+
+
+
+<!--############# saj- production plan chd Edit form popup - start ########## --> 
+      
+<div class="modal fade bd-example-modal-lg" id="productionPlanChdEditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="productionPlanChdEditModal">Production Plan Chd From</h5>
+        
+         <h5 class="modal-title" id="editProductionPlanChdMessage" style="color: limegreen; font-size:15px; margin-left:150px"></h5>
+         
+         
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+<div class="col-md-12">
+	<div class="productionPlanModalFrom">
+	  
+	
+  
+       <form class="needs-validation"  method="post" novalidate>
+       
+					<div Class="row">	
+										     <div class="col-4">
+													<div class="form-group">
+														<label class="control-label mb-1">Production Plan MST ID</label>
+														<input type="text" class="form-control" id="modalEditChdProductionPlanMstId" aria-required="true" aria-invalid="false" name="Production_Plan_MST_ID" placeholder="ID"  readonly>
+														
+												  </div>
+											 </div>
+											
+											 <div class="col-4">
+													<div class="form-group">
+														<label class="control-label mb-1">Production Plan CHD ID</label>
+														<input type="text" class="form-control" id="modalEditProductionPlanChdId" aria-required="true" aria-invalid="false" name="Production_Plan_MST_ID" placeholder="ID"  readonly>
+														
+												  </div>
+											</div>
+												
+											<div class="col-4">
+													<div class="form-group">
+														<label>Date<span class="req" style="color:red">*</span></label>
+														<input type="date"  class="form-control" id="modalEditProductionPlanChdDate" name="inquery_start_date" required> 
+												    </div>
+											</div>
+					</div>
+											
+					<div Class="row">
+											
+											    <div class="col-4">
+								                    <div class="form-group">
+								                        <label class="control-label mb-1">Plan Qty</label>
+								                        <input type="text" class="form-control" aria-required="true" aria-invalid="false" id="modalEditChdPlanQty" name="" placeholder="Qty">
+								                    </div>
+							                    </div>
+												
+												<div class="col-4">
+										  			<div class="form-group">
+														<label class="control-label mb-1">Machine Name</label>
+														<input type="text" class="form-control" id="modalEditMachineName" aria-required="true" aria-invalid="false" name="" placeholder="ID"  readonly>
+														
+												    </div>
+										    	</div>
+											
+											    <div class="col-4">
+													<div class="form-group">
+														<label class="control-label mb-1">Shift</label>
+														<input type="text" class="form-control" id="modalEditShift" aria-required="true" aria-invalid="false" name="" placeholder="ID"  readonly>
+														
+												    </div>
+										    	</div>
+											
+					</div>	
+					<!--
+					
+					<div class="row">
+					
+					                    
+					                        	<div class="col-4">
+                                                     <div class="form-group">
+                                                          <label class="control-label mb-1">Machine Type</label>
+                                                          <select name="machineTypeId" class="form-control" aria-required="true" aria-invalid="false" id="machineTypeId" disabled>
+                                                                 <option value="">Choose Type</option>
+								                                 <option th:each="machine:${machineTypeList}"
+									                                        th:value="${machine.machineTypeId}"
+										                                    th:utext="${machine.machineTypeName}"
+							                                      /> 
+                                                           </select>
+                                                       </div>
+                                                  </div>
+                                    
+                                                  <div class="col-4">
+                                                      <div class="form-group">
+                                                           <label class="control-label mb-1">Machine Name</label>
+                                                                <select class="form-control" aria-required="true" aria-invalid="false" id="machineId" name="machineId" >
+                                                                       <option value="">Select Machine</option>
+                                                                </select>
+                                                       </div>
+                                                   </div>
+                                    
+                                                   <div class="col-4">
+                                                        <div class="form-group">
+                                                             <label class="control-label mb-1">Machine Shift</label>
+                                                              <select class="form-control" id="machineShiftId" name="machineShiftId" >
+                                                                     <option value="">Select Shift</option>
+                                                               </select>
+                                                         </div>
+                                                    </div>
+                                                    
+                                                   
+					
+					    </div>
+					    
+					  -->
+									
+					    <div Class="row">		
+											
+											<div class="col-3">
+													<div class="form-group">
+														<label class="control-label mb-1">UOM</label>
+														<input type="text" class="form-control" id="modalEditUOM" aria-required="true" aria-invalid="false" name="" placeholder="ID"  readonly>
+														
+												  </div>
+											</div>
+											
+											<div class="col-3">
+													<div class="form-group">
+														<label class="control-label mb-1">Number Of Stitches</label>
+														<input type="text" class="form-control" id="modalEditStitches" aria-required="true" aria-invalid="false" name="" placeholder=""  readonly>
+														
+												  </div>
+											</div>
+											
+											
+											<div class="col-5">
+												<div class="form-group">
+													<label class="control-label mb-1">Remarks</label>
+												            <textarea rows="2" cols="40" placeholder="Type you message here..." name="remarks1" id="modalEditChdRemarks" class="form-control" aria-required="true" aria-invalid="false">
+                                                            </textarea>
+												</div>
+										     </div>
+										     
+										     
+										     <div class="col-1">
+													<div class="form-group">
+														<label class="control-label mb-1">Active</label>
+													    <div class="custom-control custom-checkbox">
+														      <input type="checkbox" class="custom-control-input" id="modalChdStatus" checked>
+														      <label class="custom-control-label" for="modalChdStatus"></label>
+													   </div>
+													</div>
+												</div>
+											
+			        	</div>			
+			 									
+												
+												
+						<div class="col-8">
+						</div>
+										
+                                        
+						<div class="modal-footer">
+										                        
+								<button type="button" class="btn btn-primary" id="modalEditChdSaveBtn">Save</button>
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+														        
+						</div>
+										
+					</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!--############# saj- production plan chd Edit form popup - end ########## -->
+
+
+
+
+
+<!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+
+      
+<div class="modal fade bd-example-modal-lg" id="shiftScheduleChangeFromModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="shiftScheduleChangeFromModal">Shift Schedule Change From</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+<div class="col-md-12">
+	<div class="">
+	  
+	
+  
+       <form class="needs-validation"  method="post" novalidate>
+							<div Class="row">	
+										     <div class="col-4">
+													<div class="form-group">
+														<label class="control-label mb-1">Production Plan MST ID</label>
+														<input type="text" class="form-control" id="modalShiftSheduleProductionPlanMstId" aria-required="true" aria-invalid="false" name="Production_Plan_MST_ID" placeholder="ID"  readonly>
+														
+												  </div>
+											</div>
+											
+											<div class="col-4">
+											</div>
+											
+											<div class="col-4">
+											</div>
+												
+											
+									</div>
+									
+							<div Class="row">
+							
+							                 <div class="col-2">
+							                 </div>		
+							                 
+									         <div class="col-4">
+													<div class="form-group">
+														<label>Start Date </label>
+														<input type="date"  class="form-control" id="productionPlanChdFirstDate" name="inquery_start_date" required> 
+												    </div>
+											</div>
+											
+											 <div class="col-4">
+													<div class="form-group">
+														<label>End Date </label>
+														<input type="date"  class="form-control" id="productionPlanChdSecondDate" name="inquery_start_date" required> 
+												    </div>
+											</div>
+								
+							
+											
+							               <div class="col-2">
+							               </div>	
+								
+								</div>
+								
+								<div Class="row">
+											<div class="col-4">
+											</div>
+											
+											 <div class="col-4">
+													<div class="form-group">
+														<label> New Shift Date<span class="req" style="color:red">*</span></label>
+														<input type="date"  class="form-control" id="modalShiftScheduleProductionPlanChdDate" name="inquery_start_date" required> 
+												    </div>
+											</div>
+									
+												<div class="modal-footer">
+										                        
+													<button type="button" class="btn btn-primary" id="modalShiftBtn">Shift</button>
+													<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+														        
+												</div>
+												
+											
+								</div>		
+								
+								
+												
+								</div>	
+					</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+
+
+
+<!--@@@@@@@@@@@@@@@@ production Plan chd Shift Schedule @@@@@@@@@@@@@@@@@@-->
+
+      
+<div class="modal fade bd-example-modal-lg" id="chdShiftScheduleChangeFromModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="shiftScheduleChangeFromModal">Shift Schedule Change From</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+<div class="col-md-12">
+	<div class="">
+	  
+	
+  
+       <form class="needs-validation"  method="post" novalidate>
+							<div Class="row">	
+										     <div class="col-4">
+													<div class="form-group">
+														<label class="control-label mb-1">Pro. Plan Chd ID</label>
+														<input type="text" class="form-control" id="modalShiftShedulePPChdId" aria-required="true" aria-invalid="false" name="Production_Plan_Chd_ID" placeholder="ID"  readonly>
+														
+												  </div>
+											</div>
+											
+										<div class="col-4">
+			                              	<div class="form-group">
+					                             <label>Pro Plan Chd Date</label>
+					 	                         <input type="date" class="form-control" id="modalShiftShedulePPChdDate" value="" name="start_date" readonly>
+				                            </div>
+			                            </div>
+			                            
+			                            
+			                            <div class="col-4">
+			                              	<div class="form-group">
+					                             <label>Machine Type</label>
+					 	                         <input type="text" class="form-control" id="modalShiftShedulePPChdMachineTypeId" value="" name="" readonly>
+				                            </div>
+			                            </div>
+			                            
+			                            
+			                             <div class="col-4" readonly>
+			                              	<div class="form-group">
+					                             <label>Machine Name</label>
+					 	                         <input type="text" class="form-control" id="modalShiftShedulePPChdMachineName" value="" name="" readonly>
+				                            </div>
+			                            </div>
+			                            
+			                             <div class="col-4">
+			                              	<div class="form-group">
+					                             <label>Shift</label>
+					 	                         <input type="text" class="form-control" id="modalShiftShedulePPChdShift" value="" name="" readonly>
+				                            </div>
+			                            </div>
+												
+							</div>
+							
+							
+							
+							
+							 <div class="modal-footer">
+						                        
+					
+					         </div> 
+							
+							
+	<!--##########-->
+		<div class="row">
+        
+                <div class="col-3">
+                     <div class="form-group">
+                       <label class="control-label mb-1">Machine Type</label>
+                          <select name="machineTypeId" class="form-control" aria-required="true" aria-invalid="false" id="machineTypeId3">
+                                 <option value="">Choose Type</option>
+								 <option th:each="machine:${machineTypeList}"
+										 th:value="${machine.machineTypeId}"
+										 th:utext="${machine.machineTypeName}"
+							     /> 
+                          </select>
+                     </div>
+                </div>
+                                    
+                <div class="col-3">
+                   <div class="form-group">
+                        <label class="control-label mb-1">Machine Name</label>
+                        <select class="form-control" aria-required="true" aria-invalid="false" id="machineId3" name="machineId" >
+                               <option value="">Select Machine</option>
+                        </select>
+                    </div>
+                </div>
+                                    
+                <div class="col-3">
+                    <div class="form-group">
+                    <label class="control-label mb-1">Machine Shift</label>
+                         <select class="form-control" id="machineShiftId3" name="machineShiftId" >
+                                 <option value="">Select Shift</option>
+                         </select>
+                    </div>
+                </div>
+        
+			    <div class="col-3">
+				   <div class="form-group">
+					  <label>Date From</label>
+						<input type="date" value="" class="form-control" id="shiftScheduleModalstartDate" name="startDate"> 
+					<!--	<input type="date" data-date="" class="form-control" id="startScheduleDate" data-date-format="DD MMMM YYYY" value=""> -->
+				   </div>
+			    </div>
+			    
+			 
+			 </div>
+			    
+			  <div class="row"> 
+			    
+				<div class="col-3">
+					<div class="form-group">
+						<label>Date To</label>
+							<input type="date" class="form-control" id="shiftScheduleModalendScheduleDate" name="endDate">
+					</div>
+				</div>
+										
+				
+ 
+              
+                     <div class="modal-footer">
+						<button type="button" class="btn btn-primary" id="shiftScheduleModalSearchScheduleBtn">Search Schedule</button>
+					</div> 
+              
+            </div>
+				<!--###############-->
+				
+				
+				
+				
+				
+		<div class="row">
+        	<div class="col-3">
+            	<div class="card table-container" style="width:750px; overflow-x: scroll">
+                	<div class="card-header">
+						<strong class="card-title">Available Machine Data</strong>
+					</div>
+			 	<h4> Select </h4>
+				<div class="form-group">
+					<select  name="state" id="maxRows5" class="form-control" style="width:150px;">
+						<option value="10"> 10</option>
+						<option value="5"> 5</option>
+						<option value="20"> 20</option>
+						<option value="50"> 50</option>
+						<option value="80"> 80</option>
+						<option value="5000"> Show All</option>
+					</select>
+				</div>		
+                    <div class="card-body">
+                    		                    		
+                    <table id="chdMachineScheduleDataTable" class="table table-striped table-bordered" style="width:100%">
+					<thead  style="width:100% !important">
+						<tr  style="width:100% !important">
+						    
+						
+						  
+							<th scope="col">Machine</th>
+							<th scope="col">Shift</th>
+							<th scope="col">Date</th>
+							<th scope="col">Available</th>
+							<th scope="col">Save</th>
+							
+						</tr>
+					</thead>
+				    <tbody>
+				       <tr>
+				       
+				       
+				       </tr>
+				
+					</tbody>
+				</table>
+			 	<div class="pagination-container">
+	           			<nav>
+	           			    <ul id="paginationInChdMachineScheduleDataTable" class="pagination"></ul>
+				        </nav>
+				</div>       
+             	
+            </div>  		
+                    		  		
+        	</div>
+    	</div>
+ 	</div>
+ </div>  
+                    
+				
+				
+				
+				
+				
+				
+				
+				
+				
+								
+								
+												
+								</div>	
+					</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<!--@@@@@@@@@@@@@@@@@@@@@@@@ production Plan chd Shift Schedule @@@@@@@@@@@@@@@@@@@@@@@-->
+
+
+
+<!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  Machine Availability modal pop up @@@@@@@@@@@@@@@@@@@@@@@-->
+								
+
+											
+<div class="modal fade bd-example-modal-lg" id="machineAvailabilityModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Machine Availability </h5>
+        
+         <center><p id="machinePopulateMessage" style="color: limegreen; display: block;font-size:15px; margin-left:150px"></p></center>
+        
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+	
+     <div class="modal-body">
+     
+  <!--  <form class="needs-validation" method="post" id="machineSheduleSearch" novalidate> -->
+      <div class="row">
+        
+                <div class="col-3">
+                     <div class="form-group">
+                       <label class="control-label mb-1">Machine Type</label>
+                          <select name="machineTypeId" class="form-control" aria-required="true" aria-invalid="false" id="machineTypeId2">
+                                 <option value="">Choose Type</option>
+								 <option th:each="machine:${machineTypeList}"
+										 th:value="${machine.machineTypeId}"
+										 th:utext="${machine.machineTypeName}"
+							     /> 
+                          </select>
+                     </div>
+                </div>
+                                    
+                <div class="col-3">
+                   <div class="form-group">
+                        <label class="control-label mb-1">Machine Name</label>
+                        <select class="form-control" aria-required="true" aria-invalid="false" id="machineId2" name="machineId" >
+                               <option value="">Select Machine</option>
+                        </select>
+                    </div>
+                </div>
+                                    
+                <div class="col-3">
+                    <div class="form-group">
+                    <label class="control-label mb-1">Machine Shift</label>
+                         <select class="form-control" id="machineShiftId2" name="machineShiftId" >
+                                 <option value="">Select Shift</option>
+                         </select>
+                    </div>
+                </div>
+        
+			    <div class="col-3">
+				   <div class="form-group">
+					  <label>Date From</label>
+						<input type="date" value="" class="form-control" id="startDate" name="startDate"> 
+					<!--	<input type="date" data-date="" class="form-control" id="startDate" data-date-format="DD MMMM YYYY" value=""> -->
+				   </div>
+			    </div>
+			    
+			 
+			 </div>
+			    
+			  <div class="row"> 
+			    
+				<div class="col-3">
+					<div class="form-group">
+						<label>Date To</label>
+							<input type="date" class="form-control" id="endDate" name="endDate">
+					</div>
+				</div>
+										
+				<div class="col-md-1">
+        	        <div class="form-group text-center">
+        		        <label class="labelcontrol">Available</label>
+        		            <input type="checkbox" id="availableId" name="verified">
+        		     </div>
+        	     </div>
+ 
+              
+             <div class="modal-footer">
+						                        
+					<button type="button" class="btn btn-primary" id="availabilityCheckBtn">Availability Check</button>
+						<button type="button" class="btn btn-primary" id="usingScheduleBtn">Search Using Schedule</button>
+					
+														        
+			</div> 
+              
+            </div>
+            
+       <!--    </form>    -->
+       
+        </br>
+       
+
+<!--####### popup #########- search table  resultList-#################-->
+<div class="row" style="margin-left:10px">
+	<div class="row">           
+    	<div class="col-3">
+        	<div class="card table-container" style="width:250px; overflow-x: scroll">
+            	<div class="card-header">
+					<strong class="card-title">Availablity Machine</strong>										
+				</div>
+				
+			<!--	<h4> Select </h4>
+				<div class="form-group">
+					<select  name="state" id="maxRows3" class="form-control" style="width:150px;">
+						
+						<option value="5"> 5</option>
+						<option value="10"> 10</option>
+						
+					    <option value="20"> 20</option>
+						<option value="50"> 50</option>
+						<option value="80"> 80</option>
+						<option value="5000"> Show All</option>
+					</select>
+				</div>  -->
+				
+                <div class="card-body">   		
+		        <table id="availableMachineTable" class="table table-striped table-bordered" style="width:100%">
+					<thead >
+						<tr>
+						     <th scope="col">Machine</th>
+						    <th scope="col">Schedule Date</th>
+						   
+						   
+						</tr>
+					</thead>
+				    <tbody>
+				
+					</tbody>
+				</table>
+                 <div class="pagination-container">
+	           			<nav>
+	           			    <ul id="paginationInAvailMachine" class="pagination"></ul>
+				        </nav>
+				</div>   		
+                    		
+                    		
+                    		
+                    		 		</div>
+                    		   </div>
+                         </div>
+               	</div>  
+               	 
+        <div class="row">
+        	<div class="col-3">
+            	<div class="card table-container" style="width:500px; overflow-x: scroll">
+                	<div class="card-header">
+						<strong class="card-title">Machine Schedule Search Result List</strong>
+						
+					</div>
+			<!--  	<h4> Select </h4>
+				<div class="form-group">
+					<select  name="state" id="maxRows4" class="form-control" style="width:150px;">
+					    
+					    <option value="5"> 5</option>
+					    <option value="10"> 10</option>
+						
+						<option value="20"> 20</option>
+						<option value="50"> 50</option>
+						<option value="75"> 75</option>
+						<option value="5000"> Show All</option>
+					</select>
+				</div>		-->
+                    <div class="card-body">
+                    		                    		
+                    <table id="machineScheduleDataTable" class="table table-striped table-bordered display nowrap" style="width:100%">
+					<thead >
+						<tr  >
+						    
+						
+						    <th scope ="col" name="row_id"><center>Select</br></center><center><input type="hidden" class="select_all" id="selectAllMachine"/></center></th>
+							<th scope="col">Machine</th>
+							<th scope="col">Shift</th>
+							<th scope="col">Date</th>
+							<th scope="col">Available</th>
+						</tr>
+					</thead>
+				    <tbody>
+				         
+					</tbody>
+				</table>
+			 <!--  	<div class="pagination-container">
+	           			<nav>
+	           			    <ul id="paginationInMachineSchedule" class="pagination"></ul>
+				        </nav>
+				</div>  -->      
+             	<div class="modal-footer">	                        
+					<button type="button" class="btn btn-primary" id="okBtn">OK</button>
+					<button type="button" class="btn btn-secondary" id="modalMachineAvailabilityCloseBtn" data-dismiss="modal">Close</button>										        
+				</div>    		
+            </div>  		
+                    		  		
+        	</div>
+    	</div>
+ 	</div>
+ </div>  
+                    
+                    
+             
+                     
+      
+  
+      
+
+
+</div>
+   </div>	
+ </div>
+
+
+<!--######popup####### saj- Show Schedule modal -end ############-->
+                     
+            
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!--    <script type="text/javascript" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>-->
+
+    <script src="/js/vendor/jquery-2.1.4.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/plugins.js"></script>
+    <script src="/js/main.js"></script>
+
+
+    <script src="/js/lib/data-table/datatables.min.js"></script>
+    <script src="/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+    <script src="/js/lib/data-table/dataTables.buttons.min.js"></script>
+    <script src="/js/lib/data-table/buttons.bootstrap.min.js"></script>
+    <script src="/js/lib/data-table/jszip.min.js"></script>
+    <script src="/js/lib/data-table/pdfmake.min.js"></script>
+    <script src="/js/lib/data-table/vfs_fonts.js"></script>
+    <script src="/js/lib/data-table/buttons.html5.min.js"></script>
+    <script src="/js/lib/data-table/buttons.print.min.js"></script>
+    <script src="/js/lib/data-table/buttons.colVis.min.js"></script>
+    <script src="/js/lib/data-table/datatables-init.js"></script>
+    
+    
+   
+    <script type="text/javascript">
+    
+        
+       $(document).ready(function() {
+            $('#productionPlanDataTable').DataTable({
+              "scrollX": true,
+             "overflow": true,
+              
+              
+            });
+
+       });
+        
+        
+      
+        
+        $(document).ready(function() {
+            $('#pPMstTableId').DataTable({
+                "scrollX": false,           
+            });
+
+       });
+        
+        $(document).ready(function() {
+            $('#pPChdTableId').DataTable({
+                "scrollX": false,
+              
+            });
+
+       });
+        
+      
+        
+       
+        
+   </script>  
+   
+   
+   
+   <script type="text/javascript">
+   
+   
+   function codeAddress() {
+    
+    
+		            $.getJSON("/pPlanCtrl/owner", {
+		                ownerType : $('#buyerTypeId').val(),
+		                ajax : 'true'
+		            }, function(data) {
+		                var html = '<option value="">Select Buyer Name</option>';
+		                var len = data.length;
+		                for ( var i = 0; i < len; i++) {
+		             
+		                      html += '<option value="' + data[i].orderOwnerId + '">'
+		                            + data[i].ownerName + '</option>';
+		                }
+		                html += '</option>';
+		                $('#BuyerOrOtherId').html(html);
+		            });
+		            
+		document.getElementById("PPTableMassage").hidden=true;
+		document.getElementById("chdTableMassage").hidden=true; 
+		
+		document.getElementById("datasaved").value=null; 
+		
+           // alert('ok');
+        }
+        window.onload = codeAddress;
+   
+   
+   
+   
+
+		
+		
+		$('#buyerTypeId').change(
+		        function() {
+		            $.getJSON("/pPlanCtrl/owner", {
+		                ownerType : $(this).val(),
+		                ajax : 'true'
+		            }, function(data) {
+		                var html = '<option value="">Select Buyer Name</option>';
+		                var len = data.length;
+		                for ( var i = 0; i < len; i++) {
+		             
+		                     // html += '<option value="' + data[i].ownerName + '">'
+		                       html += '<option value="' + data[i].orderOwnerId + '">'
+		                            + data[i].ownerName + '</option>';
+		                }
+		                html += '</option>';
+		                $('#BuyerOrOtherId').html(html);
+		            });
+		        });
+		
+	
+   
+     $('#machineTypeId').change(
+	        function() {
+	        	
+	            $.getJSON("/productionPlan/machine/type", {
+	            	
+	                machine : $(this).val(),
+	                
+	                ajax : 'true'
+	            }, function(data) {
+	                var html = '<option value="">Select Machine</option>';
+	                var len = data.length;
+	                //alert(len);
+	                for ( var i = 0; i < len; i++) {
+	                    html += '<option value="' + data[i].machineId + '">'
+	                            + data[i].machineName + '</option>';
+	                }
+	               html += '</option>';
+	                $('#machineId').html(html);
+	            });
+	        }); 
+    
+    $('#machineId').change(
+	        function() {
+	        	
+	            $.getJSON("/productionPlan/machine/shift/type", {
+	            	
+	                machineId : $(this).val(),
+	                
+	                ajax : 'true'
+	            }, function(data) {
+	                var html = '<option value="">Select Shift</option>';
+	                var len = data.length;
+	               // alert(len);
+	                for ( var i = 0; i < len; i++) {
+	                    html += '<option value="' + data[i].machineShiftId + '">'
+                                                  + data[i].machineShiftName + '</option>';
+	                }
+	               html += '</option>';
+	                $('#machineShiftId').html(html);
+	            });
+	        }); 
+	        
+	        
+	        $('#machineTypeId2').change(
+	        function() {
+	        	
+	            $.getJSON("/productionPlan/machine/type", {
+	            	
+	                machine : $(this).val(),
+	                
+	                ajax : 'true'
+	            }, function(data) {
+	                var html = '<option value="">Select Machine</option>';
+	                var len = data.length;
+	               // alert(len);
+	                for ( var i = 0; i < len; i++) {
+	                    html += '<option value="' + data[i].machineId + '">'
+	                            + data[i].machineName + '</option>';
+	                }
+	               html += '</option>';
+	                $('#machineId2').html(html);
+	            });
+	        }); 
+    
+    $('#machineId2').change(
+	        function() {
+	        	
+	            $.getJSON("/productionPlan/machine/shift/type", {
+	            	
+	                machineId : $(this).val(),
+	                
+	                ajax : 'true'
+	            }, function(data) {
+	                var html = '<option value="">Select Shift</option>';
+	                var len = data.length;
+	               // alert(len);
+	                for ( var i = 0; i < len; i++) {
+	                    html += '<option value="' + data[i].machineShiftId + '">'
+                                                  + data[i].machineShiftName + '</option>';
+	                }
+	               html += '</option>';
+	                $('#machineShiftId2').html(html);
+	            });
+	        }); 
+	        
+	        
+	        
+	        
+	        
+	        $('#machineTypeId3').change(
+	        function() {
+	        	
+	            $.getJSON("/productionPlan/machine/type", {
+	            	
+	                machine : $(this).val(),
+	                
+	                ajax : 'true'
+	            }, function(data) {
+	                var html = '<option value="">Select Machine</option>';
+	                var len = data.length;
+	                //alert(len);
+	                for ( var i = 0; i < len; i++) {
+	                    html += '<option value="' + data[i].machineId + '">'
+	                            + data[i].machineName + '</option>';
+	                }
+	               html += '</option>';
+	                $('#machineId3').html(html);
+	            });
+	        }); 
+    
+    $('#machineId3').change(
+	        function() {
+	        	
+	            $.getJSON("/productionPlan/machine/shift/type", {
+	            	
+	                machineId : $(this).val(),
+	                
+	                ajax : 'true'
+	            }, function(data) {
+	                var html = '<option value="">Select Shift</option>';
+	                var len = data.length;
+	               // alert(len);
+	                for ( var i = 0; i < len; i++) {
+	                    html += '<option value="' + data[i].machineShiftId + '">'
+                                                  + data[i].machineShiftName + '</option>';
+	                }
+	               html += '</option>';
+	                $('#machineShiftId3').html(html);
+	            });
+	        }); 
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        $('#user').change(
+		        function() {
+		            $.getJSON("/inquery/user/cluster", {
+		               user : $(this).val(),
+		                ajax : 'true'
+		            }, function(data) {
+		                var html = '<option value="">Select Cluster Name</option>';
+		                var len = data.length;
+		              
+		                for ( var i = 0; i < len; i++) {
+		                    html += '<option value="' + data[i].modelCluster.clusterId+ '">'
+		                            + data[i].modelCluster.clusterName + '</option>';
+		                }
+		                html += '</option>';
+		                $('#user_cluster').html(html);
+		            });
+		        });
+    
+   
+	
+	</script>
+	
+	
+	
+	<script>
+	
+	/*
+	$('#maxRows4').on('change',function(){
+	
+	var table="#machineScheduleDataTable";
+	$('.pagination').html('');
+	
+	var trnum =0;
+	var maxRows =parseInt($(this).val());
+	var  totalRows=$(table+' tbody tr').length;
+	
+	$(table+' tr:gt(0)').each(function(e) {
+	
+	              trnum++;
+	              
+	              if(trnum > maxRows)
+	              {
+	                 $(this).hide();
+	              }
+	              if(trnum <= maxRows)
+	              {
+	                 $(this).show();
+	              }
+	    
+	
+	
+	});   //each function
+	
+	 if(totalRows > maxRows)
+	              {
+	              
+	              
+	              var pagenum =Math.ceil(totalRows/maxRows);
+	              
+	              for(var i=1;i<=pagenum;)
+	              {
+	                 $("#paginationInMachineSchedule").append('<li class="btn-sm" data-page="'+i+'">\<span>'+ i++ +'</span></li>').show();
+	              }  //for
+	                
+	              }   //if
+	              
+	              
+	              $('.pagination li:first-child').addClass('active');
+	             $('.pagination li').on('click',function(){
+	             
+	             var pageNum =  $(this).attr('data-page');
+	             var trIndex= 0;
+	             
+	             $('.pagination li').removeClass('active');
+	              $(this).addClass('active');
+	             $(table+' tr:gt(0)').each(function(e) {
+	             
+	                trIndex++;
+	                if(trIndex >(maxRows*pageNum) || trIndex<=((maxRows*pageNum)-maxRows))
+	                {
+	                    $(this).hide();
+	                }
+	                else
+	                {
+	                $(this).show();
+	                }
+	             
+	             
+	             
+	                }); // each function
+	             
+	             });  //  click function
+	             
+	    	
+       
+	      });   //on change function
+	*/
+	
+	</script>
+	
+	
+<!--    ################################################################################ 
+        #                                                                              #
+        #                           Start popup Search click                           #
+        #                                                                              #
+        ################################################################################ -->
+	
+<script>
+	   
+    $(function () {
+    
+    $('#usingScheduleBtn').click(function(e) {
+    
+    var check=document.getElementById("availableId");
+    
+ //   alert($("#machineId2").val());
+  
+     if(check.checked==true)
+		                 	{
+	        	      
+	        	   
+	        	            e.preventDefault();
+     
+                            var formData= { 
+                                           "machineTypeId" :$("#machineTypeId2").val(),
+                                           "machineId" : $("#machineId2").val(),
+                                           "machineShiftId" : $("#machineShiftId2").val(),
+                                           "startDate" : $("#startDate").val(),
+                                           "endDate" : $("#endDate").val()
+                                           };
+                                           
+                           $('#machineScheduleDataTable tbody').empty();
+           
+                            $.ajax({
+                                    type : "GET",
+                                    url:"/productionplancontroller/getmachinesheduledataavailable",
+                                    dataType : 'json',
+	                                data: formData,
+                                    success: function(result){
+	                                $.each(result, function(i,machineScheduleList){
+					
+	              var customerRow = '<tr>' +      
+	                                        '<td class="machineSelect text-center">'+'<input type="checkbox" readonly>'+'</td>'+	
+							                '<td class="machineNameTd">' +machineScheduleList.machineName+ '</td>' +
+									     	'<td class="machineShiftNameTd">' +machineScheduleList.shiftName+ '</td>' +
+									    	'<td class="scheduleDateTd">' +machineScheduleList.scheduleDate+ '</td>' +
+									    	'<td>' +'YES'+'</td>' +
+									    	'<td class="uomNameTd" hidden>' +machineScheduleList.uomName+ '</td>' +
+									    	'<td class="machineShiftIdTd" hidden>' +machineScheduleList.machineShiftId+ '</td>' +
+									    	'<td class="machineScheduleId" hidden>' +machineScheduleList.machineSheduleId+ '</td>' +
+									    	
+						            '</tr>';
+						  
+		                            $('#machineScheduleDataTable tbody').append(customerRow);
+					
+		                                                                          });        // each
+		                                                                          
+		                           
+		                           
+		                                     
+		                  //for defult 10 data-start
+		                  
+		    /*              
+		                  
+	var table="#machineScheduleDataTable";
+	$('.pagination').html('');
+	
+	var trnum =0;
+	var maxRows =parseInt(5);
+	var  totalRows=$(table+' tbody tr').length;
+	
+	$(table+' tr:gt(0)').each(function(e) {
+	
+	              trnum++;
+	              
+	              if(trnum > maxRows)
+	              {
+	                 $(this).hide();
+	              }
+	              if(trnum <= maxRows)
+	              {
+	                 $(this).show();
+	              }
+	    
+	
+	
+	});   //each function
+	
+	 if(totalRows > maxRows)
+	              {
+	              
+	              
+	              var pagenum =Math.ceil(totalRows/maxRows);
+	              
+	              for(var i=1;i<=pagenum;)
+	              {
+	                 $("#paginationInMachineSchedule").append('<li class="btn-sm" data-page="'+i+'">\<span>'+ i++ +'</span></li>').show();
+	              }  //for
+	                
+	              }   //if
+	              
+	              
+	              $('.pagination li:first-child').addClass('active');
+	             $('.pagination li').on('click',function(){
+	             
+	             var pageNum =  $(this).attr('data-page');
+	             var trIndex= 0;
+	             
+	             $('.pagination li').removeClass('active');
+	              $(this).addClass('active');
+	             $(table+' tr:gt(0)').each(function(e) {
+	             
+	                trIndex++;
+	                if(trIndex >(maxRows*pageNum) || trIndex<=((maxRows*pageNum)-maxRows))
+	                {
+	                    $(this).hide();
+	                }
+	                else
+	                {
+	                $(this).show();
+	                }
+	             
+	             
+	             
+	                }); // each function
+	             
+	             });  //  click function
+		                  
+		                  //for default 10 data -end
+		                  
+		                   */        
+		                                                                          
+		                                                                          
+		                                                                          
+					 
+		                                                      },   // end success
+	                               error : function(e) {
+		                                                alert("ERROR: ", e);
+		                                                console.log("ERROR: ", e);
+			                                           }
+					
+		                           });   // end ajax
+	        	   
+	        	   
+                           }		//if condition
+                       else
+                           {
+                           
+                      
+                           
+                           e.preventDefault();
+     
+                            var formData= { 
+                                           "machineTypeId" :$("#machineTypeId2").val(),
+                                           "machineId" : $("#machineId2").val(),
+                                           "machineShiftId" : $("#machineShiftId2").val(),
+                                           "startDate" : $("#startDate").val(),
+                                           "endDate" : $("#endDate").val()
+                                           };
+                                           
+        $('#machineScheduleDataTable tbody').empty();
+           
+                            $.ajax({
+                                    type : "GET",
+                                    url:"/productionplancontroller/getMachineSheduleNotAvailable",
+                                    dataType : 'json',
+	                                data: formData,
+                                    success: function(result){
+	                                $.each(result, function(i,machineScheduleList){
+					
+	              var customerRow = '<tr>' +      
+	                                        '<td class="text-center">'+'<input type="checkbox" disabled>'+'</td>'+	
+							                '<td>' +machineScheduleList.machineName+ '</td>' +
+									     	'<td>' +machineScheduleList.shiftName+ '</td>' +
+									    	'<td>' +machineScheduleList.scheduleDate+ '</td>' +
+									    	'<td>' +'No'+'</td>' +
+						            '</tr>';
+						  
+		$('#machineScheduleDataTable tbody').append(customerRow);
+					
+		                                                                          });        // each
+		                                                                          
+		                  
+		                  
+		                  //for defult 10 data-start
+		         /*         
+		                  
+		                  
+	var table="#machineScheduleDataTable";
+	$('.pagination').html('');
+	
+	var trnum =0;
+	var maxRows =parseInt(10);
+	var  totalRows=$(table+' tbody tr').length;
+	
+	$(table+' tr:gt(0)').each(function(e) {
+	
+	              trnum++;
+	              
+	              if(trnum > maxRows)
+	              {
+	                 $(this).hide();
+	              }
+	              if(trnum <= maxRows)
+	              {
+	                 $(this).show();
+	              }
+	    
+	
+	
+	});   //each function
+	
+	 if(totalRows > maxRows)
+	              {
+	              
+	              
+	              var pagenum =Math.ceil(totalRows/maxRows);
+	              
+	              for(var i=1;i<=pagenum;)
+	              {
+	                 $("#paginationInMachineSchedule").append('<li class="btn-sm" data-page="'+i+'">\<span>'+ i++ +'</span></li>').show();
+	              }  //for
+	                
+	              }   //if
+	              
+	              
+	              $('.pagination li:first-child').addClass('active');
+	             $('.pagination li').on('click',function(){
+	             
+	             var pageNum =  $(this).attr('data-page');
+	             var trIndex= 0;
+	             
+	             $('.pagination li').removeClass('active');
+	              $(this).addClass('active');
+	             $(table+' tr:gt(0)').each(function(e) {
+	             
+	                trIndex++;
+	                if(trIndex >(maxRows*pageNum) || trIndex<=((maxRows*pageNum)-maxRows))
+	                {
+	                    $(this).hide();
+	                }
+	                else
+	                {
+	                $(this).show();
+	                }
+	             
+	             
+	             
+	                }); // each function
+	             
+	             });  //  click function
+		                  
+		                  //for default 10 data -end
+		                  
+		                  
+		                  
+		                                                                          
+		                           */                                               
+		                                                                          
+					 
+		                                                      },   // end success
+	                               error : function(e) {
+		                                                alert("ERROR: ", e);
+		                                                console.log("ERROR: ", e);
+			                                           }
+					
+		                           });   // end ajax
+                           
+                           
+                           }	// else condition
+    
+	
+	
+	
+	
+
+	             
+	             
+	
+     
+        
+             });  // submit
+   });   // function
+    
+</script>
+
+
+
+
+
+<!--    ################################################################################ 
+        #                                                                              #
+        #                           End popup Search click                             #
+        #                                                                              #
+        ################################################################################ -->
+        
+<script>
+   $('#selectAllMachine').on('click', function(e) {
+       $('input[name="checkbox"]').prop('checked', $(this).prop('checked'));
+        alert("Select all");
+      if($(this).is(':checked',true))  
+		{
+			$(".machineSelect").find('input[type="checkbox"]').prop('checked', true);  
+		}  
+		else  
+		{  
+			$(".machineSelect").find('input[type="checkbox"]').prop('checked',false);  
+		}  
+      
+    });
+ </script>        
+        
+        
+
+<!--    ################################################################################ 
+        #                                                                              #
+        #                           Start popup ok click                               #
+        #                                                                              #
+        ################################################################################ -->
+<script>
+
+
+
+
+$("#pPMstTableId").on('click','.ShowAvailableMachine',function(){
+
+
+        var $row = $(this).closest("tr");    // Find the row	
+        var id = $row.find('.pPMstId').text();
+         
+        document.getElementById("datasaved").value=id;
+        
+       // alert(id);
+       
+    //  $('#machineScheduleDataTable').empty();   
+      
+  });
+
+/*
+    function pPchdDeleteFunction() {
+			                            document.getElementById("pPChdTableId").deleteRow(1);
+		                           }
+*/
+   
+
+
+</script>
+
+
+ 
+  <script>
+     
+	    $('#modalMachineAvailabilityCloseBtn').click(function(e) {
+	    
+	     $('#machineScheduleDataTable tbody').empty();  
+	     
+	     document.getElementById("datasaved").value=null;
+	     document.getElementById("machinePopulateMessage").innerHTML=null;
+	     
+	     });
+	    
+ </script>
+
+
+
+
+<script type = "text/javascript">
+      $("#pPChdTableId").on('click','.inputPlannedQty',function(){
+         function update(id){
+           document.getElementById(id).innerHTML = "<input type = 'text' name = 'txtNewInput' id = 'txtNewInput' value = '" + content + "'/>";
+        }
+    });
+</script>
+
+<script type = "text/javascript">
+      $("#pPChdTableId").on('click','.inputRemarks',function(){
+         function update(id){
+           document.getElementById(id).innerHTML = "<input type = 'text' name = 'txtNewInput' id = 'txtNewInput' value = '" + content + "'/>";
+        }
+    });
+</script>
+<!--    ################################################################################ 
+        #                                                                              #
+        #                         End popup ok click                                   #
+        #                                                                              #
+        ################################################################################ 
+-->
+
+
+  <!-- ################################################################################# 
+        #                                                                               #
+        #                    Start Production Plan chd data save -sas                   #
+        #                                                                               #
+        ################################################################################# -->
+        
+        
+        <script>
+     
+	    $('#savePPChd').click(function() {
+	    
+	     
+	    	
+	    	var total1=document.getElementById("titleData1").value;
+	    	var total2=document.getElementById("qtyGrandTotal").value;
+	    	
+	    	var gtotal=parseInt(total1);
+	    	var checkout=parseInt(total2);
+	    	
+	    	if(checkout>gtotal){
+	    		
+	    		alert("You can't cross qty limit");
+	    	}
+	    	
+	    	else{
+	    		
+	    	
+	    	
+	    	
+		    
+		    
+		    // $('#pPMstTableId tbody').empty(); 
+   	   $('#machineScheduleDataTable tbody').empty();  
+	    		
+	  $("#pPChdTableId tr ").each(function(e){
+		 
+		
+		          //    alert("go ");
+		          
+		         // 
+		       //  console.log("fff");
+		              
+		    var tr = $(this).closest('tr');
+		    
+  	        var productionPlanMstId = tr.find(".productionPlanMstId").text();
+  	        
+  	         var productionPlanDate = tr.find(".dateTd").text();
+  	        var machineShiftId = tr.find(".machineShiftId").text();
+  	        let productionPlanQty = tr.find('input[name="productionPlanQty"]').val();
+  	        let remarks = tr.find('input[name="remarks"]').val();
+  	        
+  	        alert("Save qty is : " + productionPlanQty);     
+		              
+		              var formData= { 
+		              
+	    		                     "productionPlanMstId" : productionPlanMstId,
+	    		                     "productionPlanDate" : productionPlanDate,	
+	    			                 "machineShiftId" : machineShiftId,
+	    			                 "productionPlanQty" : productionPlanQty,
+	    			                 "remarks" : remarks
+	    			                 
+	    			                 };
+	    			                 
+	    			                 
+	    			                  $.ajax({
+   		                                      type : "POST",	    		           
+   		                                      url:"/productionplancontroller/saveproductionplanchd",
+   		                                      dataType : 'json',
+   			                                  data: formData,
+   		                                       success: function(result){
+   		            var text="Production Plan Chd Data saved successfully";
+		            document.getElementById("pPChdTableSaveMessage").innerHTML=text;
+   		                                       
+   		                                        $.each(result, function(i,productionPlanChdList){
+	                                                            
+     
+       
+        
+	            var customerRow = '<tr>' +      
+	                                     '<td class="pPMstId">' +productionPlanChdList.productionPlanMstId+'</td>' +
+	                                     '<td class="productionPlanChdIdTd">' +productionPlanChdList.productionPlanChdId+ '</td>' +
+							             '<td>' +productionPlanChdList.planDate+'</td>' +
+							             '<td>' +productionPlanChdList.machineName+ '</td>' +
+							             '<td>' +productionPlanChdList.shiftName+'</td>' +
+							             '<td>' +productionPlanChdList.productionPlanQty+'</td>' +
+							             //'<td>' +'</td>' +
+							             '<td>' +productionPlanChdList.uomName+'</td>' +
+							     
+									   	// '<td class="pPMstActiveStatus">' +productionPlanChdList.activeStatus+'</td>' +
+									   	 '<td>' +productionPlanChdList.remarks+'</td>' +
+							            
+										 '<td class="editChdBtn">'+'<a type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#productionPlanChdEditModal">Edit</a>'+'</td>' +
+									   	
+									   	
+									   	                                                                                             //  data-toggle="modal" data-target="#chdShiftScheduleChangeFromModal"
+						                 '<td class="chdShiftScheduleButton">' + '<input type="button" value="Shift Schedule " class="btn btn-primary btn-md" >'+ '</td>' +
+						       
+						         '</tr>';
+						  
+		                                      $('#pPChdTableId tbody').append(customerRow);
+	                                                              
+	                                                                                       
+	                                                                                     });        // each
+   		            	
+   		                
+   		            	
+   		                                                                },
+   		            
+   			 });  //end ajax
+   			 
+   			 document.getElementById("pPChdTableId").deleteRow(1);
+		              $("#pPChdTableId").find("tbody").empty();
+		       // $('#pPChdTableId tbody').empty();      
+		       // $('#pPChdTableId tbody').closest("tr").remove();         
+		            
+		       });  //end table each function
+		    
+		    
+		       
+   	    
+   	   
+	    	}          //else 
+		       
+		       
+	    		  
+
+        });  //save button click function
+        
+        
+        
+        
+        
+        
+        
+        $("#pPChdTableId").on('click','.editChdBtn',function(){
+        
+       
+         var $row = $(this).closest("tr"); 	
+         
+         var productionPlanChdId = $row.find('.productionPlanChdIdTd').text();
+         
+      
+         
+         var formData= { 
+   			            "productionPlanChdId" : productionPlanChdId	
+   			     			      
+   		                };
+   		       
+   		       
+   		       $.ajax({
+		            type : "GET",	    		           
+		             url:"/productionplancontroller/productionplanchdmodaleditdata",
+		            dataType : 'json',
+			        data: formData,
+		            success: function(result){
+		            
+		            
+		            $.each(result, function(i,productionPlanChdList){
+		                
+		            		
+		            		document.getElementById("modalEditChdProductionPlanMstId").value=productionPlanChdList.productionPlanMstId;
+		            		document.getElementById("modalEditProductionPlanChdId").value=productionPlanChdList.productionPlanChdId;
+		            		document.getElementById("modalEditProductionPlanChdDate").value=productionPlanChdList.planDate;
+		            		document.getElementById("modalEditMachineName").value=productionPlanChdList.machineName;
+		            		document.getElementById("modalEditShift").value=productionPlanChdList.shiftName;
+		            		document.getElementById("modalEditUOM").value=productionPlanChdList.uomName;
+		            		document.getElementById("modalEditChdRemarks").value=productionPlanChdList.remarks;
+		            		document.getElementById("modalEditChdPlanQty").value=productionPlanChdList.productionPlanQty;
+		            		document.getElementById("machineShiftId").value=productionPlanChdList.machineShiftId;
+		            	
+		            		
+		            		
+		            		}); //each
+		            	
+		            	
+		            }  //sucess
+		            
+		            
+			 });  //ajax
+        
+        
+        
+         });  // fuction
+         
+         
+         
+         
+    $('#modalEditChdSaveBtn').click(function(e) {
+	    
+	     
+   	    var status = document.getElementById("modalChdStatus");
+      
+        var active;
+		    		 
+		    		 if (status.checked == true){
+		    			 active=1;
+		    		 }
+		    		 else{
+		    			 active=0;
+		    		 }
+   	   
+   	        
+   	        
+   	        var formData= { 
+   	        
+   			              "productionPlanChdId" : $("#modalEditProductionPlanChdId").val(),
+   			              "productionPlanMstId" : $("#modalEditChdProductionPlanMstId").val(),
+   			              "productionPlanDate" : $("#modalEditProductionPlanChdDate").val(),
+   			             // "machineShiftId" : $("#machineShiftId").val(),
+   			              "productionPlanQty" : $("#modalEditChdPlanQty").val(),
+   			              "remarks" : $("#modalEditChdRemarks").val(),
+   		           	      "activeStatus" : active
+   			 
+   			              };
+   		       
+   		       
+   		       $('#machineScheduleDataTable tbody').empty();
+   		       $('#pPChdTableId tbody').empty();  
+   		       
+   		         $.ajax({
+		            type : "POST",	    		           
+		             url:"/productionplancontroller/editproductionplanchd",
+		            dataType : 'json',
+			        data: formData,
+		            success: function(result){
+		            
+		            
+		               var text="Data updated successfully,press close button";
+                       document.getElementById("editProductionPlanChdMessage").innerHTML=text;
+		            
+		            
+		            
+		              $.each(result, function(i,productionPlanChdList){
+	                                                            
+      
+       
+        
+	            var customerRow = '<tr>' +      
+	                                     '<td class="pPMstId">' +productionPlanChdList.productionPlanMstId+'</td>' +
+	                                     '<td class="productionPlanChdIdTd">' +productionPlanChdList.productionPlanChdId+ '</td>' +
+							             '<td>' +productionPlanChdList.planDate+'</td>' +
+							             '<td>' +productionPlanChdList.machineName+ '</td>' +
+							             '<td>' +productionPlanChdList.machineShiftName+'</td>' +
+							             '<td>' +productionPlanChdList.productionPlanQty+'</td>' +
+							             //'<td>' +'</td>' +
+							             '<td>' +productionPlanChdList.uomName+'</td>' +
+							            
+									   	// '<td class="pPMstActiveStatus">' +productionPlanChdList.activeStatus+'</td>' +
+									   	 '<td>' +productionPlanChdList.remarks+'</td>' +
+							            
+										 '<td class="editChdBtn">'+'<a type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#productionPlanChdEditModal">Edit</a>'+'</td>' +
+									   	
+						         '</tr>';
+						  
+		                                      $('#pPChdTableId tbody').append(customerRow);
+	                                                              
+	                                                                                       
+	                                                                                     });        // each
+   		            	
+		              
+		            	
+		            }
+		            
+		            
+			 });
+   	      
+   	      
+   	   });
+         
+         
+
+     </script> 
+        
+   <!-- ################################################################################# 
+        #                                                                               #
+        #                    End Production Plan chd data save -sas                     #
+        #                                                                               #
+        ################################################################################# -->
+
+
+
+
+<!--    ################################################################################ 
+        #                                                                              #
+        #                         Start Search button click                            #
+        #                                                                              #
+        ################################################################################ 
+-->
+<script>
+	//production plan search Ajax   
+    $(function () {
+    
+    $('#productionPlanSearch').submit(function(e) {
+    
+    	
+    	 document.getElementById("titleData").innerHTML=null;
+    	 document.getElementById("titleData1").value=null;
+    
+    /*
+    
+    var id=document.getElementById("orderTypeId");
+    var selectOrderType = id.options[id.selectedIndex].value;
+ //   alert(selectOrderType);
+    
+     if(selectOrderType==1){
+     
+                            var check=document.getElementById("notPlanned");
+       
+                          //  alert(check);
+       
+                            if(check.checked==true){
+			                                      //  alert("not planned");
+	        	                                    $('#productionPlanDataTable tbody').empty();
+       
+                                                    e.preventDefault();
+     
+                                                    var formData= { 
+                                                                  //"orderTypeId" :$("#orderTypeId").val(),
+                                                                   "initialBuyerId" : $("#BuyerOrOtherId").val(),
+                                                                   "ultimateBuyerName" : $("#ultimateBuyerName").val(),
+                      
+                                                                    "inqueryId" : $("#inqueryId").val(),
+                                                                    "planId" : $("#planId").val(),
+                      
+                                                                    "designBy" : $("#designBy").val(),
+                                                                    "designId" : $("#designId").val(),
+                                       
+                                                                    "userId" : $("#userId").val(),
+                                                                   // "userClusterId" : $("#userClusterId").val(),
+                      
+                                                                    "inqStartDate" : $("#inqStartDate").val(),
+                                                                    "inqEndDate" : $("#inqEndDate").val(),
+                                                                    "designStartDate" : $("#designStartDate").val(),
+                                                                    "designEndDate" : $("#designEndDate").val(),
+                      
+                                                                    "planStartDate" : $("#planStartDate").val(),
+                                                                    "planEndDate" : $("#planEndDate").val()
+                      
+                                                                     };
+        
+      
+        
+           
+                                       $.ajax({
+                                       type : "GET",
+                                       url:"/production/plan/search/ajax",
+                                       dataType : 'json',
+	                                   data: formData,
+                                       success: function(result){
+                                       
+                                		
+                                       
+                                       
+	                                   $.each(result, function(i,modelOrderList){
+	     
+	           var customerRow = '<tr>' +      
+	                                    '<td>' +'Inquiry'+'</td>' +
+							            '<td>' + '</td>' +
+							            '<td>' +modelOrderList.orderId+'</td>' +
+							            '<td>' +modelOrderList.orderDate+ '</td>' +
+							            '<td>' +modelOrderList.orderItemQuantityId+'</td>' +
+										'<td>' +modelOrderList.orderOwnerName+'</td>' +
+										'<td>' +modelOrderList.itemName+ '</td>' +
+										'<td>' +modelOrderList.itemQty+ '</td>' +
+										'<td>' +modelOrderList.uomName+ '</td>' +
+										'<td>' +'</td>' +
+										'<td>' +'</td>' +
+										'<td>' +'Yes'+'</td>' +
+										'<td>'+'<a href="#" type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#productionPlanModal">plan Mst</a>'+'</td>' +   
+						          '</tr>';
+				$('#productionPlanDataTable tbody').append(customerRow);
+					
+		                       });        // each
+					 
+		                     },   // end success
+		                     
+	                                     error : function(e) {
+		                                                      alert("ERROR: ", e);
+	                                                        	console.log("ERROR: ", e);
+		                                                   	  }
+					
+		                                                            });   // end ajax
+	        	
+	                     }  // if (this condition based on when Not planned checked)
+	                                                            
+	                                                            
+	                     else{
+	                                                            
+	                        //  alert("planned");
+	                                                                 
+	                          $('#productionPlanDataTable tbody').empty();
+       
+                               e.preventDefault();
+     
+                                                    var formData= { 
+                                                                  //"orderTypeId" :$("#orderTypeId").val(),
+                                                                   "initialBuyerId" : $("#BuyerOrOtherId").val(),
+                                                                   "ultimateBuyerName" : $("#ultimateBuyerName").val(),
+                      
+                                                                    "inqueryId" : $("#inqueryId").val(),
+                                                                    "planId" : $("#planId").val(),
+                      
+                                                                    "designBy" : $("#designBy").val(),
+                                                                    "designId" : $("#designId").val(),
+                                       
+                                                                    "userId" : $("#userId").val(),
+                                                                   // "userClusterId" : $("#userClusterId").val(),
+                      
+                                                                    "inqStartDate" : $("#inqStartDate").val(),
+                                                                    "inqEndDate" : $("#inqEndDate").val(),
+                                                                    "designStartDate" : $("#designStartDate").val(),
+                                                                    "designEndDate" : $("#designEndDate").val(),
+                      
+                                                                    "planStartDate" : $("#planStartDate").val(),
+                                                                    "planEndDate" : $("#planEndDate").val()
+                      
+                                                                     };
+        
+      
+        
+           
+                                       $.ajax({
+                                       type : "GET",
+                                       url:"/pPlanCtrl/getOrderDataPlanned",
+                                       dataType : 'json',
+	                                   data: formData,
+                                       success: function(result){
+	                                   $.each(result, function(i,modelOrderList){
+	     
+	           var customerRow = '<tr>' +      
+	                                    '<td>' +'Inquiry'+'</td>' +
+							            '<td>' + '</td>' +
+							            '<td>' +modelOrderList.orderId+'</td>' +
+							            '<td>' +modelOrderList.orderDate+ '</td>' +
+							            '<td>' +modelOrderList.orderItemQuantityId+'</td>' +
+										'<td>' +modelOrderList.orderOwnerName+'</td>' +
+										'<td>' +modelOrderList.itemName+ '</td>' +
+										'<td>' +modelOrderList.itemQty+ '</td>' +
+										'<td>' +modelOrderList.uomName+ '</td>' +
+										'<td>' +'</td>' +
+										'<td>' +'</td>' +
+										'<td>' +'Yes'+'</td>' +
+										'<td>'+'<a href="#" type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#productionPlanModal">plan Mst</a>'+'</td>' +   
+						          '</tr>';
+				$('#productionPlanDataTable tbody').append(customerRow);
+					
+		                       });        // each
+					 
+		                     },   // end success
+		                     
+	                                     error : function(e) {
+		                                                      alert("ERROR: ", e);
+	                                                        	console.log("ERROR: ", e);
+		                                                   	  }
+					
+		                                                            });   // end ajax
+	                 
+	                  }	//else (this condition based on when Not planned Unchecked)
+       
+      
+		
+       
+    }   //  if (Selected check(when choose Inquiry))
+	        	
+    else{
+    
+    
+  
+  
+  
+  */
+  
+  
+  
+    
+    
+      
+    //  alert("WO selected");
+  
+      document.getElementById("datasaved").value=null; 
+      
+      var check=document.getElementById("notPlanned");
+      
+     //  alert(check);
+     
+   
+       
+                            if(check.checked==true){
+                            
+                           //   document.getElementById('savePPChd').style.visibility='hidden';
+                            
+                                  $('#productionPlanDataTable tbody').empty();
+                                  $('#pPMstTableId tbody').empty(); 
+                                  $('#pPChdTableId tbody').empty(); 
+                                  e.preventDefault();
+     
+                                                   var formData= { 
+                                                   
+                                                                 
+                                                                 "orderOwnerTypeId" : $("#buyerTypeId").val(),
+                                                                 "initialBuyerId" : $("#BuyerOrOtherId").val(),
+                                                                 "ultimateBuyerId" : $("#ultimateBuyerName").val(),
+                                                                 "wOMstId" : $("#inqueryId").val(),
+                                                                 "itemId" : $("#itemId").val(),
+                                                                 "userId" : $("#userId").val(),
+                                                                 "planStartDate" : $("#planStartDate").val(),
+                                                                 "planEndDate" : $("#planEndDate").val()
+                                                                 
+                                                                 
+                      
+                                                                  
+                                                                   
+                                                                   };
+        
+      
+        
+           
+                                                           $.ajax({
+                                                                  type : "GET",
+                                                                  url:"/productionplancontroller/getwodataplanned",
+                                                                  dataType : 'json',
+	                                                              data: formData,
+                                                                  success: function(result){
+                                                                  
+                                                                  
+                                          document.getElementById("PPTableMassage").hidden=false;                        
+                                                                  
+                                                                  
+                                                                  
+	                                                              $.each(result, function(i,WOList){
+	     
+	            var customerRow = '<tr>' +      
+	                                     '<td>' +'WO'+'</td>' +
+							             //'<td class="wOMstIdTd" >'+'<a href="#">' +WOList.wOMstId+ '</a>' +'</td>' +
+							             '<td class="wOMstIdTd" >' +WOList.wOMstId+'</td>' +
+							             '<td>' +WOList.orderId+'</td>' +
+							             '<td>' +WOList.wODate+ '</td>' +
+							             '<td>' +WOList.orderItemQuantityId+'</td>' +
+									   	 '<td>' +WOList.orderOwnerName+'</td>' +
+										 '<td>' +WOList.itemName+ '</td>' +
+										 '<td>' +WOList.wOQty+ '</td>' +
+										 '<td>' +WOList.uomName+ '</td>' +
+										 '<td>' +'</td>' +
+										 '<td>' +'</td>' +
+										 '<td>' +WOList.activeStatus+'</td>' +
+										                                                      // data-toggle="modal" data-target="#productionPlanModal"
+										 '<td Class="PlanMstMassage">'+'<a type="button" class="btn btn-success btn-sm" >Plan MST</a>'+'</td>' +   
+						                 '<td class="productionPlanMstIdTd" hidden>' +WOList.productionPlanMstId+ '</td>' +
+						          '</tr>';
+						  
+		                                      $('#productionPlanDataTable tbody').append(customerRow);
+					
+		                                                });        // each
+		                                                
+		                                                
+		                                                
+		                                                // for default 10 data   
+		                                    
+	var table='#productionPlanDataTable';
+	
+	$(".pagination").html('');
+	
+	var trnum =0;
+	var maxRows =parseInt(10);
+	var  totalRows=$(table+' tbody tr').length;
+	
+	$(table+' tr:gt(0)').each(function(e) {
+	
+	              trnum++;
+	              
+	              if(trnum > maxRows)
+	              {
+	                 $(this).hide();
+	              }
+	              if(trnum <= maxRows)
+	              {
+	                 $(this).show();
+	              }
+	    
+	
+	
+	});   //each function
+	
+	 if(totalRows > maxRows)
+	              {
+	              
+	              
+	              var pagenum =Math.ceil(totalRows/maxRows);
+	              
+	              for(var i=1;i<=pagenum;)
+	              {
+	                 $("#pagination").append('<li class="btn-sm" data-page="'+i+'">\<span>'+ i++ +'</span></li>').show();
+	              }  //for
+	                
+	              }   //if
+	              
+	              
+	              $('.pagination li:first-child').addClass('active');
+	             $('.pagination li').on('click',function(){
+	             
+	             var pageNum =  $(this).attr('data-page');
+	             var trIndex= 0;
+	             
+	             $('.pagination li').removeClass('active');
+	              $(this).addClass('active');
+	             $(table+' tr:gt(0)').each(function(e) {
+	             
+	                trIndex++;
+	                if(trIndex >(maxRows*pageNum) || trIndex<=((maxRows*pageNum)-maxRows))
+	                {
+	                    $(this).hide();
+	                }
+	                else
+	                {
+	                $(this).show();
+	                }
+	             
+	             
+	             
+	                }); // each function
+	             
+	             });  //  click function
+	             
+	             
+	
+		                                       
+		                // default 10 data - end        
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+					 
+		                                          },   // end success
+	                                        
+	                                        error : function(e) {
+		                                                        alert("ERROR: ", e);
+		                                                        console.log("ERROR: ", e);
+			                                                    }
+					
+		                                    });   // end ajax
+                                                
+                            
+                                 }   // 
+                                           
+                             else
+                                 {
+                                 
+                                 
+                                 
+                                 
+                              
+                                 
+                                 //   alert("WO Not planned");
+                                                  
+                                                   e.preventDefault();
+     
+                                                   var formData= { 
+                                                   
+                                                                  "orderOwnerTypeId" : $("#buyerTypeId").val(),
+                                                                  "initialBuyerId" : $("#BuyerOrOtherId").val(),
+                                                                  "ultimateBuyerId" : $("#ultimateBuyerName").val(),
+                                                                  "wOMstId" : $("#inqueryId").val(),
+                                                                  "itemId" : $("#itemId").val(),
+                                                                  "wOStartDate" : $("#inqStartDate").val(),
+                                                                  "wOEndDate" : $("#inqEndDate").val()
+                                                                  
+                                                                 };
+        
+                                                             
+                                                   
+                                                   $('#productionPlanDataTable tbody').empty();
+                                                   $('#pPMstTableId tbody').empty(); 
+                                                    $('#pPChdTableId tbody').empty(); 
+        
+           
+                                                           $.ajax({
+                                                                  type : "GET",
+                                                                  url:"/productionplancontroller/getwodatanotplaned",
+                                                                  dataType : 'json',
+	                                                              data: formData,
+                                                                  success: function(result){
+                                                                  
+                                     document.getElementById("PPTableMassage").hidden=false;                             
+                                                                  
+	                                                              $.each(result, function(i,WOList){
+	     
+	            var customerRow = '<tr>' +      
+	                                     '<td>' +'WO'+'</td>' +
+							             '<td class="inUsedPPMst">' +WOList.wOMstId+ '</td>' +
+							             '<td>' +WOList.orderId+'</td>' +
+							             '<td>' +WOList.wODate+ '</td>' +
+							             '<td class="orderItemQuantityIdTd">' +WOList.orderItemQuantityId+'</td>' +
+									   	 '<td>' +WOList.orderOwnerName+'</td>' +
+										 '<td>' +WOList.itemName+ '</td>' +
+										 '<td class="wOQty">' +WOList.wOQty+ '</td>' +
+										 '<td>' +WOList.uomName+ '</td>' +
+										 '<td>' +'</td>' +
+										 '<td>' +'</td>' +
+										 '<td>' +WOList.activeStatus+'</td>' +
+										 '<td class="planMstBtn">'+'<a href="#" type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#productionPlanModal">Plan MST</a>'+'</td>' +  
+										 '<td class="wOChdIdTd" hidden>' +WOList.wOChdId+ '</td>' + 
+						          '</tr>';
+						  
+		                                      $('#productionPlanDataTable tbody').append(customerRow);
+					
+		                                                });        // each
+		                                                
+		                                                
+
+	// for default 10 data   
+		                                    
+	var table='#productionPlanDataTable';
+	
+	$(".pagination").html('');
+	
+	var trnum =0;
+	var maxRows =parseInt(10);
+	var  totalRows=$(table+' tbody tr').length;
+	
+	$(table+' tr:gt(0)').each(function(e) {
+	
+	              trnum++;
+	              
+	              if(trnum > maxRows)
+	              {
+	                 $(this).hide();
+	              }
+	              if(trnum <= maxRows)
+	              {
+	                 $(this).show();
+	              }
+	    
+	
+	
+	});   //each function
+	
+	 if(totalRows > maxRows)
+	              {
+	              
+	              
+	              var pagenum =Math.ceil(totalRows/maxRows);
+	              
+	              for(var i=1;i<=pagenum;)
+	              {
+	                 $("#pagination").append('<li class="btn-sm" data-page="'+i+'">\<span>'+ i++ +'</span></li>').show();
+	              }  //for
+	                
+	              }   //if
+	              
+	              
+	              $('.pagination li:first-child').addClass('active');
+	             $('.pagination li').on('click',function(){
+	             
+	             var pageNum =  $(this).attr('data-page');
+	             var trIndex= 0;
+	             
+	             $('.pagination li').removeClass('active');
+	              $(this).addClass('active');
+	             $(table+' tr:gt(0)').each(function(e) {
+	             
+	                trIndex++;
+	                if(trIndex >(maxRows*pageNum) || trIndex<=((maxRows*pageNum)-maxRows))
+	                {
+	                    $(this).hide();
+	                }
+	                else
+	                {
+	                $(this).show();
+	                }
+	             
+	             
+	             
+	                }); // each function
+	             
+	             });  //  click function
+	             
+	             
+	
+		                                       
+		                // default 10 data - end                       
+		                                       
+		                                       
+		                                       
+		                                       
+		                                                
+		                                                
+		                                                
+					 
+		                                          },   // end success
+	                                        
+	                                        error : function(e) {
+		                                                        alert("ERROR: ", e);
+		                                                        console.log("ERROR: ", e);
+			                                                    }
+					
+		                                    });   // end ajax
+		                                    
+		                                   
+                             
+                                            
+                                 }  // if (this condition based on when Not planned Unchecked)
+                                 
+                                 
+      /*                           
+                                 
+      
+      } //  else (Selected check(when choose Work Order))
+      
+      
+      
+      
+      */
+		
+		
+        
+    });  // submit
+});   // function
+    
+</script>
+
+<!--pagination  Script-->
+	<script>
+	
+	
+	var table='#productionPlanDataTable';
+	
+	
+	$('#maxRows').on('change',function(){
+	
+	$(".pagination").html('');
+	
+	var trnum =0;
+	var maxRows =parseInt($(this).val());
+	var  totalRows=$(table+' tbody tr').length;
+	
+	$(table+' tr:gt(0)').each(function(e) {
+	
+	              trnum++;
+	              
+	              if(trnum > maxRows)
+	              {
+	                 $(this).hide();
+	              }
+	              if(trnum <= maxRows)
+	              {
+	                 $(this).show();
+	              }
+	    
+	
+	
+	});   //each function
+	
+	 if(totalRows > maxRows)
+	              {
+	              
+	              
+	              var pagenum =Math.ceil(totalRows/maxRows);
+	              
+	              for(var i=1;i<=pagenum;)
+	              {
+	                 $("#pagination").append('<li class="btn-sm" data-page="'+i+'">\<span>'+ i++ +'</span></li>').show();
+	              }  //for
+	                
+	              }   //if
+	              
+	              
+	              $('.pagination li:first-child').addClass('active');
+	             $('.pagination li').on('click',function(){
+	             
+	             var pageNum =  $(this).attr('data-page');
+	             var trIndex= 0;
+	             
+	             $('.pagination li').removeClass('active');
+	              $(this).addClass('active');
+	             $(table+' tr:gt(0)').each(function(e) {
+	             
+	                trIndex++;
+	                if(trIndex >(maxRows*pageNum) || trIndex<=((maxRows*pageNum)-maxRows))
+	                {
+	                    $(this).hide();
+	                }
+	                else
+	                {
+	                $(this).show();
+	                }
+	             
+	             
+	             
+	                }); // each function
+	             
+	             });  //  click function
+	             
+	             
+	      });   //on change function
+	             
+	             
+	/*             
+	    $(function () {
+	    
+	    
+	               $('table tr:gt(0)').prepend('<th>ID</th>');
+	               
+	               var id = 0;
+	               
+	               
+	               $('table tr:gt(0)').each(function(e) {
+	               
+	               id++;
+	               
+	                $(this).prepend('<th>'+id+'</th>');
+	               
+	               
+	              }); // each function
+	    
+	    });
+	    
+	*/    
+	            
+</script>
+
+<script>
+
+ $("#productionPlanDataTable").on('click','.inUsedPPMst',function(){
+ 
+ 
+ //alert("working....");
+ 
+  
+ document.getElementById("datasaved").value=null; 
+ 
+ 
+  var $row = $(this).closest("tr"); 	
+  var wOMstId = $row.find('.inUsedPPMst').text();
+  var qty = $row.find('.wOQty').text();
+  
+  
+  
+ // $(this).closest("tr").toggleClass("bgYellow");
+ 
+  document.getElementById("titleData").innerHTML="Your available wo qty : " + qty;
+  document.getElementById("titleData1").value=qty;
+ 
+// alert("productionPlanDataTable1 : "+wOMstId);
+ 
+ 
+   var formData= { 
+                       
+                        "wOMstId" : wOMstId
+                        
+                  };
+                  
+   
+        $('#pPMstTableId tbody').empty(); 
+        $('#pPChdTableId tbody').empty(); 
+                  
+                  
+                   $.ajax({
+                                   type : "GET",
+                                   url:"/productionplancontroller/getProductionPlanMstInUsed",
+                                   dataType : 'json',
+	                               data: formData,
+                                  success: function(result){
+                                 
+                          document.getElementById("chdTableMassage").hidden=true;       
+                                                               
+          $.each(result, function(i,productionPlanMstList){
+	                                                            
+            
+						         
+						          var customerRow = '<tr>' +      
+	                                     '<td class="pPMstId">' +productionPlanMstList.productionPlanMstId+'</td>' +
+							             '<td class="planDateTd">' +productionPlanMstList.planDate+ '</td>' +
+							             '<td class="userNameTd">' +productionPlanMstList.ownerName+'</td>' +
+							             '<td class="userNameTd">' +productionPlanMstList.userName+'</td>' +
+							             '<td class="refNoTd">' +productionPlanMstList.refNo+ '</td>' +
+							             '<td class="remarksTd">' +productionPlanMstList.remarks+'</td>' +
+									   	 '<td class="pPMstActiveStatus">' +productionPlanMstList.activeStatus+'</td>' +
+										 '<td class="editBtn">'+'<a href="#" type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#editProductionPlanModal">Edit</a>'+'</td>' +
+										 '<td class="ShowAvailableMachine">' + '<input type="button" value="Show Available Machine" class="btn btn-primary btn-md" data-toggle="modal" data-target="#machineAvailabilityModal" >'+ '</td>' +
+										<!-- '<td class="shiftScheduleButton">' + '<input type="button" value="Shift Schedule " class="btn btn-primary btn-md" >'+ '</td>' + -->
+						                 
+						         '</tr>';
+						         
+						         
+						         
+						  
+		                                      $('#pPMstTableId tbody').append(customerRow);
+	                                                              
+	                                                                                       
+	                                                                                     });        // each
+	                   
+	                                                            
+	                                                            }
+					
+		                                    });   // end ajax
+ 
+ 
+ 
+ 
+  });   // function
+
+</script>
+
+
+
+<script>
+ 
+ $("#productionPlanDataTable").on('click','.PlanMstMassage',function(){
+ 
+ 
+ alert("Already Done Plan mst");
+ 
+ });   // function
+
+</script>
+
+  <!--  ################################################################################ 
+        #                                                                              #
+        #                         END Search button click                              #
+        #                                                                              #
+        ################################################################################ -->
+ <script>
+ 
+ Date.prototype.toDateInputValue = (function() {
+		    var local = new Date(this);
+		    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+		    return local.toJSON().slice(0,10);
+		});
+
+         document.getElementById('modalProductionPlanDate').value = new Date().toDateInputValue();
+ 
+ 
+ $("#productionPlanDataTable").on('click','.planMstBtn',function(){
+
+        var $row = $(this).closest("tr"); 	
+        var orderItemQuantityId = $row.find('.orderItemQuantityIdTd').text();
+        var wOChdId = $row.find('.wOChdIdTd').text();
+      
+        $(".productionPlanModalFrom #modalOrderItemQtyId").val( orderItemQuantityId );
+        $(".productionPlanModalFrom #modalwOChdId").val( wOChdId );
+    
+       
+       });   // function
+        
+      $('#modalSaveBtn').click(function(e) {
+      
+      var status = document.getElementById("modalActive");
+      
+      var active;
+		    		 
+		    		 if (status.checked == true){
+		    			 active='1';
+		    		 }
+		    		 else{
+		    			 active='0';
+		    		 }
+        
+             //  alert("Working Modal Save Button");
+           
+             var x ="";
+              
+             if($("#modalUsarId").val()==x)
+             {
+               alert("Select Planned by");
+             }
+             else
+             {
+              //  alert("sucessfull");
+                
+                 var formData= { 
+                       
+                        "orderItemQtyId" : $("#modalOrderItemQtyId").val(),
+                        "wOChdId" : $("#modalwOChdId").val(),
+                        "planDate" : $("#modalProductionPlanDate").val(),
+                        "userId" : $("#modalUsarId").val(),
+                        "refNo" : $("#modalRefNo").val(),
+                        "remarks" : $("#modalRemarks").val(),
+                        "activeStatus" : active
+                        
+                               };
+                               
+                               $('#pPMstTableId tbody').empty(); 
+                               
+                               $.ajax({
+                                                                  type : "POST",
+                                                                  url:"/productionplancontroller/productionplanmodalsave",
+                                                                  dataType : 'json',
+	                                                              data: formData,
+                                                                  success: function(result){
+                                                                  
+                                                            document.getElementById("chdTableMassage").hidden=true;
+                                                                  
+                                                                   var text="Data saved succesfully,press close button";
+		            document.getElementById("productionPlanSaveMessage").innerHTML=text;
+                                                                  
+	                                                              $.each(result, function(i,productionPlanMstList){
+	                                                            
+      
+                if(productionPlanMstList.activeStatus==1)
+                {
+              
+                var customerRow = '<tr>' +      
+	                                     '<td class="pPMstId">' +productionPlanMstList.productionPlanMstId+'</td>' +
+							             '<td class="planDateTd">' +productionPlanMstList.planDate+ '</td>' +
+							             '<td class="userNameTd">' +productionPlanMstList.ownerName+'</td>' +
+							             '<td class="userNameTd">' +productionPlanMstList.userName+'</td>' +
+							             '<td class="refNoTd">' +productionPlanMstList.refNo+ '</td>' +
+							             '<td class="remarksTd">' +productionPlanMstList.remarks+'</td>' +
+									   	 '<td class="pPMstActiveStatus">' +productionPlanMstList.activeStatus+'</td>' +
+										 '<td class="editBtn">'+'<a href="#" type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#editProductionPlanModal">Edit</a>'+'</td>' +
+										 '<td class="ShowAvailableMachine">' + '<input type="button" value="Show Available Machine" class="btn btn-primary btn-md" data-toggle="modal" data-target="#machineAvailabilityModal" >'+ '</td>' +
+										<!-- '<td class="shiftScheduleButton">' + '<input type="button" value="Shift Schedule " class="btn btn-primary btn-md" >'+ '</td>' + -->
+						                 
+						         '</tr>';
+                
+                }
+                else if(productionPlanMstList.activeStatus==0)
+                {
+              
+                
+                var customerRow = '<tr>' +      
+	                                     '<td class="pPMstId">' +productionPlanMstList.productionPlanMstId+'</td>' +
+							             '<td class="planDateTd">' +productionPlanMstList.planDate+ '</td>' +
+							             '<td class="userNameTd">' +productionPlanMstList.ownerName+'</td>' +
+							             '<td class="userNameTd">' +productionPlanMstList.userName+'</td>' +
+							             '<td class="refNoTd">' +productionPlanMstList.refNo+ '</td>' +
+							             '<td class="remarksTd">' +productionPlanMstList.remarks+'</td>' +
+									   	 '<td class="pPMstActiveStatus">' +productionPlanMstList.activeStatus+'</td>' +
+										 '<td class="editBtn">'+'<a href="#" type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#editProductionPlanModal">Edit</a>'+'</td>' +
+										 '<td >' + '<input type="button" value="Show Available Machine" class="btn btn-primary btn-md" >'+ '</td>' +
+								<!--		 '<td class="shiftScheduleButton">' + '<input type="button" value="Shift Schedule " class="btn btn-primary btn-md" >'+ '</td>' +   -->
+						                 
+						         '</tr>';
+                }
+ 
+ 
+					  
+		                                      $('#pPMstTableId tbody').append(customerRow);
+	                                                             
+	                                                                                       
+	                                                                                     });        // each
+					 
+		                                          },   // end success
+	                                        
+	                                        error : function(e) {
+		                                                        alert("ERROR: ", e);
+		                                                        console.log("ERROR: ", e);
+			                                                    }
+					
+		                                    });   // end ajax
+		                                    
+		                               //     $('#productionPlanModal').modal('hide');
+                                       //     $('#productionPlanModal').close();
+                                       //     $('#productionPlanModal').dialog('close');
+                                       //     $('#productionPlanModal').empty(); 
+             }
+             
+            
+               
+              
+               
+          });   // function
+          
+          
+          
+          
+        
+ </script>
+ 
+ <!--pagination  Script-->
+	<script>
+	
+	
+	
+	/*
+	
+	  $('#maxRows2').on('change',function(){
+	  alert("in maxRows2 change function");
+	  var table='#pPMstTableId';
+	
+	$('.pagination').html('');
+	
+	var trnum =0;
+	var maxRows =parseInt($(this).val());
+	var  totalRows=$(table+' tbody tr').length;
+	
+	$(table+' tr:gt(0)').each(function(e) {
+	
+	              trnum++;
+	              
+	              if(trnum > maxRows)
+	              {
+	                 $(this).hide();
+	              }
+	              if(trnum <= maxRows)
+	              {
+	                 $(this).show();
+	              }
+	    
+	
+	
+	});   //each function
+	
+	 if(totalRows > maxRows)
+	              {
+	              
+	              
+	              var pagenum =Math.ceil(totalRows/maxRows);
+	              
+	              for(var i=1;i<=pagenum;)
+	              {
+	                 $("#paginationInMstTable").append('<li class="btn-sm" data-page="'+i+'">\<span>'+ i++ +'</span></li>').show();
+	              }  //for
+	                
+	              }   //if
+	              
+	              
+	              $('.pagination li:first-child').addClass('active');
+	             $('.pagination li').on('click',function(){
+	             
+	             var pageNum =  $(this).attr('data-page');
+	             var trIndex= 0;
+	             
+	             $('.pagination li').removeClass('active');
+	              $(this).addClass('active');
+	             $(table+' tr:gt(0)').each(function(e) {
+	             
+	                trIndex++;
+	                if(trIndex >(maxRows*pageNum) || trIndex<=((maxRows*pageNum)-maxRows))
+	                {
+	                    $(this).hide();
+	                }
+	                else
+	                {
+	                $(this).show();
+	                }
+	             
+	             
+	             
+	                }); // each function
+	             
+	             });  //  click function
+	             
+	             
+	      });   //on change function
+	    */         
+	             
+	/*             
+	    $(function () {
+	    
+	    
+	               $('table tr:gt(0)').prepend('<th>ID</th>');
+	               
+	               var id = 0;
+	               
+	               
+	               $('table tr:gt(0)').each(function(e) {
+	               
+	               id++;
+	               
+	                $(this).prepend('<th>'+id+'</th>');
+	               
+	               
+	              }); // each function
+	    
+	    });
+	    
+	*/    
+	            
+</script>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  <script>
+  
+    $("#pPMstTableId").on('click','.editBtn',function(){
+    
+         var $row = $(this).closest("tr"); 	
+         
+         var pPMstId = $row.find('.pPMstId').text();
+         
+      //   alert(pPMstId);
+         
+         var formData= { 
+         
+   			            "productionPlanMstId" : pPMstId	
+   			     			      
+   		               };
+   		       
+   		       
+   		       $.ajax({
+		            type : "GET",	    		           
+		             url:"/productionplancontroller/getproductionplanmstplanned",
+		            dataType : 'json',
+			        data: formData,
+		            success: function(result){
+		            	$.each(result, function(i,productionPlanMstList){
+		                 
+		            		
+		            		document.getElementById("modalEditProductionPlanMstId").value=productionPlanMstList.productionPlanMstId;
+		            		document.getElementById("modalEditProductionPlanDate").value=productionPlanMstList.planDate;
+		            		document.getElementById("modalEditUsarId").value=productionPlanMstList.userId;
+		            		document.getElementById("modalEditRefNo").value=productionPlanMstList.refNo;
+		            		document.getElementById("modalEditRemarks").value=productionPlanMstList.remarks;
+		            		
+		            		//document.getElementById("modalEditActive").value=productionPlanMstList.activeStatus;
+		            		
+		            		
+		            		
+		            		});
+		            	
+		            }
+		            
+		            
+			 });
+   		       
+   		       
+   		       
+   		       
+         //var planDate = $row.find('.planDateTd').text();
+        // var userName = $row.find('.userNameTd').text();
+         //var refNo = $row.find('.refNoTd').text();
+        // var remarks = $row.find('.remarksTd').text();
+        // var pPMstActiveStatus = $row.find('.pPMstActiveStatus').text();
+      // alert(pPMstId);
+       // alert(planDate);
+      //   alert(userName);
+         
+      //    alert(refNo);
+  //         alert(remarks);
+           
+    //       alert(pPMstActiveStatus);
+    
+    
+       // $(".editProductionPlanModalFrom #modalEditProductionPlanMstId").val( pPMstId );
+        
+       // document.getElementById("modalEditPlanDate").value=planDate;
+     //   $(".editProductionPlanModalFrom #modalEditPlanDate").val( planDate );
+      //  $(".editProductionPlanModalFrom #modalEditUserName").val( userName );
+     //   $(".editProductionPlanModalFrom #modalEditRefNo").val( refNo );
+       // $(".editProductionPlanModalFrom #modalEditRemarks").val( remarks );
+     //   $(".editProductionPlanModalFrom #modalEditActive").val( pPMstActiveStatus );
+    
+    
+  
+    });
+    
+    
+    
+ 
+     $('#modalEditSaveBtn').click(function(e) {
+     
+     
+   
+     var status = document.getElementById("modalEditActive");
+      
+      var active;
+		    		 
+		    		 if (status.checked == true){
+		    			 active=1;
+		    		 }
+		    		 else{
+		    			 active=0;
+		    		 }
+		    		 
+		    $('#pPMstTableId tbody').empty(); 
+		    
+		    
+		    
+	  var x ="";
+              
+             if($("#modalEditUsarId").val() == x)
+             {
+               alert("Select Planned By");
+             }
+             else
+             {
+           //    alert("sucessfull");	    
+         
+        
+  var formData= { 
+        
+   			     "productionPlanMstId" : $("#modalEditProductionPlanMstId").val(),
+   			     "planDate" : $("#modalEditProductionPlanDate").val(),
+   			     "userId" : $("#modalEditUsarId").val(),
+   			     "refNo" : $("#modalEditRefNo").val(),
+   			     "remarks" : $("#modalEditRemarks").val(),
+   			     "activeStatus" : active
+   			     
+   			   };
+   		       
+   		       
+   		         $.ajax({
+		            type : "POST",	    		           
+		             url:"/productionplancontroller/productionplanmodaleditsave",
+		            dataType : 'json',
+			        data: formData,
+		            success: function(result){
+		            
+		            var text="Data updated successfully,press close button";
+		            document.getElementById("pPMstPopupEditSaveMessage").innerHTML=text;
+		            
+		            $.each(result, function(i,productionPlanMstList){
+	                                                            
+      
+       
+        
+if(productionPlanMstList.activeStatus==1)
+                {
+              //  alert("activeStatus: "+productionPlanMstList.activeStatus);
+                var customerRow = '<tr>' +      
+	                                     '<td class="pPMstId">' +productionPlanMstList.productionPlanMstId+'</td>' +
+							             '<td class="planDateTd">' +productionPlanMstList.planDate+ '</td>' +
+							             '<td class="userNameTd">' +productionPlanMstList.ownerName+'</td>' +
+							             '<td class="userNameTd">' +productionPlanMstList.userName+'</td>' +
+							             '<td class="refNoTd">' +productionPlanMstList.refNo+ '</td>' +
+							             '<td class="remarksTd">' +productionPlanMstList.remarks+'</td>' +
+									   	 '<td class="pPMstActiveStatus">' +productionPlanMstList.activeStatus+'</td>' +
+										 '<td class="editBtn">'+'<a href="#" type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#editProductionPlanModal">Edit</a>'+'</td>' +
+										 '<td class="ShowAvailableMachine">' + '<input type="button" value="Show Available Machine" class="btn btn-primary btn-md" data-toggle="modal" data-target="#machineAvailabilityModal" >'+ '</td>' +
+								<!--		 '<td class="shiftScheduleButton">' + '<input type="button" value="Shift Schedule " class="btn btn-primary btn-md" >'+ '</td>' +   -->
+						                 
+						         '</tr>';
+                
+                }
+                else if(productionPlanMstList.activeStatus==0)
+                {
+                //alert("activeStatus: "+productionPlanMstList.activeStatus);
+                
+                var customerRow = '<tr>' +      
+	                                     '<td class="pPMstId">' +productionPlanMstList.productionPlanMstId+'</td>' +
+							             '<td class="planDateTd">' +productionPlanMstList.planDate+ '</td>' +
+							             '<td class="userNameTd">' +productionPlanMstList.ownerName+'</td>' +
+							             '<td class="userNameTd">' +productionPlanMstList.userName+'</td>' +
+							             '<td class="refNoTd">' +productionPlanMstList.refNo+ '</td>' +
+							             '<td class="remarksTd">' +productionPlanMstList.remarks+'</td>' +
+									   	 '<td class="pPMstActiveStatus">' +productionPlanMstList.activeStatus+'</td>' +
+										 '<td class="editBtn">'+'<a href="#" type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#editProductionPlanModal">Edit</a>'+'</td>' +
+										 '<td >' + '<input type="button" value="Show Available Machine" class="btn btn-primary btn-md" >'+ '</td>' +
+									<!--	 '<td class="shiftScheduleButton">' + '<input type="button" value="Shift Schedule " class="btn btn-primary btn-md" >'+ '</td>' +   -->
+						                 
+						         '</tr>';
+                }
+						  
+		                                      $('#pPMstTableId tbody').append(customerRow);
+		                                    //  refresh true;
+	                                                             
+	                                                                                       
+	                                                                                     });        // each
+		            	
+		            }
+		            
+		            
+			 });
+   		       
+   		   }    
+   		       
+   		       
+   	 });
+   	 
+   	 
+ /*  	    
+$('#productionPlanFromCancleBtn').click(function(e) {
+      
+       
+       $('#editProductionPlanModal').modal('hide');
+       
+    });
+  */ 	 
+  
+  </script>
+  
+  
+  
+  
+  
+  
+  
+   <script>
+  
+    $("#pPMstTableId").on('click','.editBtnDone',function(){
+    
+         var $row = $(this).closest("tr"); 	
+         
+         var pPMstId = $row.find('.pPMstId').text();
+         
+      //   alert(pPMstId);
+         
+         var formData= { 
+         
+   			            "productionPlanMstId" : pPMstId	
+   			     			      
+   		               };
+   		       
+   		       
+   		       $.ajax({
+		            type : "GET",	    		           
+		             url:"/productionplancontroller/getproductionplanmstplanned",
+		            dataType : 'json',
+			        data: formData,
+		            success: function(result){
+		            	$.each(result, function(i,productionPlanMstList){
+		                 
+		            		
+		            		document.getElementById("modalEditProductionPlanMstIdDone").value=productionPlanMstList.productionPlanMstId;
+		            		document.getElementById("modalEditProductionPlanDateDone").value=productionPlanMstList.planDate;
+		            		document.getElementById("modalEditUsarIdDone").value=productionPlanMstList.userId;
+		            		document.getElementById("modalEditRefNoDone").value=productionPlanMstList.refNo;
+		            		document.getElementById("modalEditRemarksDone").value=productionPlanMstList.remarks;
+		            		
+		            		//document.getElementById("modalEditActive").value=productionPlanMstList.activeStatus;
+		            		
+		            		
+		            		
+		            		});
+		            	
+		            }
+		            
+		            
+			 });
+   		       
+   		       
+   		       
+   		       
+       
+    
+  
+    });
+    
+    
+    
+ 
+     $('#modalEditSaveBtnDone').click(function(e) {
+     
+     
+//   alert("modalEditSaveBtnDone");
+     var status = document.getElementById("modalEditActiveDone");
+ //      alert(status);
+      var active;
+		    		 
+		    		 if (status.checked == true){
+		    			 active=1;
+		    		 }
+		    		 else{
+		    			 active=0;
+		    		 }
+		    		 
+		    $('#pPMstTableId tbody').empty(); 
+		    
+		    
+		    
+	  var x ="";
+              
+             if($("#modalEditUsarIdDone").val() == x)
+             {
+               alert("Select User");
+             }
+             else
+             {
+             //  alert("sucessfull");	    
+         
+        
+  var formData= { 
+        
+   			     "productionPlanMstId" : $("#modalEditProductionPlanMstIdDone").val(),
+   			     "planDate" : $("#modalEditProductionPlanDateDone").val(),
+   			     "userId" : $("#modalEditUsarIdDone").val(),
+   			     "refNo" : $("#modalEditRefNoDone").val(),
+   			     "remarks" : $("#modalEditRemarksDone").val(),
+   			     "activeStatus" : active
+   			     
+   			   };
+   		       
+   		       
+   		         $.ajax({
+		            type : "POST",	    		           
+		             url:"/productionplancontroller/productionplanmodaleditsave",
+		            dataType : 'json',
+			        data: formData,
+		            success: function(result){
+		            $.each(result, function(i,productionPlanMstList){
+	                                                            
+      
+       
+        
+if(productionPlanMstList.activeStatus==1)
+                {
+              //  alert("activeStatus: "+productionPlanMstList.activeStatus);
+              
+              
+          
+              
+               var customerRow = '<tr>' +      
+	                                     '<td class="pPMstId">' +productionPlanMstList.productionPlanMstId+'</td>' +
+							             '<td>' +productionPlanMstList.planDate+ '</td>' +
+							             '<td class="userNameTd">' +productionPlanMstList.ownerName+'</td>' +
+							             '<td>' +productionPlanMstList.userName+'</td>' +
+							             '<td>' +productionPlanMstList.refNo+ '</td>' +
+							             '<td>' +productionPlanMstList.remarks+'</td>' +
+									   	 '<td class="pPMstActiveStatus">' +productionPlanMstList.activeStatus+'</td>' +
+										 '<td class="editBtnDone">'+'<a href="#" type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#editProductionPlanModalDone">Edit</a>'+'</td>' +
+										// '<td class="ShowAvailableMachine">' + '<input type="button" value="Show Available Machine" class="btn btn-primary btn-md" data-toggle="modal" data-target="#machineAvailabilityModal" >'+ '</td>' +
+										 '<td>' + '<input type="button" value="Show Available Machine" class="btn btn-primary btn-md">'+ '</td>' +
+										<!--  '<td class="shiftScheduleButton">' + '<input type="button" value="Shift Schedule " class="btn btn-primary btn-md" data-toggle="modal" data-target="#shiftScheduleChangeFromModal">'+ '</td>' +  -->
+						                 
+						         '</tr>';
+                
+                }
+                else if(productionPlanMstList.activeStatus==0)
+                {
+                //alert("activeStatus: "+productionPlanMstList.activeStatus);
+                
+                var customerRow = '<tr>' +      
+	                                     '<td class="pPMstId">' +productionPlanMstList.productionPlanMstId+'</td>' +
+							             '<td>' +productionPlanMstList.planDate+ '</td>' +
+							             '<td class="userNameTd">' +productionPlanMstList.ownerName+'</td>' +
+							             '<td>' +productionPlanMstList.userName+'</td>' +
+							             '<td>' +productionPlanMstList.refNo+ '</td>' +
+							             '<td>' +productionPlanMstList.remarks+'</td>' +
+									   	 '<td class="pPMstActiveStatus">' +productionPlanMstList.activeStatus+'</td>' +
+										 '<td class="editBtnDone">'+'<a href="#" type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#editProductionPlanModalDone">Edit</a>'+'</td>' +
+										 '<td >' + '<input type="button" value="Show Available Machine" class="btn btn-primary btn-md" >'+ '</td>' +
+									<!--	 '<td class="shiftScheduleButton">' + '<input type="button" value="Shift Schedule " class="btn btn-primary btn-md" >'+ '</td>' +   -->
+						                 
+						         '</tr>';
+                }
+						  
+		                                      $('#pPMstTableId tbody').append(customerRow);
+		                                    //  refresh true;
+	                                                             
+	                                                                                       
+	                                                                                     });        // each
+		            	
+		            }
+		            
+		            
+			 });
+   		       
+   		   }    
+   		       
+   		       
+   	 });
+   	 
+   	 
+ /*  	    
+$('#productionPlanFromCancleBtn').click(function(e) {
+      
+       
+       $('#editProductionPlanModal').modal('hide');
+       
+    });
+  */ 	 
+  
+  </script>
+  
+  
+  
+  
+ 
+     
+     
+ 
+        
+     <script>  
+      
+       $("#productionPlanDataTable").on('click','.wOMstIdTd',function(){
+      
+    	 
+
+       document.getElementById("datasaved").value=null; 	   
+       
+        var $row = $(this).closest("tr"); 	
+        var productionPlanMstId = $row.find('.productionPlanMstIdTd').text();
+       
+        
+       
+    
+         
+          $('#pPMstTableId tbody').empty(); 
+          $('#pPChdTableId tbody').empty(); 
+         
+         var formData= { 
+	    		         "productionPlanMstId" : productionPlanMstId	
+	    			   };
+	    			   
+	    			   
+	    			   
+	    			     $.ajax({
+                                   type : "GET",
+                                   url:"/productionplancontroller/getproductionplanmstplanned",
+                                   dataType : 'json',
+	                               data: formData,
+                                  success: function(result){
+                                  
+                     document.getElementById("chdTableMassage").hidden=false;             
+                                  
+                                                                  
+          $.each(result, function(i,productionPlanMstList){
+	                                                            
+              var customerRow = '<tr>' +      
+	                                     '<td class="pPMstId">' +productionPlanMstList.productionPlanMstId+'</td>' +
+							             '<td>' +productionPlanMstList.planDate+ '</td>' +
+							             '<td class="userNameTd">' +productionPlanMstList.ownerName+'</td>' +
+							             '<td>' +productionPlanMstList.userName+'</td>' +
+							             '<td>' +productionPlanMstList.refNo+ '</td>' +
+							             '<td>' +productionPlanMstList.remarks+'</td>' +
+									   	 '<td class="pPMstActiveStatus">' +productionPlanMstList.activeStatus+'</td>' +
+									   	                                                                              
+										 '<td class="editBtnDone">'+'<a type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#editProductionPlanModalDone">Edit</a>'+'</td>' +
+										   //class="ShowAvailableMachine"                                                           // data-toggle="modal" data-target="#machineAvailabilityModal"
+										 '<td>' + '<input type="button" value="Show Available Machine" class="btn btn-primary btn-md" >'+ '</td>' +
+										 
+						             <!--    '<td class="shiftScheduleButton">' + '<input type="button" value="Shift Schedule " class="btn btn-primary btn-md" data-toggle="modal" data-target="#shiftScheduleChangeFromModal">'+ '</td>' +  -->
+						         '</tr>';
+						  
+		                                      $('#pPMstTableId tbody').append(customerRow);
+	                                                              
+	                                                                                       
+	                                                                                     });        // each
+	                                                        
+	                                                            
+	                                                            }
+					
+		                                    });   // end ajax
+       
+       
+          });
+          
+          
+      
+  $("#pPMstTableId").on('click','.shiftScheduleButton',function(){
+  
+ 
+  
+        var $row = $(this).closest("tr"); 	
+        var pPMstId = $row.find('.pPMstId').text();
+             
+           //  alert(pPMstId);
+             
+       document.getElementById("modalShiftSheduleProductionPlanMstId").value=pPMstId;
+
+ 
+                var formData= { 
+	    		                "productionPlanMstId" : pPMstId	
+	    			          };
+	    			   
+	    			   
+	    			   
+	    			     $.ajax({
+                                                                  type : "GET",
+                                                                  url:"/productionplancontroller/getproductionplanchddatebymstid",
+                                                                  dataType : 'json',
+	                                                              data: formData,
+                                                                  success: function(result){
+                                                                  
+                                                                  
+                                                                  
+                                               //document.getElementById("productionPlanChdFirstDate").value=productionPlanChdList.planDate;
+                                               //document.getElementById("productionPlanChdSecondDate").value=productionPlanChdList.planDate;
+	                         
+                                                                  
+                                                                  
+                                                 /*                 
+                                                    for(var i=0;i<arr.length;i++){
+  				 			                                         if(parseInt(arr[i].value))
+  				 			                                         tot += parseInt(arr[i].value);
+  				 			                                         }               
+                                              
+	                         
+  				 			                    */
+  				 			          
+	                                                        
+	                                                            
+	                                                            }
+					
+		                                    });   // end ajax
+             
+ 
+ 
+ 
+             
+ });
+ 
+ $('#modalShiftBtn').click(function(e) {
+                  
+             //   alert("working Mst");
+            pPMstId = document.getElementById("modalShiftSheduleProductionPlanMstId").value;
+            
+            shiftScheduleDate = document.getElementById("modalShiftScheduleProductionPlanChdDate").value;
+ 
+         //   alert(pPMstId);
+         //    alert(shiftScheduleDate);
+            
+            
+              var formData= { 
+	    		                "productionPlanMstId" : pPMstId,
+	    		                "shiftScheduleDate" : shiftScheduleDate		
+	    			          };
+	    			   
+	    			   
+	    			   $('#pPChdTableId tbody').empty();
+	    			     $.ajax({
+                                                                  type : "GET",
+                                                                  url:"/productionplancontroller/changescheduledateproductionplanchdbymstid",
+                                                                  dataType : 'json',
+	                                                              data: formData,
+                                                                  success: function(result){
+                                                                  
+                                                                  
+                                                                   $.each(result, function(i,productionPlanChdList){
+	                                                            
+      
+       
+        
+	            var customerRow = '<tr>' +      
+	                                     '<td class="pPMstId">' +productionPlanChdList.productionPlanMstId+'</td>' +
+	                                     '<td>' +productionPlanChdList.productionPlanChdId+ '</td>' +
+							             '<td>' +productionPlanChdList.planDate+'</td>' +
+							             '<td>' +productionPlanChdList.machineName+ '</td>' +
+							             '<td>' +productionPlanChdList.shiftName+'</td>' +
+							             '<td>' +productionPlanChdList.productionPlanQty+'</td>' +
+							             //'<td>' +'</td>' +
+							             '<td>' +productionPlanChdList.uomName+'</td>' +
+							   
+									   	// '<td class="pPMstActiveStatus">' +productionPlanChdList.activeStatus+'</td>' +
+									   	 '<td>' +productionPlanChdList.remarks+'</td>' +
+							             '<td class="editChdBtn"><a class="btn btn-success btn-sm" >Edit</a>'+'</td>' +
+							            
+									   	
+						         '</tr>';
+						  
+		                                      $('#pPChdTableId tbody').append(customerRow);
+	                                                              
+	                                                                                       
+	                                                                                     });        // each
+                                             
+	                                                                                       }
+					
+		                                    });   // end ajax
+            
+            
+ 
+              });
+             
+          
+ </script> 
+ 
+  <script> 
+
+   $("#pPMstTableId").on('click','.pPMstId',function(){
+   
+ //  alert("working Mst click");
+   
+        var $row = $(this).closest("tr"); 	
+        var productionPlanMstId = $row.find('.pPMstId').text();
+        
+     //    alert(productionPlanMstId);
+         $('#pPChdTableId tbody').empty(); 
+         
+       //   $('#pPMstTableId tbody').empty(); 
+         
+         var formData= { 
+	    		         "productionPlanMstId" : productionPlanMstId	
+	    			   };
+	    			   
+	    			   
+	    			   
+	    			   $.ajax({
+                                                                  type : "GET",
+                                                                  url:"/productionplancontroller/getproductionplanchdplanned",
+                                                                  dataType : 'json',
+	                                                              data: formData,
+                                                                  success: function(result){
+                                                                  
+                                                                  $.each(result, function(i,productionPlanChdList){
+	                                                            
+      
+       
+        
+	            var customerRow = '<tr>' +      
+	                                     '<td class="pPMstId">' +productionPlanChdList.productionPlanMstId+'</td>' +
+	                                     '<td class="ppChdId">' +productionPlanChdList.productionPlanChdId+ '</td>' +
+							             '<td>' +productionPlanChdList.planDate+'</td>' +
+							             '<td>' +productionPlanChdList.machineName+ '</td>' +
+							             '<td>' +productionPlanChdList.shiftName+'</td>' +
+							             '<td>' +productionPlanChdList.productionPlanQty+'</td>' +
+							             //'<td>' +'</td>' +
+							             '<td>' +productionPlanChdList.uomName+'</td>' +
+							             
+									   	// '<td class="pPMstActiveStatus">' +productionPlanChdList.activeStatus+'</td>' +
+									   	 '<td>' +productionPlanChdList.remarks+'</td>' +
+							             '<td class="editChdBtn"><a class="btn btn-success btn-sm" >Edit</a>'+'</td>' +
+							             '<td class="chdShiftScheduleButton">' + '<input type="button" value="Shift Schedule " class="btn btn-primary btn-md" data-toggle="modal" data-target="#chdShiftScheduleChangeFromModal">'+ '</td>' +
+									   	
+						         '</tr>';
+						  
+		                                      $('#pPChdTableId tbody').append(customerRow);
+	                                                              
+	                                                                                       
+	                                                                                     });        // each
+	                                                        
+	                                                            
+	                                                            }
+					
+		                                    });   // end ajax
+   
+   
+   
+   });
+   </script> 
+   
+   
+   <script>
+   
+     
+        $("#pPChdTableId").on('click','.chdShiftScheduleButton',function(){
+        
+       
+         var $row = $(this).closest("tr"); 	
+         
+         var productionPlanChdId = $row.find('.ppChdId').text();
+         
+      
+         
+         var formData= { 
+   			            "productionPlanChdId" : productionPlanChdId	
+   			     			      
+   		                };
+   		       
+   		       
+   		       $.ajax({
+		            type : "GET",	    		           
+		             url:"/productionplancontroller/productionplanchdmodaleditdata",
+		            dataType : 'json',
+			        data: formData,
+		            success: function(result){
+		            
+		            
+		            $.each(result, function(i,productionPlanChdList){
+		                
+		            		
+		            		
+		            		document.getElementById("modalShiftShedulePPChdId").value=productionPlanChdList.productionPlanChdId;
+		            		document.getElementById("modalShiftShedulePPChdDate").value=productionPlanChdList.planDate;
+		            		document.getElementById("modalShiftShedulePPChdMachineName").value=productionPlanChdList.machineName;
+		            		document.getElementById("modalShiftShedulePPChdShift").value=productionPlanChdList.shiftName;
+		            	    document.getElementById("modalShiftShedulePPChdMachineTypeId").value=productionPlanChdList.machineTypeName;
+		            	
+		            		
+		            		
+		            		}); //each
+		            	
+		            	
+		            }  //sucess
+		            
+		            
+			 });  //ajax
+        
+        
+        
+         });  // fuction
+         
+         
+   
+   
+   </script>
+   
+     <script>
+     
+     	    	
+	$('#maxRows5').on('change',function(){         
+	     
+   	
+	var table="#chdMachineScheduleDataTable";
+	$('.pagination').html('');
+	
+	var trnum =0;
+	var maxRows =parseInt($(this).val());
+	var  totalRows=$(table+' tbody tr').length;
+	
+	$(table+' tr:gt(0)').each(function(e) {
+	
+	              trnum++;
+	              
+	              if(trnum > maxRows)
+	              {
+	                 $(this).hide();
+	              }
+	              if(trnum <= maxRows)
+	              {
+	                 $(this).show();
+	              }
+	    
+	
+	
+	});   //each function
+	
+	 if(totalRows > maxRows)
+	              {
+	              
+	              
+	              var pagenum =Math.ceil(totalRows/maxRows);
+	              
+	              for(var i=1;i<=pagenum;)
+	              {
+	                 $("#paginationInChdMachineScheduleDataTable").append('<li class="btn-sm" data-page="'+i+'">\<span>'+ i++ +'</span></li>').show();
+	              }  //for
+	                
+	              }   //if
+	              
+	              
+	              $('.pagination li:first-child').addClass('active');
+	             $('.pagination li').on('click',function(){
+	             
+	             var pageNum =  $(this).attr('data-page');
+	             var trIndex= 0;
+	             
+	             $('.pagination li').removeClass('active');
+	              $(this).addClass('active');
+	             $(table+' tr:gt(0)').each(function(e) {
+	             
+	                trIndex++;
+	                if(trIndex >(maxRows*pageNum) || trIndex<=((maxRows*pageNum)-maxRows))
+	                {
+	                    $(this).hide();
+	                }
+	                else
+	                {
+	                $(this).show();
+	                }
+	             
+	             
+	             
+	                }); // each function
+	             
+	             });  //  click function
+	             
+	             
+	       
+	        });   //on change function      
+	             
+	             </script>
+   
+   
+   
+   
+   <script>
+	   
+    $(function () {
+    
+    $('#shiftScheduleModalSearchScheduleBtn').click(function(e) {
+    
+    	   
+	        	            e.preventDefault();
+     
+                            var formData= { 
+                                           "machineTypeId" :$("#machineTypeId3").val(),
+                                           "machineId" : $("#machineId3").val(),
+                                           "machineShiftId" : $("#machineShiftId3").val(),
+                                           "startDate" : $("#shiftScheduleModalstartDate").val(),
+                                           "endDate" : $("#shiftScheduleModalendScheduleDate").val()
+                                           };
+                                           
+                           $('#chdMachineScheduleDataTable tbody').empty();
+           
+                            $.ajax({
+                                    type : "GET",
+                                    url:"/productionplancontroller/getmachinesheduledataavailable",
+                                    dataType : 'json',
+	                                data: formData,
+                                    success: function(result){
+	                                $.each(result, function(i,machineScheduleList){
+					
+	              var customerRow = '<tr>' +      
+	                                       <!-- '<td class="machineSelect text-center">'+'<input type="checkbox" readonly>'+'</td>'+ -->
+							                '<td class="machineNameTd">' +machineScheduleList.machineName+ '</td>' +
+									     	'<td class="machineShiftNameTd">' +machineScheduleList.shiftName+ '</td>' +
+									    	'<td class="modalShiftscheduleDateTd">' +machineScheduleList.scheduleDate+ '</td>' +
+									    	'<td>' +'YES'+'</td>' +
+									    	'<td class="uomNameTd" hidden>' +machineScheduleList.uomName+ '</td>' +
+									    	'<td class="modalShiftscheduleMachineShiftIdTd" hidden>' +machineScheduleList.machineShiftId+ '</td>' +
+									    	'<td class="changeShiftChdSaveBtn"><a class="btn btn-success btn-sm" >Save </a>'+'</td>' +
+						            '</tr>';
+						  
+		                            $('#chdMachineScheduleDataTable tbody').append(customerRow);
+					
+		                                                                          });        // each
+		                                                                          
+	//for default 10 data -start
+		                                 
+	
+	var table="#chdMachineScheduleDataTable";
+	$('.pagination').html('');
+	
+	var trnum =0;
+	var maxRows =parseInt(10);
+	var  totalRows=$(table+' tbody tr').length;
+	
+	$(table+' tr:gt(0)').each(function(e) {
+	
+	              trnum++;
+	              
+	              if(trnum > maxRows)
+	              {
+	                 $(this).hide();
+	              }
+	              if(trnum <= maxRows)
+	              {
+	                 $(this).show();
+	              }
+	    
+	
+	
+	});   //each function
+	
+	 if(totalRows > maxRows)
+	              {
+	              
+	              
+	              var pagenum =Math.ceil(totalRows/maxRows);
+	              
+	              for(var i=1;i<=pagenum;)
+	              {
+	                 $("#paginationInChdMachineScheduleDataTable").append('<li class="btn-sm" data-page="'+i+'">\<span>'+ i++ +'</span></li>').show();
+	              }  //for
+	                
+	              }   //if
+	              
+	              
+	              $('.pagination li:first-child').addClass('active');
+	             $('.pagination li').on('click',function(){
+	             
+	             var pageNum =  $(this).attr('data-page');
+	             var trIndex= 0;
+	             
+	             $('.pagination li').removeClass('active');
+	              $(this).addClass('active');
+	             $(table+' tr:gt(0)').each(function(e) {
+	             
+	                trIndex++;
+	                if(trIndex >(maxRows*pageNum) || trIndex<=((maxRows*pageNum)-maxRows))
+	                {
+	                    $(this).hide();
+	                }
+	                else
+	                {
+	                $(this).show();
+	                }
+	             
+	             
+	             
+	                }); // each function
+	             
+	             });  //  click function
+	             
+	             
+	   
+		                                           //for default 10 data - end                               
+		                                                                          
+		                                                                          
+		                                                                          
+					 
+		                                                      },   // end success
+	                               error : function(e) {
+		                                                alert("ERROR: ", e);
+		                                                console.log("ERROR: ", e);
+			                                           }
+					
+		                           });   // end ajax
+		                           
+		                           
+		                           
+		                           
+ 
+	        	   
+	 
+	
+	});  // submit
+   });   // function
+    
+</script>
+
+
+
+   
+    <script> 
+    
+    
+
+   $("#chdMachineScheduleDataTable").on('click','.changeShiftChdSaveBtn',function(){   
+     
+            
+            
+            
+             productionPlanChdId = document.getElementById("modalShiftShedulePPChdId").value;
+             
+             var tr = $(this).closest('tr');
+		    
+  	         var productionPlanDate = tr.find(".modalShiftscheduleDateTd").text();
+  	         var machineShiftId = tr.find(".modalShiftscheduleMachineShiftIdTd").text();
+  	     
+		        var formData= { 
+		              
+	    		                     "productionPlanChdId" : productionPlanChdId,
+	    		                     "productionPlanDate" : productionPlanDate,	
+	    			                 "machineShiftId" : machineShiftId,
+	    			                 
+	    			                 
+	    			           };
+
+                $('#chdMachineScheduleDataTable tbody').empty(); 
+		    
+		   $.ajax({
+		            type : "POST",	    		           
+		             url:"/productionplancontroller/shiftscheduleproductionplanchd",
+		            dataType : 'json',
+			        data: formData,
+		            success: function(result){
+		            
+		            
+		                $.each(result, function(i,productionPlanChdList){
+		                
+		            		
+		            		
+		            		document.getElementById("modalShiftShedulePPChdId").value=productionPlanChdList.productionPlanChdId;
+		            		document.getElementById("modalShiftShedulePPChdDate").value=productionPlanChdList.planDate;
+		            		document.getElementById("modalShiftShedulePPChdMachineName").value=productionPlanChdList.machineName;
+		            		document.getElementById("modalShiftShedulePPChdShift").value=productionPlanChdList.shiftName;
+		            	    document.getElementById("modalShiftShedulePPChdMachineTypeId").value=productionPlanChdList.machineTypeName;
+		            	
+		            		
+		            		
+		            		}); //each
+		            
+		            	
+		            }  // success
+		            
+		            
+			 });   //ajax
+   		       
+ 
+   		       
+   		       
+   	 });  //function
+   	 
+   	 
+
+  </script>
+  
+  
+  <script>
+  /*
+  
+  $('#maxRows3').on('change',function(){	                                    	
+	var table='#availableMachineTable';
+	
+	
+	$('.pagination').html('');
+	
+	var trnum =0;
+	var maxRows =parseInt($(this).val());
+	var  totalRows=$(table+' tbody tr').length;
+	
+	$(table+' tr:gt(0)').each(function(e) {
+	
+	              trnum++;
+	              
+	              if(trnum > maxRows)
+	              {
+	                 $(this).hide();
+	              }
+	              if(trnum <= maxRows)
+	              {
+	                 $(this).show();
+	              }
+	    
+	
+	
+	});   //each function
+	
+	 if(totalRows > maxRows)
+	              {
+	              
+	              
+	              var pagenum =Math.ceil(totalRows/maxRows);
+	              
+	              for(var i=1;i<=pagenum;)
+	              {
+	                 $("#paginationInAvailMachine").append('<li class="btn-sm" data-page="'+i+'">\<span>'+ i++ +'</span></li>').show();
+	              }  //for
+	                
+	              }   //if
+	              
+	              
+	              $('.pagination li:first-child').addClass('active');
+	             $('.pagination li').on('click',function(){
+	             
+	             var pageNum =  $(this).attr('data-page');
+	             var trIndex= 0;
+	             
+	             $('.pagination li').removeClass('active');
+	              $(this).addClass('active');
+	             $(table+' tr:gt(0)').each(function(e) {
+	             
+	                trIndex++;
+	                if(trIndex >(maxRows*pageNum) || trIndex<=((maxRows*pageNum)-maxRows))
+	                {
+	                    $(this).hide();
+	                }
+	                else
+	                {
+	                $(this).show();
+	                }
+	             
+	             
+	             
+	                }); // each function
+	             
+	             });  //  click function
+	             
+	             
+	      });   //on change function
+	      
+	      */
+  
+  </script>
+   
+   
+   
+   
+    <script> 
+    
+    
+             $('#availabilityCheckBtn').click(function(e) {
+             
+               var machineTypeId = document.getElementById("machineTypeId2").value;
+               //  var machineTypeId =10;
+               
+	 
+	     
+   	   //  alert("working available");
+   	     //   alert(machineTypeId);
+   	        
+   	        
+   	          var formData= { 
+	    		              "machineTypeId" : machineTypeId	
+	    			        };
+	    			   
+	    			   $('#availableMachineTable tbody').empty(); 
+	    			   
+	    			   $.ajax({
+                                                                  type : "GET",
+                                                                  url:"/productionplancontroller/getavailablemachine",
+                                                                  dataType : 'json',
+	                                                              data: formData,
+                                                                  success: function(result){
+                                                                  
+                                                                  $.each(result, function(i,availableMachineList){
+	                                                            
+      
+       
+        
+	            var customerRow = '<tr>' +  
+	                                      '<td>' +availableMachineList.machineName+ '</td>' +  
+	                                     '<td>' +availableMachineList.scheduleDate+'</td>' +
+	                                       
+	                                     
+	                              '</tr>';
+						  
+		                                      $('#availableMachineTable tbody').append(customerRow);
+	                                                              
+	                                                                                       
+	                                                                                     });        // each
+	                                                                                     
+	 /*                                                                                    
+	                                	
+	var table='#availableMachineTable';
+	
+	
+	$('.pagination').html('');
+	
+	var trnum =0;
+	var maxRows =parseInt(5);
+	var  totalRows=$(table+' tbody tr').length;
+	
+	$(table+' tr:gt(0)').each(function(e) {
+	
+	              trnum++;
+	              
+	              if(trnum > maxRows)
+	              {
+	                 $(this).hide();
+	              }
+	              if(trnum <= maxRows)
+	              {
+	                 $(this).show();
+	              }
+	    
+	
+	
+	});   //each function
+	
+	 if(totalRows > maxRows)
+	              {
+	              
+	              
+	              var pagenum =Math.ceil(totalRows/maxRows);
+	              
+	              for(var i=1;i<=pagenum;)
+	              {
+	                 $("#paginationInAvailMachine").append('<li class="btn-sm" data-page="'+i+'">\<span>'+ i++ +'</span></li>').show();
+	              }  //for
+	                
+	              }   //if
+	              
+	              
+	              $('.pagination li:first-child').addClass('active');
+	             $('.pagination li').on('click',function(){
+	             
+	             var pageNum =  $(this).attr('data-page');
+	             var trIndex= 0;
+	             
+	             $('.pagination li').removeClass('active');
+	              $(this).addClass('active');
+	             $(table+' tr:gt(0)').each(function(e) {
+	             
+	                trIndex++;
+	                if(trIndex >(maxRows*pageNum) || trIndex<=((maxRows*pageNum)-maxRows))
+	                {
+	                    $(this).hide();
+	                }
+	                else
+	                {
+	                $(this).show();
+	                }
+	             
+	             
+	             
+	                }); // each function
+	             
+	             });  //  click function
+	             
+	             */
+	    
+	                                                        
+	                                                            
+	                                                            }
+					
+		                                    });   // end ajax
+		                                    
+	
+	             
+	             
+	   
+	}); 	//  click function	                    
+   	        
+   	        
+   	      
+   	      
+   	
+       
+       </script>       
+       
+
+										
+	<script type="text/javascript" th:inline="javascript">
+		
+		var now = new Date();
+		var day = ("0" + now.getDate()).slice(-2);
+		var month = ("0" + (now.getMonth() + 1)).slice(-2);
+	
+	    var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+	    
+	    document.getElementById('inqEndDate').value = today;
+       document.getElementById('planEndDate').value = today;
+    
+       
+	</script>
+	
+	<!-- =======================================Refresh inquiry modal===================================== -->
+   
+     <script>
+  
+       $("#modalEditCloseBtn").click(function () {
+    	 
+    	   document.getElementById("pPMstPopupEditSaveMessage").innerHTML=null;
+    	   
+    	 //  $('#wOMstFrom')[0].reset();
+    	   
+    	   //set date
+    	   
+    	//var now = new Date();
+   		//var day = ("0" + now.getDate()).slice(-2);
+   		//var month = ("0" + (now.getMonth() + 1)).slice(-2);
+   	
+   	   // var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+   	  
+   	    
+   	   // document.getElementById("modalDesignDate").value= today;
+    	 
+    	});
+   
+    
+     </script>
+     
+   <!-- ==========================================End here================================================ -->
+   
+   
+  <script>
+  
+       $("#productionPlanModalCloseBtn").click(function () {
+    	 
+    	   document.getElementById("productionPlanSaveMessage").innerHTML=null;
+    	   
+    	   $('#productionPlanFromId')[0].reset();
+    	   
+    	   //set date
+    	   
+    	var now = new Date();
+   		var day = ("0" + now.getDate()).slice(-2);
+   		var month = ("0" + (now.getMonth() + 1)).slice(-2);
+   	
+   	    var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+   	  
+   	    
+   	   document.getElementById("modalProductionPlanDate").value= today;
+    	 
+    	});
+   
+    
+     </script>
+     
+     
+     <!-- ==============================chd data pupulate============================================== -->
+     
+     <script>
+     
+     $('#okBtn').click(function(e) {
+         
+         
+         
+		 var text="Data populated succesfully,press close button";
+		            document.getElementById("machinePopulateMessage").innerHTML=text;
+				
+				
+            
+         $('#machineScheduleDataTable tr').filter(':has(:checkbox:checked)').each(function() {
+             
+    
+          /*  
+             var $row = $(this).closest("tr"); 
+             var scheduleDate = $row.find(".scheduleDateTd").text();
+   		 	 var machineName = $row.find(".machineNameTd").text();
+   		 	 var machineShiftName = $row.find(".machineShiftNameTd").text();
+   		 	 var machineShiftId = $row.find(".machineShiftIdTd").text();
+   		 	 var uomName = $row.find(".uomNameTd").text();
+   		 	 
+   		 	 */
+   		 	 
+   		 	 //created by sohel rana on 29/04/2019
+   		 	 
+   		 	 var id=document.getElementById("datasaved").value;
+   		 	 
+   		 	var tr = $(this).closest("tr"); 
+             var scheduleDate = tr.find(".scheduleDateTd").text();
+   		 	 var machineName = tr.find(".machineNameTd").text();
+   		 	 var machineShiftName = tr.find(".machineShiftNameTd").text();
+   		 	 var machineShiftId = tr.find(".machineShiftIdTd").text();
+   		 	 var uomName = tr.find(".uomNameTd").text();
+   		     var machineScheduleId = tr.find(".machineScheduleId").text();
+   		 	 
+            
+           // alert(machineName);
+           // alert(machineShiftName);
+           
+           
+           var check;
+           
+           
+            $("#pPChdTableId tr").each(function(){
+            	
+            	    var tr = $(this).closest('tr');
+	    	       
+	    	        var validDate = tr.find(".dateTd").text();
+	    	        var validScheduleId = tr.find(".scheduleId").text();
+	    	        
+	    	        if(validDate==scheduleDate && validScheduleId==machineScheduleId){
+	    	        	
+	    	        	
+	    	        	//alert("Data is already populate");
+	    	        	$(this).closest('tr').remove();
+	    	        }
+	    	                  
+               });
+             
+            
+        if(check!=0){
+        	
+        
+       	 var table = document.getElementById("pPChdTableId");
+             
+             // $('#machineScheduleDataTable tbody').empty();
+             
+             var row = table.insertRow(1);
+             
+                   var cell1 = row.insertCell(0);
+                   var cell2 = row.insertCell(1);
+  	     			var cell3 = row.insertCell(2);
+  	     			var cell4 = row.insertCell(3);
+  	     			var cell5 = row.insertCell(4);
+  	     			var cell6 = row.insertCell(5);
+  	     			var cell7 = row.insertCell(6);
+  	     			var cell8 = row.insertCell(7);
+  	     			var cell9 = row.insertCell(8);
+  	     			var cell10 = row.insertCell(9);
+  	     			var cell11 = row.insertCell(10);
+  	     	
+             
+           
+                   cell1.innerHTML = '<span class="productionPlanMstId">'+id+'</span>';
+                   cell2.innerHTML = '<span>'+'</span>';
+  	     			cell3.innerHTML = '<span class="dateTd">'+scheduleDate+'</span>';
+  	     			cell4.innerHTML = '<span>'+machineName+'</span>';
+  	     			cell5.innerHTML = '<span>'+machineShiftName+'</span>';
+  	     			cell6.innerHTML = '<input class="productionPlanQty" name="productionPlanQty" id="productionPlanQty" style="width: 5em" type="number">';
+  	     			cell7.innerHTML = '<span>'+uomName+'</span>';
+  	     		
+                   cell8.innerHTML = '<input class="remarks" name="remarks" id="remarks" size="4px" type="text">';
+                   cell9.innerHTML = '<button type="button" class="removeid btn btn-danger btn-sm">Remove</button>';
+                   cell10.innerHTML = '<span class="machineShiftId" hidden>'+machineShiftId+'</span>';
+                   cell11.innerHTML = '<span class="scheduleId" hidden>'+machineScheduleId+'</span>';
+       	
+       
+             
+        }
+                    
+                 
+         	
+
+           });
+           
+          
+       });
+     
+     </script>
+     
+     
+     <script>
+        
+     $("#pPChdTableId").on('click','.removeid',function(){
+    	 
+    	 $(this).closest("tr").remove();    // Find the row
+     });
+     
+     </script>
+     
+   
+    
+      <style>
+         
+        .bgYellow{ background-color: #FFFF00; }
+      
+      </style>
+      
+      <!-- ===================================================calculation function================================== -->
+      
+        <script>
+        
+        $("#pPChdTableId").on('input', '.productionPlanQty', function () {
+        	
+        	
+        	//alert("calculating.......");
+            
+        	var result = [];
+        	
+        	$("#pPChdTableId tr").each( function(){
+        		
+        		
+        		    var arr = document.getElementsByName('productionPlanQty');
+	 			    var tot=0;
+	 			    for(var i=0;i<arr.length;i++){
+	 			        if(parseInt(arr[i].value))
+	 			            tot += parseInt(arr[i].value);
+	 			    }
+	 			    document.getElementById('qtyGrandTotal').value = tot;
+        		
+        	});
+        	
+        });
+        
+        </script>
+      
+      <!-- ========================================End here====================================================== -->
+      
+      <style>
+      
+    
+      #availableMachineTable {
+    display:block;
+    height:200px;
+    weidth:100%;
+    overflow:auto;
+    
+       
+}
+   
+   
+    #machineScheduleDataTable {
+    display:block;
+    height:200px;
+    weidth:100%;
+    overflow:auto;
+    
+       
+}
+
+    
+      </style>
+      
+      <style>
+   
+    .table td {
+    padding: 0 5px;
+}
+
+   </style>
+   
+   
+   
+   <script>
+   
+     //show available qty on click newmst
+     
+            $("#productionPlanDataTable").on('click', '.planMstBtn', function () {
+            	
+            	
+            	
+            	var check=document.getElementById("notPlanned");
+                
+                //  alert(check);
+                
+                var tr = $(this).closest('tr');
+	    	       
+    	        var qty = tr.find(".wOQty").text();
+    	        
+    	       
+                  
+                if(check.checked==false){
+                	 document.getElementById("titleData").innerHTML=qty;
+                	 
+                }
+            	
+            });
+     
+     
+   
+   </script>
+     
+
+  
+</body>
+
+</html>

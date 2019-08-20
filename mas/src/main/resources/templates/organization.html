@@ -1,0 +1,1670 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang=""xmlns:th="http://www.thymeleaf.org">
+<!--<![endif]-->
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>OrgGroup</title>
+	<meta name="description" content="Sufee Admin - HTML5 Admin Template">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+	<link rel="apple-touch-icon" href="apple-icon.png">
+	<link rel="shortcut icon" href="favicon.ico">
+
+    <link rel="stylesheet"th:href="@{/css/normalize.css}" href="../../static/css/normalize.css">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"href="../../static/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}"href="../../static/css/font-awesome.min.css">
+    <link rel="stylesheet"th:href="@{/css/themify-icons.css}" href="../../static/css/themify-icons.css">
+    <link rel="stylesheet"th:href="@{/css/flag-icon.min.css}" href="../../static/css/flag-icon.min.css">
+    <link rel="stylesheet" th:href="@{/css/cs-skin-elastic.css}"href="../../static/css/cs-skin-elastic.css">
+	<!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
+	<link rel="stylesheet"th:href="@{/scss/style.css}" href="../../static/scss/style.css">
+
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+	<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+	<style type="text/css">
+		.modal-backdrop.show {
+			display: none;
+		}
+
+		td {
+			border: 1px #DDD solid;
+			padding: 5px;
+			cursor: pointer;
+		}
+
+		.selected {
+			background: red;
+		}
+
+		.dataTables_filter {
+			text-align: right;
+		}
+		
+		.col-md-7{
+			padding-left: 78%;
+		}
+		.pagination {
+			
+		}
+
+		.modal {
+			z-index: 999999999;
+		}
+	</style>
+	<script>
+	
+
+	</script>
+</head>
+
+<body>
+	<!-- Left Panel -->
+
+	<aside id="left-panel" class="left-panel">
+		<nav class="navbar navbar-expand-sm navbar-default">
+
+			<div class="navbar-header">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+					<i class="fa fa-bars"></i>
+				</button>
+				<a class="navbar-brand" href="./">BiziiDash</a>
+				<a class="navbar-brand hidden" href="./">BD</a>
+			</div>
+
+			<div id="main-menu" class="main-menu collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+
+					<h3 class="menu-title">Inquery Info</h3><!-- /.menu-title -->
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Inquery</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="inquery_table.html">Inquery</a></li>
+							<li><a href="inquery_ms_details.html">Inquery Master Details</a></li>
+							<li><a href="inquery_verification.html">Inquery Verification</a></li>
+						</ul>
+					</li>
+
+					<h3 class="menu-title">Buyer Info</h3><!-- /.menu-title -->
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Buyer</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="buyer_data_upload.html">Buyer upload</a></li>
+							<li><a href="buyer_search_design.html">Buyer Search</a></li>
+						</ul>
+					</li>
+
+					<h3 class="menu-title">Design Info</h3><!-- /.menu-title -->
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Design</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="design_table.html">Design</a></li>
+							<li><a href="design_search.html">Design Search</a></li>
+						</ul>
+					</li>
+
+
+
+
+
+					<h3 class="menu-title">Machine Info</h3><!-- /.menu-title -->
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Machine</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="Machine_search.html">Machine List</a></li>
+							<li><a href="Machine_data_upload.html">Machine Upload</a></li>
+						</ul>
+					</li>
+
+					<h3 class="menu-title">Cost Info</h3><!-- /.menu-title -->
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Cost</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="cost_head_search.html">Cost List</a></li>
+							<li><a href="cost_calculation.html">Cost Calculation</a></li>
+							<li><a href="cost_head.html">Cost Head</a></li>
+						</ul>
+					</li>
+
+					<h3 class="menu-title">Item Info</h3><!-- /.menu-title -->
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Item</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="Item_list.html">Item List</a></li>
+							<li><a href="item_type_list.html">Item Type List</a></li>
+							<li><a href="item_type%20(category).html">Item Type Category</a></li>
+							<li><a href="item_entry.html">Item Upload</a></li>
+						</ul>
+					</li>
+					<h3 class="menu-title">Purchase Info</h3><!-- /.menu-title -->
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Purchase</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="Purchase_price_data_upload.html">Purchase Upload</a></li>
+						</ul>
+					</li>
+					<h3 class="menu-title">Specification Info</h3><!-- /.menu-title -->
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Specification</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="Specification_data_upload%20.html">Specification Data Upload</a></li>
+						</ul>
+					</li>
+					<h3 class="menu-title">Supplier Info</h3><!-- /.menu-title -->
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Supplier</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="Supplier_data_upload%20.html">Supplier Data Upload</a></li>
+						</ul>
+					</li>
+					<h3 class="menu-title">UOM Info</h3><!-- /.menu-title -->
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>UOM</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="uom_list.html">UOM List</a></li>
+							<li><a href="uom_upload.html">UOM Upload</a></li>
+						</ul>
+					</li>
+
+
+
+
+				</ul>
+			</div><!-- /.navbar-collapse -->
+		</nav>
+	</aside><!-- /#left-panel -->
+
+	<!-- Left Panel -->
+
+	<!-- Right Panel -->
+
+	<div id="right-panel" class="right-panel">
+
+		<!-- Header-->
+		<header id="header" class="header">
+
+			<div class="header-menu">
+
+				<div class="col-sm-7">
+					<a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
+					<div class="header-left">
+						<button class="search-trigger"><i class="fa fa-search"></i></button>
+						<div class="form-inline">
+							<form class="search-form">
+								<input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
+								<button class="search-close" type="submit"><i class="fa fa-close"></i></button>
+							</form>
+						</div>
+
+
+
+					</div>
+				</div>
+
+				<div class="col-sm-5">
+					<div class="user-area dropdown float-right">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">
+						</a>
+
+						<div class="user-menu dropdown-menu">
+							<a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
+							<a class="nav-link" href="#"><i class="fa fa-power -off"></i>Logout</a>
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+
+		</header><!-- /header -->
+		<!-- Header-->
+		
+		<div class="up-msg">
+			<div class="col-sm-6 text-left">
+				<input type="text" id="" name=""  th:value="${message}"readonly style="color: limegreen; display: block;border:0px">
+			</div>
+		</div>
+
+		<div class="breadcrumbs">
+			<div class="col-sm-4">
+				<div class="page-header float-left">
+					<div class="page-title">
+						<h1>Organization Group Inquery Table</h1>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-8">
+				<div class="page-header float-right">
+					<div class="page-title">
+						<ol class="breadcrumb text-right">
+							<li><a href="#">Dashboard</a></li>
+							<li><a href="#">Inquery Info</a></li>
+							<li class="active">Org. Group Inquery Table</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="content">
+			<div class="row">
+				<div class="col-12">
+					<form th:action="@{/orgGroup/search}"  class="needs-validation" novalidate>
+						<div class="row">
+							<div class="col-12">
+								<div class="row">
+									<div class="col-3">
+										<div class="form-group">
+											<label>Org. Group Name</label>
+											<input type="text" class="form-control" aria-required="true" aria-invalid="false" value="" placeholder="Org.GroupName" name="groupName">
+										</div>
+									</div>
+									<div class="col-3">
+										<div class="form-group">
+											<label>Org. Group Code</label>
+											<input type="text" class="form-control" aria-required="true" aria-invalid="false" value="" placeholder="org.GroupCode" name="groupCode">
+										</div>
+									</div>
+									
+									
+									<!--
+                                        <div class="col-2">
+                                           <input type="submit" value="search" class="btn btn-secondery btn-md" style="margin-top: 32px">
+                                       </div>
+                                       
+				
+-->
+								
+									<div class="col-3">
+										<div class="form-group">
+											<label class="control-label mb-1">Remarks</label>
+											<input type="text" rows="1" cols="20" placeholder="Remarks"  class="form-control" aria-required="true" aria-invalid="false" value="" name="orgGroupRemarks">
+										
+										</div>
+									</div>
+								
+								
+									<div class="col-3">
+										<div class="form-group">
+											<label>Active</label>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="defaultChecked2" name="active" checked>
+												<label class="custom-control-label" for="defaultChecked2"></label>
+											</div>
+										</div>
+									</div>
+								
+								</div>
+								<div class="row">
+									<div class="col-sm-10 text-right">
+									<div class="form-group">
+											<label></label>
+											<input type="submit" value="Search" class="btn btn-primary" style="margin-top: 24px;">
+											<a href="#" class="btn btn-success" data-toggle="modal" data-target="#largeModal5" style="margin-top: 23px">New</a>
+										</div>
+										</form>
+									
+										<!-- ==============================Add Org.Group Inquery Entry Modal=============================== -->
+										<div class="form-group">
+											<div class="modal fade" id="largeModal5" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+												<div class="modal-dialog modal-lg" role="document">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title" id="largeModalLabel">Add Org.Group</h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body" style="text-align: left">
+															<form class="needs-validation" th:object="${orgGroup}"  th:action="@{/orgGroup/save}"    method="post" novalidate>
+																<div class="row">
+																	<div class="col-3">
+																		<div class="form-group">
+																			<label  class="control-label mb-1">Org. Group ID</label>
+																				<input id="cc-pament" type="text" class="form-control" aria-required="true" aria-invalid="false" placeholder="orgGroupId" th:field ="*{orgGroupId}" readonly />
+																		</div>
+																	</div>
+																	<div class="col-3">
+																		<div class="form-group">
+																			<labelb class="control-label mb-1">Group Name</label>
+																			<input type="text" name="groupName" placeholder="groupName" class="form-control"  th:field ="*{groupName}" required>
+																		</div>
+																	</div>
+																	<div class="col-3">
+																		<div class="form-group">
+																			<label  class="control-label mb-1">Group Code</label>
+																			<input type="text" name="groupCode" class="form-control"  placeholder="Group Code" th:field ="*{groupCode}" required>
+																			
+																		</div>
+																	</div>
+																	<div class="col-3">
+																		<div class="form-group">
+																			<label >Country Name</label>
+																			<select class="form-control" name="countryName"  placeholder="countryName" th:field ="*{countryId}" required>
+																				<option value="">Select Country</option>
+																						<option th:each="country:${countryList}"
+																								th:value="${country.countryId}"
+																								th:utext="${country.countryName}"																
+																												/> 
+																			</select>
+																				
+																		</div>
+																	</div>
+																	
+																	<div class="col-3">
+																		<div class="form-group">
+																				<label >Owner Country Name</label>
+																			<select class="form-control" name="ownerCountryName" placeholder="ownerCountryName" th:field ="*{ownerCountryId}" required>
+																				<option value="">Select country</option>
+																						<option	th:each="country:${countryList}"
+																								th:value="${country.countryId}"
+																								th:utext="${country.countryName}"/> 
+																			</select>
+																		</div>
+																	</div>
+																
+																	<div class="col-6">
+																		<div class="form-group">
+																			<label for="cc-payment" class="control-label mb-1">Remarks</label>
+																			<textarea rows="5" cols="50"  placeholder="Type you message here..." name="remarks" th:field ="*{orgGroupRemarks}" class="form-control" >																			
+                                                   				 			</textarea>
+																		</div>
+																	</div>
+																	<div class="col-2">
+																		<div class="form-group">
+																			<label for="cc-payment" class="control-label mb-1">Status</label>
+																			<div class="custom-control custom-checkbox">
+																				<input type="checkbox" class="custom-control-input" id="defaultChecked5" th:field="*{active}" checked>
+																				<label class="custom-control-label" for="defaultChecked5"></label>
+																			</div>
+																		</div>
+																	</div>
+
+																</div>
+
+
+
+																<div class="text-right">
+
+																	<input type="submit" class="btn btn-primary btn-md">
+																		
+																	
+
+																</div>
+															</form>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							
+							</div>
+						</div>
+				</div>
+
+			</div>
+
+		</div>
+		
+		<!-- ======================================= OrgGroup Inquery Table========================== -->
+		<div class="content mt-3">
+			<div class="animated fadeIn">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card" style="width: 1200px; height:250px; overflow-y:scroll">
+							<div class="card-header">
+								<strong class="card-title">Organization Group</strong>
+							</div>
+							<div class="card-body">
+							
+<!--							
+								<table  id="dtHorizontalVerticalExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%"">
+									<thead>
+										<tr>
+											<th scope="col">Org.Group ID</th>
+											<th scope="col">Group Name</th>
+											
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="orgGrp : ${orgGroupList}">
+											<td><a type="text" th:text="${orgGrp.orgGroupId}"></a></td>
+											<td><span th:text="${orgGrp.groupName}"></span></td>
+											
+										</tr>
+
+									</tbody>
+
+								</table>
+-->
+							
+								<table  class="table table-striped table-bordered" style="min-width: 2000px">
+									<thead>
+										<tr>
+											<th scope="col">Org.Group ID</th>
+											<th scope="col">Group Name</th>
+											<th scope="col">Group Code</th>
+											<th scope="col">Country Name</th>
+											<th scope="col">OwnerCountry Name</th>
+											<th scope="col">Remarks</th>
+											<th scope="col">Active</th>
+											<th scope="col">Action</th>
+											<th scope="col">Org</th>
+											<th scope="col">Report</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="orgGrp : ${orgGroupList}">
+											<td scope="row"><a type="text" th:href="@{/orgGroup/org/search/{id}(id=${orgGrp.orgGroupId})}" th:text="${orgGrp.orgGroupId}"></a></td>
+											<td scope="row"><span th:text="${orgGrp.groupName}"></span></td>
+											<td><span th:text="${orgGrp.groupCode}"></span></td>
+											<td><span th:text="${orgGrp.countryId.countryName}"></span></td>
+											<td><span th:text="${orgGrp.countryId.countryName}"></span></td>	
+											<td><textarea rows="3" style="width: 100%" th:text="${orgGrp.orgGroupRemarks}"></textarea></td>
+											<td class="text-center">
+											<input type="checkbox" th:checked="${orgGrp.active}" ? 'checked' readonly >
+											</td>
+											<td>
+												 <a  class="btn btn-success btn-sm" data-toggle="modal" data-target="#largeModal15" th:onclick="'showOrgGroupEditModal('+${orgGrp.orgGroupId}+')'" >Edit</a> 	
+												<a href="#" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#smallmodal999">Audit</a>
+											</td>
+											<td>
+												<a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#largeModal" th:onclick="'showOrgGroupEditModal('+${orgGrp.orgGroupId}+')'">Org</a>
+											</td>
+											<td><a href="#">report</a></td>
+										</tr>
+
+									</tbody>
+
+								</table>
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div><!-- .animated -->
+		</div><!-- .content -->
+
+
+<!-- ======================================= Organization Inquery Table========================== -->
+		<div class="content mt-3">
+			<div class="animated fadeIn">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card" style="width: 1200px; height:250px; overflow-y:scroll">
+							<div class="card-header">
+								<strong class="card-title">Organization</strong>
+							</div>
+							<div class="card-body">
+								<table  class="table table-striped table-bordered" style="min-width: 2500px">
+									<thead>
+										<tr>
+											<th scope="col">Org. ID</th>
+											<th scope="col">Org. Name</th>
+											<th scope="col">Org. Address</th>
+											<th scope="col">City</th>
+											<th scope="col">District</th>
+											<th scope="col">Upazilla</th>
+											<th scope="col">Police Station</th>
+											<th scope="col">Org. Email</th>
+											<th scope="col">Org. Web</th>
+											<th scope="col">Org. Phone</th>
+											<th scope="col">Short Code</th>
+											<th scope="col">Post Code</th>											
+											<th scope="col">Country Name</th>
+											<th scope="col">Org. Group Name</th>
+											<th scope="col">Org. Type Name</th>
+											<th scope="col">Remarks</th>
+											<th scope="col">Add Branch</th>
+											<th scope="col">Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="Group : ${orgList}">
+											<td><a  scope="row" type="text" th:href="@{/orgGroup/branch/search/{id}(id=${Group.orgId})}" th:text="${Group.orgId}"></a></td>
+											<td scope="row"><span th:text="${Group.orgName}"></span></td>
+											<td scope="row"><span th:text="${Group.orgAddress}"></span></td>
+											<td scope="row"><span th:text="${Group.orgCity}"></span></td>
+											<td scope="row"><span th:text="${Group.orgDistrict}"></span></td>
+											<td scope="row"><span th:text="${Group.orgUpazilla}"></span></td>
+											<td scope="row"><span th:text="${Group.polliceStation}"></span></td>
+											<td scope="row"><span th:text="${Group.orgEmail}"></span></td>
+											<td scope="row"><span th:text="${Group.orgWeb}"></span></td>
+											<td scope="row"><span th:text="${Group.orgPhone}"></span></td>
+											<td scope="row"><span th:text="${Group.shortCode}"></span></td>
+											<td scope="row"><span th:text="${Group.postCode}"></span></td>
+											<td scope="row"><span th:text="${Group.countryId.countryName}"></span></td>
+											<td scope="row"><span th:text="${Group.orgGroupId.groupName}"></span></td>
+											<td scope="row"><span th:text="${Group.orgTypeId.orgTypeName}"></span></td>
+											<td><textarea rows="3" style="width: 100%" th:text="${Group.orgRemarks}"></textarea></td>
+											<td>
+												<a href="#" class="btn btn-primary btn-sm mb-1" data-toggle="modal" data-target="#mediumModal333" th:onclick="'showOrgEditModal('+${Group.orgId}+')'">Branch</a>
+
+											</td>
+											<td>
+												<a href="#" data-toggle="modal" data-target="#largeModal3333" class="btn btn-success btn-sm" th:onclick="'showOrgEditModal('+${Group.orgId}+')'" >Edit</a>
+												<a href="#"  type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#smallmodal999">Audit</a>
+											</td>
+										</tr>
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+
+
+
+				</div>
+			</div><!-- .animated -->
+		</div><!-- .content -->
+
+
+<!-- ======================================= Organization Branch Inquery Table========================== -->
+		<div class="content mt-3">
+			<div class="animated fadeIn">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card" style="width: 1200px; height:250px; overflow-y:scroll">
+							<div class="card-header">
+								<strong class="card-title">Branch</strong>
+							</div>
+							<div class="card-body">
+								<table  class="table table-striped table-bordered" style="min-width: 2500px">
+									<thead>
+										<tr>
+											<th scope="col">Branch ID</th>
+											<th scope="col">Branch Name</th>
+											<th scope="col">Branch Main</th>
+											<th scope="col">Branch Address</th>
+											<th scope="col">Branch Email</th>
+											<th scope="col">Branch Web</th>
+											<th scope="col">Branch Phone</th>
+											<th scope="col">City</th>
+											<th scope="col">Upazilla</th>
+											<th scope="col">District</th>
+											<th scope="col">Branch Division</th>
+											<th scope="col">Short Code</th>
+											<th scope="col">Post Code</th>
+											<th scope="col">Police Station</th>
+											<th scope="col">Org. Name</th>
+											<th scope="col">Country Name</th>
+											<th scope="col">Remarks</th>
+											<th scope="col">Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="groupBranch : ${branchList}">
+											<td scope="row"><a type="text" th:text="${groupBranch.branchId}"></a></td>
+											<td scope="row"><span th:text="${groupBranch.branchName}"></span></td>
+											<td scope="row"><span th:text="${groupBranch.branchMain}"></span></td>
+											<td scope="row"><span th:text="${groupBranch.branchAddress}"></span></td>
+											<td scope="row"><span th:text="${groupBranch.branchEmail}"></span></td>
+											<td scope="row"><span th:text="${groupBranch.branchWeb}"></span></td>
+											<td scope="row"><span th:text="${groupBranch.branchPhone}"></span></td>
+											<td scope="row"><span th:text="${groupBranch.branchCity}"></span></td>
+											<td scope="row"><span th:text="${groupBranch.branchUpazilla}"></span></td>
+											<td scope="row"><span th:text="${groupBranch.branchDistrict}"></span></td>
+											<td scope="row"><span th:text="${groupBranch.branchDivision}"></span></td>
+											<td scope="row"><span th:text="${groupBranch.shortCode}"></span></td>
+											<td scope="row"><span th:text="${groupBranch.postCode}"></span></td>
+											<td scope="row"><span th:text="${groupBranch.policeStation}"></span></td>
+											<td scope="row"><span th:text="${groupBranch.orgId.orgName}"></span></td>
+											<td scope="row"><span th:text="${groupBranch.countryId.countryName}"></span></td>
+											<td><textarea rows="3" style="width: 100%" th:text="${groupBranch.branchRemarks}"></textarea></td>
+											<td>
+												<a href="#"data-toggle="modal" data-target="#mediumModal123123"  class="btn btn-success btn-sm btn-block" th:onclick="'showOrgBranchEditModal('+${groupBranch.branchId}+')'">Edit</a>
+												<a href="#"  type="button" class="btn btn-primary btn-sm btn-block" data-toggle="modal" data-target="#smallmodal999">Audit</a>
+
+
+											</td>
+										</tr>
+										
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+
+
+
+				</div>
+			</div><!-- .animated -->
+		</div><!-- .content -->
+
+		
+
+
+	</div><!-- /#right-panel -->
+
+	<!-- Right Panel -->
+<!--=====================================================================
+				Entry info modal
+=====================================================================-->
+	<div class="modal fade" id="smallmodal999" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="smallmodalLabel" style="color: #000">Entry info</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+
+					<div class="row">
+						<div class="col-12">
+							<div class="form-group">
+								<label for="cc-payment" class="control-label mb-1">Entered By</label>
+								<p>Khandoker Toufiq Amin Rumi</p>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<div class="form-group">
+								<label for="cc-payment" class="control-label mb-1">Entered Time</label>
+								<p>2:30 am</p>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<div class="form-group">
+								<label for="cc-payment" class="control-label mb-1">Update By</label>
+								<p>active</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+
+
+						<div class="col-12">
+							<div class="form-group">
+								<label for="cc-payment" class="control-label mb-1">Update Time</label>
+								<p>active</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+<!--=====================================================================
+			Add Organization modal
+=====================================================================-->
+	<div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content" style="z-index: 1000000000000">
+				<div class="modal-header">
+					<h5 class="modal-title" id="largeModalLabel">Add Organization</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form th:object="${org}" th:action="@{/orgGroup/org/save}" class="needs-validation"  method="post" novalidate="novalidate">
+
+						<div class="row">
+							<div class="col-3">
+								<div class="form-group">
+									<label class="control-label mb-1">Org.ID</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="orgId" placeholder="Org.ID" th:field="*{orgId}" readonly>
+										
+								</div>
+							</div>
+							<div class="col-3">
+								<div class="form-group">
+									<label  class="control-label mb-1">Org.Name</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="orgName" placeholder="Org.Name" th:field="*{orgName}" required>
+
+								</div>
+							</div>
+							<div class="col-3">
+								<div class="form-group">
+									<label  class="control-label mb-1">Org.Address</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="orgAddress" placeholder="Org.Address" th:field="*{orgAddress}" required>
+
+								</div>
+							</div>
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Org.Email</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="orgEmail" placeholder="Org.Email" th:field="*{orgEmail}" required>
+										
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Org. Web</label>
+									<input type="text" name="orgWeb" class="form-control" aria-required="true" aria-invalid="false"  placeholder="Org.Web" th:field="*{orgWeb}" required>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Phone</label>
+									<input type="text" name="orgPhone" class="form-control" aria-required="true" aria-invalid="false"  placeholder="Phone" th:field="*{orgPhone}" required>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">City</label>
+									<input type="text" name="orgCity" class="form-control" aria-required="true" aria-invalid="false"  placeholder="City" th:field="*{orgCity}" required>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Upazilla</label>
+									<input type="text" name="orgUpazilla" class="form-control" aria-required="true" aria-invalid="false"  placeholder="Upazilla" th:field="*{orgUpazilla}" required>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">District</label>
+									<input type="text" name="orgDistrict" class="form-control" aria-required="true" aria-invalid="false"  placeholder="District" th:field="*{orgDistrict}" required>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Police Station</label>
+									<input type="text" name="polliceStation" class="form-control" aria-required="true" aria-invalid="false"  placeholder="Police Station" th:field="*{polliceStation}" required>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Short Code</label>
+									<input type="text" name="shortCode" class="form-control" aria-required="true" aria-invalid="false"  placeholder="Short Code" th:field="*{shortCode}" required>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Post Code</label>
+									<input type="text" name="postCode" class="form-control" aria-required="true" aria-invalid="false"  placeholder="Post Code" th:field="*{postCode}" required>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label>Org.Group</label>
+									<select class="form-control" name="orgGroupId" id="update-groupId2" placeholder="Org.Group ID" th:field="*{orgGroupId.orgGroupId}" required>
+										<option value="">Org. Group</option>
+										<option th:each="orgGroup:${orgGroupList}"
+											th:value="${orgGroup.orgGroupId}"
+											th:utext="${orgGroup.groupName}"
+											/>
+									</select>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label>Org.Type</label>
+									<select class="form-control" name="orgTypeId"  placeholder="Org.Type" th:field="*{orgTypeId.orgTypeId}" required>
+										<option value="">Select Type</option>
+										<option th:each="orgType:${orgTypeList}"
+										th:value="${orgType.orgTypeId}"
+										th:utext="${orgType.orgTypeName}"																
+													/> 
+									</select>		
+								</div>
+							</div>
+							<div class="col-3">
+								<div class="form-group">
+									<label >Country Name</label>
+									<select class="form-control" name="countryName"  placeholder="countryName" th:field="*{countryId.countryId}" required>
+										<option value="">Select Country</option>
+										<option th:each="country:${countryList}"
+										th:value="${country.countryId}"
+										th:utext="${country.countryName}"																
+													/> 
+									</select>																				
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-5">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Remarks</label>
+									<textarea rows="3" cols="250" name="orgRemarks" class="form-control" aria-required="true" aria-invalid="false" th:field="*{orgRemarks}" required>
+									</textarea>
+								</div>
+							</div>
+							<div class="col-2">
+								<div class="form-group">
+									<label for="cc-payment" class="control-label mb-1">Status</label>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" th:field="*{active}" id="defaultChecked13" checked>
+										<label class="custom-control-label" for="defaultChecked13"></label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<div class="row">
+								<div class="col-12">
+									<input type="submit" value="Save" class="btn btn-primary btn-sm " >
+
+
+								</div>
+							</div>
+
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+<!--=====================================================================
+				Add Organization Branch modal
+=====================================================================-->
+	<div class="modal fade" id="mediumModal333" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="smallmodalLabel">Add Organization Branch</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form th:object="${branch}" th:action="@{/branch/save}" method="post"  novalidate="novalidate">
+
+						<div class="row">
+
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Branch ID</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" placeholder="Branch ID" name="branchId" th:field="*{branchId}" readonly>
+								</div>
+							</div>
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Branch Name</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="branchName"  placeholder="Branch Name" th:field="*{branchName}" required>
+									
+								</div>
+							</div>
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Branch Main</label>
+									<input type="text" class="form-control" placeholder="Branch Main" aria-required="true" aria-invalid="false" name="branchMain" th:field="*{branchMain}" required>
+								</div>
+							</div>
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Branch Address</label>
+									<input type="text" class="form-control" placeholder="branchAddress" aria-required="true" aria-invalid="false" name="branchAddress" th:field="*{branchAddress}" required>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Branch Email</label>
+									<input type="text" class="form-control" placeholder="branchEamil" aria-required="true" aria-invalid="false" name="branchEmail" th:field="*{branchEmail}" required>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Branch Web</label>
+									<input type="text" class="form-control" placeholder="branchWeb" aria-required="true" aria-invalid="false" name="branchWeb" th:field="*{branchWeb}" required>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Phone</label>
+									<input type="text" class="form-control" placeholder="branchPhone" aria-required="true" aria-invalid="false" name="branchPhone" th:field="*{branchPhone}" required>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">City</label>
+									<input type="text" class="form-control" placeholder="branchCity" aria-required="true" aria-invalid="false" name="branchCity" th:field="*{branchCity}" required>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Upazilla</label>
+									<input type="text" class="form-control" placeholder="branchUpazilla" aria-required="true" aria-invalid="false" name="branchUpazilla" th:field="*{branchUpazilla}" required >
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">District</label>
+									<input type="text" class="form-control" placeholder="branchDistrict" aria-required="true" aria-invalid="false" name="branchDistrict" th:field="*{branchDistrict}" required>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Branch Division</label>
+									<input type="text" class="form-control" placeholder="branchDivision" aria-required="true" aria-invalid="false" name="branchDivision" th:field="*{branchDivision}" required>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Police Station</label>
+									<input type="text" class="form-control" placeholder="Police Station" aria-required="true" aria-invalid="false" name="policeStation" th:field="*{policeStation}" required>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Short Code</label>
+									<input type="text" class="form-control" placeholder="shortCode" aria-required="true" aria-invalid="false" name="shortCode" th:field="*{shortCode}" required>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Post Code</label>
+									<input type="text" class="form-control" placeholder="Post Code" aria-required="true" aria-invalid="false" name="postCode" th:field="*{postCode}" required>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label >Organization</label>
+									<select class="form-control" id="update-orgId2" name="orgId" placeholder="Org. Name" th:field="*{orgId.orgId}" required>
+									<option value="">Select Organization</option>
+									<option	th:each="org:${orgList}"
+										th:value="${org.orgId}"
+										th:utext="${org.orgName}"/> 
+									</select>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+								<label >Country Name</label>
+									<select class="form-control" id="update-countryId2" name="countryId" placeholder="countryName" th:field="*{countryId.countryId}" required>
+									<option value="">Select country</option>
+									<option	th:each="country:${countryList}"
+										th:value="${country.countryId}"
+										th:utext="${country.countryName}"/> 
+									</select>
+								</div>
+							</div>	
+						</div>
+
+						<div class="row">
+							<div class="col-6">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Remarks</label>
+									<textarea rows="5" cols="50" name="orgGroupRemarks"aria-required="true" aria-invalid="false" th:field="*{branchRemarks}" style="width: 100%"></textarea>
+								</div>
+							</div>
+							<div class="col-2">
+								<div class="form-group">
+									<label for="cc-payment" class="control-label mb-1">Status</label>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="defaultChecked14" th:field="*{active}" checked>
+										<label class="custom-control-label" for="defaultChecked14"></label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="modal-footer">
+							<div class="row">
+								<div class="col-12">
+									<input type="submit" value="Save" class="btn btn-primary btn-sm " >
+								</div>
+							</div>
+
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+<!--=====================================================================
+				Entry info modal
+=====================================================================-->
+	<div class="modal fade" id="smallmodal11" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="smallmodalLabel" style="color: #000">Entry info</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+
+					<div class="row">
+						<div class="col-12">
+							<div class="form-group">
+								<label for="cc-payment" class="control-label mb-1">Entered By</label>
+								<p>Khandoker Toufiq Amin Rumi</p>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<div class="form-group">
+								<label for="cc-payment" class="control-label mb-1">Entered Time</label>
+								<p>2:30 am</p>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<div class="form-group">
+								<label for="cc-payment" class="control-label mb-1">Update By</label>
+								<p>active</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+
+
+						<div class="col-12">
+							<div class="form-group">
+								<label for="cc-payment" class="control-label mb-1">Update Time</label>
+								<p>active</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	
+<!--=====================================================================
+				edit Organization Group inquiry modal
+=====================================================================-->
+	
+						<div class="modal fade" id="largeModal15" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+													<div class="modal-dialog modal-lg" role="document">
+														<div class="modal-content">
+															<div class="modal-header">
+																<h5 class="modal-title" id="largeModalLabel">Edit Org.Group</h5>
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																	<span aria-hidden="true">&times;</span>
+																</button>
+															</div>
+															<div class="modal-body" style="text-align: left">
+																<form th:object="${orgGroup}" th:action="@{/orgGroup/save}" class="needs-validation"  method="post" novalidate>
+                                            						<div class="row">
+                                               							<div class="col-3">
+                                                    						<div class="form-group">
+                                                        						<label class="control-label mb-1" >Org.Group ID</label>
+                                                        						<input type="text" id="update-groupId" class="form-control" aria-required="true" aria-invalid="false" name="orgGroupId" placeholder="Org.Group Id" th:field="*{orgGroupId}" readonly>
+                                                    						</div>
+                                                						</div>
+                                                						<div class="col-3">
+                                                    						<div class="form-group">
+                                                       			 				<label class="control-label mb-1">Org.Group Name</label>
+                                                        						<input type="text" id="update-groupName" class="form-control" aria-required="true" aria-invalid="false" name="groupName" placeholder="Org.Group Name" th:field="*{groupName}" required>
+                                                    						</div>
+                                                						</div> 
+                                                						<div class="col-3">
+                                                    						<div class="form-group">
+                                                        						<label class="control-label mb-1">Org.Group Code</label>
+                                                        						<input type="text" id="update-groupCode" class="form-control" aria-required="true" aria-invalid="false" name="groupCode" placeholder="Org.Group Code" th:field="*{groupCode}" required>
+                                                    						</div>
+                                                						</div>
+                                             							<div class="col-3">
+																			<div class="form-group">
+																				<label >Country Name</label>
+																				<select class="form-control" id="update-countryName" name="countryId" placeholder="countryName" th:field="*{countryId.countryId}" required>
+																					<option value="">Select country</option>
+																					<option	th:each="country:${countryList}"
+																						th:value="${country.countryId}"
+																						th:utext="${country.countryName}"/> 
+																				</select>
+																			</div>
+																		</div>
+                                                						<div class="col-3">
+																			<div class="form-group">
+																				<label >OwnerCountry Name</label>
+																					<select class="form-control" id="update-ownerCountryName" name="ownerCountryId" placeholder="OwnerCountryName" th:field="*{ownerCountryId}" required>
+																						<option value="">Select country</option>
+																						<option	th:each="country:${countryList}"
+																						th:value="${country.countryId}"
+																						th:utext="${country.countryName}"/> 
+																					</select>
+																			</div>
+																		</div>
+                                             						</div>
+                                             						<div class="row">
+                                                						<div class="col-6">
+                                                    						<div class="form-group">
+                                                        						<label for="cc-payment" class="control-label mb-1">Remarks</label>
+                                                        						<textarea rows="5" cols="50" id="update-remarks" name="orgGroupRemarks" class="form-control" aria-required="true" aria-invalid="false" th:field="*{orgGroupRemarks}">
+                                                    							</textarea>
+                                                    						</div>
+                                                						</div>
+                                                						<div class="col-2">
+                                                    						<div class="form-group">
+                                                        						<label for="cc-payment" class="control-label mb-1">Status</label>
+                                                        						<div class="custom-control custom-checkbox">
+																					<input type="checkbox" class="custom-control-input" id="defaultChecked5" th:field="*{active}" checked >
+																					<label class="custom-control-label" for="defaultChecked5"></label>
+																				</div>
+                                                    						</div>
+                                                						</div>
+                                                						<div class="text-right">
+                                                							<button type="submit" class="btn btn-primary btn-md">
+                                                    				 		Save
+                                                							</button>
+                                            							</div>
+                                                
+                                            						</div>
+
+
+
+                                           
+                                        </form>
+															</div>
+														</div>
+													</div>
+												</div>
+												
+<!--=====================================================================
+				edit Organization modal
+=====================================================================-->												
+<div class="modal fade" id="largeModal3333" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content" style="z-index: 1000000000000">
+				<div class="modal-header">
+					<h5 class="modal-title" id="largeModalLabel">Edit Organization</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form th:object="${org}" th:action="@{/orgGroup/org/save}"   method="post" novalidate="novalidate">
+
+						<div class="row">
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Org. ID</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" id="update-orgId" name="orgId" placeholder="Org. ID" th:field="*{orgId}"  required>
+										
+								</div>
+							</div>
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Org. Name</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" id="update-orgName" name="orgName" placeholder="Org. Name" th:field="*{orgName}" required>
+									
+								</div>
+							</div>
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Org. Address</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="orgAddress" id="update-orgAddress" placeholder="Org. Address" th:field="*{orgAddress}" required>
+										
+								</div>
+							</div>
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Org. Email</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="orgEmail" id="update-orgEmail" placeholder="Org. Email" th:field="*{orgEmail}" required>
+										
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Org. Web</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="orgWeb" id="update-orgWeb" placeholder="Org. Web" th:field="*{orgWeb}" required>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Phone</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="orgPhone" id="update-orgPhone" placeholder="Org. Phone" th:field="*{orgPhone}" required>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">City</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="orgCity" id="update-orgCity" placeholder="Org. City" th:field="*{orgCity}" required>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Upazilla</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="orgUpazilla" id="update-orgUpazilla" placeholder="Org. Upazilla" th:field="*{orgUpazilla}" required>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">District</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="orgDistrict" id="update-orgDistrict" placeholder="Org. District" th:field="*{orgDistrict}" required>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Police Station</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="polliceStation" id="update-polliceStation" placeholder="polliceStation" th:field="*{polliceStation}" required>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Short Code</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="shortCode" id="update-shortCode" placeholder="Short Code" th:field="*{shortCode}" required>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Post Code</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="postCode" id="update-postCode" placeholder="Post Code" th:field="*{postCode}" required>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label >Country Name</label>
+									<select class="form-control" id="update-countryId" name="countryId" placeholder="countryName" th:field="*{countryId.countryId}" required>
+										<option value="">Select country</option>
+										<option	th:each="country:${countryList}"
+											th:value="${country.countryId}"
+											th:utext="${country.countryName}"/> 
+									</select>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label >Org. Group</label>
+									<select class="form-control" id="update-orgGroupId" name="orgGroupId" placeholder="countryName" th:field="*{orgGroupId.orgGroupId}" required>
+										<option value="">Select Group</option>
+										<option	th:each="group:${orgGroupList}"
+											th:value="${group.orgGroupId}"
+											th:utext="${group.groupName}"/> 
+									</select>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label >Org. Type</label>
+									<select class="form-control" id="update-orgTypeId" name="orgTypeId" placeholder="orgTypeId" th:field="*{orgTypeId.orgTypeId}" required>
+										<option value="">Select Type</option>
+										<option	th:each="type:${orgTypeList}"
+											th:value="${type.orgTypeId}"
+											th:utext="${type.orgTypeName}"/> 
+									</select>
+								</div>
+							</div>
+							
+								
+							
+						</div>
+						<div class="row">
+						
+						<div class="col-5">
+							<div class="form-group">
+								<label class="control-label mb-1">Remarks</label>
+								<textarea rows="3" cols="250" class="form-control" name="orgRemarks" id="update-orgRemarks" th:field="*{orgRemarks}" style="width: 100%" ></textarea>
+							</div>
+						</div>
+				
+							<div class="col-2">
+								<div class="form-group">
+									<label for="cc-payment" class="control-label mb-1">Status</label>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="defaultChecked13" th:field="*{active}" checked>
+										<label class="custom-control-label" for="defaultChecked13"></label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<div class="row">
+								<div class="col-12">
+									<input type="submit" value="Save" class="btn btn-primary btn-sm " >
+
+
+								</div>
+							</div>
+
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!--=====================================================================
+				Edit Organization Branch modal
+=====================================================================-->
+	<div class="modal fade" id="mediumModal123123" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="smallmodalLabel">Edit Branch</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form th:object="${branch}" th:action="@{/branch/save}" method="post"  novalidate="novalidate">
+						<div class="row">
+						   <div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Branch ID</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" placeholder="BranchId" name="branchId" id="update-branchId" th:field="*{branchId}" readonly>
+								</div>
+							</div>
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Branch Name</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="branchName" placeholder="Branch Name" id="update-branchName" th:field="*{branchName}" required>
+									
+								</div>
+							</div>
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Branch Main</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="branchMain" placeholder="Branch Main" id="update-branchMain" th:field="*{branchMain}" required>
+								</div>
+							</div>
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Branch Address</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="branchAddress" placeholder="Branch Address" id="update-branchAddress" th:field="*{branchAddress}" required>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Branch Email</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="branchEmail" placeholder="Branch Email" id="update-branchEmail" th:field="*{branchEmail}" required>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Branch Web</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="branchWeb" placeholder="Branch Web" id="update-branchWeb" th:field="*{branchWeb}" required>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Phone</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="branchPhone" placeholder="Phone" id="update-branchPhone" th:field="*{branchPhone}" required>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">City</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="branchCity" placeholder="Branch City" id="update-branchCity" th:field="*{branchCity}" required>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Upazilla</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="branchUpazilla" placeholder="Branch Upazilla" id="update-branchUpazilla" th:field="*{branchUpazilla}" required>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">District</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="branchDistrict" placeholder="Branch District" id="update-branchDistrict" th:field="*{branchDistrict}" required>
+								</div>
+							</div>
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Division</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="branchDivision" placeholder="Branch Division" id="update-branchDivision" th:field="*{branchDivision}" required>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Short Code</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="shortCode" placeholder="Short Code" id="update-branchShortCode" th:field="*{shortCode}" required>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Post Code</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="postCode" placeholder="Post Code" id="update-branchPostCode" th:field="*{postCode}" required>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Police Station</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="policeStation" placeholder="Police Station" id="update-branchPoliceStation" th:field="*{policeStation}" required>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label >Organization</label>
+									<select class="form-control" id="update-branchOrgId" name="countryId" placeholder="countryName" th:field="*{orgId.orgId}" required>
+										<option value="">Select Org</option>
+										<option	th:each="org:${orgList}"
+												th:value="${org.orgId}"
+												th:utext="${org.orgName}"/> 
+									</select>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label >Country Name</label>
+									<select class="form-control" id="update-branchCountryId" name="countryId" placeholder="countryName" th:field="*{countryId.countryId}" required>
+										<option value="">Select country</option>
+										<option	th:each="country:${countryList}"
+												th:value="${country.countryId}"
+												th:utext="${country.countryName}"/> 
+									</select>
+								</div>
+							</div>
+							
+						 </div>
+
+					<div class="row">
+						<div class="col-5">
+							<div class="form-group">
+								<label class="control-label mb-1">Remarks</label>
+								<textarea rows="3" cols="250" name="branchRemarks" placeholder="BranchRemarks" id="update-branchRemarks" class="form-control" th:field="*{branchRemarks}" style="width: 100%"></textarea>
+							</div>
+						</div>
+							<div class="col-2">
+								<div class="form-group">
+									<label for="cc-payment" class="control-label mb-1">Status</label>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="defaultChecked14" th:field="*{active}" checked>
+										<label class="custom-control-label" for="defaultChecked14"></label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="modal-footer">
+							<div class="row">
+								<div class="col-12">
+									<input type="submit" value="Save" class="btn btn-primary btn-sm " >
+								</div>
+							</div>
+
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+
+	<script src="/js/vendor/jquery-2.1.4.min.js"></script>
+	<script src="/js/popper.min.js"></script>
+	<script src="/js/plugins.js"></script>
+	<script src="/js/main.js"></script>
+	<script src="/js/order.js"></script>
+	<script src="/js/lib/data-table/datatables.min.js"></script>
+	<script src="/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+	<script src="/js/lib/data-table/dataTables.buttons.min.js"></script>
+	<script src="/js/lib/data-table/buttons.bootstrap.min.js"></script>
+	<script src="/js/lib/data-table/jszip.min.js"></script>
+	<script src="/js/lib/data-table/pdfmake.min.js"></script>
+	<script src="/js/lib/data-table/vfs_fonts.js"></script>
+	<script src="/js/lib/data-table/buttons.html5.min.js"></script>
+	<script src="/js/lib/data-table/buttons.print.min.js"></script>
+	<script src="/js/lib/data-table/buttons.colVis.min.js"></script>
+	<script src="/js/lib/data-table/datatables-init.js"></script>
+
+
+	<script type="text/javascript">
+
+
+		
+		function showOrgGroupEditModal(index){
+			url="/orgGroup/edit/"+index;
+		
+			jQuery.getJSON(url, { }, function (data) {
+				alert(data.groupName);
+				document.getElementById("update-groupId").value = data.orgGroupId;
+				document.getElementById("update-groupName").value=data.groupName;
+				document.getElementById("update-groupCode").value=data.groupCode;
+				document.getElementById("update-countryName").value=data.countryId.countryId;
+				document.getElementById("update-ownerCountryName").value=data.ownerCountryId;			
+				document.getElementById("update-remarks").value=data.orgGroupRemarks;
+				document.getElementById("update-groupId2").value = data.orgGroupId;
+			    });
+		}
+		
+		
+		function showOrgEditModal(index){
+			url="/org/edit/"+index;
+		
+			jQuery.getJSON(url, { }, function (data) {
+				alert(data.orgName);
+				document.getElementById("update-orgId").value = data.orgId;
+				document.getElementById("update-orgId2").value = data.orgId;	
+				document.getElementById("update-orgName").value=data.orgName;
+				document.getElementById("update-shortCode").value=data.shortCode;
+				document.getElementById("update-orgGroupId").value=data.orgGroupId.orgGroupId;
+				document.getElementById("update-orgTypeId").value=data.orgTypeId.orgTypeId;
+				document.getElementById("update-countryId").value=data.countryId.countryId;
+				document.getElementById("update-countryId2").value=data.countryId.countryId;
+				document.getElementById("update-orgAddress").value=data.orgAddress;
+				document.getElementById("update-orgEmail").value=data.orgEmail;
+				document.getElementById("update-orgWeb").value=data.orgWeb;
+				document.getElementById("update-orgPhone").value=data.orgPhone;
+				document.getElementById("update-postCode").value=data.postCode;
+				document.getElementById("update-orgCity").value=data.orgCity;
+				document.getElementById("update-polliceStation").value=data.polliceStation;
+				document.getElementById("update-orgUpazilla").value=data.orgUpazilla;
+				document.getElementById("update-orgDistrict").value=data.orgDistrict;
+				document.getElementById("update-orgRemarks").value=data.orgRemarks;
+			    });
+		}
+		
+		function showOrgBranchEditModal(index){
+			url="/branch/edit/"+index;
+		
+			jQuery.getJSON(url, { }, function (data) {
+				alert(data.branchName);
+				document.getElementById("update-branchId").value = data.branchId;
+				document.getElementById("update-branchName").value=data.branchName;								
+				document.getElementById("update-branchAddress").value=data.branchAddress;
+				document.getElementById("update-branchEmail").value=data.branchEmail;
+				document.getElementById("update-branchWeb").value=data.branchWeb;
+				document.getElementById("update-branchPhone").value=data.branchPhone;				
+				document.getElementById("update-branchCity").value=data.branchCity;
+				document.getElementById("update-branchPoliceStation").value=data.policeStation;
+				document.getElementById("update-branchUpazilla").value=data.branchUpazilla;
+				document.getElementById("update-branchDistrict").value=data.branchDistrict;
+				document.getElementById("update-branchMain").value=data.branchMain;
+				document.getElementById("update-branchDivision").value=data.branchDivision;
+				document.getElementById("update-branchShortCode").value=data.shortCode;
+				document.getElementById("update-branchOrgId").value=data.orgId.orgId;
+				document.getElementById("update-branchCountryId").value=data.countryId.countryId;
+				document.getElementById("update-branchPostCode").value=data.postCode;
+				document.getElementById("update-branchRemarks").value=data.branchRemarks;
+			    });
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	
+		</script>
+		
+		
+		
+		
+	
+     
+												
+
+</body>
+
+</html>

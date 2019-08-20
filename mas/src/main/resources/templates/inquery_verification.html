@@ -1,0 +1,2653 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html xmlns:th="http://www.thymeleaf.org">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Inquiry Verification</title>
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/themify-icons.css">
+    <link rel="stylesheet" href="/css/flag-icon.min.css">
+    <link rel="stylesheet" href="/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="/css/lib/datatable/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="/scss/style.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+   
+       
+
+    <style type="text/css">
+       
+       #calculate{
+     display:none;
+     }
+     
+     
+       .pagination li:hover{
+    cursor: pointer;
+    color:red;
+     border: 1px solid #4CAF50;
+    
+}
+	
+       
+       .pagination-container ul{
+        float:left;
+        padding:8 px 16px;
+        text-decoration: none;       
+
+        color:black;
+     }
+     
+     .pagination-container ul.active{
+        background-color: #Red;             
+        border: 1px solid #4CAF50;
+        color:white;
+     }
+    
+        .modal-backdrop.show {
+            display: none;
+        }
+
+        .modal-backdrop.fade {
+            display: none;
+        }
+
+/*
+        div.dataTables_wrapper {
+            width: 100%;
+        }
+*/
+		.selected{
+			background-color: #eee;
+			color: #000;
+		}
+		
+		.dataTables_length, .dataTables_filter {
+			display: none !important;
+		}
+    </style>
+    
+    
+    <style>
+.custom-header-panel{
+    background-color: #004b8e !important;
+    border-color: #004b8e !important;
+    color: white;
+}
+
+
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading {
+  padding: 10px 15px;
+  margin: -15px -15px 15px;
+  font-size: 17.5px;
+  font-weight: 500;      
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-footer {
+  padding: 10px 15px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+} 
+
+.panel-primary {
+  border-color: #428bca;
+}
+
+.panel-primary .panel-heading {
+  color: #ffffff;
+  background-color: #428bca;
+  border-color: #428bca;
+}
+/* This kinda of works but now 
+.panel, .panel-group .panel-heading+.panel-collapse>.panel-body{
+    border: none;
+}
+*/
+.card-header{
+    /* background-color: #004b8e !important; */
+    background-color: #004b8e !important;
+    border-color: #004b8e !important;
+    color: white;
+
+    padding: 10px 15px;
+  /*margin: -15px -15px 15px; */
+
+  font-size: 17.5px;
+  font-weight: 500;      
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+
+ <style type="text/css">
+       
+       #calculate{
+      display:none;
+     }
+    
+        .modal-backdrop.show {
+            display: none;
+        }
+
+        .modal-backdrop.fade {
+            display: none;
+        }
+
+/*
+        div.dataTables_wrapper {
+            width: 100%;
+        }
+*/
+		.selected{
+			background-color: #eee;
+			color: #000;
+		}
+		
+		.dataTables_length, .dataTables_filter {
+			display: none !important;
+		}
+    </style>
+    
+    <style type="text/css">
+		.modal-backdrop.show {
+			display: none;
+		}
+
+		td {
+			border: 1px #DDD solid;
+			padding: 5px;
+			cursor: pointer;
+		}
+
+		.selected {
+			background-color: lightsteelblue;
+			color: #fff;
+		}
+		
+		.dataTables_filter{
+			text-align: right;
+		}
+		
+		
+		div#example1_wrapper div.dataTables_filter label, 
+		div#example2_wrapper div.dataTables_filter label,
+		div#example3_wrapper div.dataTables_filter label,
+		div#example4_wrapper div.dataTables_filter label {
+		    display: none !important;
+		}
+	</style>
+
+
+</head>
+
+<body>
+    <!-- Left Panel -->
+
+	<aside id="left-panel" class="left-panel">
+		<nav class="navbar navbar-expand-sm navbar-default">
+
+			<div class="navbar-header">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+					<i class="fa fa-bars"></i>
+				</button>
+				<a class="navbar-brand" href="./">MLFM</a>
+				<a class="navbar-brand hidden" href="./">BD</a>
+			</div>
+
+			<div id="main-menu" class="main-menu collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+				
+			
+                
+   <li class="menu-item-has-children dropdown" >
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <i class="menu-icon fa fa-laptop"></i>    Set Up
+          </a>
+        
+       <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown" >
+             <li th:each="s:${listModelUserObjectSetup}" 
+                   th:value="${s.userObjectId}">
+            <a class="dropdown-item" th:href="@{${s.modelObject.filePath}+'/'+${s.modelUser.userId}}" >
+               
+                    <span th:utext="${s.modelObject.objectName}">
+                   </span>
+                </a>
+            </li>
+          
+        </ul>
+        
+   </li>
+   
+      
+	 <li class="menu-item-has-children dropdown">
+     
+       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="menu-icon fa fa-laptop"></i> Transaction
+        </a>
+        
+           <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown">
+              <li th:each="t:${listModelUserObjectTransaction}"
+                   th:value="${t.userObjectId}">
+                   
+                   <a class="dropdown-item" th:href="@{${t.modelObject.filePath}+'/'+${t.modelUser.userId}}" >
+                 
+                         <span th:utext="${t.modelObject.objectName}">
+                         </span>
+                      </a>
+              </li>
+          </ul>
+      </li>			
+				
+        	
+		   	
+		<li class="menu-item-has-children dropdown">
+     
+             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="menu-icon fa fa-laptop"></i>   Tools
+             </a>
+        
+            <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown">
+                <li th:each="u:${listModelUserObjectTool}"
+                     th:value="${u.userObjectId}">
+                     
+                           <a class="dropdown-item" th:href="@{${u.modelObject.filePath}+'/'+${u.modelUser.userId}}" >
+                 
+                    <span th:utext="${u.modelObject.objectName}">
+                    </span>
+                 </a>
+               </li>
+          
+            </ul>
+       </li>	
+
+
+		<li class="menu-item-has-children dropdown">
+     
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="menu-icon fa fa-laptop"></i> Report
+              </a>
+        
+              <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown">
+                   <li th:each="r:${listModelUserObjectReport}"
+                        th:value="${r.userObjectId}">
+                        <a class="dropdown-item" th:href="@{${r.modelObject.filePath}+'/'+${r.modelUser.userId}}" >
+                     <!--  <a class="dropdown-item" th:href="${r.modelObject.filePath}"> -->
+                           <span th:utext="${r.modelObject.objectName}">
+                           </span>
+                       </a>
+                   </li>
+          
+              </ul>
+        </li>	
+					
+					
+					
+	             </ul>
+			</div>
+		</nav>
+	</aside>
+
+
+
+	<!-- Left Panel -->
+
+    <!-- Right Panel -->
+
+    <div id="" class="right-panel">
+
+       	<!-- Header-->
+		<header id="header" class="header">
+
+			<div class="header-menu">
+<!--
+				<div class="col-sm-4">
+					<a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
+					<div class="header-left">
+						<button class="search-trigger"><i class="fa fa-search"></i></button>
+						<div class="form-inline">
+							<form class="search-form">
+								<input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
+								<button class="search-close" type="submit"><i class="fa fa-close"></i></button>
+							</form>
+						</div>
+
+					</div>
+				</div>
+-->
+		<!--
+				<div class="col-sm-5">
+					<div class="user-area dropdown float-right">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">
+                        </a>
+
+						<div class="user-menu dropdown-menu">
+							<a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
+							
+							<input type="text" class="nav-link" th:value="${userId}" id="accessUserId" readonly>
+
+							<a class="nav-link" href="/logoncontroller/init"><i class="fa fa-power -off"></i>Logout</a>
+						</div>
+					</div>
+                </div>
+         -->       
+                  
+                        <div class="col-sm-4 text-right" >
+                         
+                      </div> 
+               
+                     <div class="col-sm-8 text-right" >
+                          
+                           <a class="nav-link" href="/logoncontroller/init"  style="float:right;" ><i class="fa fa-power -off"></i>Logout</a>
+                            <span class="nav-link" th:text="${name}"readonly style="color: black; float:right; padding-left:5px;"></span>  
+                            <span class="nav-link" style="color: black; float:right; padding-right:0px;">User : </span>  
+                           
+                          
+                         
+                       </div>
+                 
+			</div>
+
+		</header><!-- /header -->
+		<!-- Header-->
+        
+        <div class="container">
+
+ <!-- <div class="row">  -->
+
+
+<!-- <div class="col-md-offset-2 col-md-8"> -->
+	
+    <div class="panel">
+      <div class="panel-heading custom-header-panel">
+          <h5 class="panel-title roboto">Search Craiteria</h3>
+      </div>
+  <div class="panel-body">
+
+
+
+  <!-- <h3> Patient Registration </h3>   -->
+    
+                <!-- <form th:action="@{/verification/search}"  class="needs-validation" novalidate> -->
+                
+                <form>
+						<div class="row">
+							<div class="col-12">
+								<div class="row">
+						  <div class="col-3">
+						 <div class="form-group">
+							<label for="ownerType" class="control-label mb-1">Client Type</label>
+							 <select name="ownerType" id="ownerType" class="form-control" aria-required="true" aria-invalid="false"required>															
+							         <option value=" ">Select Type</option>
+									<option th:each="type:${ownerTypeList}"
+											th:value="${type.orderOwnerTypeId}"
+											th:utext="${type.orderOwnerTypeName}"
+																				
+											/>
+																				
+							 </select>
+						  </div>
+					 </div>
+					 
+						<div class="col-3">
+						 <div class="form-group">
+							<label for="owner" class="control-label mb-1">Client Name</label>
+								<select name="owner" id="owner" class="form-control" placeholder="Select" >
+									<option value=" ">Select Client</option>
+										 <!-- 	<option th:each="owner:${ownerList}"
+												th:value="${owner.orderOwnerId}"
+												th:utext="${owner.ownerName}"
+													
+										/>-->
+								</select>
+							</div>
+						</div>
+                      
+                     <div class="col-3">
+						<div class="form-group">
+							<label for="ultimateOwner" class="control-label mb-1">Ultimate Buyer</label>
+								<select  id="ultimateOwner" name="ultimateOwner" class="form-control" placeholder="Select">
+									<option value=" "> Select Ultimate Buyer</option>
+										<option th:each="owner:${ownerList}"
+											th:value="${owner.orderOwnerId}"
+											
+												th:text="|${owner.ownerName} ( ${owner.orderOwnerType.orderOwnerTypeName} )|"
+																				
+												/>
+																				
+								</select>
+						 </div>
+					 </div>
+									
+									<div class="col-3">
+										<div class="form-group">
+											<label class="control-label mb-1" >Inquery ID</label>
+											<input type="text" class="form-control" id="searchInquiryId" placeholder="Inq ID" name="inquery_ID">
+										</div>
+									</div>
+									
+
+								</div>
+
+								<div class="row">
+								
+								
+								<div class="col-3">
+										<div class="form-group">
+											<label class="control-label mb-1">User</label>
+											<select class="form-control" name="user" id="userSearch">
+												<!-- <option value="">Select user</option> -->
+												<option th:each="u:${userList}"
+														th:value="${u.userId}"
+														th:utext="${u.userName}"																			
+												/> 
+											</select>
+										</div>
+									</div>
+									
+									<div class="col-3">
+										<div class="form-group">
+											<label class="control-label mb-1">User Cluster</label>
+											<select class="form-control" name="userCluster" id="clusterSearch">
+											<option value=" ">Select Cluster</option>
+																		
+											</select>
+										</div>
+									</div>
+									
+									<div class="col-3">
+										<div class="form-group">
+											<label class="control-label mb-1">Inquery From</label>
+											<input type="date" class="form-control" id="startDate" name="inquery_start_date">
+										</div>
+									</div>
+									
+								
+								<div class="col-3">
+                                        <div class="form-group">
+                                            <label class="control-label mb-1">Inquery To</label>
+                                            <input type="date" class="form-control" id="endinquerydate" name="inquery_end_date">
+                                        </div>
+                                    </div>
+							<!--  		<div class="col-2">
+										<div class="form-group">
+											<label>Mail From</label>
+											<input type="date" value="2018-05-30" name="mail_start_date" class="form-control" >
+										</div>
+									</div>
+									<div class="col-2">
+										<div class="form-group">
+											<label>Mail To</label>
+											<input name="mail_end_date" type="date" id="dateMail" class="form-control">
+										</div>
+									</div> -->
+								<!--  	<div class="col-2">
+										<div class="form-group">
+											<label>Item</label>
+											<input type="text" class="form-control" placeholder="Item">
+										</div>
+									</div>
+									<div class="col-2">
+										<div class="form-group">
+											<label>Specification</label>
+											<input type="text" class="form-control" placeholder="Seps">
+										</div>
+									</div>
+									<div class="col-2">
+										<div class="form-group">
+											<label>Mail ID</label>
+											<input type="text" class="form-control" placeholder="mail@gmail.com" name="mail_Id">
+										</div>
+									</div> 
+									<div class="col-2">
+										<div class="form-group">
+											<label>User Inquery No</label>
+											<input type="text" class="form-control" placeholder="User Inq No" name="user_inquery_no">
+										</div>
+									</div>-->
+										
+								</div>
+								<div class="row">
+								
+								<div class="col-3">
+										<div class="form-group">
+											<label class="control-label mb-1">User Inquery No</label>
+											<input type="text" class="form-control" placeholder="User Inq No" id="inquiryNo" name="user_inquery_no">
+										</div>
+									</div>
+								
+								    <div class="col-3">
+										<div class="form-group">
+											<label class="control-label mb-1">Mail ID</label>
+											<input type="text" class="form-control" id="mailId" placeholder="mail@gmail.com" name="mail_Id">
+										</div>
+									</div> 
+
+                                    <div class="col-3">
+										<div class="form-group">
+											<label class="control-label mb-1">Remarks</label>
+											<input type="text" rows="1" id="remarksSearch" cols="20" placeholder="Remarks"  class="form-control" aria-required="true" aria-invalid="false" name="remarks">
+										
+										</div>
+									</div>
+                                    
+									<div class="col-1">
+										<div class="form-group">
+											<label class="control-label mb-1">Active</label>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" name="active" class="custom-control-input" id="defaultChecked2" checked>
+												<label class="custom-control-label" for="defaultChecked2"></label>
+											</div>
+										</div>
+									</div>
+									
+									<div class="col-2">
+										<div class="form-group">
+											<label class="control-label mb-1">Verify Done</label>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="verifydone" name="verifydone">
+												<label class="custom-control-label" for="verifydone"></label>
+											</div>
+										</div>
+									</div>
+									
+									
+								</div>
+								
+								
+								<div class="row">	
+									
+								
+									<div class="col-3">
+										<div class="form-group">
+											<label class="control-label mb-1">Verified By</label>
+											<select class="form-control" name="verifiedBy" id="verifiedBy">
+												<!-- <option value="">Select user</option> -->
+												<option th:each="u:${userList}"
+														th:value="${u.userId}"
+														th:utext="${u.userName}"																			
+												/> 
+											</select>
+										</div>
+									</div>
+									
+									<div class="col-3">
+										<div class="form-group">
+											<label class="control-label mb-1">Done From</label>
+											<input type="date" id="done_start_date" name="done_start_date" class="form-control" >
+										</div>
+									</div>
+									<div class="col-3">
+										<div class="form-group">
+											<label class="control-label mb-1">Done To</label>
+											<input name="done_end_date" type="date" id="dateMail" class="form-control">
+										</div>
+									</div> 
+									
+									<div class="col-1">
+										<div class="form-group">
+											<label class="control-label mb-1"></label>
+											<input type="button" value="Search" id="inquirySearchBtn" class="btn btn-primary">
+										</div>
+									</div>
+									<div class="col-1">
+										<div class="form-group">
+											<label class="control-label mb-1"></label>
+											<a th:href="@{'/inquiry/Verification/'+${userId}}" class="btn btn-success" >Refresh</a>
+										</div>
+									</div>
+								</div>
+
+
+							</div>
+						</div>
+					</form>
+					
+					
+					
+					<h5> Select </h5>
+				<div class="form-group">
+				           <select  name="state" id="maxRows" class="form-control" style="width:150px;">
+									
+						
+						
+						 <option value="5">5</option>
+						  <option value="10">10</option>
+						 <option value="15">15</option>
+						 <option value="20">20</option>
+						 <option value="50">50</option>
+						 <option value="70">70</option>
+						 <option value="100">100</option>
+						 <option value="5000">Show ALL</option>
+				          </select>
+				</div>
+					
+					<div class="row">
+					<div class="col-lg-12">
+						<div class="card" style="width: 1100px;">
+							<div class="card-header">
+								<strong class="card-title">Search Result</strong>
+							</div>
+							<div class="card-body" style="overflow-y: scroll">
+								<form th:action="@{/verify/details/save/data}" method="post">
+								<table id="searchResultTable" class="table table-striped table-bordered display nowrap" style="width:100%">
+									
+									<h6 style="color:red; font-size:12px;margin-left:20px">Click Inquiry Id to get item data</h6>
+									
+									<thead>
+									     
+										<tr>
+											<th scope="col" >Inquery ID</th>
+											<th scope="col" >User Inquery ID</th>
+											<th scope="col">Initial Buyer</th>
+											<th scope="col">Ultimate Buyer</th>
+											<th scope="col">Inquery date</th>
+											<th scope="col">Buyer/Ohter Mail</th>
+											<th scope="col">Remarks</th>
+											<th scope="col">Final Remarks</th>
+											<th scope="col">User Name</th>
+											<th scope="col">Active</th>
+											<th scope="col">Verify</th>
+											<th scope="col">Action</th>
+											<th scope="col">Report</th>
+										</tr>
+									</thead>
+									<tbody>
+										<!--  <tr th:each="order : ${searchList}">
+	
+											<td scope="row"><a type="text" th:href="@{/verify/item/search/{id}(id=${order.orderId})}" th:text="${order.orderId}"></td>
+											<td scope="row"><span th:text="${order.userRefNo}"></td>
+											<td><span th:text="${order.modelOrderOwner.ownerName}"></span></td>
+											<td><span th:text="${order.modelOrderOwner.ownerName}"></span></td>
+											<td><span th:text="${#calendars.format(order.orderDate, 'M/dd/yyyy')}"></span></td>
+											<td><span th:text="${order.refMailId}"></span></td>
+											<td><textarea th:text="${order.orderRemarks}" rows="1" readonly></textarea></td>
+											<td><textarea th:text="${order.verifyRemarks}" rows="1" readonly></textarea></td>
+										    <td><span th:text="${order.enteredBy.userName}"></span></td>
+											<td class="text-center"><input type="checkbox" th:checked="${order.sActive} ? 'checked'" disabled readonly></td>
+											<td class="text-center"><input type="checkbox" th:checked="${order.verifyStatus} ? 'checked'" disabled readonly></td>
+											
+											
+											<td>
+			
+												<a href="#"  type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#smallmodalAudit111111">Audit</a>
+												
+												
+												<a href="#" type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal" th:onclick="'verifyEditModal(' + ${order.orderId} + ')'">
+  													Verify
+												</a>
+
+
+											</td>
+											
+											<td><a href="#">report</a></td>
+										
+										</tr>
+                                      -->
+									</tbody>
+									
+								</table>
+								
+								<div class="pagination-container" style="float:right" >
+	           			
+	           			    <ul id="inquiryTableP" class="pagination"></ul>
+				        
+				                 </div>
+							  
+								<!--  <button type="submit" class="btn btn-primary">Save</button>-->
+								</form>
+							</div>
+						</div>
+					</div>
+
+
+
+				</div>
+				
+				
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card" style="width: 1070px; overflow-x: scroll">
+							<div class="card-header">
+								<strong class="card-title">Item</strong>
+							</div>
+							<div class="card-body">
+								<table id="itemTable" class="table table-striped table-bordered display nowrap" style="width:100%">
+									
+									
+									
+									<h6 style="color:red; font-size:12px;margin-left:20px">Click Item Order Id to get quantity data</h6>
+									
+									
+									
+									<thead>
+										<tr >
+											<th scope="col">Item Order Id</th>
+										    <th scope="col">Order Id</th>
+											<th scope="col">Item ID</th>
+											<th scope="col">Item Name</th>
+											<th scope="col">Item Type</th>
+											<th scope="col">Remarks</th>
+											<th scope="col">Active Status</th>
+											<th scope="col">Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<!--  <tr th:each="item:${orderItemData}">
+											<td scope="row"><a  scope="row" type="text" th:href="@{/verify/itemQty/search/{id}(id=${item.itemOrderId})}" th:text="${item.itemOrderId}"></a></td>
+											<td th:text="${item.listModelItem.itemName}"></td>
+											<td th:text="${item.listModelItem.itemTypeId.itemTypeName}"></td>
+											<td><textarea th:text="${item.listModelItem.itemTypeId.remarks}" rows="1" readonly></textarea></td>
+											
+											<td>
+												
+												<a href="#" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#smallmodalAudit111111">Audit</a>
+
+												
+											</td>
+										</tr> -->
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+
+
+
+				</div>
+				
+				
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card" style="width: 1070px; overflow-x: scroll">
+							<div class="card-header">
+								<strong class="card-title">Quantity breakdown as on spec/design</strong>
+							</div>
+							<div class="card-body">
+								<table id="specTable" class="table table-striped table-bordered display nowrap" style="width:100%">
+							
+							  <h6 style="color:red; font-size:12px;margin-left:20px">Click Quantity Id to get specification and image data</h6>
+							
+							 <thead>
+										<tr>
+											<th scope="col">Quantity ID</th>
+											<th scope="col">Item Quantity</th>
+											<th scope="col">Remarks</th>
+											<th scope="col">Design ID</th>
+											<!--<th scope="col">Design Add</th>
+											  <th scope="col">Image</th>-->
+											<th scope="col">Active Status</th>
+											<th scope="col">Action</th>
+										</tr>
+									</thead>
+									<tbody>
+									<!--	<tr th:each="itemQty:${itemQtyList}">
+											<td scope="row"><a th:href="@{/verify/itemSpec/search/{id}(id=${itemQty.orderItemQtyId})}" th:text="${itemQty.orderItemQtyId}"></a></td>
+											<td th:text="${itemQty.itemQty}"></td>
+											<td><textarea th:text="${itemQty.remarks}" rows="1" style="width: 100%" readonly></textarea></td>								
+											<td></td>
+											<td><a href="#"></a></td>
+											<td><input type="file" class="form-control"></td>
+											<td>
+												
+												<a href="#" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#smallmodalAudit111111">Audit</a>
+
+												
+											</td>
+										</tr>   -->
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+
+
+
+				</div>
+				
+				
+				<div class="row">
+					<div class="col-8">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="card" >
+									<div class="card-header">
+										<strong class="card-title">Specification </strong>
+									</div>
+									<div class="card-body">
+										<table id="specification" class="table table-striped table-bordered display nowrap" style="width:100%">
+														
+														
+														
+														<thead>
+												<tr>
+													<th scope="col">Specification ID</th>
+													<th scope="col">Specification Name</th>
+													<th scope="col">Value</th>
+													<th scope="col">Remarks</th>
+													<th scope="col">Active Status</th>
+													<th scope="col">Action</th>
+												</tr>
+											</thead>
+											<tbody>
+												<!-- <tr th:each="itemQtySpec : ${itemSpecList}">
+													<td scope="row"><span  th:text="${itemQtySpec.orderItemQtySpecId}"></span></td>
+													<td scope="row"><span th:text="${itemQtySpec.specValue}"></span></td>
+													<td scope="row"><span th:text="${itemQtySpec.remarks}" readonly></span></td>
+													<td>
+														
+														<a href="#" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#smallmodalAudit111111">Audit</a>
+
+														
+													</td>
+												</tr>  -->
+
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+
+
+
+						</div>
+					</div>
+					<div class="col-4">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="card">
+									<div class="card-header">
+										<strong class="card-title">Image</strong>
+									</div>
+									<div class="card-body">
+										<table id="example4" class="table table-striped table-bordered">
+											<thead>
+												<tr>
+													<th scope="col">Image ID</th>
+													<th scope="col">Image</th>
+													<th scope="col">Action</th>
+												</tr>
+											</thead>
+											<tbody>
+												<!--  <tr th:each="image : ${imageList}">
+													<td scope="row" th:text="${image.orderItemQtyImageId}"></td>
+													<td><img th:src="@{/imageDesign/{img}(img=${image.imageCaption})}"></td>
+													<td><a href="#" class="btn btn-danger btn-sm">remove</a></td>
+												</tr> -->
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+
+
+
+						</div>
+					</div>
+				</div>
+				
+				
+				<div class="modal fade" id="smallmodalAudit111111" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
+															<div class="modal-dialog modal-sm" role="document">
+																<div class="modal-content">
+																	<div class="modal-header">
+																		<h5 class="modal-title" id="smallmodalLabel" style="color: #000">Entry info</h5>
+																		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																			<span aria-hidden="true">&times;</span>
+																		</button>
+																	</div>
+																	<div class="modal-body">
+
+																		<div class="row">
+																			<div class="col-12">
+																				<div class="form-group">
+																					<label for="cc-payment" class="control-label mb-1">Entered By</label>
+																					<p>Jamal Khan</p>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="row">
+																			<div class="col-12">
+																				<div class="form-group">
+																					<label for="cc-payment" class="control-label mb-1">Entered Time</label>
+																					<p>2:30 am</p>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="row">
+																			<div class="col-12">
+																				<div class="form-group">
+																					<label for="cc-payment" class="control-label mb-1">Update By</label>
+																					<p>active</p>
+																				</div>
+																			</div>
+																		</div>
+
+																		<div class="row">
+
+
+																			<div class="col-12">
+																				<div class="form-group">
+																					<label for="cc-payment" class="control-label mb-1">Update Time</label>
+																					<p>active</p>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+
+																</div>
+															</div>
+														</div>
+														
+														
+														
+															<!-- verify modal -->												
+					<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="exampleModalLabel">Inquiry Verification</h5>
+					        <h5 class="modal-title" id="smessageverification" style="color: limegreen; display: block;font-size:12px; margin-left:50px"></h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					  <!--      <form id="myForm" th:object="${order}"  th:action="@{/verify/save}" class="needs-validation" method="post"  novalidate>-->
+					     
+					     <form>
+					      <div class="modal-body">
+					        <div class="row">
+					        
+					        	<div class="col-md-6">
+					        		<div class="form-group">
+					        			<label class="labelcontrol">Inquiry ID</label>
+					        			<input name="orderId" id="update-order-id" type="text" class="form-control" readonly>
+					        		</div>
+					        	</div>
+					        	
+					        	<div class="col-md-6">
+					        		<div class="form-group">
+					        			<label class="labelcontrol">Remarks</label>
+					        			<textarea name="orderRemarks" id="update-order-remarks" class="form-control" readonly></textarea>
+					        		</div>
+					        	</div>
+					        	<div class="col-md-6">
+					        		<div class="form-group">
+					        			<label class="labelcontrol">Final Remarks</label>
+					        			<textarea name="verifyRemarks" id="update-order-fremarks" class="form-control"></textarea>
+					        		</div>
+					        	</div>
+					        	<div class="col-md-6">
+					        		<div class="form-group" style="float:center">
+					        			<label class="control-label mb-1">Verify</label>
+					        		<!--   <input type="checkbox" id="verified" name="verified">-->	
+					        			 <div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="verified" name="verified">
+												<label class="custom-control-label" for="verified"></label>
+										</div>
+					        		</div>
+					        	</div>
+					        	
+					        	
+					        </div>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-primary" id="conformVerify">Save</button>
+					        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+					      </div>
+					      </form>
+					    </div>
+					  </div>
+					</div>	
+					
+					
+					<!-- ==================================entry info modal==================================== -->
+				   
+				   
+				   	<div class="modal fade" id="viewaudit" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
+															<div class="modal-dialog modal-sm" role="document">
+																<div class="modal-content">
+																	<div class="modal-header">
+																		<h5 class="modal-title" id="viewaudit" style="color: #000">Audit info</h5>
+																		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																			<span aria-hidden="true">&times;</span>
+																		</button>
+																	</div>
+																	<div class="modal-body">
+
+																		<div class="row">
+																			<div class="col-12">
+																				<div class="form-group">
+																					<label for="cc-payment" class="control-label mb-1">Entered By</label>
+																					<p id="auditUser"></p>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="row">
+																			<div class="col-12">
+																				<div class="form-group">
+																					<label for="cc-payment" class="control-label mb-1">Entry Date & Time</label>
+																					<p id="auditDate"></p>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="row">
+																			<div class="col-12">
+																				<div class="form-group">
+																					<label for="cc-payment" class="control-label mb-1">Update By</label>
+																					<p id="auditUpdatedBy"></p>
+																				</div>
+																			</div>
+																		</div>
+
+																		<div class="row">
+
+
+																			<div class="col-12">
+																				<div class="form-group">
+																					<label for="cc-payment" class="control-label mb-1">Update Date & Time</label>
+																					<p id="auditUpdatedTime"></p>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+
+																</div>
+															</div>
+														</div>
+														
+														
+														
+															<!-- verify modal -->
+				   
+				   
+				<!-- =====================================End============================================== -->
+				
+
+
+
+
+
+                
+                
+                
+                
+                      </div>   <!-- <div class="panel-body">  -->
+
+                   </div>   <!-- <div class="panel">  -->
+                     
+                     
+
+                </div>
+
+            </div>
+       
+            
+            
+            
+                   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!--    <script type="text/javascript" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>-->
+
+    <script src="/js/vendor/jquery-2.1.4.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/plugins.js"></script>
+    <script src="/js/main.js"></script>
+
+
+    <script src="/js/lib/data-table/datatables.min.js"></script>
+    <script src="/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+    <script src="/js/lib/data-table/dataTables.buttons.min.js"></script>
+    <script src="/js/lib/data-table/buttons.bootstrap.min.js"></script>
+    <script src="/js/lib/data-table/jszip.min.js"></script>
+    <script src="/js/lib/data-table/pdfmake.min.js"></script>
+    <script src="/js/lib/data-table/vfs_fonts.js"></script>
+    <script src="/js/lib/data-table/buttons.html5.min.js"></script>
+    <script src="/js/lib/data-table/buttons.print.min.js"></script>
+    <script src="/js/lib/data-table/buttons.colVis.min.js"></script>
+    <script src="/js/lib/data-table/datatables-init.js"></script>
+    <script type="text/javascript">
+    
+        
+        $(document).ready(function() {
+            $('#searchResultTable').DataTable({
+                "scrollX": false,
+              
+            });
+
+       });
+        
+        
+       
+        
+        $(document).ready(function() {
+            $('#itemTable').DataTable({
+                "scrollX": true,           
+            });
+
+       });
+        
+        $(document).ready(function() {
+            $('#specTable').DataTable({
+                "scrollX": true,
+              
+            });
+
+       });
+        
+        
+        $(document).ready(function() {
+            $('#specification').DataTable({
+                "scrollX": true,
+              
+            });
+
+       });
+    
+    
+    
+    $(document).ready(function() {
+        
+        $.getJSON("/inquiryverificationcontroller/inquiry/owner", {
+            ownerType : $('#ownerType').val(),
+            ajax : 'true'
+        }, function(data) {
+            var html = '<option value=" ">Select Buyer</option>';
+            var len = data.length;
+            for ( var i = 0; i < len; i++) {
+         
+                  html += '<option value="' + data[i].orderOwnerId + '">'
+                        + data[i].ownerName + '</option>';
+            }
+            html += '</option>';
+            $('#owner').html(html);
+        });
+
+// alert('ok');
+});
+    
+    
+    
+    $('#ownerType').change(
+	        function() {
+	            $.getJSON("/inquiryverificationcontroller/inquiry/owner", {
+	                ownerType : $(this).val(),   
+	                ajax : 'true'
+	            }, function(data) {
+	                var html = '<option value=" ">Select Buyer</option>';
+	                var len = data.length;
+	                
+	                for ( var i = 0; i < len; i++) {
+	                    html += '<option value="' + data[i].orderOwnerId + '">'
+	                            + data[i].ownerName + '</option>';
+	                }
+	                html += '</option>';
+	                $('#owner').html(html);
+	            });
+	        }); 
+    
+  
+    
+    
+    </script>
+    
+    
+    <script type="text/javascript" th:inline="javascript">
+		
+		var now = new Date();
+		var day = ("0" + now.getDate()).slice(-2);
+		var month = ("0" + (now.getMonth() + 1)).slice(-2);
+	
+	    var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+	    
+	    document.getElementById('endinquerydate').value = today;
+        document.getElementById('dateMail').value=today;
+	</script>
+	
+	<script type="text/javascript">
+	function chkvalue() {
+		var chkId=document.getElementById('verified');
+		
+        if (chkId.checked==true) {
+        	alert(chkId.value);
+        }
+        
+        else {
+        	
+        	alert('not checked ' + chkId.value );
+        }
+		
+	}
+	
+	</script>
+	
+	
+
+
+  <!-- ========================================cluster populate======================================= -->
+           <script>
+               
+           
+           function accessCluster()
+       	{
+       	
+        	   $.getJSON("/inquirycontroller/user/cluster", {
+       		                user : $("#userSearch").val(),   
+       		                ajax : 'true'
+       		            }, function(data) {
+       		            	//var html = '<option value=" ">Select Cluster Name</option>';
+       		            	var html;
+    		                var len = data.length;
+    		              
+    		                for ( var i = 0; i < len; i++) {
+    		                    html += '<option value="' + data[i].modelCluster.clusterId+ '">'
+    		                            + data[i].modelCluster.clusterName + '</option>';
+    		                }
+    		                html += '</option>';
+    		                $('#clusterSearch').html(html);
+       		            });
+       	        
+        	   
+        	   //alert($("#userSearch").val());
+       	}
+       	
+       	
+
+       	window.onload=accessCluster;   
+           
+           </script>
+      <!-- =============================================End here========================================== -->
+      
+      
+       <!-- =========================================Inquiry search function================================ -->
+             
+             <script>
+             
+             $('#inquirySearchBtn').click(function(e) {
+            	 
+            	
+                var mapped=document.getElementById("verifydone"); 
+            	 
+            	 
+            	 if(mapped.checked==false){
+            	 
+            	 //var startDate= document.getElementById("startDate").value;
+        		// var endDate= document.getElementById("searchEnd").value;
+            	 
+            	 
+               var active=document.getElementById("defaultChecked2");
+           	  
+           	  var activeStatus;
+           	  
+           	  if(active.checked==true){
+           		  activeStatus="1";
+           	 }
+           	  
+           	  else{
+           		  activeStatus="0";
+           	  }
+           	  
+           	  
+           	
+            	 
+            	 var formData= { 
+ 	                    "ownerType" :$("#ownerType").val(),
+ 	                    "owner" : $("#owner").val(),
+ 	                    "ultimateOwner" : $("#ultimateOwner").val(),
+ 	                    "inquiryId" : $("#searchInquiryId").val(),
+ 	                     "user" : $("#userSearch").val(),
+ 	                     "cluster" : $("#clusterSearch").val(),
+ 	                   // "itemName" : $("#itemSearch").val(),
+	                    // "specName" : $("#specSearch").val(),
+ 	                    "startDate" : $("#startDate").val(),
+ 	                    "endDate" : $("#endinquerydate").val(),
+ 	                    "mail" :$("#mailId").val(),
+ 	                    "inquiryNo" : $("#inquiryNo").val(),
+ 	                    "remarks" : $("#remarksSearch").val(),
+ 	                    "status" : activeStatus
+ 	                    
+ 	                    };
+            	 
+            	 
+            	// alert("Searching your inquiry.................");
+            	 
+            	
+            	 
+            	 
+             $('#searchResultTable tbody').empty();
+			 $('#itemTable tbody').empty();
+			 $('#specTable tbody').empty();
+			 $('#specification tbody').empty();
+            	
+            	 
+            	 
+        	 	 $.ajax({
+        		            type : "Get",	    		           
+        		             url:"/inquiryverificationcontroller/search/inquiry",
+        		            dataType : 'json',
+        			        data: formData,
+        		            success: function(result){
+        		            
+        		            	$.each(result, function(i,order){
+        		            		
+        		            		
+        		            			var status=order.activeStatus;
+        		            		
+        		            		//alert(status);
+        		            		
+        		            		if(status==1){
+        		            			status="Yes";
+        		            		}
+        		            		
+        		            		else{
+        		            			status="No"
+        		            		}
+        		            		
+                             var verify=order.verifyStatus;
+        		            		
+        		            		//alert(status);
+        		            		
+        		            		if(verify==1){
+        		            			verify="Yes";
+        		            		}
+        		            		
+        		            		else{
+        		            			verify="No"
+        		            		}
+        		            		
+        		            		
+        		            		 var d = new Date(order.orderDate);
+                                     var n = d.getMonth();
+                                     var n = d.getMonth() + 1;
+                                     d= (n.length > 1 ? n : "0" + n) + "/" + d.getDate() + "/" + d.getFullYear();
+        		            		
+        		            		 var customerRow = '<tr>' +
+        			          	        
+        		            		 
+     								
+     								'<td id="searchResultOrderId" class="inquiryId" >' + order.orderId+ '</td>' + 
+     								'<td class="" >' + order.userRefNo+ '</td>' + 
+     								'<td class="" >' + order.modelOrderOwner.ownerName+ '</td>' + 
+     								'<td class="" >' + + '</td>' +
+     								'<td class="" >' + d + '</td>' + 
+     								'<td class="" >' + order.modelOrderOwner.ownerEmail+ '</td>' +
+     								'<td class="" >' + order.orderRemarks+ '</td>' +
+     								'<td class="" >' + order.verifyRemarks+ '</td>' +
+     								'<td class="" >' + order.enteredBy.userName+ '</td>' +
+     								'<td class="" >' + status + '</td>' +
+     								'<td class="" >' + verify + '</td>' +
+     								'<td><a type="button" class="verifyOpen btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal">Verify</a>  <a type="button" class="audit btn btn-primary btn-sm" data-toggle="modal" data-target="#viewaudit">Audit</a>'+ '</td>'+
+	
+     								'<td><a href="#">report</a>'+'</td>'+
+     								
+     								'</tr>';
+     							  
+     							  
+     		     				
+     		                        $('#searchResultTable tbody').append(customerRow);
+     		                        
+     		                 
+
+        								
+        		            	});	//each function
+        		            	
+        		            	
+        		            	var table='#searchResultTable';
+        		            	
+        		            	$('.pagination').html('');
+        		            	
+        		            	var trnum =0;
+        		            	var maxRows =parseInt(5);
+        		            	var  totalRows=$(table+' tbody tr').length;
+        		            	
+        		            	$(table+' tr:gt(0)').each(function(e) {
+        		            	
+        		            	              trnum++;
+        		            	              
+        		            	              if(trnum > maxRows)
+        		            	              {
+        		            	                 $(this).hide();
+        		            	              }
+        		            	              if(trnum <= maxRows)
+        		            	              {
+        		            	                 $(this).show();
+        		            	              }
+        		            	    
+        		            	
+        		            	
+        		            	});   //each function
+        		            	
+        		            	 if(totalRows > maxRows)
+        		            	              {
+        		            	              
+        		            	              
+        		            	              var pagenum =Math.ceil(totalRows/maxRows);
+        		            	              
+        		            	              for(var i=1;i<=pagenum;)
+        		            	              {
+        		            	                 $("#inquiryTableP").append('<li class="btn-sm" data-page="'+i+'">\<span>'+ i++ +'</span></li>').show();
+        		            	              }  //for
+        		            	                
+        		            	              }   //if
+        		            	              
+        		            	              
+        		            	              $('.pagination li:first-child').addClass('active');
+        		            	             $('.pagination li').on('click',function(){
+        		            	             
+        		            	             var pageNum =  $(this).attr('data-page');
+        		            	             var trIndex= 0;
+        		            	             
+        		            	             $('.pagination li').removeClass('active');
+        		            	              $(this).addClass('active');
+        		            	             $(table+' tr:gt(0)').each(function(e) {
+        		            	             
+        		            	                trIndex++;
+        		            	                if(trIndex >(maxRows*pageNum) || trIndex<=((maxRows*pageNum)-maxRows))
+        		            	                {
+        		            	                    $(this).hide();
+        		            	                }
+        		            	                else
+        		            	                {
+        		            	                $(this).show();
+        		            	                }
+        		            	             
+        		            	            	             
+        		            	                }); // each function
+        		            	             
+        		            	             });  //  click function	            	
+        		           
+        		            	
+        		            },
+        		            
+        		            	
+        	 		 });
+            	 }
+            	 
+            	 
+            	 if(mapped.checked==true){
+            		 
+            		// alert("viewing verify done data.......");
+            		 
+            		 var active=document.getElementById("defaultChecked2");
+                  	  
+                  	  var activeStatus;
+                  	  
+                  	  if(active.checked==true){
+                  		  activeStatus="1";
+                  	 }
+                  	  
+                  	  else{
+                  		  activeStatus="0";
+                  	  }
+                  	  
+                  	  
+                  	
+                   	 
+                   	 var formData= { 
+        	                    "ownerType" :$("#ownerType").val(),
+        	                    "owner" : $("#owner").val(),
+        	                    "ultimateOwner" : $("#ultimateOwner").val(),
+        	                    "inquiryId" : $("#searchInquiryId").val(),
+        	                     "user" : $("#userSearch").val(),
+        	                     "cluster" : $("#clusterSearch").val(),
+        	                   // "itemName" : $("#itemSearch").val(),
+       	                    // "specName" : $("#specSearch").val(),
+        	                    "startDate" : $("#startDate").val(),
+        	                    "endDate" : $("#endinquerydate").val(),
+        	                    "mail" :$("#mailId").val(),
+        	                    "inquiryNo" : $("#inquiryNo").val(),
+        	                    "remarks" : $("#remarksSearch").val(),
+        	                    "status" : activeStatus,
+        	                    "doneStartDate" : $("#done_start_date").val(),
+        	                    "doneEndDate" : $("#dateMail").val(),
+        	                    "verifiedBy" : $("#verifiedBy").val()
+        	                    
+        	                    
+        	                    };
+                   	 
+                   	 
+                   	// alert("Searching your inquiry.................");
+                   	 
+                   	
+                   	 
+                   	 
+                    $('#searchResultTable tbody').empty();
+       			 $('#itemTable tbody').empty();
+       			 $('#specTable tbody').empty();
+       			 $('#specification tbody').empty();
+                   	
+                   	 
+                   	 
+               	 	 $.ajax({
+               		            type : "Get",	    		           
+               		             url:"/inquiryverificationcontroller/search/inquiry/verifydone",
+               		            dataType : 'json',
+               			        data: formData,
+               		            success: function(result){
+               		            
+               		            	$.each(result, function(i,order){
+               		            		
+               		            		
+               		            			var status=order.activeStatus;
+               		            		
+               		            		//alert(status);
+               		            		
+               		            		if(status==1){
+               		            			status="Yes";
+               		            		}
+               		            		
+               		            		else{
+               		            			status="No"
+               		            		}
+               		            		
+                                    var verify=order.verifyStatus;
+               		            		
+               		            		//alert(status);
+               		            		
+               		            		if(verify==1){
+               		            			verify="Yes";
+               		            		}
+               		            		
+               		            		else{
+               		            			verify="No"
+               		            		}
+               		            		
+               		            		
+               		            		 var d = new Date(order.orderDate);
+                                            var n = d.getMonth();
+                                            var n = d.getMonth() + 1;
+                                            d= (n.length > 1 ? n : "0" + n) + "/" + d.getDate() + "/" + d.getFullYear();
+               		            		
+               		            		 var customerRow = '<tr>' +
+               			          	        
+               		            		 
+            								
+            								'<td id="searchResultOrderId" class="inquiryId" >' + order.orderId+ '</td>' + 
+            								'<td class="" >' + order.userRefNo+ '</td>' + 
+            								'<td class="" >' + order.modelOrderOwner.ownerName+ '</td>' + 
+            								'<td class="" >' + + '</td>' +
+            								'<td class="" >' + d + '</td>' + 
+            								'<td class="" >' + order.modelOrderOwner.ownerEmail+ '</td>' +
+            								'<td class="" >' + order.orderRemarks+ '</td>' +
+            								'<td class="" >' + order.verifyRemarks+ '</td>' +
+            								'<td class="" >' + order.enteredBy.userName+ '</td>' +
+            								'<td class="" >' + status + '</td>' +
+            								'<td class="" >' + verify + '</td>' +
+            								'<td><a type="button" class="verifyOpen btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal">Verify</a>  <a type="button" class="audit btn btn-primary btn-sm" data-toggle="modal" data-target="#viewaudit">Audit</a>'+ '</td>'+
+       	
+            								'<td><a href="#">report</a>'+'</td>'+
+            								
+            								'</tr>';
+            							  
+            							  
+            		     				
+            		                        $('#searchResultTable tbody').append(customerRow);
+            		                        
+            		                 
+
+               								
+               		            	});	//each function
+               		            	var table='#searchResultTable';
+               		            	
+               		            	$('.pagination').html('');
+               		            	
+               		            	var trnum =0;
+               		            	var maxRows =parseInt(5);
+               		            	var  totalRows=$(table+' tbody tr').length;
+               		            	
+               		            	$(table+' tr:gt(0)').each(function(e) {
+               		            	
+               		            	              trnum++;
+               		            	              
+               		            	              if(trnum > maxRows)
+               		            	              {
+               		            	                 $(this).hide();
+               		            	              }
+               		            	              if(trnum <= maxRows)
+               		            	              {
+               		            	                 $(this).show();
+               		            	              }
+               		            	    
+               		            	
+               		            	
+               		            	});   //each function
+               		            	
+               		            	 if(totalRows > maxRows)
+               		            	              {
+               		            	              
+               		            	              
+               		            	              var pagenum =Math.ceil(totalRows/maxRows);
+               		            	              
+               		            	              for(var i=1;i<=pagenum;)
+               		            	              {
+               		            	                 $("#inquiryTableP").append('<li class="btn-sm" data-page="'+i+'">\<span>'+ i++ +'</span></li>').show();
+               		            	              }  //for
+               		            	                
+               		            	              }   //if
+               		            	              
+               		            	              
+               		            	              $('.pagination li:first-child').addClass('active');
+               		            	             $('.pagination li').on('click',function(){
+               		            	             
+               		            	             var pageNum =  $(this).attr('data-page');
+               		            	             var trIndex= 0;
+               		            	             
+               		            	             $('.pagination li').removeClass('active');
+               		            	              $(this).addClass('active');
+               		            	             $(table+' tr:gt(0)').each(function(e) {
+               		            	             
+               		            	                trIndex++;
+               		            	                if(trIndex >(maxRows*pageNum) || trIndex<=((maxRows*pageNum)-maxRows))
+               		            	                {
+               		            	                    $(this).hide();
+               		            	                }
+               		            	                else
+               		            	                {
+               		            	                $(this).show();
+               		            	                }
+               		            	             
+               		            	            	             
+               		            	                }); // each function
+               		            	             
+               		            	             });  //  click function	            	
+               		            
+               		            	
+               		            },
+               		            
+               		            	
+               	 		 });
+            		 
+            	 }
+             });
+             
+             </script>
+             
+      <!-- ============================================End here============================================ -->
+      
+      <!-- ====================================verify function========================================= -->
+      
+      
+      <script>
+         
+      $('#searchResultTable').on('click', '.verifyOpen', function (e) {
+    
+    	// alert("setting your data"); 
+    	
+    	
+    	 document.getElementById("smessageverification").innerHTML=null;
+    	 
+    	 var tr = $(this).closest('tr');            
+         var inquiryId = tr.find(".inquiryId").text();
+         
+        // alert(inquiryId);
+         
+         
+         var formData= { 
+ 			      "inquiryId" : inquiryId
+ 			       
+ 		        };
+         
+         
+         $.ajax({
+             type : "GET",	                  
+               url:"/verify/details/data/edit",
+               dataType : 'json',
+ 	          data: formData,
+               success: function(result){
+             
+ 	  
+                $.each(result, function(i,data){
+               	 
+               	 
+                	var checkStatus=data.verifyStatus;
+         			
+                    var status= document.getElementById("verified");
+              		
+              		//alert(active);
+              		
+              		if(checkStatus==1){
+              			status.checked=true;
+              		}
+              		else{
+              			status.checked=false;
+              		}
+          	      
+
+        			
+        			document.getElementById("update-order-id").value = data.orderId;
+        			document.getElementById("update-order-remarks").value=data.orderRemarks;
+        			document.getElementById("update-order-fremarks").value=data.verifyRemarks;
+ 						
+             	});
+                  
+                  
+ 					 
+ 		},   // end success
+ 	error : function(e) {
+ 		alert("ERROR: ", e);
+ 		console.log("ERROR: ", e);
+ 			}
+ 					
+ 					
+         });   // end ajax
+         
+     
+         
+      })
+      
+      
+      </script>
+      
+      <!-- =============================================End here======================================== -->
+    
+    
+    <!-- =====================================Function===================================== -->  
+      <script>
+      $('#conformVerify').on('click', function (e) {
+    	  
+    	  WRN_PROFILE_SAVE = "Are you sure you want to conform?";  
+			var check = confirm(WRN_PROFILE_SAVE); 
+			if(check == true){
+				
+				
+				
+				var inquiryId=document.getElementById("update-order-id").value;
+    			var verifyRemarks=document.getElementById("update-order-fremarks").value;
+    			var status= document.getElementById("verified");
+          		
+          		
+          		if(status.checked==true){
+          			status=1;
+          		}
+          		else{
+          			status=0;
+          		}
+    			
+    			//alert("inquiryId" + inquiryId);
+    			
+    			//alert(status);
+    			//alert(verifyRemarks);
+    			
+    			
+    			 var formData= { 
+    	 			      "inquiryId" : inquiryId,
+    	 			     "verifyRemarks" : verifyRemarks,
+    	 			    "status" : status
+    	 			       
+    	 		        };
+    	         
+    	         
+    	         $.ajax({
+    	             type : "POST",	                  
+    	               url:"/verify/edit/data/save",
+    	               dataType : 'json',
+    	 	          data: formData,
+    	               success: function(result){
+    	            	   
+    	            	// $('#searchResultTable tbody').empty();
+    	       			// $('#itemTable tbody').empty();
+    	       			/// $('#specTable tbody').empty();
+    	       			// $('#specification tbody').empty();
+   	                 	 	  
+    	                $.each(result, function(i,order){
+    	               	  
+    	                	var m="Data saved successfully,press close button";
+	                        document.getElementById("smessageverification").innerHTML=m;
+    	                	
+    	                	
+    	                /*	var status=order.activeStatus;
+   		            		
+   		            		//alert(status);
+   		            		
+   		            		if(status==1){
+   		            			status="Yes";
+   		            		}
+   		            		
+   		            		else{
+   		            			status="No"
+   		            		}
+   		            		
+                        var verify=order.verifyStatus;
+   		            		
+   		            		//alert(status);
+   		            		
+   		            		if(verify==1){
+   		            			verify="Yes";
+   		            		}
+   		            		
+   		            		else{
+   		            			verify="No"
+   		            		}
+   		            		
+   		            		
+   		            		 var d = new Date(order.orderDate);
+                                var n = d.getMonth();
+                                var n = d.getMonth() + 1;
+                                d= (n.length > 1 ? n : "0" + n) + "/" + d.getDate() + "/" + d.getFullYear();
+   		            		
+   		            		 var customerRow = '<tr>' +
+   			          	        
+   		            		 
+								
+								'<td id="searchResultOrderId" class="inquiryId" >' + order.orderId+ '</td>' + 
+								'<td class="" >' + order.userRefNo+ '</td>' + 
+								'<td class="" >' + order.modelOrderOwner.ownerName+ '</td>' + 
+								'<td class="" >' + + '</td>' +
+								'<td class="" >' + d + '</td>' + 
+								'<td class="" >' + order.modelOrderOwner.ownerEmail+ '</td>' +
+								'<td class="" >' + order.orderRemarks+ '</td>' +
+								'<td class="" >' + order.verifyRemarks+ '</td>' +
+								'<td class="" >' + order.enteredBy.userName+ '</td>' +
+								'<td class="" >' + status + '</td>' +
+								'<td class="" >' + verify + '</td>' +
+								'<td><a type="button" class="verifyOpen btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal">Verify</a>  <a type="button" class="audit btn btn-primary btn-sm" data-toggle="modal" data-target="#viewaudit">Audit</a>'+ '</td>'+
+
+								'<td><a href="#">report</a>'+'</td>'+
+								
+								'</tr>';
+							  
+							  
+		     				
+		                        $('#searchResultTable tbody').append(customerRow);
+    	               	
+    	 					*/	
+    	 					
+    	 					
+    	 					
+	                    	$("#searchResultTable tbody tr").each(function(){
+	           			  	 // alert("find chd table");
+	           			  	   var $row = $(this).closest("tr");    // Find the row
+	           		 	       var checkingid = $row.find(".inquiryId").text(); // Find the text
+	           		 	      //alert(idtest);
+	           		 	       if(inquiryId==checkingid){
+	           		 	    	  $(this).closest("tr").remove();
+	           		 	    	
+	             			     
+	           		 	       }
+	           			  });
+    	             	});
+    	                  
+    	                  
+    	 					 
+    	 		},   // end success
+    	 	error : function(e) {
+    	 		alert("ERROR: ", e);
+    	 		console.log("ERROR: ", e);
+    	 			}
+    	 					
+    	 					
+    	         });   // end ajax
+				
+			}
+			
+			else{
+				//alert("No");
+			}
+				});
+   </script>
+     
+     <!-- ====================================end here==================================== --> 
+     
+     
+     <!-- ================================================Get Item Data On Click inquiry Id========================== -->
+
+      <script type = "text/javascript">
+      
+      $("#searchResultTable").on('click','.inquiryId',function(){
+    	  
+    	
+    	 
+    	 var $row = $(this).closest("tr");    // Find the row
+	     var id = $row.find(".inquiryId").text();
+    	 
+    	// alert("Inquiry id is : "+id);
+    	 
+    	 
+    	 var formData= { 
+                  "orderId" : id
+                                 
+                  };
+     	 
+     	 
+     	 $('#itemTable tbody').empty();
+     	//$('#specTable tbody').empty();
+     //	$('#specification tbody').empty();
+     	
+			 
+ 	 	 $.ajax({
+ 		            type : "Get",	    		           
+ 		             url:"/inquiryverificationcontroller/search/item/byorderid",
+ 		            dataType : 'json',
+ 			        data: formData,
+ 		            success: function(result){
+ 		            
+ 		               $.each(result, function(i,oi){
+			               
+			        	   
+			        	   var status=oi.activeStatus;
+   	            	    	 
+   	            	    	 if(status==1){
+   	            	    		status="Yes";
+   	            	    	 }
+   	            	    	 else{
+   	            	    		status="No";
+   	            	    	 }
+			        	
+			                 
+			        	   var customerRow = '<tr>' +      
+                             '<td class="itemOrderId">' +oi.itemOrderId+'</td>' +
+				             '<td>' +oi.modelOrder.orderId+ '</td>' +
+				             '<td>' +oi.listModelItem.itemId+'</td>' +
+				             '<td>' +oi.listModelItem.itemName+'</td>' +
+				             '<td>' +oi.listModelItem.itemTypeId.itemTypeName + '</td>' +
+				             '<td>' +oi.remarks+'</td>' +
+				            // '<td class="qty"><a href="#"  type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#mediumModal333">Quantity</a>' +'</td>'+
+						   	 '<td>' +status+'</td>' +
+						   	'<td class="eidtItemData"><a href="#"  type="button" class="audit btn btn-primary btn-sm" data-toggle="modal" data-target="#viewaudit">Audit</a>' +'</td>'
+						      
+							 	
+			                 
+			         '</tr>';
+    
+  
+		  
+        $('#itemTable tbody').append(customerRow);
+			
+			                                    
+			});        // each
+ 		            
+ 		            	
+ 		            },
+ 		            
+ 		         
+ 			 });
+    	    
+      });
+    </script>
+   
+   <!-- ======================================================End============================================== -->
+   
+   
+    <!-- ================================================Get Qty Data On Click orderItem Id========================== -->
+
+      <script type = "text/javascript">
+      
+      $("#itemTable").on('click','.itemOrderId',function(){
+    	  
+    	// alert("finding itemOrder id.............");
+    	 
+    	 var $row = $(this).closest("tr");    // Find the row
+	     var id = $row.find(".itemOrderId").text();
+    	 
+    	// alert("itemOrder id is : "+id);
+    	 
+    	 
+    	 var formData= { 
+                  "itemOrderId" : id
+                                 
+                  };
+     	 
+     	 
+     	
+     	 $('#specTable tbody').empty();
+      	
+			 
+ 	 	 $.ajax({
+ 		            type : "Get",	    		           
+ 		             url:"/inquiryverificationcontroller/search/qty/byitemorderid",
+ 		            dataType : 'json',
+ 			        data: formData,
+ 		            success: function(result){
+ 		            
+ 		            	 $.each(result, function(i,oi){
+				               
+				        	   
+				        	/*   var status=oi.activeStatus;
+	   	            	    	 
+	   	            	    	 if(status==1){
+	   	            	    		status="Yes";
+	   	            	    	 }
+	   	            	    	 else{
+	   	            	    		status="No";
+	   	            	    	 }
+				        	
+	   	            	    	 
+	   	            	    	 //alert("test" + oi.modelDesign.designId);
+				                 
+				        	   var customerRow = '<tr>' +      
+                               '<td class="itemOrderQtyId">' +oi.orderItemQtyId+'</td>' +
+					             '<td>' +oi.itemQty+ '</td>' +
+					             '<td>' +oi.remarks+'</td>' +
+					             '<td class="viewSpec"><a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#largeModal99">Specification</a>'+ '</td>' +
+					             '<td>' +  + '</td>' +
+					             '<td class="designView"><a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addDesignModal">Design</a>' + '</td>' +
+					             '<td>'+ +'</td>' +
+					             '<td>' +status+ '</td>' +
+							   	 
+							   	'<td class="editQtyModal"><a class="btn btn-success btn-sm" data-toggle="modal" data-target="#editQtyModal">Edit</a><a href="#"  type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#smallmodal11">Audit</a>' +'</td>'
+							      
+								 	
+				                 
+				         '</tr>';
+                        */
+                        
+                        
+ 		            		 var status=oi.activeStatus;
+   	            	    	 
+   	            	    	 if(status==1){
+   	            	    		status="Yes";
+   	            	    	 }
+   	            	    	 else{
+   	            	    		status="No";
+   	            	    	 }
+   	            	    	 
+   	            	    	// alert(oi.designId);
+   	            	    	
+   	            	    	 var designId;
+   	            	    	 
+   	            	    	 
+   	            	    	 
+   	            	    	 if(oi.designId==0){
+   	            	    		 
+   	            	    		 designId="N/A";
+   	            	    	 }
+   	            	    	 
+   	            	    	 else{
+   	            	    		 designId=oi.designId;
+   	            	    	 }
+			        	
+			                 
+			        	   var customerRow = '<tr>' +      
+                           '<td class="itemOrderQtyId">' +oi.orderItemQuantityId+'</td>' +
+				             '<td>' +oi.itemQty+ '</td>' +
+				             '<td>' +oi.remarks+'</td>' +
+				           //  '<td class="viewSpec"><a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#largeModal99">Specification</a>'+ '</td>' +
+				             '<td>' + designId + '</td>' +
+				            // '<td class="designView"><a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addDesignModal">Design</a>' + '</td>' +
+				           //  '<td>'+ +'</td>' +
+				             '<td>' +status+ '</td>' +
+						   	 
+						   	'<td class="editQtyModal"> <a href="#"  type="button" class="audit btn btn-primary btn-sm" data-toggle="modal" data-target="#viewaudit">Audit</a>' +'</td>'
+						      
+							 	
+			                 
+			         '</tr>';
+    
+			  
+          $('#specTable tbody').append(customerRow);
+				
+				                                    
+				});        // each
+ 		            
+ 		           	
+ 		            },
+ 		            
+ 		         
+ 			 });
+    	    
+      });
+    </script>
+   
+   <!-- ======================================================End============================================== -->
+   
+   
+    <!-- ================================================Get Spec Data On Click Qty Id========================== -->
+
+      <script>
+      
+      $("#specTable").on('click','.itemOrderQtyId',function(){
+    	  
+    	//alert("finding itemOrder id.............");
+    	 
+    	 var $row = $(this).closest("tr");    // Find the row
+	     var id = $row.find(".itemOrderQtyId").text();
+    	 
+    	// alert("itemOrder id is : "+id);
+    	 
+    	 
+    	 var formData= { 
+                  "itemOrderQtyId" : id
+                                 
+                  };
+     	 
+     	 
+     	
+     	 $('#specification tbody').empty();
+      	
+			 
+ 	 	 $.ajax({
+ 		            type : "Get",	    		           
+ 		             url:"/inquiryverificationcontroller/search/specification/orderItemQtyId",
+ 		            dataType : 'json',
+ 			        data: formData,
+ 		            success: function(result){
+ 		            
+ 		          	 $.each(result, function(i,order){
+		            		
+		            		
+		            		var status=order.activeStatus;
+		            		
+		            		//alert(status);
+		            		
+		            		if(status==1){
+		            			status="Yes";
+		            		}
+		            		
+		            		else{
+		            			status="No"
+		            		}
+		            		
+		            		
+		            		
+		            		 var customerRow = '<tr>' +
+			          	        
+		            	
+							'<td id="specificationId" class="specificationId" >' + order.orderItemQtySpecId+ '</td>' + 
+							'<td class="" >' + order.modelSpec.specName + '</td>' +   							 
+							'<td class="" >' + order.specValue+ '</td>' +
+							'<td class="" >' + order.remarks+ '</td>' +
+							'<td class="" >' + status + '</td>' +
+							'<td class="editSpec"> <a href="#" type="button" class="audit btn btn-primary btn-sm" data-toggle="modal" data-target="#viewaudit">Audit</a>'+ '</td>'+
+							
+							
+							'</tr>';
+						 
+						  
+	     				
+	                        $('#specification tbody').append(customerRow);
+
+								
+		            	});
+ 		            
+ 		           	
+ 		            },
+ 		            
+ 		         
+ 			 });
+    	    
+      });
+    </script>
+   
+   <!-- ======================================================End============================================== -->
+   
+   
+     <!-- =========================================view audit details for inquiry======================================= -->
+        
+        <script>
+         
+        $('#searchResultTable').on('click', '.audit', function (e) {
+           
+        	//alert("Showing your audit details..........");
+        	
+        	var tr = $(this).closest('tr');            
+            var inquiryId = tr.find(".inquiryId").text();
+            
+            //alert("Your inquiry id is " + inquiryId);
+            
+            var formData= { 
+  			      "inquiryId" : inquiryId
+  			       
+  		        };
+  	   
+  	       $.ajax({
+              type : "GET",	                  
+                url:"/inquirycontroller/audit/view/byid",
+                dataType : 'json',
+  	          data: formData,
+                success: function(result){
+              
+  	  
+                 $.each(result, function(i,inquiry){
+                	 
+                	 
+                	
+                	 
+                	 var d = new Date(inquiry.entryTimestamp);
+                     var n = d.getMonth();
+                     var n = d.getMonth() + 1;
+                     d= (n.length > 1 ? n : "0" + n) + "/" + d.getDate() + "/" + d.getFullYear();
+                     
+                     
+                     var t = new Date(inquiry.entryTimestamp); // for now
+                     t.getHours(); // => 9
+                     t.getMinutes(); // =>  30
+                     t.getSeconds(); // => 51
+                     
+                    
+                     
+                    
+                     
+                     var u = new Date(inquiry.updateTimestap);
+                     var n = u.getMonth();
+                     var n = u.getMonth() + 1;
+                     u= (n.length > 1 ? n : "0" + n) + "/" + u.getDate() + "/" + u.getFullYear();
+                     
+                     
+                   //  alert(u);
+            		
+            		
+            		
+
+                document.getElementById("auditUser").innerHTML=inquiry.enteredBy.userName;
+                document.getElementById("auditDate").innerHTML=t;
+                document.getElementById("auditUpdatedBy").innerHTML=inquiry.updatedBy.userName;
+                document.getElementById("auditUpdatedTime").innerHTML=u;
+                
+               // alert("enteredBy :" + inquiry.enteredBy.userName)
+  						
+              	});
+                   
+                   
+  					 
+  		},   // end success
+  	error : function(e) {
+  		alert("ERROR: ", e);
+  		console.log("ERROR: ", e);
+  			}
+  					
+  					
+          });   // end ajax
+        	
+        });
+        
+        
+        
+        </script>
+        
+   <!-- =======================================End here=================================================== -->
+   
+   
+    <!-- =========================================view audit details for orderitem======================================= -->
+        
+        <script>
+         
+        $('#itemTable').on('click', '.audit', function (e) {
+           
+        	//alert("Showing your audit details..........");
+        	
+        	var tr = $(this).closest('tr');            
+            var itemOrderId = tr.find(".itemOrderId").text();
+            
+            //alert("Your inquiry id is " + inquiryId);
+            
+            var formData= { 
+  			      "itemOrderId" : itemOrderId
+  			       
+  		        };
+  	   
+  	       $.ajax({
+              type : "GET",	                  
+                url:"/inquirymsdetailscontroller/audit/view/byorderitemid",
+                dataType : 'json',
+  	          data: formData,
+                success: function(result){
+              
+  	  
+                 $.each(result, function(i,inquiry){
+                	 
+                	 
+                	 var d = new Date(inquiry.entryTimestamp);
+                     var n = d.getMonth();
+                     var n = d.getMonth() + 1;
+                     d= (n.length > 1 ? n : "0" + n) + "/" + d.getDate() + "/" + d.getFullYear();
+                     
+                     
+                     var u = new Date(inquiry.updateTimestap);
+                     var n = u.getMonth();
+                     var n = u.getMonth() + 1;
+                     u= (n.length > 1 ? n : "0" + n) + "/" + u.getDate() + "/" + u.getFullYear();
+                     
+            		
+            		
+
+                document.getElementById("auditUser").innerHTML=inquiry.modelEnteredBy.userName;
+                document.getElementById("auditDate").innerHTML=d;
+                document.getElementById("auditUpdatedBy").innerHTML=inquiry.modelUpdatedBy.userName;
+                document.getElementById("auditUpdatedTime").innerHTML=u;
+                
+               // alert("enteredBy :" + inquiry.enteredBy.userName)
+  						
+              	});
+                   
+                   
+  					 
+  		},   // end success
+  	error : function(e) {
+  		alert("ERROR: ", e);
+  		console.log("ERROR: ", e);
+  			}
+  					
+  					
+          });   // end ajax
+        	
+        });
+        
+        
+        
+        </script>
+        
+   <!-- =======================================End here=================================================== -->
+   
+    <!-- =========================================view audit details for orderitemqty======================================= -->
+        
+        <script>
+         
+        $('#specTable').on('click', '.audit', function (e) {
+           
+        	//alert("Showing your audit details..........");
+        	
+        	var tr = $(this).closest('tr');            
+            var itemOrderQtyId = tr.find(".itemOrderQtyId").text();
+            
+            //alert("Your inquiry id is " + inquiryId);
+            
+            var formData= { 
+  			      "itemOrderQtyId" : itemOrderQtyId
+  			       
+  		        };
+  	   
+  	       $.ajax({
+              type : "GET",	                  
+                url:"/inquirymsdetailscontroller/audit/view/byorderitemqtyid",
+                dataType : 'json',
+  	          data: formData,
+                success: function(result){
+              
+  	  
+                 $.each(result, function(i,inquiry){
+                	 
+                	 
+                	 var d = new Date(inquiry.entryTimestamp);
+                     var n = d.getMonth();
+                     var n = d.getMonth() + 1;
+                     d= (n.length > 1 ? n : "0" + n) + "/" + d.getDate() + "/" + d.getFullYear();
+                     
+                     var u = new Date(inquiry.updateTimestap);
+                     var n = u.getMonth();
+                     var n = u.getMonth() + 1;
+                     u= (n.length > 1 ? n : "0" + n) + "/" + u.getDate() + "/" + u.getFullYear();
+                     
+            		
+            		
+
+                document.getElementById("auditUser").innerHTML=inquiry.modelEnteredBy.userName;
+                document.getElementById("auditDate").innerHTML=d;
+                document.getElementById("auditUpdatedBy").innerHTML=inquiry.modelUpdatedBy.userName;
+                document.getElementById("auditUpdatedTime").innerHTML=u;
+                
+               // alert("enteredBy :" + inquiry.enteredBy.userName)
+  						
+              	});
+                   
+                   
+  					 
+  		},   // end success
+  	error : function(e) {
+  		alert("ERROR: ", e);
+  		console.log("ERROR: ", e);
+  			}
+  					
+  					
+          });   // end ajax
+        	
+        });
+        
+        
+        
+        </script>
+        
+   <!-- =======================================End here=================================================== -->
+   
+   
+    <!-- =========================================view audit details for specification======================================= -->
+        
+        <script>
+         
+        $('#specification').on('click', '.audit', function (e) {
+           
+        	//alert("Showing your audit details..........");
+        	
+        	var tr = $(this).closest('tr');            
+            var specificationId = tr.find(".specificationId").text();
+            
+            //alert("Your inquiry id is " + inquiryId);
+            
+            var formData= { 
+  			      "specificationId" : specificationId
+  			       
+  		        };
+  	   
+  	       $.ajax({
+              type : "GET",	                  
+                url:"/inquirymsdetailscontroller/audit/view/byspecificationid",
+                dataType : 'json',
+  	          data: formData,
+                success: function(result){
+              
+  	  
+                 $.each(result, function(i,inquiry){
+                	 
+                	 
+                	 var d = new Date(inquiry.entryTimestamp);
+                     var n = d.getMonth();
+                     var n = d.getMonth() + 1;
+                     d= (n.length > 1 ? n : "0" + n) + "/" + d.getDate() + "/" + d.getFullYear();
+                     
+                     var u = new Date(inquiry.updateTimestap);
+                     var n = u.getMonth();
+                     var n = u.getMonth() + 1;
+                     u= (n.length > 1 ? n : "0" + n) + "/" + u.getDate() + "/" + u.getFullYear();
+                     
+            		
+
+                document.getElementById("auditUser").innerHTML=inquiry.modelEnteredBy.userName;
+                document.getElementById("auditDate").innerHTML=d;
+                document.getElementById("auditUpdatedBy").innerHTML=inquiry.modelUpdatedBy.userName;
+                document.getElementById("auditUpdatedTime").innerHTML=u;
+                
+               // alert("enteredBy :" + inquiry.enteredBy.userName)
+  						
+              	});
+                   
+                   
+  					 
+  		},   // end success
+  	error : function(e) {
+  		alert("ERROR: ", e);
+  		console.log("ERROR: ", e);
+  			}
+  					
+  					
+          });   // end ajax
+        	
+        });
+        
+        
+        
+        </script>
+        
+   <!-- =======================================End here=================================================== -->
+   
+   
+    <!--pagination  Script-->
+	<!--pagination  Script-->
+	<script>
+	
+	var table='#searchResultTable';
+	
+	
+	  $('#maxRows').on('change',function(){
+	
+	$('.pagination').html('');
+	
+	var trnum =0;
+	var maxRows =parseInt($(this).val());
+	var  totalRows=$(table+' tbody tr').length;
+	
+	$(table+' tr:gt(0)').each(function(e) {
+	
+	              trnum++;
+	              
+	              if(trnum > maxRows)
+	              {
+	                 $(this).hide();
+	              }
+	              if(trnum <= maxRows)
+	              {
+	                 $(this).show();
+	              }
+	    
+	
+	
+	});   //each function
+	
+	 if(totalRows > maxRows)
+	              {
+	              
+	              
+	              var pagenum =Math.ceil(totalRows/maxRows);
+	              
+	              for(var i=1;i<=pagenum;)
+	              {
+	                 $('#inquiryTableP').append('<li class="btn-sm" data-page="'+i+'">\<span>'+ i++ +'</span></li>').show();
+	              }  //for
+	                
+	              }   //if
+	              
+	              
+	              $('.pagination li:first-child').addClass('active');
+	             $('.pagination li').on('click',function(){
+	             
+	             var pageNum =  $(this).attr('data-page');
+	             var trIndex= 0;
+	             
+	             $('.pagination li').removeClass('active');
+	              $(this).addClass('active');
+	             $(table+' tr:gt(0)').each(function(e) {
+	             
+	                trIndex++;
+	                if(trIndex >(maxRows*pageNum) || trIndex<=((maxRows*pageNum)-maxRows))
+	                {
+	                    $(this).hide();
+	                }
+	                else
+	                {
+	                $(this).show();
+	                }
+	             
+	             
+	             
+	                }); // each function
+	             
+	             });  //  click function
+	             
+	             
+	      });   //on change function
+	             
+	  
+
+	            
+</script>
+      
+      
+        <script>
+    
+  $(document).ready(function() {
+        
+	  var y = document.getElementById("userSearch").length;
+	  
+	// alert("size is  : " + y);
+	 
+	 
+	 if(y!=1){
+		   
+	 var x = document.getElementById("userSearch");
+	  var option = document.createElement("option");
+	  option.text = "Select User";
+	  option.value=" ";
+	  x.add(option, x[0]);
+	  
+	  document.getElementById("userSearch").selectedIndex = "0";
+	
+	 }
+
+ });
+  
+  </script>
+  
+  
+  <script>
+    
+  $(document).ready(function() {
+        
+	  var y = document.getElementById("verifiedBy").length;
+	  
+	// alert("size is  : " + y);
+	 
+	 
+	 if(y!=1){
+		   
+	 var x = document.getElementById("verifiedBy");
+	  var option = document.createElement("option");
+	  option.text = "Select Verifier";
+	  option.value=" ";
+	  x.add(option, x[0]);
+	  
+	  document.getElementById("verifiedBy").selectedIndex = "0";
+	
+	 }
+
+ });
+  
+  </script>
+      
+   
+   </script>
+  
+    <style>
+   
+    .table td {
+    padding: 0 5px;
+}
+
+   </style>
+   
+   
+            
+</body>
+
+</html>

@@ -1,0 +1,1889 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang=""xmlns:th="http://www.thymeleaf.org">
+<!--<![endif]-->
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Washing Plan</title>
+	<meta name="description" content="Sufee Admin - HTML5 Admin Template">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+	<link rel="apple-touch-icon" href="apple-icon.png">
+	<link rel="shortcut icon" href="favicon.ico">
+
+    <link rel="stylesheet"th:href="@{/css/normalize.css}" href="../../static/css/normalize.css">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"href="../../static/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}"href="../../static/css/font-awesome.min.css">
+    <link rel="stylesheet"th:href="@{/css/themify-icons.css}" href="../../static/css/themify-icons.css">
+    <link rel="stylesheet"th:href="@{/css/flag-icon.min.css}" href="../../static/css/flag-icon.min.css">
+    <link rel="stylesheet" th:href="@{/css/cs-skin-elastic.css}"href="../../static/css/cs-skin-elastic.css">
+	<!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
+	<link rel="stylesheet"th:href="@{/scss/style.css}" href="../../static/scss/style.css">
+	<link rel="stylesheet" href="/css/lib/datatable/dataTables.bootstrap.min.css">
+
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+	<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+	<style type="text/css">
+		.modal-backdrop.show {
+			display: none;
+		}
+
+		td {
+			border: 1px #DDD solid;
+			padding: 5px;
+			cursor: pointer;
+		}
+
+		.selected {
+			background: red;
+		}
+
+		.dataTables_filter {
+			text-align: right;
+		}
+		
+		.col-md-7{
+			padding-left: 78%;
+		}
+		.pagination {
+			
+		}
+
+		.modal {
+			z-index: 999999999;
+		}
+	</style>
+	<script>
+	
+
+	</script>
+	
+	
+	 <style>
+.custom-header-panel{
+    background-color: #004b8e !important;
+    border-color: #004b8e !important;
+    color: white;
+}
+
+
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading {
+  padding: 10px 15px;
+  margin: -15px -15px 15px;
+  font-size: 17.5px;
+  font-weight: 500;      
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-footer {
+  padding: 10px 15px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+} 
+
+.panel-primary {
+  border-color: #428bca;
+}
+
+.panel-primary .panel-heading {
+  color: #ffffff;
+  background-color: #428bca;
+  border-color: #428bca;
+}
+/* This kinda of works but now 
+.panel, .panel-group .panel-heading+.panel-collapse>.panel-body{
+    border: none;
+}
+*/
+.card-header{
+    /* background-color: #004b8e !important; */
+    background-color: #004b8e !important;
+    border-color: #004b8e !important;
+    color: white;
+
+    padding: 10px 15px;
+  /*margin: -15px -15px 15px; */
+
+  font-size: 17.5px;
+  font-weight: 500;      
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+
+ <style type="text/css">
+       
+       #calculate{
+      display:none;
+     }
+    
+        .modal-backdrop.show {
+            display: none;
+        }
+
+        .modal-backdrop.fade {
+            display: none;
+        }
+
+/*
+        div.dataTables_wrapper {
+            width: 100%;
+        }
+*/
+		.selected{
+			background-color: #eee;
+			color: #000;
+		}
+		
+		.dataTables_length, .dataTables_filter {
+			display: none !important;
+		}
+    </style>
+</head>
+
+<body>
+	<!-- Left Panel -->
+
+	<aside id="left-panel" class="left-panel">
+		<nav class="navbar navbar-expand-sm navbar-default">
+
+			<div class="navbar-header">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+					<i class="fa fa-bars"></i>
+				</button>
+				<a class="navbar-brand" href="./">MLFM</a>
+				<a class="navbar-brand hidden" href="./">BD</a>
+			</div>
+
+			<div id="main-menu" class="main-menu collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+				
+			
+                
+   <li class="menu-item-has-children dropdown" >
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <i class="menu-icon fa fa-laptop"></i>    Set Up
+          </a>
+        
+       <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown" >
+             <li th:each="s:${listModelUserObjectSetup}" 
+                   th:value="${s.userObjectId}">
+            <a class="dropdown-item" th:href="@{${s.modelObject.filePath}+'/'+${s.modelUser.userId}}" >
+               
+                    <span th:utext="${s.modelObject.objectName}">
+                   </span>
+                </a>
+            </li>
+          
+        </ul>
+        
+   </li>
+   
+      
+	 <li class="menu-item-has-children dropdown">
+     
+       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="menu-icon fa fa-laptop"></i> Transaction
+        </a>
+        
+           <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown">
+              <li th:each="t:${listModelUserObjectTransaction}"
+                   th:value="${t.userObjectId}">
+                   
+                   <a class="dropdown-item" th:href="@{${t.modelObject.filePath}+'/'+${t.modelUser.userId}}" >
+                 
+                         <span th:utext="${t.modelObject.objectName}">
+                         </span>
+                      </a>
+              </li>
+          </ul>
+      </li>			
+				
+        	
+		   	
+		<li class="menu-item-has-children dropdown">
+     
+             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="menu-icon fa fa-laptop"></i>   Tools
+             </a>
+        
+            <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown">
+                <li th:each="u:${listModelUserObjectTool}"
+                     th:value="${u.userObjectId}">
+                     
+                           <a class="dropdown-item" th:href="@{${u.modelObject.filePath}+'/'+${u.modelUser.userId}}" >
+                 
+                    <span th:utext="${u.modelObject.objectName}">
+                    </span>
+                 </a>
+               </li>
+          
+            </ul>
+       </li>	
+
+
+		<li class="menu-item-has-children dropdown">
+     
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="menu-icon fa fa-laptop"></i> Report
+              </a>
+        
+              <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown">
+                   <li th:each="r:${listModelUserObjectReport}"
+                        th:value="${r.userObjectId}">
+                        <a class="dropdown-item" th:href="@{${r.modelObject.filePath}+'/'+${r.modelUser.userId}}" >
+                     <!--  <a class="dropdown-item" th:href="${r.modelObject.filePath}"> -->
+                           <span th:utext="${r.modelObject.objectName}">
+                           </span>
+                       </a>
+                   </li>
+          
+              </ul>
+        </li>	
+					
+					
+					
+	             </ul>
+			</div>
+		</nav>
+	</aside>
+
+
+
+	<!-- Left Panel -->
+
+	<!-- Right Panel -->
+
+	<div id="right-panel" class="right-panel">
+
+		<!-- Header-->
+		<header id="header" class="header">
+
+			<div class="header-menu">
+<!--
+				<div class="col-sm-4">
+					<a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
+					<div class="header-left">
+						<button class="search-trigger"><i class="fa fa-search"></i></button>
+						<div class="form-inline">
+							<form class="search-form">
+								<input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
+								<button class="search-close" type="submit"><i class="fa fa-close"></i></button>
+							</form>
+						</div>
+
+					</div>
+				</div>
+-->
+		<!--
+				<div class="col-sm-5">
+					<div class="user-area dropdown float-right">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">
+                        </a>
+
+						<div class="user-menu dropdown-menu">
+							<a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
+							
+							<input type="text" class="nav-link" th:value="${userId}" id="accessUserId" readonly>
+
+							<a class="nav-link" href="/logoncontroller/init"><i class="fa fa-power -off"></i>Logout</a>
+						</div>
+					</div>
+                </div>
+         -->       
+                  
+                        <div class="col-sm-4 text-right" >
+                         
+                      </div> 
+               
+                      <div class="col-sm-8 text-right" >
+                          
+                           <a class="nav-link" href="/logoncontroller/init"  style="float:right;" ><i class="fa fa-power -off"></i>Logout</a>
+                            <span class="nav-link" th:text="${name}"readonly style="color: black; float:right; padding-left:5px;"></span>  
+                            <span class="nav-link" style="color: black; float:right; padding-right:0px;">User : </span>  
+                           
+                          
+                         
+                       </div>
+                 
+			</div>
+
+		</header><!-- /header -->
+		<!-- Header-->
+		<div class="up-msg">
+			<div class="col-sm-6 text-left">
+			<!--	<input type="text" id="displayMessage" name=""  readonly style="color: limegreen; display: block;border:0px">
+			-->
+			<h5 class="modal-title" id="displayMessage" style="color: limegreen; font-size:15px; margin-left:0px"></h5>
+			</div>
+		</div>
+
+		<div class="breadcrumbs">
+			<!--  <div class="col-sm-4">
+				<div class="page-header float-left">
+					<div class="page-title">
+						<h1>Mending Plan From</h1>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-8">
+				<div class="page-header float-right">
+					<div class="page-title">
+						<ol class="breadcrumb text-right">
+							<li><a href="#">Dashboard</a></li>
+							<li><a href="#">Washing Info</a></li>
+							<li class="active">Washing Plan From</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>-->
+
+	
+<!--		
+=============================================================================
+Washing-Plan Search Part
+================================================================================		
+-->		
+<div class="card">
+	<div class="card-header">
+		<strong class="card-title">Washing Plan Search</strong>
+	</div>
+	<div class="card-body">
+					<form id="searchForm" class="needs-validation" method="post" novalidate >
+						<div class="modal-body">
+                				<div class="row">
+									<div class="col-3">
+										<div class="form-group">
+											<label >Client Type</label>
+											<select class="form-control" id="buyerTypeId" name ="buyerType" placeholder="BuyerType" >
+												 <option value="">Select Client Type</option>
+												<option	th:each="buyerTypeList:${modelOrderOwnerTypeList}"
+														th:value="${buyerTypeList.orderOwnerTypeId}"
+														th:utext="${buyerTypeList.orderOwnerTypeName}"/>
+											</select>											
+										</div>
+									</div>
+								
+									<div class="col-3">
+										<div class="form-group">
+											<label >Client Name</label>
+											<select class="form-control" id="buyerId" name ="buyerName" placeholder="BuyerName"  >
+		
+											</select>
+										</div>
+									</div>
+									
+									<div class="col-3" hidden>
+										<div class="form-group">
+											<label >Order Type<span style="color:red">*</span></label>
+											<select class="form-control" id="orderTypeId" name="orderType" placeholder="orderType" required>
+												<option value="2">workOrder</option>
+												<option value="1">inquiryOrder</option>
+												
+			
+											</select>	
+										</div>
+									</div>
+
+									<div class="col-3">
+										<div class="form-group">
+											<label class="control-label mb-1">PO ID</label>
+											<input  type="text" id="pOId" class="form-control" aria-required="true" aria-invalid="false"  name ="pOId" placeholder="PO ID" >
+										</div>
+									</div>
+									
+									<div class="col-3">
+										<div class="form-group">
+											<label>PO From Date</label>
+											<input  type="date" id="startDate" class="form-control"  name ="From Date" >
+										</div>
+									</div>
+									
+									<div class="col-3">
+										<div class="form-group">
+											<label>PO To Date</label>
+											<input  type="date" id="endDate" class="form-control"  name ="To Date"  >
+										</div>
+									</div>
+			
+									<div class="col-3">
+										<div class="form-group">
+											<label class="control-label mb-1">Washing Plan Done</label>
+														<!-- Default checked -->
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" onClick="onLoadBody()" id="active" name ="active" >
+												<label class="custom-control-label" for="active"></label>
+											</div>
+										</div>
+									</div>
+									
+								<div class="col-3">
+										<div class="form-group">
+											<label>Washing Plan Done From Date</label>
+											<input  type="date" id="washingPlanDoneStartDate" class="form-control"  name ="From Date" >
+										</div>
+									</div>
+									
+									<div class="col-3">
+										<div class="form-group">
+											<label>Washing Plan Done To Date</label>
+											<input  type="date" id="washingPlanDoneEndDate" class="form-control"  name ="To Date"  >
+										</div>
+									</div>
+																	
+									<div class="col-sm-12 text-right">
+										<input type="submit" value="Search" class="btn btn-primary" style="margin-top: 24px;">
+										<input type="button" style="margin-top: 24px;" class="btn btn-success" onClick="location.reload()" value="Refresh">				
+									</div>
+							
+
+						</div>
+					</div>				
+				</form>	
+			</div>
+		</div>
+
+		<!-- =======================================  Washing Plan Table-1========================== -->
+						
+		 <h5 style="margin-top:25px"> Select </h5>
+				<div class="form-group">
+					<select  name="state" id="maxRows" class="form-control" style="width:150px;">
+						<option value="5">5</option>
+						<option value="10">10</option>
+						<option value="15">15</option>
+						<option value="20">20</option>
+						<option value="50">50</option>
+						<option value="70">70</option>
+						<option value="100">100</option>
+						<option value="5000">Show ALL</option>
+				     </select>
+				</div>		
+					
+					
+					
+					
+					
+						<div class="card" style="width: 1070px;height: 500px; overflow:scroll">
+						<div class="card-header">
+								<strong class="card-title">Search Result</strong>
+							</div>
+							<div class="card-body">
+							<div class="text-right">
+								<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names">
+							</div>
+								<table id="washingPlanSearchTable" class="table table-striped table-bordered" cellspacing="0" style="width: 2000px">
+								
+								  <h6 style="color:red; font-size:12px;margin-left:20px" id="washingPlanSearchTableMassage" >Click Work Order Id to get Washing Plan data</h6>
+								
+									<thead>
+										<tr>
+											<th scope="col">WO ID</th>
+											<th scope="col">WO Date</th>
+											<th scope="col">PO ID</th>
+											<th scope="col">PO Date (<span style="font-size:15px">yyyy/mm/dd</span>)</th>
+											<th scope="col">Buyer/Other Name</th>
+											<th scope="col">Item Name</th>
+											<th scope="col">PO Qty</th>
+											<th scope="col">UOM</th>
+											<th scope="col">Washing Plan Qty</th>
+											<th scope="col">Remaining Qty</th>
+											<th scope="col">Action</th>
+											
+
+										</tr>
+									</thead>
+									<tbody>
+									
+					
+									
+									</tbody>
+								</table>
+								
+								
+	<div class="pagination-container">
+	           			<nav>
+	           			    <ul id="pagination" class="pagination"></ul>
+				        </nav>
+				</div> 
+							</div>
+						</div>
+	
+	<!-- =======================================  Washing Plan Table-2========================== -->
+					
+						<div class="card" style="width: 100%; overflow:scroll">
+						<div class="card-header">
+								<strong class="card-title">Washing Plan Data</strong>
+							</div>
+							<div class="card-body">
+							<div class="text-right">
+								<input type="text" id="myInput2" onkeyup="myFunction2()" placeholder="Search for names">
+							</div>
+								<table id="washingPlanDataTable" class="table table-striped table-bordered" cellspacing="0" style="width: 100%">
+									<thead>
+										<tr>
+									
+											<th scope="col">Plan ID</th>
+											<th scope="col">Plan Date (<span style="font-size:15px">yyyy/mm/dd</span>)</th>
+											<th scope="col">Plan Qty</th>
+											<th scope="col">UOM</th>
+											<th scope="col">PO ID</th>
+											<th scope="col">Buyer/Other Name</th>
+											<th scope="col">Item Name</th>
+											<th scope="col">Remarks</th>
+											<th scope="col">Status</th>
+											<th scope="col">Action</th>
+								
+
+										</tr>
+									</thead>
+									<tbody>
+				<!--			
+										<tr >
+											<td scope="row"><a type="text" ></a></td>
+											<td scope="row"><span ></span></td>
+											<td><span ></span></td>
+											<td><span ></span></td>
+											<td><span ></span></td>
+											<td><span ></span></td>
+											<td><span ></span></td>
+											
+											<td>
+												 <a class="btn btn-primary" data-toggle="modal" data-target="#largeModal60">Edit</a> 
+											</td>
+										</tr>
+			-->					
+									</tbody>
+								</table>
+							</div>
+						</div>		
+		
+		
+		
+		
+	</div><!-- /#right-panel -->
+
+	<!-- Right Panel -->
+
+
+
+
+
+												
+
+<!--=====================================================================
+				Save Washing Plan Entry  modal
+=====================================================================-->
+	
+	<div class="modal fade" id="largeModal15" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="largeModalLabel">Washing Plan Entry</h5>
+					
+					
+					<h5 class="modal-title" id="washingPlanModalMessage" style="color: limegreen; font-size:15px; margin-left:150px"></h5>
+					
+					
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+				</div>
+				<div class="modal-body" style="text-align: left">
+					<form  class="needs-validation" method="post"  novalidate>
+                                            					
+                <div class="row">
+
+ 			   		<div class="col-3" >
+						<div class="form-group">
+							<label class="control-label mb-1">Washing Plan Id</label>
+							<input  type="text" id="washingPlanId" class="form-control" aria-required="true" aria-invalid="false"  name ="washingPlanId" placeholder="WashingPlanId" readonly>
+						</div>
+					</div>
+					
+					<div class="col-3">
+						<div class="form-group">
+							<label class="control-label mb-1">PO ID</label>
+							<input  type="text" id="pOId" class="form-control" aria-required="true" aria-invalid="false"  name ="pOId" placeholder="POId" readonly>
+						</div>
+					</div>
+					
+					<div class="col-3">
+						<div class="form-group">
+							<label class="control-label mb-1">PO Qty</label>
+							<input  type="text" id="pOQty" class="form-control" aria-required="true" aria-invalid="false"  name ="pOQty" placeholder="PO Qty" readonly>
+						</div>
+					</div>
+					
+					
+					<div class="col-3">
+						<div class="form-group">
+							<label class="control-label mb-1">Item Name</label>
+							<input  type="text" id="itemName" class="form-control" aria-required="true" aria-invalid="false"  name ="itemName" placeholder="itemName" readonly>
+						</div>
+					</div>
+										
+					<div class="col-3">
+						<div class="form-group">
+							<label>Washing Plan Date</label>
+							<input type="date" id="washingPlanDate" class="form-control"  name ="From Date" >
+						</div>
+					</div>
+					
+					<div class="col-3">
+						<div class="form-group">
+							<label class="control-label mb-1">Washing Plan Qty</label>
+							<input  type="text" id="washingPlanQty" class="form-control" aria-required="true" aria-invalid="false"  name ="washingPlanQty" placeholder="Washing Plan Qty" >
+						</div>
+					</div>
+					
+					<div class="col-3">
+						<div class="form-group">
+							<label >UOM</label>
+							<select class="form-control" id="uomId" name ="uomId" placeholder="UOM" >
+							<option	th:each="modelUOMList:${modelUOMList}"
+									th:value="${modelUOMList.uomId}"
+									th:utext="${modelUOMList.uomName}"/>
+							</select>											
+						</div>
+					</div>
+										
+					<div class="col-3">
+						<div class="form-group">
+							<label class="control-label mb-1">Active</label>
+								<!-- Default checked -->
+							<div class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input" onClick="onLoadBody()" id="washingPlanActive" name ="active" checked>
+								<label class="custom-control-label" for="washingPlanActive"></label>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-5">
+						<div class="form-group">
+							<label for="" class="control-label mb-1">Remarks</label>
+							<textarea rows="3" cols="60" name="washingPlanRemarks" placeholder="Write Message Here" id="washingPlanRemarks"class="form-control" aria-required="true" aria-invalid="false">
+							</textarea>
+						</div>
+					</div>                     					
+				</div>				
+				<div class="row">                                         	
+					<div class="col-12 text-right">
+						<button type="button" id="SaveWashingPlan"  class="btn btn-primary btn-md">
+        				Save
+        				</button>
+    				</div>									
+				</div>
+				
+				
+				<!-- ======================================= Saved Washing Plan Table========================== -->
+					
+		<div class="row">
+			<div class="col-12">
+						<div class="card" style="width: 100%;height: 300px; overflow:scroll">
+						
+							<div class="card-body">
+							
+								<table id="WashingPlanTablePopUp" class="table table-striped table-bordered" cellspacing="0" style="width: 100%">
+									<thead>
+										<tr>
+												<th scope="col">Washing Plan ID</th>
+												<th scope="col">Washing Plan Date (<span style="font-size:15px">yyyy/mm/dd</span>)</th>
+						     					<th scope="col">Washing Plan Qty</th>
+						     					<th scope="col">UOM</th>
+						     					<th scope="col">Buyer/Other Name</th>
+						     					<th scope="col">Item Name</th>
+						     					<th scope="col">PO ID</th>
+						    					<th scope="col">Remarks</th>
+						    					<th scope="col">Status</th>
+						    	<!--				
+						    					<th scope="col">Action</th>
+								-->		
+										</tr>
+									</thead>
+									<tbody>
+				
+									</tbody>
+								</table>
+							</div>
+						</div>		
+				</div>
+			</div>
+
+ <div class="row">                                         	
+		<div class="col-12 text-right">
+			<button type="button" id="ViewWashingPlan" data-dismiss="modal" class="btn btn-primary btn-md">
+        	Done
+        	</button>
+    	</div>									
+	</div>
+											
+					
+    				</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<!--=====================================================================
+				Edit Washing Plan Entry  modal
+=====================================================================-->
+	
+	<div class="modal fade" id="largeModal60" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="largeModalLabel">Edit Washing Plan</h5>
+					
+					
+					<h5 class="modal-title" id="editWashingPlanModalMessage" style="color: limegreen; font-size:15px; margin-left:100px"></h5>
+					
+					
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+				</div>
+				<div class="modal-body" style="text-align: left">
+					<form  class="needs-validation" method="post"  novalidate>
+                                            					
+                <div class="row">
+
+ 			   		<div class="col-3" >
+						<div class="form-group">
+							<label class="control-label mb-1">Washing Plan Id</label>
+							<input  type="text" id="editWashingPlanId" class="form-control" aria-required="true" aria-invalid="false"  name ="washingPlanId" placeholder="washingPlanId" readonly>
+						</div>
+					</div>
+					
+					<div class="col-3">
+						<div class="form-group">
+							<label class="control-label mb-1">PO ID</label>
+							<input  type="text" id="editPOId" class="form-control" aria-required="true" aria-invalid="false"  name ="pOId" placeholder="POId" readonly>
+						</div>
+					</div>
+					
+					<div class="col-3">
+						<div class="form-group">
+							<label class="control-label mb-1">Item Name</label>
+							<input  type="text" id="editItemName" class="form-control" aria-required="true" aria-invalid="false"  name ="itemName" placeholder="itemName" readonly>
+						</div>
+					</div>
+										
+					<div class="col-3">
+						<div class="form-group">
+							<label>Washing Plan Date</label>
+							<input type="date" id="editWashingPlanDate" class="form-control"  name ="From Date" >
+						</div>
+					</div>
+					
+					<div class="col-3">
+						<div class="form-group">
+							<label class="control-label mb-1">Washing Plan Qty</label>
+							<input  type="text" id="editWashingPlanQty" class="form-control" aria-required="true" aria-invalid="false"  name ="washingPlanQty" placeholder="Washing Plan Qty" >
+						</div>
+					</div>
+					
+					<div class="col-3">
+						<div class="form-group">
+							<label >UOM</label>
+							<select class="form-control" id="editUOMId" name ="uomId" placeholder="UOM" >
+							<option	th:each="modelUOMList:${modelUOMList}"
+									th:value="${modelUOMList.uomId}"
+									th:utext="${modelUOMList.uomName}"/>
+							</select>											
+						</div>
+					</div>
+					
+					<div class="col-3" hidden>
+						<div class="form-group">
+							<label class="control-label mb-1">Washing Plan Qty Max</label>
+							<input  type="text" id="editWashingPlanQtyMax" class="form-control" aria-required="true" aria-invalid="false"  name ="washingPlanQty" placeholder="Washing Plan Qty Max" readonly>
+						</div>
+					</div>
+										
+					<div class="col-3">
+						<div class="form-group">
+							<label class="control-label mb-1">Active</label>
+								<!-- Default checked -->
+							<div class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input" onClick="onLoadBody()" id="editWashingPlanActive" name ="active" checked>
+								<label class="custom-control-label" for="editWashingPlanActive"></label>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-5">
+						<div class="form-group">
+							<label for="" class="control-label mb-1">Remarks</label>
+							<textarea rows="3" cols="60" name="washingPlanRemarks" placeholder="Write Message Here"  id="editWashingPlanRemarks"class="form-control" aria-required="true" aria-invalid="false">
+							</textarea>
+						</div>
+					</div>                     					
+	</div>				
+	<div class="row">                                         	
+		<div class="col-12 text-right">
+		<!--	<button type="button" id="SaveEditWashingPlan" data-dismiss="modal"  class="btn btn-primary btn-md">
+                	Save
+        	    </button>
+       --> 	
+        	<button type="button" id="SaveEditWashingPlan" class="btn btn-primary btn-md">Save</button>
+        	
+        	<button type="button" class="btn btn-secondary" data-dismiss="modal" id="EditWashingPlanModalCloseBtn">Close</button>
+    	</div>									
+	</div>
+											
+					
+    				</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+					
+		
+	<script src="/js/vendor/jquery-2.1.4.min.js"></script>
+	<script src="/js/popper.min.js"></script>
+	<script src="/js/plugins.js"></script>
+	<script src="/js/main.js"></script>
+	<script src="/js/order.js"></script>
+	<script src="/js/lib/data-table/datatables.min.js"></script>
+	<script src="/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+	<script src="/js/lib/data-table/dataTables.buttons.min.js"></script>
+	<script src="/js/lib/data-table/buttons.bootstrap.min.js"></script>
+	<script src="/js/lib/data-table/jszip.min.js"></script>
+	<script src="/js/lib/data-table/pdfmake.min.js"></script>
+	<script src="/js/lib/data-table/vfs_fonts.js"></script>
+	<script src="/js/lib/data-table/buttons.html5.min.js"></script>
+	<script src="/js/lib/data-table/buttons.print.min.js"></script>
+	<script src="/js/lib/data-table/buttons.colVis.min.js"></script>
+	<script src="/js/lib/data-table/datatables-init.js"></script>
+	<script src="/js/lib/data-table/jquery.dataTables.min.js"></script>
+	<script src="/js/lib/data-table/datatables-init.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+
+
+	<script type="text/javascript">
+	
+	
+	/*
+	scripts for current date
+	
+	*/
+	
+	Date.prototype.toDateInputValue = (function() {
+		    var local = new Date(this);
+		    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+		    return local.toJSON().slice(0,10);
+		});
+
+         document.getElementById("washingPlanDate").value = new Date().toDateInputValue();
+	
+	
+/*
+scripts for datatable
+*/	
+	
+	
+  $(document).ready(function() {
+        $('#example1').DataTable({
+            "scrollX": true,         
+        });
+
+   });
+   
+     $(document).ready(function() {
+        $('#washingPlanSearchTable').DataTable({
+            "scrollX": true,         
+        });
+
+   });
+   
+     $(document).ready(function() {
+        $('#washingPlanDataTable').DataTable({
+            "scrollX": true,         
+        });
+
+   });
+   
+   
+   $(document).ready(function() {
+        $('#mendingPlanSavetable').DataTable({
+            "scrollX": true,         
+        });
+
+   });
+	
+
+/*
+script for buyerlist through buyerTypeList
+
+*/
+
+	function codeAddress()
+	{
+	
+	$.getJSON("/mendingplancontroller/findowners", {
+		                buyerType : $('#buyerTypeId').val(),   
+		                ajax : 'true'
+		            }, function(data) {
+		                var html = '<option value="">Select Client</option>';
+		                var len = data.length;
+		                
+		                for ( var i = 0; i < len; i++) {
+		                    html += '<option value="' + data[i].orderOwnerId + '">'
+		                            + data[i].ownerName + '</option>';
+		                }
+		                html += '</option>';
+		                $('#buyerId').html(html);
+		            });
+		
+	}
+
+	window.onload=codeAddress;
+	
+	$('#buyerTypeId').change(
+		        function() {
+		            $.getJSON("/mendingplancontroller/findowners", {
+		                buyerType : $(this).val(),   
+		                ajax : 'true'
+		            }, function(data) {
+		                var html = '<option value="">Select Client</option>';
+		                var len = data.length;
+		                
+		                for ( var i = 0; i < len; i++) {
+		                    html += '<option value="' + data[i].orderOwnerId + '">'
+		                            + data[i].ownerName + '</option>';
+		                }
+		                html += '</option>';
+		                $('#buyerId').html(html);
+		            });
+		        });
+		        
+	/*
+		table's search scripts
+	*/	        
+		        
+		       
+  $(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#washingPlanSearchTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+}); 
+
+
+  $(document).ready(function(){
+  $("#myInput2").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#washingPlanDataTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+}); 		       
+		        
+		        
+/*
+	search Form Scripts
+
+*/		        
+		        
+	$(function () {
+    $('#searchForm').submit(function(e) {
+     // prevent default for submission
+      e.preventDefault();
+
+      $('#washingPlanSearchTable tbody').empty();
+
+       var check=document.getElementById("active");
+       if(check.checked==true){
+
+      	 if($("#pOId").val()!=""||($("#washingPlanDoneStartDate").val()!=""||$("#washingPlanDoneEndDate").val()!=""))
+		{
+		text="";
+      	document.getElementById("displayMessage").value=text;
+
+      	completedWashingPlanSearch();
+      	
+      	}
+      	else if ($("#buyerTypeId").val()!=""&&$("#buyerId").val()!="")
+      	{
+
+      	text="";
+      	document.getElementById("displayMessage").value=text;
+      		completedWashingPlanSearch();
+      	}
+      	else
+      	{
+
+      	text="Please Choose Another Data";
+      	document.getElementById("displayMessage").innerHTML=text;
+      	$('#washingPlanSearchTable tbody').empty();
+      	}	
+
+      	}	//end nested if
+      	else{
+
+      	 if($("#pOId").val()!=""||$("#startDate").val()!=""||$("#endDate").val()!="")
+		{
+
+		text="";
+      	document.getElementById("displayMessage").value=text;
+      		pendingWashingPlanSearch();
+      		
+      	}else if ($("#buyerTypeId").val()!=""&&$("#buyerId").val()!="")
+      	{
+
+      	text="";
+      	document.getElementById("displayMessage").value=text;
+      		pendingWashingPlanSearch();
+      	}
+      	
+      	else
+      	{
+
+      	text="Please Choose Another Data";
+      	document.getElementById("displayMessage").innerHTML=text;
+      	$('#washingPlanSearchTable tbody').empty();
+      	}	
+   	
+      	} 	//end nested else	  
+      
+ 
+   });  // submit
+   });   // function
+     
+   
+  /*
+  scripts for search pending & completed mendingPlan
+  
+  */ 
+		        
+		        
+function pendingWashingPlanSearch(){
+    
+  var pOId=$("#pOId").val();
+  var startDate= $("#startDate").val();
+  var endDate= $("#endDate").val();
+  var buyerId= $("#buyerId").val();
+   
+    var formData= { 
+       	 					"pOId" : pOId,
+       	 					"buyerId" : buyerId,
+        					"startDate" : startDate,
+        					"endDate" : endDate	
+        					};
+      
+      //  $('#table tbody').html('');
+       	  $('#washingPlanSearchTable tbody').empty();
+       	  
+       	  
+       	  $.ajax({
+            			type : "GET",
+           				// url :  "/api/inquiry_search",
+           				   url:"/washingplancontroller/pendingwashingplansearch",
+            			   dataType : 'json',
+	    				   data: formData,
+            			   success: function(result){
+            			   
+            if(result===null||result.length==0)
+            {
+            alert("No Records are found");
+            
+            }else{
+            
+             $.each(result, function(i,modelWashingPlanCustomList){
+					
+	    var customerRow = '<tr>' +
+	    		    	
+	    	'<td class="tdWOMstId">' + modelWashingPlanCustomList.wOMstId + '</td>' +
+			'<td hidden>' + modelWashingPlanCustomList.wOChdId + '</td>' +     			
+			'<td>' + modelWashingPlanCustomList.wODate + '</td>' +
+			'<td class="tdPOId">' + modelWashingPlanCustomList.pOId + '</td>' +   			
+			'<td>' + modelWashingPlanCustomList.pODate + '</td>' +
+			//'<td class="buyerId" >' + modelWashingPlanCustomList.buyerId + '</td>' +
+			'<td class="tdBuyerName">' + modelWashingPlanCustomList.buyerName + '</td>' +
+			'<td class="tdItemName">' + modelWashingPlanCustomList.itemName+'</td>' +
+			//'<td>' + modelWashingPlanCustomList.uomId+'</td>' +
+			'<td class="tdPOQty">' + modelWashingPlanCustomList.pOQty +'</td>' +
+			'<td>' + modelWashingPlanCustomList.uomName+'</td>' +
+			//'<td>' + modelWashingPlanCustomList.itemId+'</td>' +
+			'<td class="tdWashingQty">' + modelWashingPlanCustomList.washingPlanQty+'</td>' +
+			'<td>' + modelWashingPlanCustomList.washingPlanQtyUnDone+'</td>' +
+			'<td class="tdWashingPlan">' + '<input type="button" value="Washing Plan" class="btn btn-primary btn-md" data-toggle="modal" data-target="#largeModal15" >'+ '</td>' +
+		
+						        
+			'</tr>';
+						
+	      $('#washingPlanSearchTable tbody').append(customerRow);
+	      
+	     					
+		});        // each
+		
+		
+		
+		
+		                          // for default 10 data   
+		                                    
+	var table='#washingPlanSearchTable';
+	
+	$(".pagination").html('');
+	
+	var trnum =0;
+	var maxRows =parseInt(5);
+	var  totalRows=$(table+' tbody tr').length;
+	
+	$(table+' tr:gt(0)').each(function(e) {
+	
+	              trnum++;
+	              
+	              if(trnum > maxRows)
+	              {
+	                 $(this).hide();
+	              }
+	              if(trnum <= maxRows)
+	              {
+	                 $(this).show();
+	              }
+	    
+	
+	
+	});   //each function
+	
+	 if(totalRows > maxRows)
+	              {
+	              
+	              
+	              var pagenum =Math.ceil(totalRows/maxRows);
+	              
+	              for(var i=1;i<=pagenum;)
+	              {
+	                 $("#pagination").append('<li class="btn-sm" data-page="'+i+'">\<span>'+ i++ +'</span></li>').show();
+	              }  //for
+	                
+	              }   //if
+	              
+	              
+	              $('.pagination li:first-child').addClass('active');
+	             $('.pagination li').on('click',function(){
+	             
+	             var pageNum =  $(this).attr('data-page');
+	             var trIndex= 0;
+	             
+	             $('.pagination li').removeClass('active');
+	              $(this).addClass('active');
+	             $(table+' tr:gt(0)').each(function(e) {
+	             
+	                trIndex++;
+	                if(trIndex >(maxRows*pageNum) || trIndex<=((maxRows*pageNum)-maxRows))
+	                {
+	                    $(this).hide();
+	                }
+	                else
+	                {
+	                $(this).show();
+	                }
+	             
+	             
+	             
+	                }); // each function
+	             
+	             });  //  click function
+	             
+	             
+	
+		                                       
+		                // default 10 data - end  
+		
+		
+		
+		}	//else
+		
+		
+		
+		
+					 
+		},   // end success
+	error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+										
+        });   // end ajax
+   
+    
+   }
+   
+   
+   
+   function completedWashingPlanSearch(){
+
+  var pOId=$("#pOId").val();
+  var startDate= $("#washingPlanDoneStartDate").val();
+  var endDate= $("#washingPlanDoneEndDate").val();
+  var buyerId= $("#buyerId").val();
+   
+    var formData= { 
+       	 					"pOId" : pOId,
+       	 					"buyerId" : buyerId,
+        					"startDate" : startDate,
+        					"endDate" : endDate	
+        					};
+      
+      //  $('#table tbody').html('');
+       	  $('#washingPlanSearchTable tbody').empty();
+       	  
+       	  
+       	  $.ajax({
+            			type : "GET",
+           				// url :  "/api/inquiry_search",
+           				   url:"/washingplancontroller/completedwashingplansearch",
+            			   dataType : 'json',
+	    				   data: formData,
+            			   success: function(result){
+            			   
+            if(result===null||result.length==0)
+            {
+            alert("No Records are found");
+            
+            }else{
+            
+             $.each(result, function(i,modelWashingPlanCustomList){
+					
+	    var customerRow = '<tr>' +
+	    		    	
+	    	'<td class="tdWOMstId">' + modelWashingPlanCustomList.wOMstId + '</td>' +
+			'<td hidden>' + modelWashingPlanCustomList.wOChdId + '</td>' +     			
+			'<td>' + modelWashingPlanCustomList.wODate + '</td>' +
+			'<td class="tdPOId">' + modelWashingPlanCustomList.pOId + '</td>' +   			
+			'<td>' + modelWashingPlanCustomList.pODate + '</td>' +
+			//'<td class="buyerId" >' + modelWashingPlanCustomList.buyerId + '</td>' +
+			'<td class="tdBuyerName">' + modelWashingPlanCustomList.buyerName + '</td>' +
+			'<td class="tdItemName">' + modelWashingPlanCustomList.itemName+'</td>' +
+			//'<td>' + modelWashingPlanCustomList.uomId+'</td>' +
+			'<td class="tdPOQty">' + modelWashingPlanCustomList.pOQty +'</td>' +
+			'<td>' + modelWashingPlanCustomList.uomName+'</td>' +
+			//'<td>' + modelWashingPlanCustomList.itemId+'</td>' +
+			'<td class="tdWashingQty">' + modelWashingPlanCustomList.washingPlanQty+'</td>' +
+			'<td>' + modelWashingPlanCustomList.washingPlanQtyUnDone+'</td>' +
+			'<td class="tdWashingPlan">' + '<input type="button" value="Washing Plan" class="btn btn-primary btn-md" data-toggle="modal" data-target="#largeModal15" >'+ '</td>' +
+		
+						        
+			'</tr>';
+									  
+									  						
+	      $('#washingPlanSearchTable tbody').append(customerRow);
+	      	     
+					
+		});        // each
+		
+		}	//else
+					 
+		},   // end success
+	error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+										
+        });   // end ajax
+    
+   
+   }
+   
+   
+   /*
+   
+   scripts for save washing plan
+   
+   
+   */
+   
+    $("#washingPlanSearchTable").on('click','.tdWashingPlan',function(){
+   
+	    var $row = $(this).closest("tr");  
+	     
+	    //var $row = $(".tdQCSearch").closest("tr"); 
+	    var pOId = $row.find(".tdPOId").text();
+	    var pOQty = $row.find(".tdPOQty").text();
+	    var itemName = $row.find(".tdItemName").text();
+	    var n="";
+	 
+	     $(".modal-body #pOId").val( pOId );
+	     $(".modal-body #pOQty").val( pOQty );
+	     $(".modal-body #itemName").val( itemName );
+	
+	     $(".modal-body #washingPlanQty").val(n);
+	     $(".modal-body #washingPlanRemarks").val(n);
+	   
+	
+	 var formData= { 
+     				 		"pOId" : pOId,
+   
+
+						};
+		
+	$('#WashingPlanTablePopUp tbody').empty();					
+						
+		$.ajax({
+   		           type : "GET",    		           
+   		             url:"/washingplancontroller/savewashingplansearch",
+   		            dataType : 'json',
+   			        data: formData,
+   		            success: function(result){
+   		            
+
+   		               $.each(result, function(i,modelWashingPlanList){
+   		               
+ 					
+	    var customerRow = '<tr>' +
+	    	
+	    	'<td class="washingPlanId" >' + modelWashingPlanList.washingPlanId + '</td>' +
+	    	'<td class="washingPlanDate">' + modelWashingPlanList.washingPlanDate + '</td>' +
+	    	'<td class="washingPlanQty">' + modelWashingPlanList.washingPlanQty +'</td>' +
+	    	'<td >' + modelWashingPlanList.uomName + '</td>' +
+	    	'<td >' + modelWashingPlanList.buyerName + '</td>' +
+			'<td >' + modelWashingPlanList.itemName + '</td>' +
+			'<td class="washingPlanPOId">' + modelWashingPlanList.pOId + '</td>' +
+	    	'<td class="washingPlanRemarks" >' + modelWashingPlanList.washingPlanRemarks + '</td>' +
+	    	'<td class="sActive">' + modelWashingPlanList.sActive + '</td>' +
+			//'<td class="tdMendingPlanRemove">' + '<button type="button" class="btn btn-danger btn-sm" onclick="qCPlanDeleteFunction(this)">Remove</button>'+'</td>' + 
+			        
+			'</tr>';
+		
+	      $('#WashingPlanTablePopUp tbody').append(customerRow);
+		
+		});        // each
+   		            	
+   		            },	//success
+   			 });	//ajax
+   			 
+						
+		});
+		
+		
+	 $('#SaveWashingPlan').click(function(e) {
+	 	 
+	 var n="";
+	 var washingPlanDate=document.getElementById("washingPlanDate").value;
+	 var pOId=document.getElementById("pOId").value;
+	 var pOQty=document.getElementById("pOQty").value;
+	 var uomId=document.getElementById("uomId").value;
+	 var itemName=document.getElementById("itemName").value;
+	 var washingPlanQty=document.getElementById("washingPlanQty").value;
+	 var washingPlanRemarks=document.getElementById("washingPlanRemarks").value;
+	 var check=document.getElementById("washingPlanActive");
+	 if(check.checked==true)
+		{
+			var activeStatus = 1;
+			var x="Active"
+		}
+	else
+		{
+			var activeStatus = 0;
+			var x="InActive"
+		}
+		
+	 
+	if(parseFloat(washingPlanQty)>parseFloat(pOQty)){
+	 
+	 	alert("Washing Plan Quantity cannot be higher than "+parseFloat(pOQty));
+	 	
+	 	}
+	 else if(washingPlanQty==n)
+	 {
+	 alert("Please insert Washing Plan Quantity");
+	 }	
+	 else
+	 {
+	 
+	 
+	 	var formData= { 
+     				 		"pOId" : pOId,
+     				 		"uomId" : uomId,
+        					"washingPlanDate" : washingPlanDate,
+        					"washingPlanQty" : washingPlanQty,
+        					"washingPlanRemarks" : washingPlanRemarks,
+        					"activeStatus" : activeStatus
+       	 					
+						};
+	 	
+	 	$('#WashingPlanTablePopUp tbody').empty();					
+						
+		$.ajax({
+   		           type : "POST",    		           
+   		             url:"/washingplancontroller/savewashingplan",
+   		            dataType : 'json',
+   			        data: formData,
+   		            success: function(result){
+   		            
+   		          
+   		            var text="Data saved successfully,press close button ";
+		            document.getElementById("washingPlanModalMessage").innerHTML=text;
+   		            
+
+   		               $.each(result, function(i,modelWashingPlanList){
+   		               
+ 					
+	    var customerRow = '<tr>' +
+	    
+	    	'<td class="washingPlanId" >' + modelWashingPlanList.washingPlanId + '</td>' +
+	    	'<td class="washingPlanDate">' + modelWashingPlanList.washingPlanDate + '</td>' +
+	    	'<td class="washingPlanQty">' + modelWashingPlanList.washingPlanQty +'</td>' +
+	    	'<td >' + modelWashingPlanList.uomName + '</td>' +
+	    	'<td >' + modelWashingPlanList.buyerName + '</td>' +
+			'<td >' + modelWashingPlanList.itemName + '</td>' +
+			'<td class="washingPlanPOId">' + modelWashingPlanList.pOId + '</td>' +
+	    	'<td class="washingPlanRemarks" >' + modelWashingPlanList.washingPlanRemarks + '</td>' +
+	    	'<td class="sActive">' + modelWashingPlanList.sActive + '</td>' +
+			//'<td class="tdMendingPlanRemove">' + '<button type="button" class="btn btn-danger btn-sm" onclick="qCPlanDeleteFunction(this)">Remove</button>'+'</td>' + 
+			        
+			'</tr>';
+		
+	      $('#WashingPlanTablePopUp tbody').append(customerRow);
+		
+		});        // each
+   		            	
+
+   		            },	//success
+   			 });	//ajax
+	 	
+	 	
+	 	
+	 	
+	 	
+	 }		//else condition
+	 
+	 });	//clickFunction	
+	 
+/*	 
+	 
+	  $("#MendingPlanTablePopUp").on('click','.tdMendingPlanRemove',function(){
+		  
+		  var $row = $(this).closest("tr");
+		  var pOId = $row.find(".mendingPlanPOId").text();
+		  var qCId = $row.find(".mendingPlanQCId").text();
+		  var mendingPlanId = $row.find(".mendingPlanId").text();
+
+		   var formData= { 
+     				 		
+        				  "qCId" : qCId,
+        				  "pOId" : pOId,
+        				  "mendingPlanId" : mendingPlanId
+
+						};
+			
+			
+			$('#MendingPlanTablePopUp tbody').empty();		
+		
+		 $.ajax({
+   		            type : "POST",	    		           
+   		             url:"/mendingplancontroller/deletemendingplan",
+   		            dataType : 'json',
+   			        data: formData,
+   		            success: function(result){
+   		        
+   		             $.each(result, function(i,modelMendingPlanList){
+					
+			
+					
+	   var customerRow = '<tr>' +
+	    	
+	    	'<td class="mendingPlanId">' + modelMendingPlanList.mendingPlanId + '</td>' +
+	    	'<td class="mendingPlanDate">' + modelMendingPlanList.mendingPlanDate + '</td>' +
+	    	'<td class="mendingPlanPOId">' + modelMendingPlanList.pOId + '</td>' +
+	    	'<td class="mendingPlanQty">' + modelMendingPlanList.mendingPlanQty +'</td>' +
+	    	'<td >' + modelMendingPlanList.buyerName + '</td>' +
+			'<td >' + modelMendingPlanList.uomName + '</td>' +
+			'<td >' + modelMendingPlanList.itemName + '</td>' +
+			'<td class="mendingPlanQCId">' + modelMendingPlanList.qCId + '</td>' +
+	    	'<td class="mendingPlanRemarks">' + modelMendingPlanList.mendingPlanRemarks + '</td>' +
+	    	'<td class="sActive">' + modelMendingPlanList.sActive + '</td>' +
+			'<td class="tdMendingPlanRemove">' + '<button type="button" class="btn btn-danger btn-sm" onclick="mendingPlanDeleteFunction(this)">Remove</button>'+'</td>' + 
+			        
+			'</tr>';
+									  
+		
+	      $('#MendingPlanTablePopUp tbody').append(customerRow);
+	      
+	     
+					
+		});       // each
+
+   		            	
+   		            },	//success function
+   			 });	//ajax
+						
+						
+		//document.getElementById("QCPlanTablePopUp").deleteRow(x);				
+		 
+		 });	//click function
+		 
+		 
+*/		 
+		 
+/*
+	scripts for viewing saved washingPlan data
+
+*/		
+
+
+	 $('#ViewWashingPlan').click(function(e) {
+ 
+    
+
+    
+     $('#WashingPlanTablePopUp tr').each(function() {  
+     
+      var $row = $(this).closest("tr"); 
+    
+
+     
+     var washingPlanId = $row.find(".washingPlanId").text();
+     
+ 
+     
+     if(washingPlanId=="")
+   	{
+   
+   	}
+   	else{
+   
+  
+      var formData= { 
+     				 		
+        					"washingPlanId" : washingPlanId
+        					
+       	 					
+						};
+						
+	$('#washingPlanDataTable tbody').empty();				
+    
+    $.ajax({
+   		           type : "GET",    		           
+   		             url:"/washingplancontroller/showwashingplandata",
+   		            dataType : 'json',
+   			        data: formData,
+   		            success: function(result){
+   		            
+   		               $.each(result, function(i,modelWashingPlanList){
+					
+	    var customerRow = '<tr>' +
+	    
+	    	'<td class="washingPlanId" >' + modelWashingPlanList.washingPlanId + '</td>' +
+	    	'<td class="washingPlanDate">' + modelWashingPlanList.washingPlanDate + '</td>' +
+	    	'<td class="washingPlanQty">' + modelWashingPlanList.washingPlanQty +'</td>' +
+	    	'<td class="uomId" hidden>' + modelWashingPlanList.uomId + '</td>' +
+	    	'<td >' + modelWashingPlanList.uomName + '</td>' +
+	    	'<td class="washingPlanPOId">' + modelWashingPlanList.pOId + '</td>' +
+	    	'<td class="washingPlanPOQty" hidden>' + modelWashingPlanList.pOQty + '</td>' +
+	    	'<td >' + modelWashingPlanList.buyerName + '</td>' +
+			'<td class="itemName">' + modelWashingPlanList.itemName + '</td>' +
+	    	'<td class="washingPlanRemarks" >' + modelWashingPlanList.washingPlanRemarks + '</td>' +
+	    	'<td class="sActive">' + modelWashingPlanList.sActive + '</td>' +
+	    	'<td class="activeStatus" hidden>' + modelWashingPlanList.activeStatus + '</td>' +
+			'<td class="editWashingPlan" data-toggle="modal" data-target="#largeModal60" >' + '<button type="button" class="btn btn-primary btn-md">Edit</button>'+'</td>' + 
+			        
+			'</tr>';
+									  
+									  
+						
+	      $('#washingPlanDataTable tbody').append(customerRow);
+	      
+	     
+					
+		});        // each
+   		            	
+   		               
+   		            	
+   		            },	//success
+   			 });	//ajax					
+						
+      
+       
+       }	//else condition
+        
+     });	//each Function
+	    		  
+
+
+        });	//clickFunction
+        
+        
+        
+        
+          $("#washingPlanSearchTable").on('click','.tdWOMstId',function(){
+
+      
+           var $row = $(this).closest("tr"); 
+ 		   var pOId = $row.find(".tdPOId").text();
+
+ 		   
+ 		   
+			
+			 var formData= { 
+     				 		
+        					"pOId" : pOId
+        					
+       	 					
+						};
+						
+			$('#washingPlanDataTable tbody').empty();				
+    
+    $.ajax({
+   		           type : "GET",    		           
+   		             url:"/washingplancontroller/savewashingplansearch",
+   		            dataType : 'json',
+   			        data: formData,
+   		            success: function(result){
+   		            
+   		    if(result===null||result.length==0)
+            {
+            alert("No Records are found");
+            
+            }else{
+   		            
+   		     $.each(result, function(i,modelWashingPlanList){
+					
+	    var customerRow = '<tr>' +
+	    
+	    	'<td class="washingPlanId" >' + modelWashingPlanList.washingPlanId + '</td>' +
+	    	'<td class="washingPlanDate">' + modelWashingPlanList.washingPlanDate + '</td>' +
+	    	'<td class="washingPlanQty">' + modelWashingPlanList.washingPlanQty +'</td>' +
+	    	'<td class="uomId" hidden>' + modelWashingPlanList.uomId + '</td>' +
+	    	'<td >' + modelWashingPlanList.uomName + '</td>' +
+	    	'<td class="washingPlanPOId">' + modelWashingPlanList.pOId + '</td>' +
+	    	'<td class="washingPlanPOQty" hidden>' + modelWashingPlanList.pOQty + '</td>' +
+	    	'<td >' + modelWashingPlanList.buyerName + '</td>' +
+			'<td class="itemName">' + modelWashingPlanList.itemName + '</td>' +
+	    	'<td class="washingPlanRemarks" >' + modelWashingPlanList.washingPlanRemarks + '</td>' +
+	    	'<td class="sActive">' + modelWashingPlanList.sActive + '</td>' +
+	    	'<td class="activeStatus" hidden>' + modelWashingPlanList.activeStatus + '</td>' +
+			'<td class="editWashingPlan" data-toggle="modal" data-target="#largeModal60" >' + '<button type="button" class="btn btn-primary btn-md">Edit</button>'+'</td>' + 
+			        
+			'</tr>';
+									  
+									  
+						
+	      $('#washingPlanDataTable tbody').append(customerRow);
+	      
+	     
+					
+		});        // each
+   		            	
+   		}		//else condition               
+   		            	
+   		            },	//success
+   			 });	//ajax			
+						
+
+
+ 
+		 });	//clickFunction
+		 
+		 
+/*
+	scripts for save edited washingPlan Data
+*/		 
+
+$("#washingPlanDataTable").on('click','.editWashingPlan',function(){
+
+		   var $row = $(this).closest("tr");  
+	     
+	    //var $row = $(".tdQCSearch").closest("tr"); 
+	    var pOId = $row.find(".washingPlanPOId").text();
+	    var pOQty = $row.find(".washingPlanPOQty").text();
+	    var washingPlanId = $row.find(".washingPlanId").text();
+	    var washingPlanDate= $row.find(".washingPlanDate").text();
+	    var itemName = $row.find(".itemName").text();
+	    var uomId = $row.find(".uomId").text();
+	    var washingPlanQty = $row.find(".washingPlanQty").text();
+	    var washingPlanRemarks = $row.find(".washingPlanRemarks").text();
+	    var activeStatus = $row.find(".activeStatus").text();
+	    var n="";
+	    
+  
+	    if(activeStatus==1)
+     	{
+    
+     	document.getElementById("editWashingPlanActive").checked=true;
+     	}
+     	else{
+  
+     	document.getElementById("editWashingPlanActive").checked=false;
+   
+     	
+     	}
+	    
+	 
+	     $(".modal-body #editPOId").val( pOId );
+	     $(".modal-body #editUOMId").val( uomId );
+	     $(".modal-body #editWashingPlanQtyMax").val( pOQty );
+	     $(".modal-body #editWashingPlanId").val( washingPlanId );
+	     $(".modal-body #editWashingPlanDate").val( washingPlanDate );
+	     $(".modal-body #editItemName").val( itemName );
+	     $(".modal-body #editWashingPlanQty").val(washingPlanQty);
+	     $(".modal-body #editWashingPlanRemarks").val(washingPlanRemarks);
+	     		 
+});	//clickFunction		
+
+
+ $('#SaveEditWashingPlan').click(function(e) {
+
+ 
+	 var washingPlanDate=document.getElementById("editWashingPlanDate").value;
+	 var washingPlanQty=document.getElementById("editWashingPlanQty").value;
+	 var washingPlanQtyMax=document.getElementById("editWashingPlanQtyMax").value;
+	 var washingPlanRemarks=document.getElementById("editWashingPlanRemarks").value;
+	 var washingPlanId=document.getElementById("editWashingPlanId").value;
+	 var uomId=document.getElementById("editUOMId").value;
+	 var check=document.getElementById("editWashingPlanActive");
+	 var pOId=document.getElementById("editPOId").value;
+	 if(check.checked==true)
+		{
+			var activeStatus = 1;
+			var x="Active"
+		}
+	else
+		{
+			var activeStatus = 0;
+			var x="InActive"
+		}
+	
+
+	if(parseFloat(washingPlanQty)>parseFloat(washingPlanQtyMax))
+	{
+	alert("Washing Plan Quantity cannot be higher than "+parseFloat(washingPlanQtyMax));
+	}
+	else{
+	
+		
+	 var formData= { 
+     			   "washingPlanId" : washingPlanId,
+        					"pOId" : pOId,
+        					"uomId" : uomId,
+        		  "washingPlanQty" : washingPlanQty,
+        	  "washingPlanRemarks" : washingPlanRemarks,
+        	  	 "washingPlanDate" : washingPlanDate,
+        	  	    "activeStatus" : activeStatus
+        					      	 					
+						};
+						
+			$('#washingPlanDataTable tbody').empty();
+						
+    $.ajax({
+   		           type : "POST",    		           
+   		             url:"/washingplancontroller/washingplanupdate",
+   		            dataType : 'json',
+   			        data: formData,
+   		            success: function(result){
+   		            
+   		            
+   		            
+   		             var text="Data updated successfully,press close button";
+		            document.getElementById("editWashingPlanModalMessage").innerHTML=text;
+   		              		            
+   		     $.each(result, function(i,modelWashingPlanList){
+					
+	    var customerRow = '<tr>' +
+	    
+	    	'<td class="washingPlanId" >' + modelWashingPlanList.washingPlanId + '</td>' +
+	    	'<td class="washingPlanDate">' + modelWashingPlanList.washingPlanDate + '</td>' +
+	    	'<td class="washingPlanQty">' + modelWashingPlanList.washingPlanQty +'</td>' +
+	    	'<td class="uomId" hidden>' + modelWashingPlanList.uomId + '</td>' +
+	    	'<td >' + modelWashingPlanList.uomName + '</td>' +
+	    	'<td class="washingPlanPOId">' + modelWashingPlanList.pOId + '</td>' +
+	    	'<td class="washingPlanPOQty" hidden>' + modelWashingPlanList.pOQty + '</td>' +
+	    	'<td >' + modelWashingPlanList.buyerName + '</td>' +
+			'<td class="itemName">' + modelWashingPlanList.itemName + '</td>' +
+	    	'<td class="washingPlanRemarks" >' + modelWashingPlanList.washingPlanRemarks + '</td>' +
+	    	'<td class="sActive">' + modelWashingPlanList.sActive + '</td>' +
+	    	'<td class="activeStatus" hidden>' + modelWashingPlanList.activeStatus + '</td>' +
+			'<td class="editWashingPlan" data-toggle="modal" data-target="#largeModal60" >' + '<button type="button" class="btn btn-primary btn-md">Edit</button>'+'</td>' + 
+			        
+			'</tr>';
+									  									  
+						
+	      $('#washingPlanDataTable tbody').append(customerRow);
+	      	     
+					
+		});        // each           
+   		            	
+   		            },	//success
+   			 });	//ajax			
+
+				
+}		//else condition
+
+ 	 
+});	//click function
+
+
+
+ 	
+ 	
+ 	
+	
+		</script>
+		
+		
+		
+		
+	</script>
+
+
+ <script type="text/javascript" th:inline="javascript">
+		
+		var now = new Date();
+		var day = ("0" + now.getDate()).slice(-2);
+		var month = ("0" + (now.getMonth() + 1)).slice(-2);
+	
+	    var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+	    
+	    document.getElementById('endDate').value = today;
+	    document.getElementById('washingPlanDoneEndDate').value = today;
+      
+    
+       
+	</script>
+		 <style>
+   
+    .table td {
+    padding: 0 5px;
+          }
+
+   </style>
+     
+												
+
+</body>
+
+</html>

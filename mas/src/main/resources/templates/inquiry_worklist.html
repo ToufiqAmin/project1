@@ -1,0 +1,2106 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html xmlns:th="http://www.thymeleaf.org">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Inquiry</title>
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/themify-icons.css">
+    <link rel="stylesheet" href="/css/flag-icon.min.css">
+    <link rel="stylesheet" href="/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="/css/lib/datatable/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="/scss/style.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+
+
+   
+
+	<style type="text/css">
+	
+	
+
+
+.pagination li:hover{
+    cursor: pointer;
+    color:red;
+    border: 1px solid #4CAF50;
+    
+}
+	
+       
+       .pagination-container ul{
+        float:left;
+        padding:8 px 16px;
+        text-decoration: none;       
+
+        color:black;
+     }
+     
+     .pagination-container ul.active{
+        background-color: #Red;             
+        border: 1px solid #4CAF50;
+        color:white;
+     }
+
+
+		.modal-backdrop.fade {
+			display: none;
+		}
+
+		input[type=checkbox],
+		input[type=radio] {
+			width: 20px !important;
+		}
+		
+		
+
+		.up-msg {
+			padding: 10px;
+		}
+		
+		
+		.dataTables_length, .dataTables_filter {
+			display: none !important;
+		}
+	</style>
+	
+<style>
+.custom-header-panel{
+    background-color: #004b8e !important;
+    border-color: #004b8e !important;
+    color: white;
+}
+
+
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading {
+  padding: 10px 15px;
+  margin: -15px -15px 15px;
+  font-size: 17.5px;
+  font-weight: 500;      
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-footer {
+  padding: 10px 15px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+} 
+
+.panel-primary {
+  border-color: #428bca;
+}
+
+.panel-primary .panel-heading {
+  color: #ffffff;
+  background-color: #428bca;
+  border-color: #428bca;
+}
+/* This kinda of works but now 
+.panel, .panel-group .panel-heading+.panel-collapse>.panel-body{
+    border: none;
+}
+*/
+.card-header{
+    /* background-color: #004b8e !important; */
+    background-color: #004b8e !important;
+    border-color: #004b8e !important;
+    color: white;
+
+    padding: 10px 15px;
+  /*margin: -15px -15px 15px; */
+
+  font-size: 17.5px;
+  font-weight: 500;      
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+
+ </style>
+
+
+</head>
+
+<body>
+
+
+
+
+
+
+
+<!-- Left Panel -->
+
+	<aside id="left-panel" class="left-panel">
+		<nav class="navbar navbar-expand-sm navbar-default">
+
+			<div class="navbar-header">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+					<i class="fa fa-bars"></i>
+				</button>
+				<a class="navbar-brand" href="./">MLFM</a>
+				<a class="navbar-brand hidden" href="./">BD</a>
+			</div>
+
+			<div id="main-menu" class="main-menu collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+				
+			
+                
+   <li class="menu-item-has-children dropdown" >
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <i class="menu-icon fa fa-laptop"></i>    Set Up
+          </a>
+        
+       <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown" >
+             <li th:each="s:${listModelUserObjectSetup}" 
+                   th:value="${s.userObjectId}">
+            <a class="dropdown-item" th:href="@{${s.modelObject.filePath}+'/'+${s.modelUser.userId}}" >
+               
+                    <span th:utext="${s.modelObject.objectName}">
+                   </span>
+                </a>
+            </li>
+          
+        </ul>
+        
+   </li>
+   
+      
+	 <li class="menu-item-has-children dropdown">
+     
+       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="menu-icon fa fa-laptop"></i> Transaction
+        </a>
+        
+           <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown">
+              <li th:each="t:${listModelUserObjectTransaction}"
+                   th:value="${t.userObjectId}">
+                   
+                   <a class="dropdown-item" th:href="@{${t.modelObject.filePath}+'/'+${t.modelUser.userId}}" >
+                 
+                         <span th:utext="${t.modelObject.objectName}">
+                         </span>
+                      </a>
+              </li>
+          </ul>
+      </li>			
+				
+        	
+		   	
+		<li class="menu-item-has-children dropdown">
+     
+             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="menu-icon fa fa-laptop"></i>   Tools
+             </a>
+        
+            <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown">
+                <li th:each="u:${listModelUserObjectTool}"
+                     th:value="${u.userObjectId}">
+                     
+                           <a class="dropdown-item" th:href="@{${u.modelObject.filePath}+'/'+${u.modelUser.userId}}" >
+                 
+                    <span th:utext="${u.modelObject.objectName}">
+                    </span>
+                 </a>
+               </li>
+          
+            </ul>
+       </li>	
+
+
+		<li class="menu-item-has-children dropdown">
+     
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="menu-icon fa fa-laptop"></i> Report
+              </a>
+        
+              <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown">
+                   <li th:each="r:${listModelUserObjectReport}"
+                        th:value="${r.userObjectId}">
+                        <a class="dropdown-item" th:href="@{${r.modelObject.filePath}+'/'+${r.modelUser.userId}}" >
+                
+                           <span th:utext="${r.modelObject.objectName}">
+                           </span>
+                       </a>
+                   </li>
+          
+              </ul>
+        </li>	
+					
+					
+					
+	             </ul>
+			</div>
+		</nav>
+	</aside>
+
+
+
+	<!-- Left Panel -->
+
+
+
+	<!-- Left Panel -->
+<!--
+	<aside id="left-panel" class="left-panel">
+		<nav class="navbar navbar-expand-sm navbar-default">
+
+			<div class="navbar-header">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+					<i class="fa fa-bars"></i>
+				</button>
+				<a class="navbar-brand" href="./">MAS</a>
+				<a class="navbar-brand hidden" href="./">BD</a>
+			</div>
+
+			<div id="main-menu" class="main-menu collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					
+					<h3 class="menu-title">Inquery Info</h3>
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Inquery</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="inquery_table.html">Inquery</a></li>
+							<li><a href="inquery_data_upload.html">Inquery Upload</a></li>
+							<li><a href="inquery_ms_details.html">Inquery Master Details</a></li>
+							<li><a href="inquery_verification.html">Inquery Verification</a></li>
+						</ul>
+					</li>
+
+					<h3 class="menu-title">Buyer Info</h3>
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Buyer</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="buyer_data_upload.html">Buyer upload</a></li>
+							<li><a href="buyer_search_design.html">Buyer Search</a></li>
+						</ul>
+					</li>
+
+					<h3 class="menu-title">Design Info</h3>
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Design</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="design_table.html">Design</a></li>
+							<li><a href="design_search.html">Design Search</a></li>
+						</ul>
+					</li>
+
+					
+
+					
+					
+					<h3 class="menu-title">Machine Info</h3>
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Machine</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="Machine_search.html">Machine List</a></li>
+							<li><a href="Machine_data_upload.html">Machine Upload</a></li>
+						</ul>
+					</li>
+					
+					<h3 class="menu-title">Cost Info</h3>
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Cost</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="cost_head_search.html">Cost List</a></li>
+							<li><a href="cost_calculation.html">Cost Calculation</a></li>
+							<li><a href="cost_head.html">Cost Head</a></li>
+						</ul>
+					</li>
+					
+					<h3 class="menu-title">Item Info</h3>
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Item</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="Item_list.html">Item List</a></li>
+							<li><a href="item_type_list.html">Item Type List</a></li>
+							<li><a href="item_type%20(category).html">Item Type Category</a></li>
+							<li><a href="item_entry.html">Item Upload</a></li>
+						</ul>
+					</li>
+					<h3 class="menu-title">Purchase Info</h3>
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Purchase</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="Purchase_price_data_upload.html">Purchase Upload</a></li>
+						</ul>
+					</li>
+					<h3 class="menu-title">Specification Info</h3>
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Specification</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="Specification_data_upload%20.html">Specification Data Upload</a></li>
+						</ul>
+					</li>
+					<h3 class="menu-title">Supplier Info</h3>
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Supplier</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="Supplier_data_upload%20.html">Supplier Data Upload</a></li>
+						</ul>
+					</li>
+					<h3 class="menu-title">UOM Info</h3>
+					<li class="menu-item-has-children dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>UOM</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><a href="uom_list.html">UOM List</a></li>
+							<li><a href="uom_upload.html">UOM Upload</a></li>
+						</ul>
+					</li>
+					
+
+
+
+				</ul>
+			</div>
+		</nav>
+	</aside>
+	
+	-->
+
+
+	<!-- Left Panel -->
+
+	<!-- Right Panel -->
+
+	<!-- Right Panel -->
+
+	<div id="right-panel" class="right-panel">
+
+			<!-- Header-->
+		<header id="header" class="header">
+
+			<div class="header-menu">
+<!--
+				<div class="col-sm-4">
+					<a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
+					<div class="header-left">
+						<button class="search-trigger"><i class="fa fa-search"></i></button>
+						<div class="form-inline">
+							<form class="search-form">
+								<input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
+								<button class="search-close" type="submit"><i class="fa fa-close"></i></button>
+							</form>
+						</div>
+
+					</div>
+				</div>
+-->
+		<!--
+				<div class="col-sm-5">
+					<div class="user-area dropdown float-right">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">
+                        </a>
+
+						<div class="user-menu dropdown-menu">
+							<a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
+							
+							<input type="text" class="nav-link" th:value="${userId}" id="accessUserId" readonly>
+
+							<a class="nav-link" href="/logoncontroller/init"><i class="fa fa-power -off"></i>Logout</a>
+						</div>
+					</div>
+                </div>
+         -->       
+                  
+                        <div class="col-sm-4 text-right" >
+                         
+                      </div> 
+               
+                        <div class="col-sm-8 text-right" >
+                          
+                           <a class="nav-link" href="/logoncontroller/init"  style="float:right;" ><i class="fa fa-power -off"></i>Logout</a>
+                            <span class="nav-link" th:text="${name}"readonly style="color: black; float:right; padding-left:5px;"></span>  
+                            <span class="nav-link" style="color: black; float:right; padding-right:0px;">User : </span>  
+                           
+                          
+                         
+                       </div>
+                 
+			</div>
+
+		</header><!-- /header -->
+		<!-- Header-->
+
+
+		<div class="up-msg">
+			<div class="col-sm-6 text-left">
+				<input type="hidden" id="displayMessage" name="" placeholder="Message" th:value="${message}"readonly style="color: limegreen; display: block">
+			</div>
+	<!--  	<div class="col-sm-6 text-right">
+				<a class="btn btn-primary btn-sm" th:href="@{/machine/init}">New</a>
+				<a class="btn btn-success btn-sm" th:href="@{/machineType/list}">View</a>
+			</div>
+	-->
+		</div>
+
+		<div class="content mt-3">
+			<div class="animated fadeIn">
+
+         	<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-header">
+								<strong class="card-title">Search</strong>
+							</div>
+							
+							<div class="card-body">
+									<form id="submitForm" name="submitForm" >  
+                          
+                                   <div class="row">
+                                   
+                                       <div class="col-2">
+						 <div class="form-group">
+							<label for="ownerType" class="control-label mb-1">Client Type</label>
+							 <select name="ownerType" id="ownerType" class="form-control" aria-required="true" aria-invalid="false"required>															
+							        <option value=" ">Select Type</option>
+									<option th:each="type:${ownerTypeList}"
+											th:value="${type.orderOwnerTypeId}"
+											th:utext="${type.orderOwnerTypeName}"
+																				
+											/>
+																				
+							 </select>
+						  </div>
+					 </div>
+					 
+						<div class="col-2">
+						 <div class="form-group">
+							<label for="owner" class="control-label mb-1">Client Name</label>
+							
+								<select name="owner" id="owner" class="form-control" placeholder="Select" >
+									<option value=" "> Select Client</option>
+										 <!-- 	<option th:each="owner:${ownerList}"
+												th:value="${owner.orderOwnerId}"
+												th:utext="${owner.ownerName}"
+													
+										/>-->
+								</select>
+							</div>
+							
+							
+						</div>
+						
+						<div class="col-1">
+						 <div class="form-group">
+							<label for="owner" class="control-label mb-1"></label>
+							
+							<a th:href="@{/owners/add}" class="btn btn-primary" style="margin-top: 27px">+</a>	
+						</div>	
+							
+						</div>
+						
+						
+						  
+                     <div class="col-2">
+						<div class="form-group">
+							<label for="ultimateOwner" class="control-label mb-1">Ultimate Buyer</label>
+								<select  id="ultimateOwner" name="ultimateOwner" class="form-control" placeholder="Select">
+									<option value=" "> Select Ultimate Buyer</option>
+										<option th:each="owner:${ownerList}"
+											th:value="${owner.orderOwnerId}"
+											
+												th:text="|${owner.ownerName} ( ${owner.orderOwnerType.orderOwnerTypeName} )|"
+																				
+												/>
+																				
+								</select>
+						 </div>
+					 </div>
+                                       
+                                       
+                                       
+                                 <!--      <div class="col-2">
+                                          <label class="control-label mb-1">User</label>
+                                           <select class="form-control" id="user" name="user">
+                                              <!--  <option value=" ">Select User</option>
+                                                <option th:each="user : ${userList}" 
+                                                th:value="${user.userId}"
+                                                th:text="${user.userName}"
+                                                ></option>
+                                            </select>
+                                       </div>  -->  
+                                       
+                                       
+                                       <div class="col-2">
+                                          <label class="control-label mb-1">User</label>
+                                           <select class="form-control" id="user" name="user">
+                                              <!--  <option value=" ">Select User</option>-->
+                                                <option th:each="user : ${userList}" 
+                                                th:value="${user.userId}"
+                                                th:text="${user.userName}"
+                                                ></option>
+                                            </select>
+                                       </div> 
+                                       
+                                       
+                                       <div class="col-2">
+                                          <label class="control-label mb-1">Cluster</label>
+                                          <select class="form-control" id="userCluster">
+                                               <!-- <option value=" ">Select Cluster</option>  -->
+                                               
+                                            </select>
+                                       </div>
+                                       
+                                      
+                                       
+                                       
+                                       
+                              </div>
+                              
+                              <div class="row">
+                              
+                              <div class="col-2">
+                                          <label>Quoted Price</label>
+                                          <select class="form-control" id="quotedPrice" name="quotedPrice">
+                                                <option value="0">Select Price</option>
+                                                <option value="1">Blank</option>
+                                                <option value="2">Not Blank</option>
+                                            </select>
+                                       </div>
+                              
+                                       
+                                       <div class="col-2">
+                                          <label>Buyer Expected Price</label>
+                                          <select class="form-control" id="expectedPrice" name="expectedPrice">
+                                                <option>Expected Price</option>
+                                                <option>Blank</option>
+                                                <option>Not Blank</option>
+                                            </select>
+                                       </div>
+                                       <div class="col-3">
+                                          <label>Inquery Form</label>
+                                          <input type="date" id="startDate" name="startDate" class="form-control">
+                                       </div>
+                                       <div class="col-3">
+                                          <label>Inquery To</label>
+                                          <input type="date" id="endDate" name="endDate" class="form-control">
+                                       </div>
+                                       
+                          
+                                     
+                                      
+                                       
+                                       <div class="col-1">
+                                           <label>Active</label>
+                                           <div class="custom-control custom-checkbox">
+														  <input name="check1" type="checkbox" class="custom-control-input" id="active" checked>
+														  <label class="custom-control-label" for="active"></label>
+														</div>
+                                       </div>
+                                        
+                                       
+                                      </div>
+                                      
+                                      
+                                      <div class="row">
+                                      
+                                      
+                                      <div class="col-8">
+                                           <label>Resubmitted</label>
+                                           <div class="custom-control custom-checkbox">
+														  <input name="check2" type="checkbox" class="custom-control-input" id="defaultChecked2">
+														  <label class="custom-control-label" for="defaultChecked2"></label>
+														</div>
+                                       </div>
+                                       
+                                       <div class="col-4">
+                                           <input type="button" id="btnsearch" value="Search" class="btn btn-primary btn-md" style="margin-top: 22px">  
+                                                                     
+                                         <a th:href="@{'/owners/orders/'+${userId}}" class="btn btn-success" style="margin-top: 22px" >Refresh</a>
+                                         <a class="btn btn-success" id="showmodal"  data-toggle="modal" data-target="#largeModal5" style="margin-top: 22px">New Inquiry</a>  
+                                                                     
+                                        </div>
+                                   
+                               
+                                
+                                </div> 
+                      
+                            
+                            
+                        </form>
+							</div>
+							
+						</div> <!-- .card -->
+
+					</div>
+					<!--/.col-->
+				</div>
+				
+				
+	
+				 
+		      <h5> Select </h5>
+				<div class="form-group">
+				           <select  name="state" id="maxRows" class="form-control" style="width:150px;">
+															 
+						 <option value="10">10</option>
+						 <option value="5">5</option>
+						 <option value="15">15</option>
+						 <option value="20">20</option>
+						 <option value="50">50</option>
+						 <option value="70">70</option>
+						 <option value="100">100</option>
+						 <option value="5000">Show ALL</option>
+				          </select>
+				</div>
+				
+				<div class="content mt-3">
+			      <div class="animated fadeIn">
+
+				  <div class="row">
+					<div class="col-lg-12">
+						<div class="card table-container" style="width: 1070px; overflow-x: scroll">
+							<div class="card-header">
+								<strong class="card-title">Search Result</strong>
+							</div>
+							<div class="card-body">
+								<table id="inquiryTable" class="table table-striped table-bordered display nowrap" style="width:100%">    
+                    <thead>
+            
+                      <tr>
+                        <th>Inquiry ID</th>
+                         <th>Initial Buyer</th>
+                        <th>Inquiry Date</th>
+                       
+                        <th>Ultimate Buyer</th>
+                        <th>Buyer/Other Mail</th>
+                        <th>Verify</th>
+                        <th>Design</th>
+                         <th>Item Name</th>
+                        <th>Buyer Expected Delivery Date</th>
+                        <th>Actual Delivery Date</th>
+                        <th>User Feedback</th>
+                        <th>Causes Of Rejection</th>
+                        <th>Entered By</th>
+                        <th>User Cluster</th>
+                        <th>No Of Resubmissions</th>
+                        <th>Quoted Price</th>
+                        <th>Buyer Expected Price</th>
+                        <th>Final Price</th>
+                       <!--   <th>Status</th> -->
+                        <th>Action</th>
+                      </tr>
+                
+                        
+                    </thead>
+                    <tbody>
+              <!--
+                      <tr th:each="inq : ${orderListOnCriteria}" >
+                        <td><a href="#"><span th:text="${inq.orderId}">  </span></a></td>
+                        <td><span th:text="${inq.modelOrderOwner.ownerName}"> </span></td>
+                        <td></td>
+                        <td><a href="#">Link here</a></td>
+                        <td><a href="#">Link here</a></td>
+                        <td>Link here</td>
+                        <td>Admin</td>
+                        <td><a href="#">Link here</a></td>
+                        <td>3245678990000</td>
+                        <td>32456789900000</td>
+                        <td><a href="inquery_ms_details.html" class="btn btn-success btn-sm btn-block">View</a>
+                        </td>
+                      </tr>
+               -->
+              
+                      
+                    </tbody>
+                  </table>
+                  
+                  <div class="pagination-container" style="float:right" >
+	           			
+	           			    <ul id="inquiryTableP" class="pagination"></ul>
+				        
+				                 </div>
+                  
+                  
+            
+							</div>
+
+						</div>
+					</div>
+				</div>
+				
+    </div>
+    </div>
+				
+				
+				
+				<!-- ==================================entry info modal==================================== -->
+				   
+				   
+				   	<div class="modal fade" id="viewaudit" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
+															<div class="modal-dialog modal-sm" role="document">
+																<div class="modal-content">
+																	<div class="modal-header">
+																		<h5 class="modal-title" id="viewaudit" style="color: #000">Audit info</h5>
+																		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																			<span aria-hidden="true">&times;</span>
+																		</button>
+																	</div>
+																	<div class="modal-body">
+
+																		<div class="row">
+																			<div class="col-12">
+																				<div class="form-group">
+																					<label for="cc-payment" class="control-label mb-1">Entered By</label>
+																					<p id="auditUser"></p>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="row">
+																			<div class="col-12">
+																				<div class="form-group">
+																					<label for="cc-payment" class="control-label mb-1">Entry Date & Time</label>
+																					<p id="auditDate"></p>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="row">
+																			<div class="col-12">
+																				<div class="form-group">
+																					<label for="cc-payment" class="control-label mb-1">Update By</label>
+																					<p id="auditUpdatedBy"></p>
+																				</div>
+																			</div>
+																		</div>
+
+																		<div class="row">
+
+
+																			<div class="col-12">
+																				<div class="form-group">
+																					<label for="cc-payment" class="control-label mb-1">Update Date & Time</label>
+																					<p id="auditUpdatedTime"></p>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+
+																</div>
+															</div>
+														</div>
+														
+														
+														
+															<!-- verify modal -->
+				   
+				   
+				<!-- =====================================End============================================== -->
+				
+				
+				<!-- ===========================================Inquiry save modal============================ -->
+				                    
+				                    
+				                  
+
+										<div class="form-group">
+											<div class="modal fade" id="largeModal5" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+												<div class="modal-dialog modal-lg" role="document">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title" id="largeModalLabel">Add Inquiry</h5>
+															<h5 class="modal-title" id="smessageinquiry" style="color: limegreen; display: block; font-size:15px; margin-left:150px"></h5>
+															
+														<center><p id="saveMessage" style="color: limegreen; display: block"></p></center>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body" style="text-align: left">
+															<!-- <form class="needs-validation" th:object="${modelOrder}" th:action="@{/inquirycontroller/inquiry/save}"  method="post" novalidate> -->
+															<form class="needs-validation" id="form_add">
+																<div class="row">
+																	<div class="col-3">
+																		<div class="form-group">
+																			<label  class="control-label mb-1">Inquery ID</label>
+																				<input id="cc-pament" type="text" class="form-control" aria-required="true" aria-invalid="false" placeholder="Inquiry Id" readonly />
+																		</div>
+																	</div>
+																	<div class="col-3">
+																		<div class="form-group">
+																			<label for="popupOwnerType" class="control-label mb-1">Owner Type<span style="color:red">*</span></label>
+																			<select name="popupOwnerType" id="popupOwnerType" class="form-control" aria-required="true" aria-invalid="false" required>
+																				 
+																				<option th:each="type:${ownerTypeList}"
+																						th:value="${type.orderOwnerTypeId}"
+																						th:utext="${type.orderOwnerTypeName}"
+																				
+																				/>
+																				
+																			</select>
+																		</div>
+																	</div>
+																	<div class="col-3">
+																		<div class="form-group">
+																			<label for="popupOwner" class="control-label mb-1">Client Name<span style="color:red">*</span></label>
+																			<select   name="popupOwner" id="popupOwner" class="form-control" placeholder="Select" required>
+																			<!--  <option value="0"> Select Buyer Name</option>-->
+																			<!-- 	<option th:each="owner:${ownerList}"
+																						th:value="${owner.orderOwnerId}"
+																						th:utext="${owner.ownerName}"
+													
+																				/>-->
+																			</select>
+																			
+																			<div class="invalid-feedback">
+																				Please input Buyer
+																			</div>
+																		</div>
+																	</div>
+																	
+																	<div class="col-3">
+																		<div class="form-group">
+																			<label for="popupUltimateOwner" class="control-label mb-1">Ultimate Buyer Name</label>
+																			<select  id="popupUltimateOwner" name="popupUltimateOwner" class="form-control" placeholder="Select" required>
+																				<!--  <option value=" ">  </option>
+																			  	<option th:each="owner:${ownerList}"
+																						th:value="${owner.orderOwnerId}"
+																						th:text="${owner.ownerName + '-' + owner.orderOwnerType.orderOwnerTypeName}"
+																				
+																				/>-->
+																				
+																			</select>
+																			
+																			<div class="invalid-feedback">
+																				Please input UltimateBuyer
+																			</div>
+																		</div>
+																	</div>
+																	
+																	<div class="col-3">
+																		<div class="form-group">
+																			<label for="popupUser" class="control-label mb-1">User<span style="color:red">*</span></label>
+																			<select name="popupUser" id="popupUser"  class="form-control" placeholder="Select" required>
+																				<option value="0"> Select User</option>
+																				
+																			 	<option th:each="u:${userList}"
+																						th:value="${u.userId}"
+																						th:utext="${u.userName}"																			
+																				/> 
+																			</select>
+																		
+																		</div>
+																	</div>
+																	<div class="col-3">
+																		<div class="form-group">
+																			<label for="cluster" class="control-label mb-1">User Cluster<span style="color:red">*</span></label>
+																			<!--  <select name="cluster" id="cluster"  class="form-control" placeholder="Select" th:field="*{modelCluster.clusterId}" required> -->
+																		  	<select name="cluster" id="cluster"  class="form-control" placeholder="Select" required>  
+														
+																			</select>
+																			<div class="invalid-feedback">
+																				Please input User Cluster
+																			</div>
+																		</div>
+																	</div>
+																	<div class="col-3">
+																		<div class="form-group">
+																			<label for="contact-person" class="control-label mb-1">Contact Person</label>
+																			<select  id="contact-person" name="contact-person" class="form-control" placeholder="Select">
+																			
+															
+																			</select>
+																			
+											
+																		</div>
+																		
+																	</div>
+
+
+																	<div class="col-3">
+																		<div class="form-group">
+																			<label for="refid" class="control-label mb-1">User Ref ID</label>
+																			<!--  <input id="refid" type="text" class="form-control" aria-required="true" aria-invalid="false"  name="" th:field="*{userRefNo}" placeholder="user id" >-->
+																			<input type="number" id="refid" value="0" aria-required="true" placeholder="user id" aria-invalid="false" class="form-control">
+																		</div>
+																	</div>
+
+
+																</div>
+
+																<div class="row">
+
+																	<div class="col-6">
+																		<div class="form-group">
+																			<label for="mail" class="control-label mb-1">Ref. mail ID</label>
+																			<input id="buyerMail" type="email" class="form-control" aria-required="true" aria-invalid="false" value=""placeholder="email@mail.com">
+																			
+																		</div>
+																	</div>
+																	<div class="col-3">
+																		<div class="form-group">
+																			<label class="control-label mb-1">Inquery Date<span style="color:red">*</span></label>
+																			<input type="Date" class="form-control" value="0" aria-required="true" aria-invalid="false" name="order-date" id="popupOrderDate"  placeholder="Select Date" required>
+																			<div class="invalid-feedback">
+																				Please input a date
+																			</div>
+																		</div>
+																	</div>
+																	<div class="col-3">
+																		<div class="form-group">
+																			<label for="cc-payment" class="control-label mb-1">Mail sent date</label>
+																			<input type="Date" class="form-control" aria-required="true" aria-invalid="false" value="" id="popupSentDate" name="sent-date">
+																			<div class="invalid-feedback">
+																				Please input a date
+																			</div>
+																		</div>
+																	</div>
+																	<div class="col-3">
+																		<div class="form-group">
+																			<label for="cc-payment" class="control-label mb-1">Mail Receive date</label>
+																			<input type="Date" class="form-control" aria-required="true" aria-invalid="false" id="popupReceiveDate" name="view-date" placeholder="Mail View Date">
+																			<div class="invalid-feedback">
+																				Please input a date
+																			</div>
+																		</div>
+																	</div>
+																	<div class="col-3">
+																		<div class="form-group">
+																			<label class="control-label mb-1">Approximate Order Qty</label>
+																			<input type="number" class="form-control" id="apQty" name="" placeholder="Approximate Order Qty"  title="Enter Qty As Only Number" >
+																		</div>
+																	</div>
+																	
+																	<div class="col-2">
+																			<div class="form-group">
+																				<label for="" class="control-label mb-1">UOM</label>
+																				<select class="form-control"  id="uomSelect">
+																					<option value=" ">Select UOM</option>
+																					<option th:each="uom:${uomList}"
+																							th:value="${uom.uomId}"
+																							th:text="${uom.uomName}"/>
+																				</select>
+																			</div>
+																		</div>
+																	<div class="col-4">
+																		<div class="form-group">
+																			<label class="control-label mb-1">Buyer Expected Delivery Date</label>
+																			<input type="Date" class="form-control" id="popupDeliveryDate" name="delivery-date" placeholder="Buyer Expected Date" >
+																		</div>
+																	</div>
+
+																</div>
+
+
+																<div class="row">
+
+
+
+																	<div class="col-6">
+																		<div class="form-group">
+																			<label for="cc-payment" class="control-label mb-1">Remarks</label>
+																			<textarea row="5" placeholder="Type remarks here....." id="popupRemarks" name="remarks"  class="form-control" aria-required="true" aria-invalid="false" ></textarea>
+																		</div>
+																	</div>
+																	<div class="col-2">
+																		<div class="form-group">
+																			<label for="cc-payment" class="control-label mb-1">Active</label>
+																			<div class="custom-control custom-checkbox">
+																				<input type="checkbox" class="custom-control-input"  id="activeStatus" checked>
+																				<label class="custom-control-label" for="activeStatus"></label>
+																			</div>
+																		</div>
+																	</div>
+
+																</div>
+
+
+
+																<div class="text-right">
+
+																	<!--  <input type="submit" id="saveData" class="btn btn-primary btn-md">-->
+																	<button type="button" id="saveData" class="btn btn-primary" >Save</button>
+																	<button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>
+																		
+																	
+
+																</div>
+															</form>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									
+										
+					<!-- ======================================End modal====================================== -->
+					
+				
+
+
+<!----------------------------------------------------------------------------------------------------------------------------------->
+
+ 
+			
+
+				
+
+			</div><!-- .animated -->
+		</div><!-- .content -->
+
+
+	</div><!-- /#right-panel -->
+	
+	
+
+        
+              
+                      
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!--    <script type="text/javascript" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>-->
+
+    <script src="/js/vendor/jquery-2.1.4.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/plugins.js"></script>
+    <script src="/js/main.js"></script>
+
+
+    <script src="/js/lib/data-table/datatables.min.js"></script>
+    <script src="/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+    <script src="/js/lib/data-table/dataTables.buttons.min.js"></script>
+    <script src="/js/lib/data-table/buttons.bootstrap.min.js"></script>
+    <script src="/js/lib/data-table/jszip.min.js"></script>
+    <script src="/js/lib/data-table/pdfmake.min.js"></script>
+    <script src="/js/lib/data-table/vfs_fonts.js"></script>
+    <script src="/js/lib/data-table/buttons.html5.min.js"></script>
+    <script src="/js/lib/data-table/buttons.print.min.js"></script>
+    <script src="/js/lib/data-table/buttons.colVis.min.js"></script>
+    <script src="/js/lib/data-table/datatables-init.js"></script>
+	
+	
+	<script type="text/javascript">
+       
+    
+    $(document).ready(function() {
+        $('#inquiryTable').DataTable({
+            "scrollX": true,
+          
+        });
+        
+        
+        var ss=document.getElementById("activeStatus");
+        
+        if(ss.checked==false){
+        	ss.checked=true;
+        }
+        
+
+   });
+   
+    </script>
+	
+	<script>
+	
+	
+	/*
+     $(function () {
+    $('#submitForm').submit(function(e) {
+     // prevent default for submission
+      e.preventDefault();
+     // form data capture
+      var formData= { 
+        "initialBuyer" :$("#initialBuyer").val(),
+        "ultimateBuyer" : $("#ultimateBuyer").val(),
+        "user" : $("#user").val(),
+        "stDate" : $("#stDate").val(),
+        "endDate" : $("#endDate").val()
+        
+        };
+        
+        //  $('#table tbody').html('');
+        $('#bootstrap-data-table tbody').empty();
+           
+            $.ajax({
+            type : "GET",
+           // url :  "/api/inquiry_search",
+           url:"/inquiry_controller/api/inquiry_search"
+            dataType : 'json',
+	    data: formData,
+            success: function(result){
+	     $.each(result, function(i,order1){
+					
+	    var customerRow = '<tr>' +
+							            '<td>' + order1.orderId + '</td>' +
+										'<td>' + order1.modelOrderOwner.ownerName + '</td>' +
+										'<td>' + order1.ultimateOwner.ownerName + '</td>' +
+										'<td>' + 'Sent Mail' + '</td>' +
+										'<td>' + 'design' + '</td>' +
+								        
+								        '<td>' + 'production' + '</td>' +
+								        '<td>' + 'delivery' + '</td>' +
+								        '<td>' + order1.enteredBy.userName + '</td>' +
+								        '<td>' +'No. of Resubmissions' + '</td>' +
+								        '<td>' +'Quoted Price' + '</td>' +
+								        '<td>' +'Buyer Expected Price' + '</td>' +
+								        '<td>'  + '</td>' +
+								        '<td>'  + '</td>' +
+								         
+								        
+									  '</tr>';
+									  
+									  
+						
+	      $('#bootstrap-data-table tbody').append(customerRow);
+					
+		});        // each
+					 
+		},   // end success
+	error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+					
+					
+        });   // end ajax
+        
+        
+        
+    
+   });  // submit
+   });   // function
+    
+   
+   */
+    </script>
+    
+    <script>
+    
+    
+  /*  $('#popupOwner').change(
+	        function() {
+	            $.getJSON("/inquirycontroller/owner/person", {
+	               owner : $(this).val(),
+	                ajax : 'true'
+	            }, function(data) {
+	               var html = '<option value=" ">Select Person</option>';
+	                var len = data.length;
+	               
+	               // for ( var i = 0; i < len; i++) {
+	                	html += '<option value="' + data.contactPersonName+ '">'
+                        + data.contactPersonName + '</option>';
+	              //  }
+	               // html += '</option>';
+	                $('#contact-person').html(html);
+	            });
+	        });
+    */
+    
+    $('#popupOwner').change(
+	        function() {
+	            $.getJSON("/inquirymsdetailscontroller/owner/contactperson", {
+	            	ownerId : $(this).val(),
+	                ajax : 'true'
+	            }, function(data) {
+	               var html = '<option value=" ">Select Person</option>';
+	                var len = data.length;
+	               
+	                for ( var i = 0; i < len; i++) {
+	                	html += '<option value="' + data[i].contactPersonName+ '">'
+                  + data[i].contactPersonName + '</option>';
+	                }
+	                html += '</option>';
+	                $('#contact-person').html(html);
+	            });
+	        });
+    
+    
+    $('#user').change(
+	        function() {
+	            $.getJSON("/inquirycontroller/user/cluster", {
+	               user : $(this).val(),
+	                ajax : 'true'
+	            }, function(data) {
+	                var html = '<option value=" ">Select Cluster</option>';
+	                var len = data.length;
+	              
+	                for ( var i = 0; i < len; i++) {
+	                    html += '<option value="' + data[i].modelCluster.clusterId+ '">'
+	                            + data[i].modelCluster.clusterName + '</option>';
+	                }
+	                html += '</option>';
+	                $('#userCluster').html(html);
+	            });
+	        });
+    
+    
+    $('#popupUser').change(
+	        function() {
+	            $.getJSON("/inquirycontroller/user/cluster", {
+	               user : $(this).val(),
+	                ajax : 'true'
+	            }, function(data) {
+	               
+	            	
+	            	var html = '<option value="0">Select Cluster</option>';
+	            	
+	                var len = data.length;
+	              
+	                for ( var i = 0; i < len; i++) {
+	                    html += '<option value="' + data[i].modelCluster.clusterId+ '">'
+	                            + data[i].modelCluster.clusterName + '</option>';
+	                }
+	                html += '</option>';
+	                $('#cluster').html(html);
+	            });
+	        });
+    
+ /*  $(document).ready(function() {
+        
+        $.getJSON("/inquirycontroller/inquiry/owner", {
+            ownerType : $('#ownerType').val(),
+            ajax : 'true'
+        }, function(data) {
+            var html = '<option value=" ">Select Buyer</option>';
+            var len = data.length;
+            for ( var i = 0; i < len; i++) {
+         
+                  html += '<option value="' + data[i].orderOwnerId + '">'
+                        + data[i].ownerName + '</option>';
+            }
+            html += '</option>';
+            $('#owner').html(html);
+        });
+
+
+});
+   
+  */ 
+   
+   $(document).ready(function() {
+       
+       $.getJSON("/inquirycontroller/buyer/ultimatebuyer", {
+           ajax : 'true'
+       }, function(data) {
+           var html = '<option value="0"> Select UltimateBuyer</option>';
+           var len = data.length;
+           for ( var i = 0; i < len; i++) {
+        
+                 html += '<option value="' + data[i].orderOwnerId + '">'
+                       + data[i].ownerName + '</option>';
+           }
+           html += '</option>';
+           $('#popupUltimateOwner').html(html);
+       });
+
+//alert('ok');
+});
+    
+    
+    
+    $('#ownerType').change(
+	        function() {
+	            $.getJSON("/inquirycontroller/inquiry/owner", {
+	                ownerType : $(this).val(),   
+	                ajax : 'true'
+	            }, function(data) {
+	                var html = '<option value=" ">Select Buyer</option>';
+	                var len = data.length;
+	                
+	                for ( var i = 0; i < len; i++) {
+	                    html += '<option value="' + data[i].orderOwnerId + '">'
+	                            + data[i].ownerName + '</option>';
+	                }
+	                html += '</option>';
+	                $('#owner').html(html);
+	            });
+	        }); 
+    
+    </script>
+    
+    
+     <script>
+    
+  $(document).ready(function() {
+        
+	   
+        $.getJSON("/inquirycontroller/inquiry/owner", {
+            ownerType : $('#popupOwnerType').val(),
+            ajax : 'true'
+        }, function(data) {
+            var html = '<option value="0">Select Buyer</option>';
+            var len = data.length;
+            for ( var i = 0; i < len; i++) {
+         
+                  html += '<option value="' + data[i].orderOwnerId + '">'
+                        + data[i].ownerName + '</option>';
+            }
+            html += '</option>';
+            $('#popupOwner').html(html);
+        });
+
+// alert('ok');
+
+ });
+ 
+ </script>
+    
+    <script>
+    
+    $('#popupOwnerType').change(
+	        function() {
+	            $.getJSON("/inquirycontroller/inquiry/owner", {
+	                ownerType : $(this).val(),   
+	                ajax : 'true'
+	            }, function(data) {
+	                var html = '<option value="0">Select Buyer</option>';
+	                var len = data.length;
+	                
+	                for ( var i = 0; i < len; i++) {
+	                    html += '<option value="' + data[i].orderOwnerId + '">'
+	                            + data[i].ownerName + '</option>';
+	                }
+	                html += '</option>';
+	                $('#popupOwner').html(html);
+	            });
+	        }); 
+    
+    </script>
+    
+    
+     <!-- =======================================Searching your inquiry data================================================= -->
+   
+   <script>
+	    
+   $(function () {
+	    $('#btnsearch').click(function(e) {
+	    	
+	    	document.getElementById("displayMessage").value=null;
+	    	    var id=document.getElementById("quotedPrice");
+	      	  	var quotedId = id.options[id.selectedIndex].value;
+	      	    var quotedType = id.options[id.selectedIndex].text;
+	      	  	
+	      	    
+	      	  //  alert(quotedId);
+	      	    
+	      	    
+	      	    if(quotedId==1){
+	      	    	//alert("You searched data with qutoed price blank");
+	      	    	
+	      	    }
+	      	    
+	      	    if(quotedId==2){
+	      	    	//alert("You searched data with qutoed price not blank");
+	      	    }
+	      	    
+	      	    if(quotedId==0){
+	        	
+	      	  	//alert("searching");
+	        	
+	        	var active=document.getElementById("active");
+	        	  
+	        	var activeStatus;
+	        	  
+	        	  if(active.checked==true){
+	        		  activeStatus="1";
+	        	 }
+	        	  
+	        	  else{
+	        		  activeStatus="0";
+	        	  }
+	        	
+	        	
+	        	$(function () {
+	               
+	        		
+	        	
+	        		
+	                  var formData= { 
+	                  "ownerType" :$("#ownerType").val(),
+	                   "owner" : $("#owner").val(),
+	                   "ultimateOwner" : $("#ultimateOwner").val(),
+	                   "startDate" : $("#startDate").val(),
+	                   "edate" : $("#endDate").val(),
+	                   "user" : $("#user").val(),
+	                   "active" : activeStatus
+	                 
+	                    };
+	             
+	             
+	                    $('#inquiryTable tbody').empty();
+	                
+	                    $.ajax({
+	                        type : "GET",
+	                  
+	                          url:"/inquirycontroller/inquiry/search",
+	                          dataType : 'json',
+	            	          data: formData,
+	                        success: function(result){
+	            	     $.each(result, function(i,inquiry){
+	            					
+	            	    	 
+	            	    	 var verify=inquiry.verifyStatus;
+	            	    	 
+	            	    	 if(verify==1){
+	            	    		 verify="Yes";
+	            	    	 }
+	            	    	 else{
+	            	    		 verify="No";
+	            	    	 }
+	            	    	 
+	            	    	 
+                      /*    var status=inquiry.orderStatus;
+	            	    	 
+	            	    	 if(status==1){
+	            	    		 status="Accept";
+	            	    	 }
+	            	    	 else{
+	            	    		 status="Reeject";
+	            	    	 }
+	            	  */  	 
+	            	   
+	            	    var customerRow = '<tr>' +
+	            							            
+	            										'<td class="inquiryId">' +inquiry.orderId + '</td>' +
+	            										'<td >' +inquiry.initialBuyer + '</td>' +
+	            										'<td >' + inquiry.orderDate+ '</td>' +
+	            										
+	            										'<td >' +inquiry.ultimateBuyer + '</td>' +
+	            										'<td >' +inquiry.buyerMail + '</td>' +
+	            										'<td >' + verify + '</td>' +
+	            										'<td ><a th:href="#">Design</a>' + '</td>' +
+	            										'<td >' + inquiry.itemName + '</td>' +
+	            										'<td >' + inquiry.buyerExpectedDate + '</td>' +
+	            										'<td >' + + '</td>' +
+	            										
+	            										'<td >' + "Status"+ '</td>' +
+	            										'<td >' +"Reason" + '</td>'  +
+	            										'<td >' +inquiry.userName + '</td>' +
+	            										'<td >' +inquiry.clusterName + '</td>' +
+	            										'<td >' +  + '</td>' +
+	            										'<td >' + + '</td>' +
+	            										'<td >' + inquiry.expectedPrice + '</td>' +
+	            										'<td >' + + '</td>' +
+	            										'<td class="audit"> <button class="btn btn-success" data-toggle="modal" data-target="#viewaudit" >Audit</button>' +'</td>'
+	            										
+	            										
+	            									  '</tr>';
+	            									  
+	            									  
+	            						
+	            	      $('#inquiryTable tbody').append(customerRow);
+	            	      
+	            	     
+	            					
+	            		});        // each
+	            		
+	            		
+	            		
+	            		var table='#inquiryTable';
+		            	
+		            	$('.pagination').html('');
+		            	
+		            	var trnum =0;
+		            	var maxRows =parseInt(10);
+		            	var  totalRows=$(table+' tbody tr').length;
+		            	
+		            	$(table+' tr:gt(0)').each(function(e) {
+		            	
+		            	              trnum++;
+		            	              
+		            	              if(trnum > maxRows)
+		            	              {
+		            	                 $(this).hide();
+		            	              }
+		            	              if(trnum <= maxRows)
+		            	              {
+		            	                 $(this).show();
+		            	              }
+		            	    
+		            	
+		            	
+		            	});   //each function
+		            	
+		            	 if(totalRows > maxRows)
+		            	              {
+		            	              
+		            	              
+		            	              var pagenum =Math.ceil(totalRows/maxRows);
+		            	              
+		            	              for(var i=1;i<=pagenum;)
+		            	              {
+		            	                 $("#inquiryTableP").append('<li class="btn-sm" data-page="'+i+'">\<span>'+ i++ +'</span></li>').show();
+		            	              }  //for
+		            	                
+		            	              }   //if
+		            	              
+		            	              
+		            	              $('.pagination li:first-child').addClass('active');
+		            	             $('.pagination li').on('click',function(){
+		            	             
+		            	             var pageNum =  $(this).attr('data-page');
+		            	             var trIndex= 0;
+		            	             
+		            	             $('.pagination li').removeClass('active');
+		            	              $(this).addClass('active');
+		            	             $(table+' tr:gt(0)').each(function(e) {
+		            	             
+		            	                trIndex++;
+		            	                if(trIndex >(maxRows*pageNum) || trIndex<=((maxRows*pageNum)-maxRows))
+		            	                {
+		            	                    $(this).hide();
+		            	                }
+		            	                else
+		            	                {
+		            	                $(this).show();
+		            	                }
+		            	             
+		            	            	             
+		            	                }); // each function
+		            	             
+		            	             });  //  click function	
+	            					 
+	            		},   // end success
+	            	error : function(e) {
+	            		alert("ERROR: ", e);
+	            		console.log("ERROR: ", e);
+	            			}
+	            					
+	            					
+	                    });   // end ajax
+	                    
+	            
+	                    
+	               });   // function
+	               
+	              
+	        	
+	        	}
+    	
+   	    });
+   });
+   	  			
+   	    
+   </script>
+   
+   <!-- ============================================End====================================================== -->
+   
+    <script type="text/javascript" th:inline="javascript">
+		
+		var now = new Date();
+		var day = ("0" + now.getDate()).slice(-2);
+		var month = ("0" + (now.getMonth() + 1)).slice(-2);
+	
+	    var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+	    
+	    document.getElementById('endDate').value = today;
+	    document.getElementById("popupOrderDate").value= today;
+       
+	</script>
+	
+	
+	 <!-- =============================================Save function===================================== -->
+   <script>
+  
+   $(function () {
+	    $('#saveData').click(function(e) {
+	  
+	      e.preventDefault();
+	    
+	      
+	   //  alert("Saving your data");
+	     
+	     
+	     var ownerType= document.getElementById("popupOwnerType").value;
+		 var owner = document.getElementById("popupOwner").value;
+		 var ultimateOwner= document.getElementById("popupUltimateOwner").value;
+		 var user= document.getElementById("popupUser").value;
+		 var cluster= document.getElementById("cluster").value;
+		 var person= document.getElementById("contact-person").value;
+		 var refid= document.getElementById("refid").value;
+		 var mail= document.getElementById("buyerMail").value;
+		 var sentDate= document.getElementById("popupSentDate").value;
+		var recieveDate= document.getElementById("popupReceiveDate").value;
+		var orderDate= document.getElementById("popupOrderDate").value;
+		 var qty= document.getElementById("apQty").value;
+		var deliveryDate= document.getElementById("popupDeliveryDate").value;
+		 var remarks= document.getElementById("popupRemarks").value;
+		 var status= document.getElementById("activeStatus");
+		 var uom= document.getElementById("uomSelect").value;
+		 
+		 
+		 if(qty==""){
+			 
+			// alert("qty is null");
+			
+			qty="0";
+		 }
+		 
+		 
+		// alert(refid);
+		 
+		 if(refid==0){
+			// alert("ref id is null");
+			 refid="0";
+		 }
+         var active;
+		 
+		 if (status.checked == true){
+			 active='1';
+		 }
+		 else{
+			 active='0';
+		 }
+		 
+		 if(ownerType==0 || owner==0 || user==0 || cluster==0 || orderDate==0 ){
+			 			 
+			 alert("Please select all mendatory data (red asterisk marked)");
+		 }
+		 
+		 else{
+			// alert("All data is given");
+			 
+			 
+			 var formData= { 
+	                   "ownerType" : ownerType,
+	                   "owner" : owner,
+	                   "ultimateOwner" : ultimateOwner,
+	                   "user" : user,
+	                   "cluster" : cluster,
+	                  "orderDate" : orderDate,
+	                  "sentDate" : sentDate,
+	                  "receiveDate" : recieveDate,
+	                  "deliveryDate" : deliveryDate,	               
+	                   "person" : person,
+	                   "refid" : refid,
+	                   "mail" : mail,	                   
+	                    "qty" : qty,
+	                   "remarks" : remarks,
+	                   "active" : active,
+	                   "uom" : uom
+	                 
+	                    };
+	        
+
+	                    $.ajax({
+	                        type : "POST",	                  
+	                          url:"/inquirycontroller/newinquiry/save",
+	                          dataType : 'json',
+	            	          data: formData,
+	                        success: function(result){
+	                        	
+	                        	
+	                        	
+	                        	if(result==null||result.length==0)
+	                            {
+	                        		alert("An inquiry has already been created for this buyer today");
+	                            }
+	                        	
+	                        	else{
+	                        		
+	                        	
+	                            var text="Save Successfully";
+	                        	var m="Data saved successfully,press close button";
+	                            document.getElementById("displayMessage").value=text;
+	                        	document.getElementById("smessageinquiry").innerHTML=m;
+	            	  
+	                        	   $.each(result, function(i,inquiry){
+	                        		   
+	                        		 $('#inquiryTable tbody').empty();  
+	      	            	    	 
+	      	            	    	 var verify=inquiry.verifyStatus;
+	      	            	    	 
+	      	            	    	 if(verify==1){
+	      	            	    		 verify="Yes";
+	      	            	    	 }
+	      	            	    	 else{
+	      	            	    		 verify="No";
+	      	            	    	 }
+	      	            	    	 
+	      	            	    	 
+	                            /*    var status=inquiry.orderStatus;
+	      	            	    	 
+	      	            	    	 if(status==1){
+	      	            	    		 status="Accept";
+	      	            	    	 }
+	      	            	    	 else{
+	      	            	    		 status="Reeject";
+	      	            	    	 }
+	      	            	  */  	 
+	      	            	    var customerRow = '<tr>' +
+	      	            							            
+	      	            										'<td class="inquiryId">' +inquiry.orderId + '</td>' +
+	      	            										'<td >' +inquiry.initialBuyer + '</td>' +
+	      	            										'<td >' + inquiry.orderDate+ '</td>' +
+	      	            										
+	      	            										'<td >' + + '</td>' +
+	      	            										'<td >' +inquiry.buyerMail + '</td>' +
+	      	            										'<td >' + verify + '</td>' +
+	      	            										'<td ><a th:href="#">Design</a>' + '</td>' +
+	      	            										'<td >' + "Item Name" + '</td>' +
+	      	            										'<td >' + inquiry.buyerExpectedDate + '</td>' +
+	      	            										'<td >' + + '</td>' +
+	      	            										
+	      	            										'<td >' + "Status"+ '</td>' +
+	      	            										'<td >' +"Reason" + '</td>'  +
+	      	            										'<td >' +inquiry.userName + '</td>' +
+	      	            										'<td >' +inquiry.clusterName + '</td>' +
+	      	            										'<td >' +  + '</td>' +
+	      	            										'<td >' + + '</td>' +
+	      	            										'<td >' + inquiry.expectedPrice + '</td>' +
+	      	            										'<td >' + + '</td>' +
+	      	            										'<td class="audit"> <button class="btn btn-success" data-toggle="modal" data-target="#viewaudit" >Audit</button>' +'</td>'
+	      	            										
+	      	            										
+	      	            									  '</tr>';
+	      	            									  
+	      	            									  
+	      	            						
+	      	            	      $('#inquiryTable tbody').append(customerRow);
+	      	            	      
+	      	            	     
+	      	            					
+	      	            		});        // each
+	      	            		
+	                        	}
+	            					 
+	            		},   // end success
+	            	error : function(e) {
+	            		
+	            		console.log("ERROR: ", e);
+	            			}
+	            					
+	            					
+	                    });   // end ajax
+	                    
+	                    
+	                  //  $('#largeModal5').modal('hide');
+	                    
+	          
+		 }
+		 		 
+		
+
+	     
+	      });
+	    
+
+	   });   // function
+	   
+    </script>
+   <!-- ===================================================================================================== -->
+   
+   
+<!--pagination  Script-->
+	<script>
+	
+	var table='#inquiryTable';
+	
+	
+	  $('#maxRows').on('change',function(){
+	
+	$('.pagination').html('');
+	
+	var trnum =0;
+	var maxRows =parseInt($(this).val());
+	var  totalRows=$(table+' tbody tr').length;
+	
+	$(table+' tr:gt(0)').each(function(e) {
+	
+	              trnum++;
+	              
+	              if(trnum > maxRows)
+	              {
+	                 $(this).hide();
+	              }
+	              if(trnum <= maxRows)
+	              {
+	                 $(this).show();
+	              }
+	    
+	
+	
+	});   //each function
+	
+	 if(totalRows > maxRows)
+	              {
+	              
+	              
+	              var pagenum =Math.ceil(totalRows/maxRows);
+	              
+	              for(var i=1;i<=pagenum;)
+	              {
+	                 $('#inquiryTableP').append('<li class="btn-sm" data-page="'+i+'">\<span>'+ i++ +'</span></li>').show();
+	              }  //for
+	                
+	              }   //if
+	              
+	              
+	              $('.pagination li:first-child').addClass('active');
+	             $('.pagination li').on('click',function(){
+	             
+	             var pageNum =  $(this).attr('data-page');
+	             var trIndex= 0;
+	             
+	             $('.pagination li').removeClass('active');
+	              $(this).addClass('active');
+	             $(table+' tr:gt(0)').each(function(e) {
+	             
+	                trIndex++;
+	                if(trIndex >(maxRows*pageNum) || trIndex<=((maxRows*pageNum)-maxRows))
+	                {
+	                    $(this).hide();
+	                }
+	                else
+	                {
+	                $(this).show();
+	                }
+	             
+	             
+	             
+	                }); // each function
+	             
+	             });  //  click function
+	             
+	             
+	      });   //on change function
+	             
+	  
+	/*             
+	    $(function () {
+	    
+	    
+	               $('table tr:gt(0)').prepend('<th>ID</th>');
+	               
+	               var id = 0;
+	               
+	               
+	               $('table tr:gt(0)').each(function(e) {
+	               
+	               id++;
+	               
+	                $(this).prepend('<th>'+id+'</th>');
+	               
+	               
+	              }); // each function
+	    
+	    });
+	    
+	*/    
+	            
+</script>
+
+  <!-- ========================================cluster populate======================================= -->
+           <script>
+               
+           
+           function accessCluster()
+       	{
+       	
+        	   $.getJSON("/inquirycontroller/user/cluster", {
+       		                user : $("#user").val(),   
+       		                ajax : 'true'
+       		            }, function(data) {
+       		            	//var html = '<option value=" ">Select Cluster Name</option>';
+       		            	var html;
+    		                var len = data.length;
+    		              
+    		                for ( var i = 0; i < len; i++) {
+    		                    html += '<option value="' + data[i].modelCluster.clusterId+ '">'
+    		                            + data[i].modelCluster.clusterName + '</option>';
+    		                }
+    		                html += '</option>';
+    		                $('#userCluster').html(html);
+       		            });
+       	        
+        	   
+        	   //alert($("#userSearch").val());
+       	}
+       	
+       	
+
+       	window.onload=accessCluster;   
+           
+           </script>
+      <!-- =============================================End here========================================== -->
+
+ 
+   <!-- =========================================view audit details for inquiry======================================= -->
+        
+        <script>
+         
+        $('#inquiryTable').on('click', '.audit', function (e) {
+           
+        	//alert("Showing your audit details..........");
+        	
+        	var tr = $(this).closest('tr');            
+            var inquiryId = tr.find(".inquiryId").text();
+            
+            //alert("Your inquiry id is " + inquiryId);
+            
+            var formData= { 
+  			      "inquiryId" : inquiryId
+  			       
+  		        };
+  	   
+  	       $.ajax({
+              type : "GET",	                  
+                url:"/inquirycontroller/audit/view/byid",
+                dataType : 'json',
+  	          data: formData,
+                success: function(result){
+              
+  	  
+                 $.each(result, function(i,inquiry){
+                	 
+                	 
+                	
+                	 
+                	 var d = new Date(inquiry.entryTimestamp);
+                     var n = d.getMonth();
+                     var n = d.getMonth() + 1;
+                     d= (n.length > 1 ? n : "0" + n) + "/" + d.getDate() + "/" + d.getFullYear();
+                     
+                     
+                     var t = new Date(inquiry.entryTimestamp); // for now
+                     t.getHours(); // => 9
+                     t.getMinutes(); // =>  30
+                     t.getSeconds(); // => 51
+                     
+                    
+                     
+                    
+                     
+                     var u = new Date(inquiry.updateTimestap);
+                     var n = u.getMonth();
+                     var n = u.getMonth() + 1;
+                     u= (n.length > 1 ? n : "0" + n) + "/" + u.getDate() + "/" + u.getFullYear();
+                     
+                     
+                   //  alert(u);
+            		
+            		
+            		
+
+                document.getElementById("auditUser").innerHTML=inquiry.enteredBy.userName;
+                document.getElementById("auditDate").innerHTML=t;
+                document.getElementById("auditUpdatedBy").innerHTML=inquiry.updatedBy.userName;
+                document.getElementById("auditUpdatedTime").innerHTML=u;
+                
+               // alert("enteredBy :" + inquiry.enteredBy.userName)
+  						
+              	});
+                   
+                   
+  					 
+  		},   // end success
+  	error : function(e) {
+  		alert("ERROR: ", e);
+  		console.log("ERROR: ", e);
+  			}
+  					
+  					
+          });   // end ajax
+        	
+        });
+        
+        
+        
+        </script>
+        
+   <!-- =======================================End here=================================================== -->
+   
+   
+   <!-- =======================================Refresh inquiry modal===================================== -->
+   
+     <script>
+  
+       $("#close").click(function () {
+    	 
+    	   document.getElementById("smessageinquiry").innerHTML=null;
+    	   
+    	   $('#form_add')[0].reset();
+    	   
+    	   //set date
+    	   
+    	var now = new Date();
+   		var day = ("0" + now.getDate()).slice(-2);
+   		var month = ("0" + (now.getMonth() + 1)).slice(-2);
+   	
+   	    var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+   	  
+   	    
+   	    document.getElementById("popupOrderDate").value= today;
+    	 
+    	});
+   
+    
+     </script>
+     
+   <!-- ==========================================End here================================================ -->
+   
+   
+   <style>
+   
+    .table td {
+    padding: 0 5px;
+}
+
+   </style>
+   
+   
+        <script>
+    
+  $(document).ready(function() {
+        
+	  var y = document.getElementById("user").length;
+	  
+	// alert("size is  : " + y);
+	 
+	 
+	 if(y!=1){
+		 
+	
+	  
+	 var x = document.getElementById("user");
+	  var option = document.createElement("option");
+	  option.text = "Select User";
+	  option.value=" ";
+	  x.add(option, x[0]);
+	  
+	  document.getElementById("user").selectedIndex = "0";
+	
+	 }
+
+ });
+  
+  </script>
+   
+    
+</body>
+
+</html>

@@ -1,0 +1,2856 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html xmlns:th="http://www.thymeleaf.org">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Production Order</title>
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/themify-icons.css">
+    <link rel="stylesheet" href="/css/flag-icon.min.css">
+    <link rel="stylesheet" href="/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="/css/lib/datatable/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="/scss/style.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+   
+       
+
+    <style type="text/css">
+       
+       #calculate{
+     display:none;
+     }
+    
+        .modal-backdrop.show {
+            display: none;
+        }
+
+        .modal-backdrop.fade {
+            display: none;
+        }
+
+/*
+        div.dataTables_wrapper {
+            width: 100%;
+        }
+*/
+		.selected{
+			background-color: #eee;
+			color: #000;
+		}
+		
+		.dataTables_length, .dataTables_filter {
+			display: none !important;
+		}
+    </style>
+    
+    
+    <style>
+.custom-header-panel{
+    background-color: #004b8e !important;
+    border-color: #004b8e !important;
+    color: white;
+}
+
+
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading {
+  padding: 10px 15px;
+  margin: -15px -15px 15px;
+  font-size: 17.5px;
+  font-weight: 500;      
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-footer {
+  padding: 10px 15px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+} 
+
+.panel-primary {
+  border-color: #428bca;
+}
+
+.panel-primary .panel-heading {
+  color: #ffffff;
+  background-color: #428bca;
+  border-color: #428bca;
+}
+/* This kinda of works but now 
+.panel, .panel-group .panel-heading+.panel-collapse>.panel-body{
+    border: none;
+}
+*/
+.card-header{
+    /* background-color: #004b8e !important; */
+    background-color: #004b8e !important;
+    border-color: #004b8e !important;
+    color: white;
+
+    padding: 10px 15px;
+  /*margin: -15px -15px 15px; */
+
+  font-size: 17.5px;
+  font-weight: 500;      
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+
+ <style type="text/css">
+       
+       #calculate{
+      display:none;
+     }
+    
+        .modal-backdrop.show {
+            display: none;
+        }
+
+        .modal-backdrop.fade {
+            display: none;
+        }
+
+/*
+        div.dataTables_wrapper {
+            width: 100%;
+        }
+*/
+		.selected{
+			background-color: #eee;
+			color: #000;
+		}
+		
+		.dataTables_length, .dataTables_filter {
+			display: none !important;
+		}
+    </style>
+
+
+</head>
+
+<body>
+   <!-- Left Panel -->
+
+	<aside id="left-panel" class="left-panel">
+		<nav class="navbar navbar-expand-sm navbar-default">
+
+			<div class="navbar-header">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+					<i class="fa fa-bars"></i>
+				</button>
+				<a class="navbar-brand" href="./">MLFM</a>
+				<a class="navbar-brand hidden" href="./">BD</a>
+			</div>
+
+			<div id="main-menu" class="main-menu collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+				
+			
+                
+   <li class="menu-item-has-children dropdown" >
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <i class="menu-icon fa fa-laptop"></i>    Set Up
+          </a>
+        
+       <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown" >
+             <li th:each="s:${listModelUserObjectSetup}" 
+                   th:value="${s.userObjectId}">
+            <a class="dropdown-item" th:href="@{${s.modelObject.filePath}+'/'+${s.modelUser.userId}}" >
+               
+                    <span th:utext="${s.modelObject.objectName}">
+                   </span>
+                </a>
+            </li>
+          
+        </ul>
+        
+   </li>
+   
+      
+	 <li class="menu-item-has-children dropdown">
+     
+       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="menu-icon fa fa-laptop"></i> Transaction
+        </a>
+        
+           <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown">
+              <li th:each="t:${listModelUserObjectTransaction}"
+                   th:value="${t.userObjectId}">
+                   
+                   <a class="dropdown-item" th:href="@{${t.modelObject.filePath}+'/'+${t.modelUser.userId}}" >
+                 
+                         <span th:utext="${t.modelObject.objectName}">
+                         </span>
+                      </a>
+              </li>
+          </ul>
+      </li>			
+				
+        	
+		   	
+		<li class="menu-item-has-children dropdown">
+     
+             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="menu-icon fa fa-laptop"></i>   Tools
+             </a>
+        
+            <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown">
+                <li th:each="u:${listModelUserObjectTool}"
+                     th:value="${u.userObjectId}">
+                     
+                           <a class="dropdown-item" th:href="@{${u.modelObject.filePath}+'/'+${u.modelUser.userId}}" >
+                 
+                    <span th:utext="${u.modelObject.objectName}">
+                    </span>
+                 </a>
+               </li>
+          
+            </ul>
+       </li>	
+
+
+		<li class="menu-item-has-children dropdown">
+     
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="menu-icon fa fa-laptop"></i> Report
+              </a>
+        
+              <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown">
+                   <li th:each="r:${listModelUserObjectReport}"
+                        th:value="${r.userObjectId}">
+                        <a class="dropdown-item" th:href="@{${r.modelObject.filePath}+'/'+${r.modelUser.userId}}" >
+                     <!--  <a class="dropdown-item" th:href="${r.modelObject.filePath}"> -->
+                           <span th:utext="${r.modelObject.objectName}">
+                           </span>
+                       </a>
+                   </li>
+          
+              </ul>
+        </li>	
+					
+					
+					
+	             </ul>
+			</div>
+		</nav>
+	</aside>
+
+
+
+	<!-- Left Panel -->
+
+    <!-- Right Panel -->
+
+    <div id="" class="right-panel">
+
+       <!-- Header-->
+		<header id="header" class="header">
+
+			<div class="header-menu">
+
+		
+                  
+                        <div class="col-sm-4 text-right" >
+                         
+                      </div> 
+               
+                      <div class="col-sm-8 text-right" >
+                          
+                           <a class="nav-link" href="/logoncontroller/init"  style="float:right;" ><i class="fa fa-power -off"></i>Logout</a>
+                            <span class="nav-link" th:text="${name}"readonly style="color: black; float:right; padding-left:5px;"></span>  
+                            <span class="nav-link" style="color: black; float:right; padding-right:0px;">User : </span>  
+                           
+                          
+                         
+                       </div>
+                 
+			</div>
+
+		</header><!-- /header -->
+		<!-- Header-->
+        
+        <div class="container">
+
+ <!-- <div class="row">  -->
+
+
+<!-- <div class="col-md-offset-2 col-md-8"> -->
+	
+    <div class="panel">
+      <div class="panel-heading custom-header-panel">
+          <h5 class="panel-title roboto"> PO Search </h3>
+      </div>
+  <div class="panel-body">
+
+
+  <form  id="pOSearch"  class="needs-validation" novalidate>
+				<div class="row">
+					<div class="col-12">
+					
+						<div class="row">
+									
+									
+									    
+									   <div class="col-3">
+										     <div class="form-group">
+											      <label>Client type</label>
+											    
+												  <select name="order_owner_Type" id="buyerTypeId" class="form-control" aria-required="true" aria-invalid="false">
+									                      <option value="">Select client type</option>
+									                      <option th:each="type:${ownerTypeList}"
+											                         th:value="${type.orderOwnerTypeId}"
+											                         th:utext="${type.orderOwnerTypeName}"
+									                       />
+							                      </select>
+										     </div>
+									    </div>
+									
+								         <div class="col-3">
+										     <div class="form-group">
+											      <label>Client Name</label>
+											      
+											       <select class="form-control" name="initialBuyer" id="buyerOtherId">
+											        	 
+												        
+											      </select>
+											      
+											   
+										     </div>
+									    </div>
+									 
+					 
+								        <div class="col-3">
+											<div class="form-group">
+											      <label>WO Id</label>
+												 <input type="text" class="form-control" placeholder="WO Id" name="wOMstId" id="wOMstId">
+											</div>
+										</div>
+										
+										
+										
+	                                    
+	                                    
+	                                    <div class="col-3">
+			                                <div class="form-group">
+			                                	<label>Item</label>
+			               	                    <select id="itemId" name="itemName" class="form-control">
+			                                            <option value="">Select Item</option>
+			                                            <option	th:each="itemList:${modelItemList}"
+														th:value="${itemList.itemId}"
+														th:utext="${itemList.itemName}"/>
+			                                    </select>
+			                                </div>									
+	                                   </div>
+	                                   
+	                                   
+	                                </div>   
+	                                
+	                                
+	                                <div class="row">
+	                              
+										<div class="col-3">
+										     <div class="form-group">
+												<label>Design Id</label>
+												<input type="text" class="form-control" placeholder="Design Id" name="" id="designId">
+											 </div>
+										</div>
+										
+										<div class="col-3">
+										     <div class="form-group">
+												<label>User Design No</label>
+												<input type="text" class="form-control" placeholder="Design No" name="" id="userDesignNo">
+											 </div>
+										</div>
+									   
+									
+
+									    <div class="col-3">
+											<div class="form-group">
+												<label>Plan From</label>
+												<input type="date" value="" class="form-control" name="planStartDate" id="planStartDate">
+											</div>
+										</div>
+										
+										<div class="col-3">
+											<div class="form-group">
+												<label>Plan To</label>
+												<input type="date" value="" class="form-control" name="planEndDate" id="planEndDate">
+											</div>
+										</div>
+										
+										</div>
+										
+										<div class="row">
+
+										<div class="col-2"> 
+												<div class="form-group">
+													<label>PO Done </label>
+													<div class="custom-control custom-checkbox">
+														<input type="checkbox" class="custom-control-input" id="pODone" >
+														<label class="custom-control-label" for="pODone"></label>
+													</div>
+											   </div>   
+										</div>
+										
+										<div class="col-3">
+											<div class="form-group">
+												<label>PO Done From</label>
+												<input type="date" value="" class="form-control" name="pODoneFrom" id="pODoneFrom">
+											</div>
+										</div>
+										
+										<div class="col-3">
+											<div class="form-group">
+												<label>PO Done To</label>
+												<input type="date" value="" class="form-control" name="pODoneTo" id="pODoneTo">
+											</div>
+										</div>
+								  
+				
+						 			
+							          	<div class="col-4" style="text-right">	    
+							          	   <input type="submit" value="Search" class="btn btn-primary" style="margin-top: 30px;">
+							        	   <input type="button" style="margin-top: 30px;" class="btn btn-success" onClick="location.reload()" value="Refresh">				
+						        		</div>
+						 		     
+								    
+					</div>   
+								    
+				  </div>  
+				  				
+				</div>
+							
+			 </form>
+						
+						
+		
+	  
+        
+        <!--############# saj- production plan MST table portion -start ############### -->
+        
+        
+        
+        
+                <h5> Select </h5>
+				<div class="form-group">
+					<select  name="state" id="maxRows" class="form-control" style="width:150px;">
+						<option value="10">10</option>
+						<option value="5">5</option>
+						<option value="15">15</option>
+						<option value="20">20</option>
+						<option value="50">50</option>
+						<option value="70">70</option>
+						<option value="100">100</option>
+						<option value="5000">Show ALL</option>
+				     </select>
+				</div>		      
+        
+  
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="card" style="width: 1100px; overflow: scroll">
+					<div class="card-header">
+						<strong class="card-title">Search Result</strong>
+					</div>
+					<div class="card-body">
+					
+						<table id="pPMstTableId" class="table table-striped table-bordered display nowrap" style="width:100%">
+						 <h6 style="color:red; font-size:12px;margin-left:20px" id="pPMstTableMassage" >Click Plan Mst Id to get Plan Chd data</h6>	  
+									  
+					<thead>
+								
+							<tr>
+								<th scope="col">Plan MST Id</th>
+								<th scope="col">PO Mst Date</th>
+								<th scope="col">Buyer/Other Name</th>
+								<th scope="col">WOMst Id</th>
+								<th scope="col">WOChd Id</th>
+								<th scope="col">Design Id</th>
+								<th scope="col">Item Name</th>
+								<th scope="col">Planned By</th>
+								<th scope="col">Reference</th>
+								<th scope="col">Remarks</th>
+								<th scope="col">Action</th>
+								<th scope="col" hidden>Active Status</th>
+								<th scope="col" hidden>Lace Type</th>
+								<th scope="col" hidden>Lace Type Name</th>
+								<th scope="col" hidden>Fabric Type Id</th>
+								<th scope="col" hidden>Fabric Type Name</th>
+								<th scope="col" hidden>DTM</th>
+							</tr>
+					</thead>
+						
+						
+					<tbody>
+					         
+					</tbody>
+						
+				</table>
+				
+					<div class="pagination-container">
+	           			<nav>
+	           			    <ul id="pagination" class="pagination"></ul>
+				        </nav>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+			
+		
+	 
+
+
+
+
+
+
+
+    <!--############# saj- start po mst Edit modal upload form popup - start ########## --> 
+	     
+	      
+      
+<div class="modal fade bd-example-modal-lg" id="pOEditModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="">PO FORM(Edit)</h5>
+            <center><p id="pOUpdateMessage" style="color: limegreen; display: block;font-size:15px; margin-left:150px"></p></center>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+       </div>
+      
+<div class="col-md-12">
+	<div class="">
+	  
+	
+  
+       <form id="pOFromId" method="post" novalidate="novalidate">
+						<div class="row">
+						
+							<div class="col-md-3">
+				        		<div class="form-group">
+				        			<label class="labelcontrol">PO Mst Id</label>
+				        			<input name="" id="chdEditId" type="text" class="form-control" hidden>
+				        			<input name="" id="mcSEditId" type="text" class="form-control" hidden>
+				        			<input name="" id="mcTEditId" type="text" class="form-control" hidden>
+				        			<input name="" id="pOMstEditId" type="text" class="form-control" aria-required="true" aria-invalid="false" placeholder="Id" readonly>
+				        		</div>
+				        	</div>
+				        	
+				        	<div class="col-3">
+								<div class="form-group">
+									<label>PO Mst Date</label>
+									<input type="date" class="form-control" id="modalEditPOMstDate" name="pOMstDate"  required>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+								      <label class="control-label mb-1">User PO No</label>
+								            <input type="text" class="form-control" aria-required="true" aria-invalid="false" id="modalEditPOUserPONo" name="" placeholder="Type.....">
+								</div>
+							</div>
+				        	
+							<div class="col-md-3">
+				        		<div class="form-group">
+				        			<label class="labelcontrol">Design Id</label>
+				        			<input name="" id="modalEditDesignId" type="text" class="form-control" placeholder=""  readonly>
+				        		</div>
+				        	</div>
+				        	
+				        	<div class="col-md-3">
+				        		<div class="form-group">
+				        			<label class="labelcontrol">Item Name</label>
+				        			<input name="" id="modalEditItemName" type="text" class="form-control" placeholder="" readonly>
+				        		</div>
+				        	</div>							
+					
+		                   
+						    <input hidden type="text" class="form-control" aria-required="true" aria-invalid="false" id="modalEditLaceTypeId" name="" placeholder="type"  readonly>
+							
+		                    <div class="col-3">
+								<div class="form-group">
+								    <label class="control-label mb-1">Lace Type</label>
+								    <input type="text" class="form-control" aria-required="true" aria-invalid="false" id="modalEditLaceTypeName" name="" placeholder="type" readonly>
+								</div>
+							</div>
+							
+							 <input hidden type="text" class="form-control" aria-required="true" aria-invalid="false" id="modalEditfabricTypeId" name="" placeholder="type"  readonly>
+							
+							<div class="col-3">
+								<div class="form-group">
+								    <label class="control-label mb-1">Fabric Type</label>
+								    <input type="text" class="form-control" aria-required="true" aria-invalid="false" id="modalEditFabricTypeName" name="" placeholder="type" readonly>
+								</div>
+							</div>
+		                    
+						
+                             <div class="col-3">
+								<div class="form-group">
+								    <label class="control-label mb-1">DTM</label>
+								    <input type="text" class="form-control" aria-required="true" aria-invalid="false" id="modalEditDTM" name=""   placeholder="Type....." readonly>
+								</div>
+							</div>
+				   
+						
+						<div class="col-4">
+			                     <div class="form-group">
+			                         <label for="" class="control-label mb-1">Remarks</label>
+				                     <textarea rows="2" id="modalEditRemarks" placeholder="Remarks here..."  class="form-control" style="width: 100%" ></textarea>
+			                     </div>
+		                    </div>
+		                    
+		                    <div class="col-2">
+								   <div class="form-group">
+										<label class="control-label mb-1">Active</label>
+										<div class="custom-control custom-checkbox">
+											  <input type="checkbox" class="custom-control-input" id="modalEditPOActive" name ="active" checked>
+											<label class="custom-control-label" for="modalEditPOActive"></label>
+										</div>
+								 </div>
+						   </div>
+		      
+                       
+                       <div class="col-3">
+					   </div>
+												
+						<div class="col-3">
+							<div class="modal-footer">
+								<label></label>
+								<button type="button" class="btn btn-primary" id="modalEditPOMstSaveBtn">Save</button>
+								 <button type="button" class="btn btn-secondary" data-dismiss="modal" id="pOModalEditCloseBtn">Close</button>
+							</div>
+						</div>
+                </div>
+					</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!--############# saj- start po mst Edit modal upload form popup - end ########## -->
+
+
+
+
+
+
+	 
+	 
+	     <!--############# saj- start po mst modal upload form popup - start ########## --> 
+	     
+	      
+      
+<div class="modal fade bd-example-modal-lg" id="pOModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+           <h5 class="modal-title" id="pOModal">PO FORM</h5>
+             <center><p id="pOSaveMessage" style="color: limegreen; display: block;font-size:15px; margin-left:150px"></p></center>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+             </button>
+         </div>
+      
+<div class="col-md-12">
+	<div class="">
+	  
+	
+  
+       <form id="pOFromId" method="post" novalidate="novalidate">
+						<div class="row">
+						
+							<div class="col-md-3">
+				        		<div class="form-group">
+				        			<label class="labelcontrol">PO Mst Id</label>
+				        			<input name="" id="chdId" type="text" class="form-control" hidden>
+				        			<input name="" id="mcSId" type="text" class="form-control" hidden>
+				        			<input name="" id="mcTId" type="text" class="form-control" hidden>
+				        			<input name="" id="" type="text" class="form-control" aria-required="true" aria-invalid="false" placeholder="Id" readonly>
+				        		</div>
+				        	</div>
+				        	
+				        	<div class="col-3">
+								<div class="form-group">
+									<label>PO Mst Date</label>
+									<input type="date" class="form-control" id="modalPOMstDate" name="pOMstDate"  required>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+								      <label class="control-label mb-1">User PO No</label>
+								            <input type="text" class="form-control" aria-required="true" aria-invalid="false" id="modalPOUserPONo" name="" placeholder="Type.....">
+								</div>
+							</div>
+				        	
+							<div class="col-md-3">
+				        		<div class="form-group">
+				        			<label class="labelcontrol">Design Id</label>
+				        			<input name="" id="modalDesignId" type="text" class="form-control" placeholder=""  readonly>
+				        		</div>
+				        	</div>
+				        	
+				        	<div class="col-md-3">
+				        		<div class="form-group">
+				        			<label class="labelcontrol">Item Name</label>
+				        			<input name="" id="modalItemName" type="text" class="form-control" placeholder="" readonly>
+				        		</div>
+				        	</div>							
+					
+		                   
+						    <input hidden type="text" class="form-control" aria-required="true" aria-invalid="false" id="modalLaceTypeId" name="" placeholder="type"  readonly>
+							
+		                    <div class="col-3">
+								<div class="form-group">
+								    <label class="control-label mb-1">Lace Type</label>
+								    <input type="text" class="form-control" aria-required="true" aria-invalid="false" id="modalLaceTypeName" name="" placeholder="type" readonly>
+								</div>
+							</div>
+							
+							 <input hidden type="text" class="form-control" aria-required="true" aria-invalid="false" id="modalfabricTypeId" name="" placeholder="type"  readonly>
+							
+							<div class="col-3">
+								<div class="form-group">
+								    <label class="control-label mb-1">Fabric Type</label>
+								    <input type="text" class="form-control" aria-required="true" aria-invalid="false" id="modalFabricTypeName" name="" placeholder="type" readonly>
+								</div>
+							</div>
+		                    
+						
+                             <div class="col-3">
+								<div class="form-group">
+								    <label class="control-label mb-1">DTM</label>
+								    <input type="text" class="form-control" aria-required="true" aria-invalid="false" id="modalDTM" name=""   placeholder="Type....." readonly>
+								</div>
+							</div>
+				   
+						
+						<div class="col-4">
+			                     <div class="form-group">
+			                         <label for="" class="control-label mb-1">Remarks</label>
+				                     <textarea rows="2" id="modalRemarks" placeholder="Remarks here..."  class="form-control" style="width: 100%" ></textarea>
+			                     </div>
+		                    </div>
+		                    
+		                    <div class="col-2">
+								   <div class="form-group">
+										<label class="control-label mb-1">Active</label>
+										<div class="custom-control custom-checkbox">
+											  <input type="checkbox" class="custom-control-input" id="modalpOActive" name ="active" checked>
+											<label class="custom-control-label" for="modalpOActive"></label>
+										</div>
+								 </div>
+						</div>
+		      
+                       
+                       <div class="col-3">
+					   </div>
+												
+						<div class="col-3">
+							<div class="modal-footer">
+								<label></label>
+								<button type="button" class="btn btn-primary" id="modalPOMstSaveBtn">Save</button>
+								 <button type="button" class="btn btn-secondary" data-dismiss="modal" id="pOModalCloseBtn">Close</button>
+							</div>
+						</div>
+                  </div>
+					</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!--############# saj- start po mst modal upload form popup - end ########## -->
+
+
+
+	 
+	 
+	 
+	 
+	 
+	
+
+		</div>
+	</div> <!-- .card -->
+	
+	
+<!--  po chd table -->
+	<!--  <div class="col-12">   -->
+                    	<div class="card table-container">
+                    	        <div class="card-header">
+								<strong class="card-title">Plan CHD</strong>
+								</div>
+							
+                    		<div class="card-body" style="overflow-y:scroll" >
+                    		<div id="searchsub">
+				
+				
+				
+				
+					<table id="pPChdTableId" class="table table-striped table-bordered display nowrap" style="width:100%">
+					
+					<h6 style="color:red; font-size:12px;margin-left:20px" id="planChdTableMassage" >Click Plan Mst Id to get PO Mst data</h6>
+						<thead>
+							<tr>
+							<th  name="pPChdChkBoxAll">Select</br><center><input type="hidden" class="select_all" id="pPChdChkBoxAll"/></center></th>    	               
+							
+								<th hidden >Machine Shift Id</th>
+								
+								<th scope="col">Plan Mst Id</th>
+								<th scope="col">Plan Chd Id</th>
+								<th scope="col">Plan Date</th>
+								<th scope="col">Machine Name</th>
+								<th scope="col">Shift</th>
+								<th scope="col">Plan Qty</th>
+								<th scope="col">Machine Capacity</th>
+								<th scope="col">UOM</th>
+								<th scope="col">Number of Stitches</th>
+								<th scope="col">Remarks</th>
+							</tr>
+						</thead>
+						
+						<tbody>
+						    
+						</tbody>
+						
+	   
+						
+					</table>
+					
+					<div class="col-10">
+					</div>
+					
+					<!--<div class="col-2">
+					    <div class="form-group">
+	                        <label></label>
+	                        <a href="#" type="button" class="btn btn-success btn-sm">Save</a>									
+	                    </div>
+                    </div>-->
+                   
+
+				  </div>
+			  </div>
+		 </div>
+	<!--   </div>	 -->
+	
+	<!-- po chd table -->
+	
+
+	
+
+<!--############# saj- production plan MST table portion -end ############### -->
+
+
+
+<!--############# saj- production plan chd table portion -start ############### -->
+<!--
+<div class="col-md-12">
+	<div class="card">
+		   <div class="card-header">
+			   <strong class="card-title">Production Plan CHD Table</strong>
+		   </div>
+		<div class="card-body">
+			<div id="">
+				<div class="card-body">
+	-->	
+	<!--  po mst table -->
+		 		<!--  	 <div class="col-12"> -->	
+                    	<div class="card table-container">
+                    	        <div class="card-header">
+								<strong class="card-title">PO Mst</strong>
+								</div>
+							
+                    		<div class="card-body" style="overflow-y:scroll">
+                    		<div id="searchsub">
+				
+				
+				
+				
+					<table id="pOMstTableId" class="table table-striped table-bordered display nowrap" style="width:100%">
+					
+					<h6 style="color:red; font-size:12px;margin-left:20px" id="POMstTableMassage" >Click PO Mst Id to get PO Chd Data</h6>
+						<thead>
+							<tr>
+							               
+								<th>PO Mst Id</th>
+								<th scope="col">PO Mst Date</th>
+								<th scope="col">User PO No</th>
+								<th scope="col">Design Id</th>
+								<th scope="col">Item Name</th>
+								<th scope="col">Lace Type</th>
+								<th scope="col">Fabric Type</th>
+								<th scope="col">DTM</th>
+								<th scope="col">Remarks</th>
+								<th scope="col">Active Status</th>
+								<th scope="col">Action</th>
+								<th scope="col">Action</th>
+							</tr>
+						</thead>
+						
+						<tbody>
+						    
+						</tbody>
+						
+	   
+						
+					</table>
+					
+				</div>
+			  </div>
+		 </div>
+	<!--   </div>   -->		
+	
+	<!--  end of po mst table -->
+				
+	<!--  po chd table -->
+	<!--  <div class="col-12">   -->
+                    	<div class="card table-container" style="width: 1070px; overflow-x: scroll">
+                    	        <div class="card-header">
+								<strong class="card-title">PO CHD</strong>
+								</div>
+							
+                    		<div class="card-body">
+                    		<div id="searchsub">
+				
+				
+				
+				
+					<table id="pOChdTableId" class="table table-striped table-bordered display nowrap" style="width:100%">
+					
+					<h6 style="color:limegreen; font-size:12px;margin-left:20px" id="POChdTableSaveMessage" ></h6>
+					
+						<thead>
+							<tr>
+						<!--	<th  name="pPChdChkBoxAll">Select</br><center><input type="checkbox" class="select_all" id="pPChdChkBoxAll"/></center></th>    	               
+							-->
+								<th hidden >Machine Shift Id</th>
+								<th scope="col">PO Mst Id</th>
+								<th scope="col">PO Chd Id</th>
+								<th scope="col">Production Mst Id</th>
+								<th scope="col">Production Chd Id</th>
+								<th scope="col">Plan Date</th>
+								<th scope="col">Machine Name</th>
+								<th scope="col">Shift Name</th>
+								<th scope="col">Plan Qty</th>
+								<th scope="col">Machine Qty</th>
+								<th scope="col">UOM</th>
+								<th scope="col">Number of Stitches</th>
+								<th scope="col">Remarks</th>
+							</tr>
+						</thead>
+						
+						<tbody>
+						    
+						</tbody>
+						
+	   
+						
+					</table>
+					
+					<div class="col-10">
+					</div>
+					
+				
+                   
+                    
+                    <div class="col-2">
+	                          <div class="form-group">
+	                              <label></label>
+	                             <a type="button" id="savePOChd" class=" btn btn-success" style="float:right"> Save PO Chd Data </a>								
+	                          </div>
+	                 </div>
+
+				  </div>
+			  </div>
+		 </div>
+	<!--   </div>	 -->
+	
+	<!-- po chd table -->
+	 
+</div>		 <!--  end of panel body -->	
+				
+
+
+
+
+<!--  start po chd table -->
+
+
+
+
+<!--  end po chd table -->
+
+<!--  po mst table  -->
+
+
+
+
+
+<!--  end po mst table -->
+
+
+
+<!--############# saj- production plan table portion -end ############### -->
+  
+
+     
+
+
+
+                   </div>   <!-- <div class="panel">  -->
+                     
+                     
+
+                </div>
+
+            </div>
+            
+            
+            
+            
+            
+            
+            <!--############# saj- production plan upload form popup - start ########## --> 
+ <!--  stopped cak 190214 -->  
+ <!--  
+<div class="modal fade bd-example-modal-lg" id="productionPlanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="productionPlanModal">Production Plan From</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+<div class="col-md-12">
+	<div class="card">
+	
+      <form class="needs-validation" th:object="${productionPlanMst}" th:action="@{/production/plan/save}" method="post" novalidate>
+											<div class="row">
+												<div class="col-3">
+													<div class="form-group">
+														<label class="control-label mb-1">Production Plan MST ID</label>
+														<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="Production_Plan_MST_ID" placeholder="ID"  readonly>
+													</div>
+												</div>
+												
+											<div class="col-3">
+													<div class="form-group">
+														<label>Date<span class="req" style="color:red">*</span></label>
+														<input type="date"  class="form-control" name="inquery_start_date" th:field="*{planDate}" required> 
+												
+													</div>
+												</div>
+												
+												<div class="col-4">
+													<div class="form-group">
+														<label for="validationCustom03" class="control-label mb-1">Palanned By<span class="req" style="color:red">*</span></label>
+														<select name="machineType" id="machineType" class="form-control" aria-required="true" aria-invalid="false" th:field="*{modelUser.userId}" required>
+													
+																				
+																				<option value="">Choose Type</option>
+																				<option th:each="type:${userList}"
+																						th:value="${type.userId}"
+																						th:utext="${type.userName}"
+																				/>
+														</select>
+													</div>
+												</div>
+												
+												
+												
+											</div>
+									
+												
+											<div class="row">
+												<div class="col-3">
+													<div class="form-group">
+														<label class="control-label mb-1">Reference No</label>
+														<textarea rows="3" cols="50" placeholder="Type you message here..." name="REF_NO" class="form-control" aria-required="true" aria-invalid="false" th:field="*{refNo}">
+														
+														</textarea>
+													</div>
+												</div>	
+													
+												<div class="col-3">
+													<div class="form-group">
+														<label class="control-label mb-1">Remarks</label>
+												
+                                                        <textarea rows="3" cols="40" placeholder="Type you message here..." name="remarks1" th:field="*{remarks}" class="form-control" aria-required="true" aria-invalid="false">
+                                                        </textarea>
+													</div>
+												</div>
+												
+												<div class="col-1">
+													<div class="form-group">
+														<label class="control-label mb-1">Active</label>
+														
+														<div class="custom-control custom-checkbox">
+														   <input type="checkbox" class="custom-control-input" id="defaultChecked4" th:field="*{active}" checked>
+														  
+														  <label class="custom-control-label" for="defaultChecked4"></label>
+														</div>
+													</div>
+												</div>
+											
+												<div class="col-3">
+													<div class="form-group">
+														<label></label>
+														<input type="submit" value="Save" class="btn btn-primary" style="margin-top: 24px;">
+													</div>
+												</div>
+											</div>
+
+										</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+-->
+
+
+<!--############# saj- production plan upload form popup - end ########## --> 
+
+
+
+								
+<!--###### popup ####### saj- Show Schedule modal - start ############-->	
+											
+<div class="modal fade bd-example-modal-lg" id="ProductionPlanMstModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Machine Availability </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+	
+     <div class="modal-body">
+     
+    <form class="needs-validation" method="post" id="machineSheduleSearch" novalidate> 
+      <div class="row">
+        
+                <div class="col-3">
+                     <div class="form-group">
+                       <label class="control-label mb-1">Machine Type</label>
+                          <select name="machineTypeId" class="form-control" aria-required="true" aria-invalid="false" id="machineTypeId">
+                                 <option value="">Choose Type</option>
+								 <option th:each="machine:${machineTypeList}"
+										 th:value="${machine.machineTypeId}"
+										 th:utext="${machine.machineTypeName}"
+							     />
+                          </select>
+                     </div>
+                </div>
+                                    
+                <div class="col-3">
+                   <div class="form-group">
+                        <label class="control-label mb-1">Machine Name</label>
+                        <select class="form-control" aria-required="true" aria-invalid="false" id="machineId" name="machineId" >
+                               <option value="">Select Machine</option>
+                        </select>
+                    </div>
+                </div>
+                                    
+                <div class="col-3">
+                    <div class="form-group">
+                    <label class="control-label mb-1">Machine Shift</label>
+                         <select class="form-control" id="machineShiftId" name="machineShiftId" >
+                                 <option value="">Select Shift</option>
+                         </select>
+                    </div>
+                </div>
+        
+			    <div class="col-3">
+				   <div class="form-group">
+					  <label>Date From</label>
+						<input type="date" value="" class="form-control" id="startDate" name="startDate"> 
+					<!--	<input type="date" data-date="" class="form-control" id="startDate" data-date-format="DD MMMM YYYY" value=""> -->
+				   </div>
+			    </div>
+			    
+			 
+			 </div>
+			    
+			  <div class="row"> 
+			    
+				<div class="col-3">
+					<div class="form-group">
+						<label>Date To</label>
+							<input type="date" class="form-control" id="endDate" name="endDate">
+					</div>
+				</div>
+										
+				<div class="col-md-1">
+        	        <div class="form-group text-center">
+        		        <label class="labelcontrol">Available</label>
+        		            <input type="checkbox" id="availableId" name="verified">
+        		     </div>
+        	     </div>
+        	                            
+        	     <div class="col-3">
+	                <div class="form-group">
+	                    <label></label>
+	                         <input type="submit" value="Search Using Schedule" class="btn btn-primary" style="margin-top: 2px;">									
+	                </div>
+                 </div>
+                 
+                 <div class="col-4">
+	                <div class="form-group">
+	                    <label></label>
+	                         <input type="submit" value="Search Using Manual Data" class="btn btn-primary" style="margin-top: 24px;">									
+	                </div>
+                 </div>
+                 
+            </div>
+            
+           </form> 
+
+<!--####### popup #########- search table  resultList-#################-->
+      
+      <div class="col-md-12">
+	<div class="card">
+      
+      <div class="card">
+		<div class="card-header">
+			<strong class="card-title">Machine Schedule Search Result List </strong>
+		</div>
+	<div class="card-body">
+			<!-- Credit Card -->
+		<div id="">
+			<div class="card-body">
+				<table id="machineScheduleDataTable" class="table table-striped table-bordered" style="width:100% !important">
+					<thead  style="width:100% !important">
+						<tr  style="width:100% !important">
+						    
+						 <!--   <th scope="col">Select</th> -->
+						    <th scope ="col" name="row_id"><center>Select</br></center><center><input type="checkbox" class="select_all" id="myCheck"/></center></th>
+							<th scope="col">Machine</th>
+							<th scope="col">Shift</th>
+							<th scope="col">Date</th>
+							<th scope="col">Available</th>
+						</tr>
+					</thead>
+				    <tbody>
+					<!--
+					     <tr th:each="scheduleList:${machineScheduleList}">
+					       <td ><span th:text="${scheduleList.machineName}"></span></td>
+					       <td><span th:text="${scheduleList.machineShiftName}"></span></td>
+					       <td><span th:text="${scheduleList.sheduleDate}"></span></td>
+					       <td>sd</td>
+						</tr>
+					-->	
+					</tbody>
+				</table>
+				
+				    <div class="col-8">
+				    </div>
+				   
+				     <div class="col-md-2">
+	                     <div class="form-group">
+	                       <label></label>
+	                        <!-- <input type="submit" id="selectMachineSchedule" value="OK" class="btn btn-primary btn-sm">	 -->
+	                          <button class="btn btn-success btn-sm" id="selectCheckSchedule">OK</button>								
+	                     </div>
+                     </div>
+              
+                
+                    <div class="col-2">
+	                    <div class="form-group">
+	                        <label></label>
+	                        <a href="#" type="button" class="btn btn-success btn-sm">Cancel</a>									
+	                    </div>
+                    </div>
+                    
+                    
+				
+			  </div>
+	    	</div>
+          </div>
+         </div>
+       </div>
+	</div>
+<!--####### popup #########- search table  resultList-#################-->
+
+</div>
+   </div>	
+ </div>
+</div>
+
+<!--######popup####### saj- Show Schedule modal -end ############-->
+            
+            
+            
+        
+            
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!--    <script type="text/javascript" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>-->
+
+    <script src="/js/vendor/jquery-2.1.4.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/plugins.js"></script>
+    <script src="/js/main.js"></script>
+
+
+    <script src="/js/lib/data-table/datatables.min.js"></script>
+    <script src="/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+    <script src="/js/lib/data-table/dataTables.buttons.min.js"></script>
+    <script src="/js/lib/data-table/buttons.bootstrap.min.js"></script>
+    <script src="/js/lib/data-table/jszip.min.js"></script>
+    <script src="/js/lib/data-table/pdfmake.min.js"></script>
+    <script src="/js/lib/data-table/vfs_fonts.js"></script>
+    <script src="/js/lib/data-table/buttons.html5.min.js"></script>
+    <script src="/js/lib/data-table/buttons.print.min.js"></script>
+    <script src="/js/lib/data-table/buttons.colVis.min.js"></script>
+    <script src="/js/lib/data-table/datatables-init.js"></script>
+   <script type="text/javascript">
+		$(document).ready(function() {
+			$('#pPMstTableId').DataTable({
+				"scrollX": true
+			});
+			
+			
+			
+			
+			
+			$(document).ready(function() {
+	            $('#pOMstTableId').DataTable({
+	               "scrollX": false
+	           });
+
+	        });
+		
+		
+			
+			$(document).ready(function() {
+	            $('#pOChdTableId').DataTable({
+	               "scrollX": true
+	           });
+
+	        });
+			
+			
+			
+			
+			
+			$('#sub-close').submit(function(e) {
+				e.preventDefault();
+				// Coding
+				//$('#umodal').modal('toggle'); 
+				$('#umodal').modal('hide');
+				return false;
+			});
+		});
+		
+		
+        
+         $(document).ready(function() {
+            $('#pPChdTableId').DataTable({
+               "scrollX": false
+           });
+
+        });
+		
+		
+		$('#buyerTypeId').change(
+		        function() {
+		            $.getJSON("/pPlanCtrl/owner", {
+		                ownerType : $(this).val(),
+		                ajax : 'true'
+		            }, function(data) {
+		                var html = '<option value="">Select Client Name</option>';
+		                var len = data.length;
+		                for ( var i = 0; i < len; i++) {
+		             
+		                        html += '<option value="' + data[i].orderOwnerId + '">'
+		                            + data[i].ownerName + '</option>';
+		                }
+		                html += '</option>';
+		                $('#buyerOtherId').html(html);
+		            });
+		        });
+		
+	
+    
+     $('#machineTypeId').change(
+	        function() {
+	        	
+	            $.getJSON("/productionPlan/machine/type", {
+	            	
+	                machine : $(this).val(),
+	                
+	                ajax : 'true'
+	            }, function(data) {
+	                var html = '<option value="">Select Machine</option>';
+	                var len = data.length;
+	                alert(len);
+	                for ( var i = 0; i < len; i++) {
+	                    html += '<option value="' + data[i].machineId + '">'
+	                            + data[i].machineName + '</option>';
+	                }
+	               html += '</option>';
+	                $('#machineId').html(html);
+	            });
+	        }); 
+    
+    $('#machineId').change(
+	        function() {
+	        	
+	            $.getJSON("/productionPlan/machine/shift/type", {
+	            	
+	                machineId : $(this).val(),
+	                
+	                ajax : 'true'
+	            }, function(data) {
+	                var html = '<option value="">Select Shift</option>';
+	                var len = data.length;
+	                alert(len);
+	                for ( var i = 0; i < len; i++) {
+	                    html += '<option value="' + data[i].machineShiftId + '">'
+                                                  + data[i].machineShiftName + '</option>';
+	                }
+	               html += '</option>';
+	                $('#machineShiftId').html(html);
+	            });
+	        }); 
+	        
+	        
+	        $('#user').change(
+		        function() {
+		            $.getJSON("/inquery/user/cluster", {
+		               user : $(this).val(),
+		                ajax : 'true'
+		            }, function(data) {
+		                var html = '<option value="">Select Cluster Name</option>';
+		                var len = data.length;
+		              
+		                for ( var i = 0; i < len; i++) {
+		                    html += '<option value="' + data[i].modelCluster.clusterId+ '">'
+		                            + data[i].modelCluster.clusterName + '</option>';
+		                }
+		                html += '</option>';
+		                $('#user_cluster').html(html);
+		            });
+		        });
+    
+   
+	
+	</script>
+	
+	
+	 </script>  
+    
+    <script type="text/javascript" th:inline="javascript">
+		
+		var now = new Date();
+		var day = ("0" + now.getDate()).slice(-2);
+		var month = ("0" + (now.getMonth() + 1)).slice(-2);
+	
+	    var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+	    
+	    document.getElementById('planEndDate').value = today;
+        document.getElementById('pODoneTo').value = today;
+        document.getElementById('modalPOMstDate').value = today;
+	</script>
+	
+	<script>
+	
+	
+	var table='#pPMstTableId';
+	
+	
+	$('#maxRows').on('change',function(){
+	
+	$(".pagination").html('');
+	
+	var trnum =0;
+	var maxRows =parseInt($(this).val());
+	var  totalRows=$(table+' tbody tr').length;
+	
+	$(table+' tr:gt(0)').each(function(e) {
+	
+	              trnum++;
+	              
+	              if(trnum > maxRows)
+	              {
+	                 $(this).hide();
+	              }
+	              if(trnum <= maxRows)
+	              {
+	                 $(this).show();
+	              }
+	    
+	
+	
+	});   //each function
+	
+	 if(totalRows > maxRows)
+	              {
+	              
+	              
+	              var pagenum =Math.ceil(totalRows/maxRows);
+	              
+	              for(var i=1;i<=pagenum;)
+	              {
+	                 $("#pagination").append('<li class="btn-sm" data-page="'+i+'">\<span>'+ i++ +'</span></li>').show();
+	              }  //for
+	                
+	              }   //if
+	              
+	              
+	              $('.pagination li:first-child').addClass('active');
+	             $('.pagination li').on('click',function(){
+	             
+	             var pageNum =  $(this).attr('data-page');
+	             var trIndex= 0;
+	             
+	             $('.pagination li').removeClass('active');
+	              $(this).addClass('active');
+	             $(table+' tr:gt(0)').each(function(e) {
+	             
+	                trIndex++;
+	                if(trIndex >(maxRows*pageNum) || trIndex<=((maxRows*pageNum)-maxRows))
+	                {
+	                    $(this).hide();
+	                }
+	                else
+	                {
+	                $(this).show();
+	                }
+	             
+	             
+	             
+	                }); // each function
+	             
+	             });  //  click function
+	             
+	             
+	      });   //on change function
+	
+	
+	</script>
+	
+
+
+
+   
+        
+      
+    <script> 
+    
+
+      function codeAddress()
+	{
+	
+	$.getJSON("/pocontroller/findowners", {
+		                buyerType : $('#buyerTypeId').val(),   
+		                ajax : 'true'
+		            }, function(data) {
+		                var html = '<option value="">Select Buyer</option>';
+		                var len = data.length;
+		                
+		                for ( var i = 0; i < len; i++) {
+		                    html += '<option value="' + data[i].orderOwnerId + '">'
+		                            + data[i].ownerName + '</option>';
+		                }
+		                html += '</option>';
+		                $('#buyerOtherId').html(html);
+		            });
+		
+		
+		document.getElementById("planChdTableMassage").hidden=true;
+		document.getElementById("POMstTableMassage").hidden=true;
+		
+	}
+
+	window.onload=codeAddress;
+	
+	
+
+       </script>  
+       
+       
+<script>
+
+    //production plan search Ajax   
+    
+    $(function () {
+    
+    $('#pOSearch').submit(function(e) {
+   
+    
+      var id=document.getElementById("buyerTypeId");
+      var selectOrderType = id.options[id.selectedIndex].value;
+      //alert("test " + selectOrderType);
+    
+
+	  $('#pPMstTableId tbody').empty();
+      e.preventDefault();
+     
+
+     var check=document.getElementById("pODone");
+      
+     //  alert(check);
+       
+                            if(check.checked==false){
+                            
+                                                    //alert("PO Not planned");
+                                                    
+                                                    $('#pPMstTableId tbody').empty();
+                                                    $('#pPChdTableId tbody').empty();
+                                                    $('#pOMstTableId tbody').empty();
+                                                    $('#pOChdTableId tbody').empty();
+                                                    document.getElementById("planChdTableMassage").hidden=true;
+	                                             	document.getElementById("POMstTableMassage").hidden=true;
+                                                    //e.preventDefault();
+     
+                                                   var formData= { 
+                                                                 "orderOwnerTypeId" :$("#buyerTypeId").val(),
+                                                                 "orderOwnerId" : $("#buyerOtherId").val(),
+                                                                 "wOMstId" : $("#wOMstId").val(),
+                                                                 "planStartDate" : $("#planStartDate").val(),
+                                                                 "planEndDate" : $("#planEndDate").val(),
+                                                                 "itemId" : $("#itemId").val(),
+								                                 "designId" : $("#designId").val()
+									                             //"userDesignNo" : $("#userDesignNo").val()
+                                                                  };
+        
+      
+                                                   $.ajax({
+                                                                  type : "GET",
+                                                                  url:"/pocontroller/getsearchdatapopending",
+                                                                  dataType : 'json',
+	                                                              data: formData,
+                                                                  success: function(result){
+	                                                              $.each(result, function(i,pPlanList){
+	                            
+	     var customerRow = '<tr>' +   
+	                               	                                     
+							              '<td class="pPlanMstId">' +pPlanList.productionPlanMstId+ '</td>' +
+							              '<td>' +pPlanList.planMstDate+ '</td>' +
+							              '<td>' +pPlanList.orderOwnerName+ '</td>' +
+							              '<td>' +pPlanList.wOMstId+ '</td>' +
+							              '<td>' +pPlanList.wOChdId+ '</td>' +
+							              '<td class="designIdSearch">' +pPlanList.designId+ '</td>' +
+							               '<td class="itemNameSearch">' +pPlanList.itemName+ '</td>' +							              
+							              '<td>' +pPlanList.plannedByName+ '</td>' +
+							              '<td>' +pPlanList.refNo + '</td>' +						                
+							              '<td>' +pPlanList.remarks +'</td>' +
+							             
+										 '<td class="pOMstBtn">'+'<a href="#" type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#pOModal">PO Mst</a>'+'</td>' +   
+						                   
+                                           '<td hidden>' + '</td>' +
+                                          '<td class="laceTypeIdSearch" hidden>' +pPlanList.laceType+ '</td>' +
+                                          '<td class="laceTypeNameSearch" hidden>' +pPlanList.laceTypeName+ '</td>' +
+							              '<td class="fabricTypeIdSearch" hidden>' +pPlanList.fabricTypeId+ '</td>' +
+							              '<td class="fabricTypeNameSearch" hidden>' +pPlanList.fabricTypeName+ '</td>' +
+						                  '<td class="dTMSearch" hidden>' +pPlanList.dTM+ '</td>' +
+						  '</tr>';
+						  
+		                                      $('#pPMstTableId tbody').append(customerRow);
+					
+		                                                });        // each
+		                                                
+		                                                
+		                                                
+		                	                                                // for default 10 data   
+		                                    
+	var table='#pPMstTableId';
+	
+	$(".pagination").html('');
+	
+	var trnum =0;
+	var maxRows =parseInt(10);
+	var  totalRows=$(table+' tbody tr').length;
+	
+	$(table+' tr:gt(0)').each(function(e) {
+	
+	              trnum++;
+	              
+	              if(trnum > maxRows)
+	              {
+	                 $(this).hide();
+	              }
+	              if(trnum <= maxRows)
+	              {
+	                 $(this).show();
+	              }
+	    
+	
+	
+	});   //each function
+	
+	 if(totalRows > maxRows)
+	              {
+	              
+	              
+	              var pagenum =Math.ceil(totalRows/maxRows);
+	              
+	              for(var i=1;i<=pagenum;)
+	              {
+	                 $("#pagination").append('<li class="btn-sm" data-page="'+i+'">\<span>'+ i++ +'</span></li>').show();
+	              }  //for
+	                
+	              }   //if
+	              
+	              
+	              $('.pagination li:first-child').addClass('active');
+	             $('.pagination li').on('click',function(){
+	             
+	             var pageNum =  $(this).attr('data-page');
+	             var trIndex= 0;
+	             
+	             $('.pagination li').removeClass('active');
+	              $(this).addClass('active');
+	             $(table+' tr:gt(0)').each(function(e) {
+	             
+	                trIndex++;
+	                if(trIndex >(maxRows*pageNum) || trIndex<=((maxRows*pageNum)-maxRows))
+	                {
+	                    $(this).hide();
+	                }
+	                else
+	                {
+	                $(this).show();
+	                }
+	             
+	             
+	             
+	                }); // each function
+	             
+	             });  //  click function
+	             
+	             
+	
+		                                       
+		                // default 10 data - end                                
+		                                                
+		                                                
+		                                                
+		                                                
+		                                                
+					 
+		                                          },   // end success
+	                                        
+	                                        error : function(e) {
+		                                                        alert("ERROR: ", e);
+		                                                        console.log("ERROR: ", e);
+			                                                    }
+					
+		                                    });   // end ajax
+		                                    
+		                                    
+                            
+                                 }   // if (this condition based on when PO Done Unchecked)
+                           else
+                           {
+                          // alert("po Done");
+                                                    $('#pPMstTableId tbody').empty();
+                                                    $('#pPChdTableId tbody').empty();
+                                                    $('#pOMstTableId tbody').empty();
+                                                    $('#pOChdTableId tbody').empty();
+                                                    document.getElementById("planChdTableMassage").hidden=true;
+		                                            document.getElementById("POMstTableMassage").hidden=true;
+                                                    
+                                                    
+                           //e.preventDefault();
+                           
+                            var formData= { 
+                                                                 "orderOwnerTypeId" :$("#buyerTypeId").val(),
+                                                                 "orderOwnerId" : $("#buyerOtherId").val(),
+                                                                 "wOMstId" : $("#wOMstId").val(),
+                                                                 "pODoneFrom" : $("#pODoneFrom").val(),
+                                                                 "pODoneTo" : $("#pODoneTo").val(),
+                                                                  "itemId" : $("#itemId").val(),
+								                                 "designId" : $("#designId").val(),
+									                             //"userDesignNo" : $("#userDesignNo").val()
+                                                                 };
+                           
+                           $.ajax({
+                                                                  type : "GET",
+                                                                  url:"/pocontroller/getsearchdatapodone",
+                                                                  dataType : 'json',
+	                                                              data: formData,
+                                                                  success: function(result){
+                                                                  
+                                                                  
+	                                                              $.each(result, function(i,pODoneList){
+	                            
+	     var customerRow = '<tr>' +   
+	                               	                                     
+							              '<td class="productionPlanMstDoneTd">' +pODoneList.productionPlanMstId+ '</td>' +
+							              '<td>' +pODoneList.planMstDate+ '</td>' +
+							              '<td>' +pODoneList.orderOwnerName+ '</td>' +
+							              '<td>' +pODoneList.wOMstId+ '</td>' +
+							              '<td>' +pODoneList.wOChdId+ '</td>' +
+							              '<td class="">' +pODoneList.designId+ '</td>' +
+							               '<td class="itemNameDoneSearch">' +pODoneList.itemName+ '</td>' +							              
+							              '<td>' +pODoneList.plannedByName+ '</td>' +
+							              '<td>' +pODoneList.refNo + '</td>' +						                
+							              '<td>' +pODoneList.remarks +'</td>' +
+							             
+										 '<td class="">'+'<a href="#" type="button" class="btn btn-success btn-sm">PO Mst</a>'+'</td>' +   
+						                  
+                                           '<td hidden>' + '</td>' +
+                                          '<td class="laceTypeIdDoneSearch" hidden>' +pODoneList.laceTypeId+ '</td>' +
+                                          '<td class="laceTypeNameDoneSearch" hidden>' +pODoneList.laceTypeName+ '</td>' +
+							              '<td class="fabricTypeIdDoneSearch" hidden>' +pODoneList.fabricTypeId+ '</td>' +
+							              '<td class="fabricTypeNameDoneSearch" hidden>' +pODoneList.fabricTypeName+ '</td>' +
+						                  '<td class="dTMDoneSearch" hidden>' +pODoneList.dTM+ '</td>' +
+						              
+						  '</tr>';
+						  
+		                                      $('#pPMstTableId tbody').append(customerRow);
+					
+		                                                });        // each
+		                                                
+		                                                                         
+		                	                                                // for default 10 data   
+		                                    
+	var table='#pPMstTableId';
+	
+	$(".pagination").html('');
+	
+	var trnum =0;
+	var maxRows =parseInt(10);
+	var  totalRows=$(table+' tbody tr').length;
+	
+	$(table+' tr:gt(0)').each(function(e) {
+	
+	              trnum++;
+	              
+	              if(trnum > maxRows)
+	              {
+	                 $(this).hide();
+	              }
+	              if(trnum <= maxRows)
+	              {
+	                 $(this).show();
+	              }
+	    
+	
+	
+	});   //each function
+	
+	 if(totalRows > maxRows)
+	              {
+	              
+	              
+	              var pagenum =Math.ceil(totalRows/maxRows);
+	              
+	              for(var i=1;i<=pagenum;)
+	              {
+	                 $("#pagination").append('<li class="btn-sm" data-page="'+i+'">\<span>'+ i++ +'</span></li>').show();
+	              }  //for
+	                
+	              }   //if
+	              
+	              
+	              $('.pagination li:first-child').addClass('active');
+	             $('.pagination li').on('click',function(){
+	             
+	             var pageNum =  $(this).attr('data-page');
+	             var trIndex= 0;
+	             
+	             $('.pagination li').removeClass('active');
+	              $(this).addClass('active');
+	             $(table+' tr:gt(0)').each(function(e) {
+	             
+	                trIndex++;
+	                if(trIndex >(maxRows*pageNum) || trIndex<=((maxRows*pageNum)-maxRows))
+	                {
+	                    $(this).hide();
+	                }
+	                else
+	                {
+	                $(this).show();
+	                }
+	             
+	             
+	             
+	                }); // each function
+	             
+	             });  //  click function
+	             
+	             
+	
+		                                       
+		                // default 10 data - end                        
+		                                                
+	
+		                                          },   // end success
+	                                        
+	                                        error : function(e) {
+		                                                        alert("ERROR: ", e);
+		                                                        console.log("ERROR: ", e);
+			                                                    }
+					
+		         });   // end ajax
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           }         // else (this condition based on when PO Done checked)       
+                            
+                                            
+                                
+      
+  
+		
+		
+        
+  
+    });  // submit
+});   // function
+    
+</script>   
+       
+       <!--  plan mst id click -->
+       <script>
+       
+       $("#pPMstTableId").on('click','.pPlanMstId',function(){
+       
+       
+   //    alert("search table and click PPMST id");
+       
+       $row=$(this).closest("tr");
+       var id = $row.find('.pPlanMstId').text();
+     //  alert("plan mst id " + id );
+       
+       var formData= { 
+                      "pPlanMstId" :id
+                      }
+                      
+        $("#pPChdTableId tbody").empty();
+     
+     
+                              $.ajax({
+                                         type : "GET",
+                                         url:"/pocontroller/productionplanchddata",
+                                         dataType : 'json',
+	                                     data: formData,
+                                         success: function(result){
+	                            
+	                            $.each(result, function(i,pPlanChdList){
+	                     
+	        var customerRow = '<tr>' +   
+	                            
+	                                     '<td class="pPChdChkBox text-center"><input type="checkbox">' + '</td>' +	                                       
+							              '<td class="pPMstIdTd">' +id+ '</td>' +
+							             '<td class="pPChdIdTd">' +pPlanChdList.productionPlanChdId+ '</td>' +
+							             '<td class="pPChdDateTd">' +pPlanChdList.productionPlanDate+ '</td>' +
+							              '<td class="machineNameTd">' +pPlanChdList.machineName+ '</td>' +
+							              '<td class="shiftNameTd">' +pPlanChdList.shiftName+ '</td>' +
+							              '<td class="productionPlanQtyTd">' +pPlanChdList.productionPlanQty+ '</td>' +
+							              '<td class="machineCapacityQtyTd">' +pPlanChdList.machineCapacityQty + '</td>' +
+							              '<td class="machineCapacityUOMNameTd">' +pPlanChdList.machineCapacityUOMName+ '</td>' +
+							              '<td class="noOfStitchTd">' + '</td>' +
+							              '<td class="remarksTd">' +pPlanChdList.remarks + '</td>' +
+							              '<td class="machineShiftIdTd" hidden>' +pPlanChdList.machineShiftId + '</td>' +
+							             
+							             
+										 //'<td>'+'<a href="#" type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#productionPlanModal">plan Chd</a>'+'</td>' +   
+						      '</tr>';
+						
+		                                      $('#pPChdTableId tbody').append(customerRow);
+					
+		                                                });        // each
+					 
+		                                          },   // end success
+	                                        
+	                                        error : function(e) {
+		                                                        alert("ERROR: ", e);
+		                                                        console.log("ERROR: ", e);
+			                                                    }
+					
+		                                    });   // end ajax
+       
+       
+       });
+  </script>
+  
+  
+  
+   <script>
+       
+       $("#pPMstTableId").on('click','.productionPlanMstDoneTd',function(){
+       
+       
+   //    alert("search table and click PPMST id");
+       
+       $row=$(this).closest("tr");
+       var id = $row.find('.productionPlanMstDoneTd').text();
+       
+       var itemName = $row.find('.itemNameDoneSearch').text();
+    //    alert("itemName "+itemName);
+       var laceTypeName = $row.find('.laceTypeNameDoneSearch').text();
+     //   alert("laceTypeName" +laceTypeName);
+       var fabricTypeName = $row.find('.fabricTypeNameDoneSearch').text();
+   //     alert("fabricTypeName "+fabricTypeName);
+       var dTM = $row.find('.dTMDoneSearch').text();
+    //    alert("dTM "+dTM);
+       
+         
+						                 
+						                
+						               
+       
+     //  alert("plan mst id " + id );
+       
+       var formData= { 
+                      "pPlanMstId" :id
+                      }
+                      
+        $("#pPChdTableId tbody").empty();
+     
+     
+                              $.ajax({
+                                         type : "GET",
+                                         url:"/pocontroller/productionplanchddata",
+                                         dataType : 'json',
+	                                     data: formData,
+                                         success: function(result){
+                                         
+                                         
+                                 document.getElementById("planChdTableMassage").hidden=false;        
+	                            
+	                            $.each(result, function(i,pPlanChdList){
+	                     
+	        var customerRow = '<tr>' +   
+	                            
+	                                     '<td class="pPChdChkBox text-center"><input type="checkbox" disabled>' + '</td>' +	                                       
+							              '<td class="pPMstIdDoneTd">' +id+ '</td>' +
+							             '<td class="pPChdIdDoneTd">' +pPlanChdList.productionPlanChdId+ '</td>' +
+							             '<td class="pPChdDateTd">' +pPlanChdList.productionPlanDate+ '</td>' +
+							              '<td class="machineNameTd">' +pPlanChdList.machineName+ '</td>' +
+							              '<td class="shiftNameTd">' +pPlanChdList.shiftName+ '</td>' +
+							              '<td class="productionPlanQtyTd">' +pPlanChdList.productionPlanQty+ '</td>' +
+							              '<td class="machineCapacityQtyTd">' +pPlanChdList.machineCapacityQty + '</td>' +
+							              '<td class="machineCapacityUOMNameTd">' +pPlanChdList.machineCapacityUOMName+ '</td>' +
+							              '<td class="noOfStitchTd">' + '</td>' +
+							              '<td class="remarksTd">' +pPlanChdList.remarks + '</td>' +
+							              '<td class="machineShiftIdTd" hidden>' +pPlanChdList.machineShiftId + '</td>' +
+							             
+							             '<td class="itemNameDone" hidden>' +itemName+ '</td>' +
+							              '<td class="laceTypeNameDone" hidden>' +laceTypeName+ '</td>' +
+							              '<td class="fabricTypeNameDone" hidden>' +fabricTypeName + '</td>' +
+							              '<td class="dTMDone" hidden>' +dTM + '</td>' +
+									
+						      '</tr>';
+						
+		                                      $('#pPChdTableId tbody').append(customerRow);
+					
+		                                                });        // each
+					 
+		                                          },   // end success
+	                                        
+	                                        error : function(e) {
+		                                                        alert("ERROR: ", e);
+		                                                        console.log("ERROR: ", e);
+			                                                    }
+					
+		                                    });   // end ajax
+       
+       
+       });
+  </script>
+  
+  <script>
+       
+       $("#pPChdTableId").on('click','.pPMstIdDoneTd',function(){
+       
+      // alert("pPMstIdDoneTd");
+      
+      
+        $row=$(this).closest("tr");
+       var pPChdId = $row.find('.pPChdIdDoneTd').text();
+     // alert("pPMstIdDoneTd"+pPChdId);
+     
+     
+     
+      var itemName = $row.find('.itemNameDone').text();
+   //     alert("itemName "+itemName);
+       var laceTypeName = $row.find('.laceTypeNameDone').text();
+    //    alert("laceTypeName" +laceTypeName);
+       var fabricTypeName = $row.find('.fabricTypeNameDone').text();
+   //     alert("fabricTypeName "+fabricTypeName);
+       var dTM = $row.find('.dTMDone').text();
+    //    alert("dTM "+dTM);
+     	                                
+			                    	
+									
+									
+															
+	   var machineName = $row.find('.machineNameTd').text();
+      //  alert("machineNameTd "+machineName);
+       var shiftName = $row.find('.shiftNameTd').text();
+     //  alert("shiftNameTd" +shiftName);
+       var machineCapacityQty = $row.find('.machineCapacityQtyTd').text();
+   //     alert("machineCapacityQtyTd "+machineCapacityQty);
+       var machineCapacityUOMName = $row.find('.machineCapacityUOMNameTd').text();
+  //      alert("machineCapacityUOMNameTd "+machineCapacityUOMName);				
+										
+      
+      var formData= { 
+                      "pPChdId" :pPChdId
+                    }
+                    
+                    
+                   // $("#pPChdTableId tbody").empty();
+                    $("#pOMstTableId tbody").empty();
+                       $.ajax({
+                                         type : "GET",
+                                         url:"/pocontroller/getpomstdonedata",
+                                         dataType : 'json',
+	                                     data: formData,
+                                         success: function(result){
+                                         
+                               document.getElementById("POMstTableMassage").hidden=false;          
+                                         
+                                         
+	                        $.each(result, function(i,pOMstList){
+	                                                            
+      
+              
+              
+                var customerRow = '<tr>' +      
+	                                     '<td class="pOMstDoneTd">' +pOMstList.pOMstId+'</td>' +
+							             '<td class="">' +pOMstList.pOMstDate+ '</td>' +
+							             '<td class="">' +pOMstList.userPONo+'</td>' +
+							             '<td class="">' +pOMstList.designId+'</td>' +
+							             '<td class="">' +itemName+ '</td>' +
+							             '<td class="">' +laceTypeName+ '</td>' +
+							             '<td class="">' +fabricTypeName+ '</td>' +
+							             '<td class="">' +dTM+ '</td>' +
+							             '<td class="">' +pOMstList.remarks+'</td>' +
+									   	 '<td class="">' +pOMstList.activeStatus+'</td>' +
+										 '<td class="">'+'<a href="#" type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#editProductionPlanModal">Edit</a>'+'</td>' +
+										 '<td class="">' + '<input type="button" value="Populate PO Chd" class="btn btn-primary btn-md">'+ '</td>' +
+										
+										
+										 '<td class="machineNameDone" hidden>' +machineName+ '</td>' +
+							             '<td class="shiftNameDone" hidden>' +shiftName+ '</td>' +
+							             '<td class="machineCapacityQtyDone" hidden>' +machineCapacityQty+ '</td>' +
+							             '<td class="machineCapacityUOMNameDone" hidden>' +machineCapacityUOMName+ '</td>' +
+						                
+						         '</tr>';
+                
+               
+                                $('#pOMstTableId tbody').append(customerRow);
+	                                                             
+	                                                                                       
+	                                                                                     });        // each
+		                                          },   // end success
+	                                        
+	                                        error : function(e) {
+		                                                        alert("ERROR: ", e);
+		                                                        console.log("ERROR: ", e);
+			                                                    }
+					
+		                                    });   // end ajax
+                    
+                    
+      
+       
+           });
+  </script>
+  
+  
+  <script>
+       
+       $("#pOMstTableId").on('click','.pOMstDoneTd',function(){
+       
+       //  alert("pOMstDoneTd");
+      
+      
+        $row=$(this).closest("tr");
+       var pOMstId = $row.find('.pOMstDoneTd').text();
+      //alert("pPMstIdDoneTd : "+pOMstId);
+                                         
+						                 
+						                 
+						                 
+        var machineName = $row.find('.machineNameDone').text();
+        var shiftName = $row.find('.shiftNameDone').text();
+        var machineCapacityQty = $row.find('.machineCapacityQtyDone').text();
+        var machineCapacityUOMName = $row.find('.machineCapacityUOMNameDone').text();
+              
+      
+       var formData= { 
+                      "pOMstId" :pOMstId
+                    }
+                    
+                $("#pOChdTableId tbody").empty();    
+                      $.ajax({
+                                         type : "GET",
+                                         url:"/pocontroller/getpochddonedata",
+                                         dataType : 'json',
+	                                     data: formData,
+                                         success: function(result){
+                                         
+                          $.each(result, function(i,pOChdList){
+	                                                            
+      
+             
+              
+                var customerRow = '<tr>' +      
+	                                     '<td class="">' +pOChdList.pOMstId+'</td>' +
+							             '<td class="">' +pOChdList.pOChdId+ '</td>' +
+							             '<td class="">' +pOChdList.productionPlanMstId+'</td>' +
+							             '<td class="">' +pOChdList.productionPlanChdId+'</td>' +
+							             '<td class="">' +pOChdList.pOChdDate+ '</td>' +
+							             '<td class="">' +machineName+ '</td>' +
+							             '<td class="">' +shiftName+ '</td>' +
+							             '<td class="">' +pOChdList.pOQty+ '</td>' +
+							             '<td class="">' +machineCapacityQty+ '</td>' +
+							             '<td class="">' +machineCapacityUOMName+ '</td>' + 
+							             '<td class="">' + '</td>' +
+							             '<td class="">' +pOChdList.remarks+ '</td>' +
+							            
+										
+						                 
+						         '</tr>';
+						         
+						         
+                                 $('#pOChdTableId tbody').append(customerRow);
+	                                                             
+	                                                                                       
+	                                                                                     });        // each
+		                                          },   // end success
+	                                        
+	                                        error : function(e) {
+		                                                        alert("ERROR: ", e);
+		                                                        console.log("ERROR: ", e);
+			                                                    }
+					
+		                                    });   // end ajax
+                    
+                    
+       
+  
+       });
+  </script>
+  
+  
+       
+   <script>
+           $("#pPMstTableId").on('click','.pOMstBtn', function() {
+           
+          
+           var $row=$(this).closest("tr");
+           
+          
+           var designId=$row.find('.designIdSearch').text();
+          
+           var laceTypeId=$row.find('.laceTypeIdSearch').text();
+           var laceTypeName=$row.find('.laceTypeNameSearch').text();
+          // alert(laceTypeName);
+           var fabricTypeId=$row.find('.fabricTypeIdSearch').text();
+           var fabricTypeName=$row.find('.fabricTypeNameSearch').text();
+         //  alert(fabricTypeName);
+           
+           var itemName=$row.find('.itemNameSearch').text();
+           var dTM=$row.find('.dTMSearch').text();
+           
+           
+           
+           $("#pOModal #modalDesignId").val(designId);
+           
+            $("#pOModal #modalLaceTypeId").val(laceTypeId);  
+          
+           $("#pOModal #modalLaceTypeName").val(laceTypeName); 
+           
+           $("#pOModal #modalFabricTypeId").val(fabricTypeId);
+           
+           $("#pOModal #modalFabricTypeName").val(fabricTypeName); 
+           
+           $("#pOModal #modalItemName").val(itemName); 
+           
+           $("#pOModal #modalDTM").val(dTM); 
+           
+           });
+           
+           
+           </script>
+           
+           
+  <script>
+             $("#pOModal").on('click','#modalPOMstSaveBtn', function() {
+             
+             var designId=$("#pOModal #modalDesignId").val();
+             var userPONo=$("#pOModal #modalPOUserPONo").val();
+             var remarks=$("#pOModal #modalRemarks").val();
+             var pOMstDate=$("#pOModal #modalPOMstDate").val();
+             var status = document.getElementById("modalpOActive");
+             var itamName=$("#pOModal #modalItemName").val();
+             var laceTypeName=$("#pOModal #modalLaceTypeName").val();
+             var fabricTypeName=$("#pOModal #modalFabricTypeName").val();
+             var dTM=$("#pOModal #modalDTM").val();
+             var active;
+		    		 
+		    		 if (status.checked == true){
+		    			 active='1';
+		    		 }
+		    		 else{
+		    			 active='0';
+		    		 }
+             
+             
+             
+             var formData={
+             
+                            "pOMstDate":pOMstDate,
+                            "designId": designId,
+                            "userPONo":userPONo,
+                            "remarks":remarks,
+                            "active":active
+                            
+             
+                           };
+                           
+                           $('#pOMstTableId tbody').empty();
+             
+              $.ajax({
+                                         type : "POST",
+                                         url:"/pocontroller/savepomst",
+                                         dataType : 'json',
+	                                     data: formData,
+                                         success: function(result){
+                                         
+                                         var text="Data saved succesfully,press close button";
+		                                 document.getElementById("pOSaveMessage").innerHTML=text;
+                                         
+                                        $.each(result, function(i,pOMstList){
+	                                                            
+      
+                if(pOMstList.activeStatus==1)
+                {
+              
+                var customerRow = '<tr>' +      
+	                                     '<td class="pOMstIdTd">' +pOMstList.pOMstId+'</td>' +
+							             '<td class="pOMstDateEditTd">' +pOMstList.pOMstDate+ '</td>' +
+							             '<td class="userPONoEditTd">' +pOMstList.userPONo+'</td>' +
+							             '<td class="designIdEditTd">' +pOMstList.designId+'</td>' +
+							             '<td class="itamNameEditTd">' +itamName+ '</td>' +
+							             '<td class="laceTypeNameEditTd">' +laceTypeName+ '</td>' +
+							             '<td class="fabricTypeNameEditTd">' +fabricTypeName+ '</td>' +
+							             '<td class="dTMEditTd">' +dTM+ '</td>' +
+							             '<td class="remarksEditTd">' +pOMstList.remarks+'</td>' +
+									   	 '<td class="activeStatusEditTd">' +pOMstList.activeStatus+'</td>' +
+										 '<td class="POMstEditBtn">'+'<a href="#" type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#pOEditModal">Edit</a>'+'</td>' +
+										 
+										 '<td class="populatePOChdBtn">' + '<input type="button" value="Populate PO Chd" class="btn btn-primary btn-md">'+ '</td>' +
+										
+						                 
+						         '</tr>';
+                
+                }
+                else if(pOMstList.activeStatus==0)
+                {
+              
+                
+                  var customerRow = '<tr>' +      
+	                                    '<td class="pOMstIdTd">' +pOMstList.pOMstId+'</td>' +
+							             '<td class="pOMstDateEditTd">' +pOMstList.pOMstDate+ '</td>' +
+							             '<td class="userPONoEditTd">' +pOMstList.userPONo+'</td>' +
+							             '<td class="designIdEditTd">' +pOMstList.designId+'</td>' +
+							             '<td class="itamNameEditTd">' +itamName+ '</td>' +
+							             '<td class="laceTypeNameEditTd">' +laceTypeName+ '</td>' +
+							             '<td class="fabricTypeNameEditTd">' +fabricTypeName+ '</td>' +
+							             '<td class="dTMEditTd">' +dTM+ '</td>' +
+							             '<td class="remarksEditTd">' +pOMstList.remarks+'</td>' +
+									   	 '<td class="activeStatusEditTd">' +pOMstList.activeStatus+'</td>' +
+										 '<td class="POMstEditBtn">'+'<a href="#" type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#pOEditModal">Edit</a>'+'</td>' +
+										 '<td class="">' + '<input type="button" value="Populate PO Chd" class="btn btn-primary btn-md">'+ '</td>' +
+										
+						                 
+						         '</tr>';
+                }
+ 
+                    
+		                                      $('#pOMstTableId tbody').append(customerRow);
+	                                                             
+	                                                                                       
+	                                                                                     });        // each
+                                         
+                                         
+	                            
+	                       
+		                                          },   // end success
+	                                        
+	                                        error : function(e) {
+		                                                        alert("ERROR: ", e);
+		                                                        console.log("ERROR: ", e);
+			                                                    }
+					
+		                                    });   // end ajax
+             
+             
+           });
+
+ </script>
+ 
+ 
+ 
+<script>
+   
+          
+           $("#pOMstTableId").on('click','.POMstEditBtn', function() {
+           
+           
+           
+           var $row=$(this).closest("tr");
+           var pOMstId=$row.find('.pOMstIdTd').text();
+           var pOMstDate=$row.find('.pOMstDateEditTd').text();
+           var userPONo=$row.find('.userPONoEditTd').text();
+           var designId=$row.find('.designIdEditTd').text();
+           var itemName=$row.find('.itamNameEditTd').text();
+        // var laceTypeId=$row.find('.laceTypeIdSearch').text();
+           var laceTypeName=$row.find('.laceTypeNameEditTd').text();
+        // var fabricTypeId=$row.find('.fabricTypeIdSearch').text();
+           var fabricTypeName=$row.find('.fabricTypeNameEditTd').text();
+           var dTM=$row.find('.dTMEditTd').text();
+           var remarks=$row.find('.remarksEditTd').text();
+           
+           
+           
+           
+           $("#pOEditModal #pOMstEditId").val(pOMstId);
+           $("#pOEditModal #modalEditDesignId").val(designId);
+           $("#pOEditModal #modalEditPOMstDate").val(pOMstDate);
+           $("#pOEditModal #modalEditPOUserPONo").val(userPONo);
+           $("#pOEditModal #modalEditItemName").val(itemName);
+         //$("#pOEditModal #modalLaceTypeId").val(laceTypeId);  
+           $("#pOEditModal #modalEditLaceTypeName").val(laceTypeName); 
+         //$("#pOEditModal #modalFabricTypeId").val(fabricTypeId);
+           $("#pOEditModal #modalEditFabricTypeName").val(fabricTypeName); 
+           $("#pOEditModal #modalEditDTM").val(dTM); 
+           $("#pOEditModal #modalEditRemarks").val(remarks); 
+           
+        
+           });
+           
+              
+          
+</script>
+
+
+
+
+<script>
+             $("#pOEditModal").on('click','#modalEditPOMstSaveBtn', function() {
+             
+          //   alert("sdadas");
+             
+             
+             var pOMstId=$("#pOEditModal #pOMstEditId").val();
+             var designId=$("#pOEditModal #modalEditDesignId").val();
+             var userPONo=$("#pOEditModal #modalEditPOUserPONo").val();
+             var remarks=$("#pOEditModal #modalEditRemarks").val();
+             var pOMstDate=$("#pOEditModal #modalEditPOMstDate").val();
+             var status = document.getElementById("modalEditPOActive");
+             var itamName=$("#pOEditModal #modalEditItemName").val();
+             var laceTypeName=$("#pOEditModal #modalEditLaceTypeName").val();
+             var fabricTypeName=$("#pOEditModal #modalEditFabricTypeName").val();
+             var dTM=$("#pOEditModal #modalEditDTM").val();
+             
+             var active;
+		    		 
+		    		 if (status.checked == true){
+		    			 active='1';
+		    		 }
+		    		 else{
+		    			 active='0';
+		    		 }
+             
+             
+             
+             var formData={
+             
+             
+                            "pOMstId":pOMstId,
+                            "pOMstDate":pOMstDate,
+                            //"designId": designId,
+                            "userPONo":userPONo,
+                            "remarks":remarks,
+                            "active":active
+                            
+             
+                           };
+                           
+                           $('#pOMstTableId tbody').empty();
+             
+              $.ajax({
+                                         type : "POST",
+                                         url:"/pocontroller/saveeditpomst",
+                                         dataType : 'json',
+	                                     data: formData,
+                                         success: function(result){
+                                        
+                                         var text="Update succesfully,press close button";
+		                                 document.getElementById("pOUpdateMessage").innerHTML=text;
+                                         
+                                        $.each(result, function(i,pOMstList){
+	                                                            
+      
+                if(pOMstList.activeStatus==1)
+                {
+              
+                var customerRow = '<tr>' +      
+	                                     '<td class="pOMstIdTd">' +pOMstList.pOMstId+'</td>' +
+							             '<td class="pOMstDateEditTd">' +pOMstList.pOMstDate+ '</td>' +
+							             '<td class="userPONoEditTd">' +pOMstList.userPONo+'</td>' +
+							             '<td class="designIdEditTd">' +pOMstList.designId+'</td>' +
+							             '<td class="itamNameEditTd">' +itamName+ '</td>' +
+							             '<td class="laceTypeNameEditTd">' +laceTypeName+ '</td>' +
+							             '<td class="fabricTypeNameEditTd">' +fabricTypeName+ '</td>' +
+							             '<td class="dTMEditTd">' +dTM+ '</td>' +
+							             '<td class="remarksEditTd">' +pOMstList.remarks+'</td>' +
+									   	 '<td class="activeStatusEditTd">' +pOMstList.activeStatus+'</td>' +
+										 '<td class="POMstEditBtn">'+'<a href="#" type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#pOEditModal">Edit</a>'+'</td>' +
+										 
+										 '<td class="populatePOChdBtn">' + '<input type="button" value="Populate PO Chd" class="btn btn-primary btn-md">'+ '</td>' +
+										
+						                 
+						         '</tr>';
+                
+                }
+                else if(pOMstList.activeStatus==0)
+                {
+              
+                
+                  var customerRow = '<tr>' +      
+	                                    '<td class="pOMstIdTd">' +pOMstList.pOMstId+'</td>' +
+							             '<td class="pOMstDateEditTd">' +pOMstList.pOMstDate+ '</td>' +
+							             '<td class="userPONoEditTd">' +pOMstList.userPONo+'</td>' +
+							             '<td class="designIdEditTd">' +pOMstList.designId+'</td>' +
+							             '<td class="itamNameEditTd">' +itamName+ '</td>' +
+							             '<td class="laceTypeNameEditTd">' +laceTypeName+ '</td>' +
+							             '<td class="fabricTypeNameEditTd">' +fabricTypeName+ '</td>' +
+							             '<td class="dTMEditTd">' +dTM+ '</td>' +
+							             '<td class="remarksEditTd">' +pOMstList.remarks+'</td>' +
+									   	 '<td class="activeStatusEditTd">' +pOMstList.activeStatus+'</td>' +
+										 '<td class="POMstEditBtn">'+'<a href="#" type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#pOEditModal">Edit</a>'+'</td>' +
+										 '<td class="">' + '<input type="button" value="Populate PO Chd" class="btn btn-primary btn-md">'+ '</td>' +
+										
+						                 
+						         '</tr>';
+                }
+ 
+                    
+		                                      $('#pOMstTableId tbody').append(customerRow);
+	                                                             
+	                                                                                       
+	                                                                                     });        // each
+                                         
+                                         
+	                          
+		                                          },   // end success
+	                                        
+	                                        error : function(e) {
+		                                                        alert("ERROR: ", e);
+		                                                        console.log("ERROR: ", e);
+			                                                    }
+					
+		                                    });   // end ajax
+             
+             
+	                       
+           });
+
+ </script>
+ 
+ 
+ 
+           
+  <script> 
+  
+   
+         $("#pOMstTableId").on('click','.populatePOChdBtn',function(){
+         
+        // alert("pOMstTableId populatePOChdBtn");
+        
+        
+       // alert("hello world");
+        
+      //  $('#pOChdTableId tbody').empty();
+         
+         var $row = $(this).closest("tr");    // Find the row
+	     var pOMstId = $row.find(".pOMstIdTd").text(); // Find the text
+	     
+	   //   alert("pOMstId : "+pOMstId);
+	      
+	      
+	      $('#pPChdTableId tr').filter(':has(:checkbox:checked)').each(function() {
+	      
+	      
+	      var tr = $(this).closest("tr"); 
+	        	
+                var productionPlanMstId = tr.find(".pPMstIdTd").text();
+                var productionPlanChdId = tr.find(".pPChdIdTd").text();
+                var productionPlanChdDate = tr.find(".pPChdDateTd").text();
+                var shiftName = tr.find(".shiftNameTd").text();
+                var machineName = tr.find(".machineNameTd").text();
+                var productionPlanQty = tr.find(".productionPlanQtyTd").text();
+                var machineCapacityQty = tr.find(".machineCapacityQtyTd").text();
+                var machineCapacityUOMName = tr.find(".machineCapacityUOMNameTd").text();
+                var noOfStitch = tr.find(".noOfStitchTd").text();
+                var remarks = tr.find(".remarksTd").text();
+                
+                 var machineShiftId = tr.find(".machineShiftIdTd").text();
+              
+	      
+	   //  alert("each : ");
+	   
+	   
+	     
+	      
+	     var table = document.getElementById("pOChdTableId");
+             
+             // $('#machineScheduleDataTable tbody').empty();
+             
+                  
+             var row = table.insertRow(1);
+             
+                    var cell1 = row.insertCell(0);
+                    var cell2 = row.insertCell(1);
+  	     	   	    var cell3 = row.insertCell(2);
+  	     	   		var cell4 = row.insertCell(3);
+  	     			var cell5 = row.insertCell(4);
+  	     			var cell6 = row.insertCell(5);
+  	     			var cell7 = row.insertCell(6);
+  	     			var cell8 = row.insertCell(7);
+  	     			var cell9 = row.insertCell(8);
+  	     			var cell10 = row.insertCell(9);
+  	     			var cell11= row.insertCell(10);
+  	     			var cell12 = row.insertCell(11);
+  	     			var cell13 = row.insertCell(12);
+	      
+	                 cell1.innerHTML = '<span class="pOMstIdSave">'+pOMstId+'</span>';
+                     cell2.innerHTML = '<span>'+'</span>';
+  	     			 cell3.innerHTML = '<span class="productionPlanMstIdSave">'+productionPlanMstId+'</span>';
+  	     			 cell4.innerHTML = '<span class="productionPlanChdIdSave">'+productionPlanChdId+'</span>';
+  	     			 cell5.innerHTML = '<span class="productionPlanChdDateSave">'+productionPlanChdDate+'</span>';
+  	     			 cell6.innerHTML = '<span class="machineNameDataSave">'+machineName+'</span>';
+  	     			 cell7.innerHTML = '<span class="shiftNameDataSave">'+shiftName+'</span>';
+  	     			 cell8.innerHTML = '<span class="productionPlanQtySave">'+productionPlanQty+'</span>';
+  	     			 cell9.innerHTML = '<span class="machineCapacityQtyDataSave">'+machineCapacityQty+'</span>';
+  	     			 cell10.innerHTML = '<span class="machineCapacityUOMNameDataSave">'+machineCapacityUOMName+'</span>';
+  	     			 cell11.innerHTML = '<span class="noOfStitchDataSave">'+noOfStitch+'</span>';
+  	     			 cell12.innerHTML = '<span>'+remarks+'</span>';
+  	     			 cell13.innerHTML = '<span class="machineShiftIdSave" hidden>'+machineShiftId+'</span>';
+  	     			
+	     
+	      
+	       });  //each(workOrderEntrySearchDataTable)
+        
+           });  //function(pOMstTableId) 
+        
+          
+    </script>        
+    
+    
+  
+        
+        
+        <script>
+     
+	    $('#savePOChd').click(function(e) {
+	    
+
+   	    
+   	    $("#pOChdTableId tr").each(function(){
+		   
+		              
+		    var tr = $(this).closest('tr');
+		    
+		    
+		    
+  	        var pOMstId = tr.find(".pOMstIdSave").text();
+  	        var productionPlanMstId = tr.find(".productionPlanMstIdSave").text();
+  	        var productionPlanChdId = tr.find(".productionPlanChdIdSave").text();
+  	        var productionPlanChdDate = tr.find(".productionPlanChdDateSave").text();
+  	        var productionPlanQty = tr.find(".productionPlanQtySave").text();
+  	        var machineShiftId = tr.find(".machineShiftIdSave").text();
+  	        
+  	        
+  	        
+  	        var machineName = tr.find(".machineNameDataSave").text();
+  	        var shiftName = tr.find(".shiftNameDataSave").text();
+  	        var machineCapacityQty = tr.find(".machineCapacityQtyDataSave").text();
+  	        var machineCapacityUOMName = tr.find(".machineCapacityUOMNameDataSave").text();
+  	        var noOfStitch = tr.find(".noOfStitchDataSave").text();
+  	        
+  	        
+  	       // let productionPlanQty = tr.find('input[name="productionPlanQty"]').val();
+  	       // let remarks = tr.find('input[name="remarks"]').val();
+  	        
+		          
+		              
+		              var formData= { 
+		              
+	    		                     "pOMstId" : pOMstId,
+	    		                     "productionPlanMstId" : productionPlanMstId,	
+	    			                 "productionPlanChdId" : productionPlanChdId,
+	    			                 "pOChdDate" : productionPlanChdDate,	
+	    			                 "pOQty" : productionPlanQty,
+	    			                 "machineShiftId" : machineShiftId
+	    			                
+	    			                 
+	    			                 };
+	    			                 
+	    			                 
+	    			                  $.ajax({
+   		                                      type : "POST",	    		           
+   		                                      url:"/pocontroller/savepochd",
+   		                                      dataType : 'json',
+   			                                  data: formData,
+   		                                      success: function(result){
+   		                                      
+   		            var text="PO Chd Data saved successfully";
+		            document.getElementById("POChdTableSaveMessage").innerHTML=text;
+   		                                       
+   		                                       
+   $.each(result, function(i,pOChdList){
+	                                                            
+      
+             
+              
+                var customerRow = '<tr>' +      
+	                                     '<td class="">' +pOChdList.pOMstId+'</td>' +
+							             '<td class="">' +pOChdList.pOChdId+ '</td>' +
+							             '<td class="">' +productionPlanMstId+'</td>' +
+							             '<td class="">' +pOChdList.productionPlanChdId+'</td>' +
+							             '<td class="">' +pOChdList.pOChdDate+ '</td>' +
+							             '<td class="">' +machineName+ '</td>' +
+							             '<td class="">' +shiftName+ '</td>' +
+							             '<td class="">' +pOChdList.pOQty+ '</td>' +
+							             '<td class="">' +machineCapacityQty+ '</td>' +
+							             '<td class="">' +machineCapacityUOMName+ '</td>' + 
+							             '<td class="">' +noOfStitch+ '</td>' +
+							             '<td class="">' +pOChdList.remarks+ '</td>' +
+							            
+										
+						                 
+						         '</tr>';
+						         
+						         
+                                 $('#pOChdTableId tbody').append(customerRow);
+	                                                             
+	                                                                                       
+	                                                                                     });        // each
+                                         
+                    
+   		                                       
+   		                                    
+   		            	
+   		                                                                },
+   		            
+   		               	 });  //end ajax
+   			 
+   		//  $("#pOChdTableId").find("tbody").empty();
+		    document.getElementById("pOChdTableId").deleteRow(1);      
+		            
+		       });  //end table each function
+	    		  
+
+        });  // save function
+     
+     </script> 
+        
+   <!-- ################################################################################# 
+        #                                                                               #
+        #                    End Production Plan chd data save -sas                     #
+        #                                                                               #
+        ################################################################################# -->
+           
+             <!-- =======================================Refresh PO From modal===================================== -->
+   
+     <script>
+  
+       $("#pOModalCloseBtn").click(function () {
+    	// alert("pOModalCloseBtn");
+    	   document.getElementById("pOSaveMessage").innerHTML=null;
+    	   
+    	   $('#pOFromId')[0].reset();
+    	   
+    	   //set date
+    	   
+    	var now = new Date();
+   		var day = ("0" + now.getDate()).slice(-2);
+   		var month = ("0" + (now.getMonth() + 1)).slice(-2);
+   	
+   	    var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+   	  
+   	    
+   	    document.getElementById("modalPOMstDate").value= today;
+    	 
+    	});
+   
+    
+     </script>
+     
+   <!-- ==========================================End here================================================ -->
+   
+   
+   <style>
+   
+    .table td {
+    padding: 0 5px;
+}
+
+   </style>
+   
+           
+           
+</body>
+
+</html>

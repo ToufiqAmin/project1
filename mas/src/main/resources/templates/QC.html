@@ -1,0 +1,2030 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang=""xmlns:th="http://www.thymeleaf.org">
+<!--<![endif]-->
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>QC</title>
+	<meta name="description" content="Sufee Admin - HTML5 Admin Template">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+	<link rel="apple-touch-icon" href="apple-icon.png">
+	<link rel="shortcut icon" href="favicon.ico">
+
+    <link rel="stylesheet"th:href="@{/css/normalize.css}" href="../../static/css/normalize.css">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"href="../../static/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}"href="../../static/css/font-awesome.min.css">
+    <link rel="stylesheet"th:href="@{/css/themify-icons.css}" href="../../static/css/themify-icons.css">
+    <link rel="stylesheet"th:href="@{/css/flag-icon.min.css}" href="../../static/css/flag-icon.min.css">
+    <link rel="stylesheet" th:href="@{/css/cs-skin-elastic.css}"href="../../static/css/cs-skin-elastic.css">
+	<!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
+	<link rel="stylesheet"th:href="@{/scss/style.css}" href="../../static/scss/style.css">
+
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+	<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+	<style type="text/css">
+		.modal-backdrop.show {
+			display: none;
+		}
+
+		td {
+			border: 1px #DDD solid;
+			padding: 5px;
+			cursor: pointer;
+		}
+
+		.selected {
+			background: red;
+		}
+
+		.dataTables_filter {
+			text-align: right;
+		}
+		
+		.col-md-7{
+			padding-left: 78%;
+		}
+		.pagination {
+			
+		}
+
+		.modal {
+			z-index: 999999999;
+		}
+	</style>
+	<script>
+	
+
+	</script>
+	
+	
+	 <style>
+.custom-header-panel{
+    background-color: #004b8e !important;
+    border-color: #004b8e !important;
+    color: white;
+}
+
+
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading {
+  padding: 10px 15px;
+  margin: -15px -15px 15px;
+  font-size: 17.5px;
+  font-weight: 500;      
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-footer {
+  padding: 10px 15px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+} 
+
+.panel-primary {
+  border-color: #428bca;
+}
+
+.panel-primary .panel-heading {
+  color: #ffffff;
+  background-color: #428bca;
+  border-color: #428bca;
+}
+/* This kinda of works but now 
+.panel, .panel-group .panel-heading+.panel-collapse>.panel-body{
+    border: none;
+}
+*/
+.card-header{
+    /* background-color: #004b8e !important; */
+    background-color: #004b8e !important;
+    border-color: #004b8e !important;
+    color: white;
+
+    padding: 10px 15px;
+  /*margin: -15px -15px 15px; */
+
+  font-size: 17.5px;
+  font-weight: 500;      
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+
+ <style type="text/css">
+       
+       #calculate{
+      display:none;
+     }
+    
+        .modal-backdrop.show {
+            display: none;
+        }
+
+        .modal-backdrop.fade {
+            display: none;
+        }
+
+/*
+        div.dataTables_wrapper {
+            width: 100%;
+        }
+*/
+		.selected{
+			background-color: #eee;
+			color: #000;
+		}
+		
+		.dataTables_length, .dataTables_filter {
+			display: none !important;
+		}
+    </style>
+</head>
+
+<body>
+	<!-- Left Panel -->
+
+	<aside id="left-panel" class="left-panel">
+		<nav class="navbar navbar-expand-sm navbar-default">
+
+			<div class="navbar-header">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+					<i class="fa fa-bars"></i>
+				</button>
+				<a class="navbar-brand" href="./">MLFM</a>
+				<a class="navbar-brand hidden" href="./">BD</a>
+			</div>
+
+			<div id="main-menu" class="main-menu collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+				
+			
+                
+   <li class="menu-item-has-children dropdown" >
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <i class="menu-icon fa fa-laptop"></i>    Set Up
+          </a>
+        
+       <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown" >
+             <li th:each="s:${listModelUserObjectSetup}" 
+                   th:value="${s.userObjectId}">
+            <a class="dropdown-item" th:href="@{${s.modelObject.filePath}+'/'+${s.modelUser.userId}}" >
+               
+                    <span th:utext="${s.modelObject.objectName}">
+                   </span>
+                </a>
+            </li>
+          
+        </ul>
+        
+   </li>
+   
+      
+	 <li class="menu-item-has-children dropdown">
+     
+       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="menu-icon fa fa-laptop"></i> Transaction
+        </a>
+        
+           <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown">
+              <li th:each="t:${listModelUserObjectTransaction}"
+                   th:value="${t.userObjectId}">
+                   
+                   <a class="dropdown-item" th:href="@{${t.modelObject.filePath}+'/'+${t.modelUser.userId}}" >
+                 
+                         <span th:utext="${t.modelObject.objectName}">
+                         </span>
+                      </a>
+              </li>
+          </ul>
+      </li>			
+				
+        	
+		   	
+		<li class="menu-item-has-children dropdown">
+     
+             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="menu-icon fa fa-laptop"></i>   Tools
+             </a>
+        
+            <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown">
+                <li th:each="u:${listModelUserObjectTool}"
+                     th:value="${u.userObjectId}">
+                     
+                           <a class="dropdown-item" th:href="@{${u.modelObject.filePath}+'/'+${u.modelUser.userId}}" >
+                 
+                    <span th:utext="${u.modelObject.objectName}">
+                    </span>
+                 </a>
+               </li>
+          
+            </ul>
+       </li>	
+
+
+		<li class="menu-item-has-children dropdown">
+     
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="menu-icon fa fa-laptop"></i> Report
+              </a>
+        
+              <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown">
+                   <li th:each="r:${listModelUserObjectReport}"
+                        th:value="${r.userObjectId}">
+                        <a class="dropdown-item" th:href="@{${r.modelObject.filePath}+'/'+${r.modelUser.userId}}" >
+                     <!--  <a class="dropdown-item" th:href="${r.modelObject.filePath}"> -->
+                           <span th:utext="${r.modelObject.objectName}">
+                           </span>
+                       </a>
+                   </li>
+          
+              </ul>
+        </li>	
+					
+					
+					
+	             </ul>
+			</div>
+		</nav>
+	</aside>
+
+
+
+	<!-- Left Panel -->
+
+	<!-- Right Panel -->
+
+	<div id="right-panel" class="right-panel">
+
+		<!-- Header-->
+		<header id="header" class="header">
+
+			<div class="header-menu">
+<!--
+				<div class="col-sm-4">
+					<a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
+					<div class="header-left">
+						<button class="search-trigger"><i class="fa fa-search"></i></button>
+						<div class="form-inline">
+							<form class="search-form">
+								<input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
+								<button class="search-close" type="submit"><i class="fa fa-close"></i></button>
+							</form>
+						</div>
+
+					</div>
+				</div>
+-->
+		<!--
+				<div class="col-sm-5">
+					<div class="user-area dropdown float-right">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">
+                        </a>
+
+						<div class="user-menu dropdown-menu">
+							<a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
+							
+							<input type="text" class="nav-link" th:value="${userId}" id="accessUserId" readonly>
+
+							<a class="nav-link" href="/logoncontroller/init"><i class="fa fa-power -off"></i>Logout</a>
+						</div>
+					</div>
+                </div>
+         -->       
+                  
+                        <div class="col-sm-4 text-right" >
+                         
+                      </div> 
+               
+                       <div class="col-sm-8 text-right" >
+                          
+                           <a class="nav-link" href="/logoncontroller/init"  style="float:right;" ><i class="fa fa-power -off"></i>Logout</a>
+                            <span class="nav-link" th:text="${name}"readonly style="color: black; float:right; padding-left:5px;"></span>  
+                            <span class="nav-link" style="color: black; float:right; padding-right:0px;">User : </span>  
+                           
+                          
+                         
+                       </div>
+                 
+			</div>
+
+		</header><!-- /header -->
+		<!-- Header-->
+		
+		<div class="up-msg">
+			<div class="col-sm-6 text-left">
+			 <!--	
+				<input type="text" id="display-message" name=""  readonly style="color: limegreen; display: block;border:0px">
+			 -->  
+			     <h5 class="modal-title" id="display-message" style="color: limegreen; font-size:15px; margin-left:0px"></h5>
+			    
+			</div>
+		</div>
+
+		<div class="breadcrumbs">
+			<!--  <div class="col-sm-4">
+				<div class="page-header float-left">
+					<div class="page-title">
+						<h1>QC From</h1>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-8">
+				<div class="page-header float-right">
+					<div class="page-title">
+						<ol class="breadcrumb text-right">
+							<li><a href="#">Dashboard</a></li>
+							<li><a href="#">QC Info</a></li>
+							<li class="active">QC From</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>-->
+
+	
+<!--		
+=============================================================================
+Search Part
+================================================================================		
+-->		
+<div class="card">
+	<div class="card-header">
+		<strong class="card-title">QC Search</strong>
+	</div>
+	<div class="card-body">
+					<form id="searchForm" class="needs-validation" method="post" novalidate >
+						<div class="modal-body">
+                				<div class="row">
+								
+									<div class="col-3">
+										<div class="form-group">
+											<label >Client Type</label>
+											<select class="form-control" id="buyerTypeId" name ="buyerType" placeholder="BuyerType" >
+											<option value="">Select Client Type</option>
+												<option	th:each="buyerTypeList:${modelOrderOwnerTypeList}"
+														th:value="${buyerTypeList.orderOwnerTypeId}"
+														th:utext="${buyerTypeList.orderOwnerTypeName}"/>
+			
+											</select>											
+										</div>
+									</div>
+								
+									<div class="col-3">
+										<div class="form-group">
+											<label >Client Name</label>
+											<select class="form-control" id="buyerId" name ="buyerName" placeholder="BuyerName"  >
+		
+											</select>
+										</div>
+									</div>
+									
+									<div class="col-3" hidden>
+										<div class="form-group">
+											<label >Order Type<span style="color:red">*</span></label>
+											<select class="form-control" id="orderTypeId" name="orderType" placeholder="orderType" required>
+												<option value="2">workOrder</option>
+												<option value="1">inquiryOrder</option>
+												
+			
+											</select>	
+										</div>
+									</div>
+											
+									<div class="col-3">
+										<div class="form-group">
+											<label class="control-label mb-1">PO ID</label>
+											<input  type="text" id="inquiryId" class="form-control" aria-required="true" aria-invalid="false"  name ="inquiryId" placeholder="PO ID" >
+										</div>
+									</div>
+									
+									<div class="col-3">
+										<div class="form-group">
+										<label >Item</label>
+											<select class="form-control" id="itemId" name ="item" placeholder="Item"  >
+												<option value="">Select Item</option>
+												<option	th:each="itemList:${modelItemList}"
+														th:value="${itemList.itemId}"
+														th:utext="${itemList.itemName}"/>
+			
+											</select>
+										</div>
+									</div>
+								
+									
+									<div class="col-3">
+										<div class="form-group">
+											<label>QC Plan From Date</label>
+											<input  type="date" id="startDate" class="form-control"  name ="From Date" >
+										</div>
+									</div>
+									
+									<div class="col-3">
+										<div class="form-group">
+											<label>QC Plan To Date</label>
+											<input  type="date" id="endDate" class="form-control"  name ="To Date"  >
+										</div>
+									</div>
+									
+									<div class="col-3">
+										<div class="form-group">
+											<label class="control-label mb-1">QC Done</label>
+														<!-- Default checked -->
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" onClick="onLoadBody()" id="active" name ="active" >
+												<label class="custom-control-label" for="active"></label>
+											</div>
+										</div>
+									</div>
+									
+									
+									<div class="col-3">
+										<div class="form-group">
+											<label>QC Done From Date</label>
+											<input  type="date" id="qCDoneStartDate" class="form-control"  name ="QC Done From Date" >
+										</div>
+									</div>
+									
+									<div class="col-3">
+										<div class="form-group">
+											<label>QC Done To Date</label>
+											<input  type="date" id="qCDoneEndDate" class="form-control"  name ="QC Done To Date" >
+										</div>
+									</div>
+									
+
+									<div class="col-3">
+										<div class="form-group">
+											<label >QC By</label>
+											<select class="form-control" id="qCById" name ="User" placeholder="User"  >
+												<option value="">Select User</option>
+												<option	th:each="userList:${userList}"
+														th:value="${userList.userId}"
+														th:utext="${userList.userName}"/>
+			
+											</select>
+										</div>
+									</div>
+								
+								
+									
+								
+								<div class="col-sm-6 text-right">
+										<input type="submit" value="Search" class="btn btn-primary" style="margin-top: 24px;">
+										<input type="button" style="margin-top: 24px;" class="btn btn-success" onClick="location.reload()" value="Refresh">				
+								</div>
+							
+
+							</div>
+						</div>				
+				</form>	
+			</div>
+		</div>
+
+		<!-- =======================================  Q.C Table-1========================== -->
+		
+		<h5> Select </h5>
+				<div class="form-group">
+				           <select  name="state" id="maxRows" class="form-control" style="width:150px;">
+									
+						
+						
+						 <option value="5">5</option>
+						  <option value="10">10</option>
+						 <option value="15">15</option>
+						 <option value="20">20</option>
+						 <option value="50">50</option>
+						 <option value="70">70</option>
+						 <option value="100">100</option>
+						 <option value="5000">Show ALL</option>
+				          </select>
+				</div>
+		
+		
+					
+						<div class="card" style="width: 1070px;height: 500px; overflow-x:scroll">
+						<div class="card-header">
+								<strong class="card-title">QC Data Search</strong>
+							</div>
+							<div class="card-body">
+							<div class="text-right">
+								<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names">
+							</div>
+							
+							
+							
+							
+								<table id="QCSearchTable" class="table table-striped table-bordered" cellspacing="0" style="width: 2000px">
+									 <h6 style="color:red; font-size:12px;margin-left:20px" id="QCDataSearchTableMessage" ></h6>
+									<thead>
+										<tr>
+											<th scope="col">Order Type</th>
+											<th scope="col">WO ID</th>
+											<th scope="col">WO Date (<span style="font-size:15px">yyyy/mm/dd</span>)</th>
+											<th scope="col">PO ID</th>
+											<th scope="col">PO Date (<span style="font-size:15px">yyyy/mm/dd</span>)</th>
+											<th scope="col">Buyer/Other Name</th>
+											<th hidden>Buyer Id</th>
+											<th scope="col">Item Name</th>
+											<th hidden>QC Plan Id</th>
+											<th scope="col">QC Plan Date (<span style="font-size:15px">yyyy/mm/dd</span>)</th>
+											<th scope="col">QC Plan Qty</th>
+											<th scope="col">UOM</th>
+											<th scope="col">Action</th>
+											<th scope="col">QC Done Qty</th>
+
+										</tr>
+									</thead>
+									<tbody>
+										
+									</tbody>
+								</table>
+					<div class="pagination-container">
+	           			<nav>
+	           			    <ul id="paginationInQCSearchTable" class="pagination"></ul>
+				        </nav>
+					</div>
+								
+								
+							</div>
+						</div>
+	
+		
+		
+		
+		
+		
+	</div><!-- /#right-panel -->
+
+	<!-- Right Panel -->
+
+
+<!--=====================================================================
+			 QC Entry modal
+=====================================================================-->
+	<div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content" style="z-index: 1000000000000">
+				<div class="modal-header">
+					<h5 class="modal-title" id="largeModalLabel">QC Entry</h5>
+					
+					<h5 class="modal-title" id="qCModalMessage" style="color: limegreen; font-size:15px; margin-left:150px"></h5>
+					
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form class="needs-validation" method="post" novalidate="novalidate">
+
+						<div class="row">
+						
+							<div class="col-3">
+								<div class="form-group">
+									<label class="control-label mb-1">QC Plan ID</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" id="qCPlanId"  name="qCPlanId"   placeholder="qCPlanId" readonly>	
+								</div>
+							</div>
+							
+							
+							
+						
+						
+							<div class="col-3">
+								<div class="form-group">
+									<label class="control-label mb-1">Item Name</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" id="qCItemName"  name="itemName"  placeholder="ItemName" readonly>	
+								</div>
+							</div>
+							
+							
+							
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label class="control-label mb-1">QC ID</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" id="qCId"  name="qCId"   placeholder="qCId" readonly>	
+								</div>
+							</div>
+							
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label>Date</label>
+									<input  type="date" id="qCDate" class="form-control" aria-required="true" aria-invalid="false"  name ="Date" >
+								</div>
+							</div>
+							
+							<div class="col-3" >
+								<div class="form-group">
+									<label class="control-label mb-1">QC Plan Qty</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" id="qCPlanQty"  name="qCPlanQty"  placeholder="qCPlanQty" readonly>	
+								</div>
+							</div>
+							
+							<div class="col-3" >
+								<div class="form-group">
+									<label for="" class="control-label mb-1">QC Qty</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" id="qCDoneQty" name="qCDoneQty"  placeholder="QC Qty" required>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label >UOM</label>
+									<select class="form-control" id="uomId" name ="uomId" placeholder="UOM" >
+									<option	th:each="modelUOMList:${modelUOMList}"
+											th:value="${modelUOMList.uomId}"
+											th:utext="${modelUOMList.uomName}"/>
+									</select>											
+								</div>
+							</div>
+							
+							<div class="col-3" >
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Bed No</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" id="bedNo" name="bedNo"  placeholder="Bed No" required>
+								</div>
+							</div>
+							
+							<div class="col-3" >
+								<div class="form-group">
+									<label for="" class="control-label mb-1">Mending Required Qty</label>
+									<input type="text" class="form-control" aria-required="true" aria-invalid="false" id="mendingRequiredQty" name="mendingRequiredQty"  placeholder="Mending Required Qty" required>
+								</div>
+							</div>
+							
+						
+						
+						
+					<div class="col-1">
+						<div class="form-group">
+							<label class="control-label mb-1">Active</label>
+								<!-- Default checked -->
+							<div class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input" onClick="onLoadBody()" id="qCActive" name ="active" checked>
+								<label class="custom-control-label" for="qCActive"></label>
+							</div>
+						</div>
+					</div>	
+							
+						<div class="col-5">
+							<div class="form-group">
+								<label for="" class="control-label mb-1">Remarks</label>
+								<textarea rows="3" cols="60" name="qCRemarks" placeholder="Write Message Here"  id="qCRemarks"class="form-control" aria-required="true" aria-invalid="false">
+								</textarea>
+							</div>
+						</div>
+							
+						<div class="col-3" hidden>
+							<div class="form-group">
+								<label class="control-label mb-1">QC Qty Max</label>
+								<input type="text" class="form-control" aria-required="true" aria-invalid="false" id="qCQtyMax"  name="qCQtyMax"  placeholder="qCQtyMax" readonly>	
+							</div>
+						</div>
+	
+				</div>
+					<div class="modal-footer">
+						<div class="row">
+						
+						 	<div class="col-12 text-right">
+						     	<div class="form-group">
+									<button type="button" id="saveQC" class="btn btn-primary btn-md">Save</button>
+        							<button type="button" class="btn btn-secondary" data-dismiss="modal" id="qCCloseBtn">Close</button>
+						     	</div>
+					    	</div>
+
+						</div>
+
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--=====================================================================
+				QC Quantity inquiry modal
+=====================================================================-->
+	
+						<div class="modal fade" id="largeModal15" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+													<div class="modal-dialog modal-lg" role="document">
+														<div class="modal-content">
+															<div class="modal-header">
+																<h5 class="modal-title" id="largeModalLabel">QC Quantity</h5>
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																	<span aria-hidden="true">&times;</span>
+																</button>
+															</div>
+															<div class="modal-body" style="text-align: left">
+																<form  class="needs-validation" method="post"  novalidate>
+                                            					
+                                             					
+                                             					<!-- =======================================  QC Quantity Modal Table========================== -->
+																	<div class="content mt-3">
+																		<div class="animated fadeIn">
+																			<div class="row">
+																				<div class="col-lg-12">
+																					<div class="card" style="width: 750px; height:200px; overflow-y:scroll">
+																						<div class="card-header">
+																							<strong class="card-title">QC Quantity</strong>
+																						</div>
+																						<div class="card-body">
+																							<table id="qCQtytable" class="table table-striped table-bordered" style="min-width: 1000px">
+																								<thead>
+																									<tr class="titlerow">
+																										<th scope="col">QC ID</th>
+																										<th scope="col">QC Date (<span style="font-size:15px">yyyy/mm/dd</span>)</th>
+																										<th scope="col">QC Qty</th>
+																										<th scope="col">UOM</th>
+																										<th scope="col">QC By</th>
+																										<th scope="col">Bed No</th>
+																										<th scope="col">QC Plan ID</th>
+																										<th scope="col">Mending Required Qty</th>
+																										<th scope="col">Active</th>
+																										<th scope="col">Remarks</th>
+																										
+																										<th scope="col">Edit</th>
+																					<!--				<th scope="col">Action</th>
+																					-->
+																									</tr>
+																								</thead>
+																								<tbody>
+																			<!--					<tr >
+																										<td scope="row"><span></span></td>
+																										<td scope="row"><span></span></td>
+																										<td><span></span></td>
+																			-->						</tr>
+														
+																								</tbody>
+																								
+																							</table>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																		</div><!-- .animated -->
+																	</div><!-- .content -->
+                                             	
+                                             	
+                                             	
+                                             	
+                                           <!--				<div class="text-right">
+																<button type="submit" class="btn btn-primary btn-md">
+                                                     			Save
+                                                				</button>
+											-->				</div>
+											
+														<div class="row">
+														<div class="col-4"></div>
+															<div class="col-3">
+																<div class="form-group">
+																	<label  class="control-label mb-1">Total</label>
+																	<input type="text" class="form-control" name="total" id="result"  placeholder="total" readonly>
+																</div>
+															</div>
+															<div class="col-4"></div>
+														</div>
+											
+											
+											
+                                        				</form>
+													</div>
+												</div>
+											</div>
+										</div>
+												
+
+
+
+
+
+
+
+
+					
+		
+	<script src="/js/vendor/jquery-2.1.4.min.js"></script>
+	<script src="/js/popper.min.js"></script>
+	<script src="/js/plugins.js"></script>
+	<script src="/js/main.js"></script>
+	<script src="/js/order.js"></script>
+	<script src="/js/lib/data-table/datatables.min.js"></script>
+	<script src="/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+	<script src="/js/lib/data-table/dataTables.buttons.min.js"></script>
+	<script src="/js/lib/data-table/buttons.bootstrap.min.js"></script>
+	<script src="/js/lib/data-table/jszip.min.js"></script>
+	<script src="/js/lib/data-table/pdfmake.min.js"></script>
+	<script src="/js/lib/data-table/vfs_fonts.js"></script>
+	<script src="/js/lib/data-table/buttons.html5.min.js"></script>
+	<script src="/js/lib/data-table/buttons.print.min.js"></script>
+	<script src="/js/lib/data-table/buttons.colVis.min.js"></script>
+	<script src="/js/lib/data-table/datatables-init.js"></script>
+	<script src="/js/lib/data-table/jquery.dataTables.min.js"></script>
+
+
+
+
+	<script type="text/javascript">
+	
+/*
+	script for getting current Date
+
+*/	
+	
+	
+	Date.prototype.toDateInputValue = (function() {
+		    var local = new Date(this);
+		    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+		    return local.toJSON().slice(0,10);
+		});
+
+         document.getElementById("qCDate").value = new Date().toDateInputValue();
+	
+
+	
+/*
+script for QC table's scroll & filter search
+
+*/
+/*
+	 $(document).ready(function() {
+           $('#QCSearchTable').DataTable();      
+	});
+*/	
+	
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#QCSearchTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+	
+/*
+script for buyerlist through buyerTypeList
+
+*/
+	
+	function codeAddress()
+	{
+	
+	$.getJSON("/qccontroller/findowners", {
+		                buyerType : $('#buyerTypeId').val(),   
+		                ajax : 'true'
+		            }, function(data) {
+		                var html = '<option value="">Select Client</option>';
+		                var len = data.length;
+		                
+		                for ( var i = 0; i < len; i++) {
+		                    html += '<option value="' + data[i].orderOwnerId + '">'
+		                            + data[i].ownerName + '</option>';
+		                }
+		                html += '</option>';
+		                $('#buyerId').html(html);
+		            });
+	
+	}
+	
+	
+
+	window.onload=codeAddress;
+	
+	$('#buyerTypeId').change(
+		        function() {
+		            $.getJSON("/qccontroller/findowners", {
+		                buyerType : $(this).val(),   
+		                ajax : 'true'
+		            }, function(data) {
+		                var html = '<option value="">Select Client</option>';
+		                var len = data.length;
+		                
+		                for ( var i = 0; i < len; i++) {
+		                    html += '<option value="' + data[i].orderOwnerId + '">'
+		                            + data[i].ownerName + '</option>';
+		                }
+		                html += '</option>';
+		                $('#buyerId').html(html);
+		            });
+		        });
+	
+/*
+script for QC data search
+
+*/	
+	
+			
+$(function () {
+    $('#searchForm').submit(function(e) {
+     
+      e.preventDefault();
+      
+     
+      
+    var check=document.getElementById("active");
+    if(check.checked==true)
+    {
+    //completedSearch();
+    	if($("#orderTypeId").val()!='' && ($("#buyerTypeId").val()!='' && $("#buyerId").val()!=''))
+		{
+		completedSearch();
+		}
+		else if($("#orderTypeId").val()!='' &&( $("#qCDoneStartDate").val()!='' || $("#qCDoneEndDate").val()!=''))
+		{
+		completedSearch();
+		}
+		else if($("#orderTypeId").val()!='' && $("#itemId").val()!='')
+		{
+		completedSearch();
+		}
+		else if($("#orderTypeId").val()!='' && $("#qCById").val()!='')
+		{
+		completedSearch();
+		}
+		else if($("#orderTypeId").val()!='' && $("#inquiryId").val()!='')
+		{
+		completedSearch();
+		}
+		else
+		{
+		text="Please chose another data";
+		//document.getElementById("display-message").value=text;
+		document.getElementById("display-message").innerHTML=text;
+		}
+    
+    
+    }
+    else
+    {
+    //pendingSearch();
+    
+    
+    
+    if($("#orderTypeId").val()!='' && ($("#buyerTypeId").val()!='' && $("#buyerId").val()!='') )
+		{
+	
+		pendingSearch();
+		}
+		else if($("#orderTypeId").val()!='' &&( $("#startDate").val()!='' || $("#endDate").val()!=''))
+		{
+	
+		pendingSearch();
+		}
+		else if($("#orderTypeId").val()!='' && $("#itemId").val()!='')
+		{
+	
+		pendingSearch();
+		}
+		else if($("#orderTypeId").val()!='' && $("#qCById").val()!='')
+		{
+	
+		pendingSearch();
+		}
+		else if($("#orderTypeId").val()!='' && $("#inquiryId").val()!='')
+		{
+	
+		pendingSearch();
+		}
+		else
+		{
+		
+	
+		text="Please chose another data";
+		//document.getElementById("display-message").value=text;
+		document.getElementById("display-message").innerHTML=text;
+		}
+    
+    
+    
+    }   
+      
+      
+      
+
+
+	
+	  });  // submit
+   });   // function	
+   
+   
+   
+   
+    function completedSearch()
+   {
+   
+    text="";
+	document.getElementById("display-message").value=text;
+   
+   if($("#orderTypeId").val()==1 )
+    	{
+    	completedOrderSearch();
+    	}
+   else if($("#orderTypeId").val()==2)
+    	{
+    	completedWOChdSearch();
+    	}
+   
+   }
+   
+   function pendingSearch()
+   {
+   
+ 
+    text="";
+	document.getElementById("display-message").value=text;
+   
+   if($("#orderTypeId").val()==1 )
+    	{
+    	pendingOrderSearch();
+    	}
+   else if($("#orderTypeId").val()==2)
+    	{
+   
+    	pendingWOChdSearch();
+    	}
+   }
+   
+   
+   
+   
+		function pendingWOChdSearch()
+		{
+		//alert("sas");
+
+			
+	  			// form data capture
+     				 var formData= { 
+        					"buyerId" :$("#buyerId").val(),
+        					"inquiryId" : $("#inquiryId").val(),
+       	 					"qCById" : $("#qCById").val(),
+        					"startDate" : $("#startDate").val(),
+        					"endDate" : $("#endDate").val(),
+        					"itemId"  : $("#itemId").val()
+
+        							};
+        
+         			//  $('#table tbody').html('');
+        			$('#QCSearchTable tbody').empty();
+           
+            		$.ajax({
+            			type : "GET",
+           				// url :  "/api/inquiry_search",
+           				   url:"/qccontroller/getpendingwosearch",
+            			   dataType : 'json',
+	    				   data: formData,
+            			   success: function(result){
+            			   
+            			   document.getElementById("display-message").innerHTML=null;
+            			   
+            if(result===null||result.length==0)
+            {
+            alert("No Records are found");
+            
+            }else{
+            
+              var text="Click QC done Qty to get QC Done List";
+		    document.getElementById("QCDataSearchTableMessage").innerHTML=text;
+            
+            			   
+	     $.each(result, function(i,modelQCCustomList){
+					
+	    var customerRow = '<tr>' +
+	    	'<td>' + '<a>Work Order</a>' + '</td>' +
+			'<td>' + modelQCCustomList.wOMstId + '</td>' +
+			'<td hidden>' + modelQCCustomList.wOChdId + '</td>' +     			
+			'<td>' + modelQCCustomList.wODate + '</td>' +
+			'<td>' + modelQCCustomList.pOId + '</td>' +
+			'<td>' + modelQCCustomList.pODate + '</td>' +
+			'<td class="buyerId" hidden>' + modelQCCustomList.buyerId + '</td>' +
+			'<td class="buyerName">' + modelQCCustomList.buyerName + '</td>' +
+			'<td class="itemName">' + modelQCCustomList.itemName+'</td>' +
+			'<td class="qCPlanId" hidden>' + modelQCCustomList.qCPlanId + '</td>' +
+			'<td>' + modelQCCustomList.qCPlanDate+'</td>' +
+			'<td class="tdQCPlanQty">' + modelQCCustomList.qCPlanQty+'</td>' +
+			'<td class="uomId" hidden>' + modelQCCustomList.uomId +'</td>' +
+			'<td>' + modelQCCustomList.uomName +'</td>' +
+			'<td class="tdQCSearch">' + '<a  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#largeModal"  >QC</a>'+ '</td>' +
+			'<td class="tdQCQtySearch" data-toggle="modal" data-target="#largeModal15">' + modelQCCustomList.qCQty+'</td>' +
+			//'<td>' + modelQCCustomList.mendingRequiredQty+'</td>' +
+			//'<td>' + modelQCCustomList.bedNo+'</td>' +
+			//'<td class="tdQCQtySearch">' + '<a  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#largeModal15"  >QC</a>'+ '</td>' +
+			'<td class="qCQtyMax" hidden>' + modelQCCustomList.qCQtyMax + '</td>' +
+					         
+								        
+			'</tr>';
+									  
+									  
+						
+	      $('#QCSearchTable tbody').append(customerRow);
+	      
+	     
+					
+		});        // each
+		
+		}	//else
+		
+		
+		// for default 10 data   
+		                                    
+	var table='#QCSearchTable';
+	
+	$(".pagination").html('');
+	
+	var trnum =0;
+	var maxRows =parseInt(5);
+	var  totalRows=$(table+' tbody tr').length;
+	
+	$(table+' tr:gt(0)').each(function(e) {
+	
+	              trnum++;
+	              
+	              if(trnum > maxRows)
+	              {
+	                 $(this).hide();
+	              }
+	              if(trnum <= maxRows)
+	              {
+	                 $(this).show();
+	              }
+	    
+	
+	
+	});   //each function
+	
+	 if(totalRows > maxRows)
+	              {
+	              
+	              
+	              var pagenum =Math.ceil(totalRows/maxRows);
+	              
+	              for(var i=1;i<=pagenum;)
+	              {
+	                 $("#paginationInQCSearchTable").append('<li class="btn-sm" data-page="'+i+'">\<span>'+ i++ +'</span></li>').show();
+	              }  //for
+	                
+	              }   //if
+	              
+	              
+	              $('.pagination li:first-child').addClass('active');
+	             $('.pagination li').on('click',function(){
+	             
+	             var pageNum =  $(this).attr('data-page');
+	             var trIndex= 0;
+	             
+	             $('.pagination li').removeClass('active');
+	              $(this).addClass('active');
+	             $(table+' tr:gt(0)').each(function(e) {
+	             
+	                trIndex++;
+	                if(trIndex >(maxRows*pageNum) || trIndex<=((maxRows*pageNum)-maxRows))
+	                {
+	                    $(this).hide();
+	                }
+	                else
+	                {
+	                $(this).show();
+	                }
+	             
+	             
+	             
+	                }); // each function
+	             
+	             });  //  click function
+	             
+	             
+	
+		                                       
+		                // default 10 data - end
+		
+		
+		
+					 
+		},   // end success
+	error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+										
+        });   // end ajax 
+        
+		}
+		
+		
+		function completedWOChdSearch()
+		{
+		//WOChdSearch();
+      	
+   
+	  			// form data capture
+     				 var formData= { 
+        					"buyerId" :$("#buyerId").val(),
+        					"inquiryId" : $("#inquiryId").val(),
+       	 					"qCById" : $("#qCById").val(),
+        					"startDate" : $("#qCDoneStartDate").val(),
+        					"endDate" : $("#qCDoneEndDate").val(),
+        					"itemId"  : $("#itemId").val()
+
+        							};
+        
+         			//  $('#table tbody').html('');
+        			$('#QCSearchTable tbody').empty();
+           
+            		$.ajax({
+            			type : "GET",
+           				// url :  "/api/inquiry_search",
+           				   url:"/qccontroller/getcompletedwosearch",
+            			   dataType : 'json',
+	    				   data: formData,
+            			   success: function(result){
+            			   
+            			   document.getElementById("display-message").innerHTML=null;
+            			   
+            if(result===null||result.length==0)
+            {
+            alert("No Records are found");
+            
+            }else{
+            			   
+	     				   $.each(result, function(i,modelQCCustomList){
+					
+	    var customerRow = '<tr>' +
+	    	'<td>' + '<a>Work Order</a>' + '</td>' +
+			'<td>' + modelQCCustomList.wOMstId + '</td>' +
+			'<td hidden>' + modelQCCustomList.wOChdId + '</td>' +     			
+			'<td>' + modelQCCustomList.wODate + '</td>' +
+			'<td>' + modelQCCustomList.pOId + '</td>' +
+			'<td>' + modelQCCustomList.pODate + '</td>' +
+			'<td class="buyerId" hidden>' + modelQCCustomList.buyerId + '</td>' +
+			'<td class="buyerName">' + modelQCCustomList.buyerName + '</td>' +
+			'<td class="itemName">' + modelQCCustomList.itemName+'</td>' +
+			'<td class="qCPlanId" hidden>' + modelQCCustomList.qCPlanId + '</td>' +
+			'<td>' + modelQCCustomList.qCPlanDate+'</td>' +
+			'<td class="tdQCPlanQty">' + modelQCCustomList.qCPlanQty+'</td>' +
+			'<td class="uomId" hidden>' + modelQCCustomList.uomId +'</td>' +
+			'<td>' + modelQCCustomList.uomName +'</td>' +
+			'<td class="tdQCSearch">' + '<a  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#largeModal"  >QC</a>'+ '</td>' +
+			//'<td>' + modelQCCustomList.qCDate+'</td>' +
+			'<td class="tdQCQtySearch" data-toggle="modal" data-target="#largeModal15">' + modelQCCustomList.qCQty+'</td>' +
+			//'<td>' + modelQCCustomList.mendingRequiredQty+'</td>' +
+			//'<td>' + modelQCCustomList.bedNo+'</td>' +
+			//'<td class="tdQCQtySearch">' + '<a  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#largeModal15"  >QC</a>'+ '</td>' +
+			'<td class="qCQtyMax" hidden>' + modelQCCustomList.qCQtyMax + '</td>' +
+										        
+			'</tr>';
+		
+	      $('#QCSearchTable tbody').append(customerRow);
+	
+		});        // each
+		
+		}	//else
+		
+		
+		// for default 10 data   
+		                                    
+	var table='#QCSearchTable';
+	
+	$(".pagination").html('');
+	
+	var trnum =0;
+	var maxRows =parseInt(5);
+	var  totalRows=$(table+' tbody tr').length;
+	
+	$(table+' tr:gt(0)').each(function(e) {
+	
+	              trnum++;
+	              
+	              if(trnum > maxRows)
+	              {
+	                 $(this).hide();
+	              }
+	              if(trnum <= maxRows)
+	              {
+	                 $(this).show();
+	              }
+	    
+	
+	
+	});   //each function
+	
+	 if(totalRows > maxRows)
+	              {
+	              
+	              
+	              var pagenum =Math.ceil(totalRows/maxRows);
+	              
+	              for(var i=1;i<=pagenum;)
+	              {
+	                 $("#paginationInQCSearchTable").append('<li class="btn-sm" data-page="'+i+'">\<span>'+ i++ +'</span></li>').show();
+	              }  //for
+	                
+	              }   //if
+	              
+	              
+	              $('.pagination li:first-child').addClass('active');
+	             $('.pagination li').on('click',function(){
+	             
+	             var pageNum =  $(this).attr('data-page');
+	             var trIndex= 0;
+	             
+	             $('.pagination li').removeClass('active');
+	              $(this).addClass('active');
+	             $(table+' tr:gt(0)').each(function(e) {
+	             
+	                trIndex++;
+	                if(trIndex >(maxRows*pageNum) || trIndex<=((maxRows*pageNum)-maxRows))
+	                {
+	                    $(this).hide();
+	                }
+	                else
+	                {
+	                $(this).show();
+	                }
+	             
+	             
+	             
+	                }); // each function
+	             
+	             });  //  click function
+	             
+	             
+	
+		                                       
+		                // default 10 data - end
+		
+		
+					 
+		},   // end success
+	error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+		
+        });   // end ajax
+		
+		}
+		
+				function pendingOrderSearch(){
+	
+		//alert("sss");
+		// form data capture
+      var formData= { 
+        "buyerId" :$("#buyerId").val(),
+        "inquiryId" : $("#inquiryId").val(),
+        "qCById" : $("#qCById").val(),
+        "startDate" : $("#startDate").val(),
+        "endDate" : $("#endDate").val(),
+		"itemId"  : $("#itemId").val()
+        
+        };
+        
+        //  $('#table tbody').html('');
+        $('#QCSearchTable tbody').empty();
+           
+            $.ajax({
+            type : "GET",
+           // url :  "/api/inquiry_search",
+           url:"/qccontroller/getpendingordersearch",
+            dataType : 'json',
+	    data: formData,
+            success: function(result){
+            
+             if(result===null||result.length==0)
+            {
+            alert("No Records are found");
+            
+            }else{
+            
+	     $.each(result, function(i,modelQCCustomList){
+	     					
+	    var customerRow = '<tr>' +
+	    	'<td>' + '<a>Inquiry Order</a>' + '</td>' +
+			'<td>' + modelQCCustomList.inquiryId + '</td>' +   			
+			'<td>' + modelQCCustomList.inquiryDate + '</td>' +
+			'<td>' + modelQCCustomList.pOId + '</td>' +
+			'<td>' + modelQCCustomList.pODate + '</td>' +
+			'<td class="buyerId" hidden>' + modelQCCustomList.buyerId + '</td>' +
+			'<td class="buyerName">' + modelQCCustomList.buyerName + '</td>' +
+			'<td class="itemName">' + modelQCCustomList.itemName+'</td>' +
+			'<td class="qCPlanId" hidden>' + modelQCCustomList.qCPlanId + '</td>' +
+			'<td>' + modelQCCustomList.qCPlanDate+'</td>' +
+			'<td class="tdQCPlanQty">' + modelQCCustomList.qCPlanQty+'</td>' +
+			'<td class="uomId" hidden>' + modelQCCustomList.uomId +'</td>' +
+			'<td>' + modelQCCustomList.uomName +'</td>' +
+			'<td class="tdQCSearch">' + '<a  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#largeModal"  >QC</a>'+ '</td>' +
+			//'<td>' + modelQCCustomList.qCDate+'</td>' +
+			'<td class="tdQCQtySearch" data-toggle="modal" data-target="#largeModal15">' + modelQCCustomList.qCQty+'</td>' +
+			//'<td>' + modelQCCustomList.mendingRequiredQty+'</td>' +
+			//'<td>' + modelQCCustomList.bedNo+'</td>' +
+			//'<td class="tdQCQtySearch">' + '<a  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#largeModal15"  >QC</a>'+ '</td>' +
+			'<td class="qCQtyMax" hidden>' + modelQCCustomList.qCQtyMax + '</td>' +
+			
+			
+			
+											        
+			'</tr>';
+			
+	      $('#QCSearchTable tbody').append(customerRow);
+			
+		});        // each
+		
+		}	//else
+		
+		
+		// for default 10 data   
+		                                   
+	var table='#QCSearchTable';
+	
+	$(".pagination").html('');
+	
+	var trnum =0;
+	var maxRows =parseInt(5);
+	var  totalRows=$(table+' tbody tr').length;
+	
+	$(table+' tr:gt(0)').each(function(e) {
+	
+	              trnum++;
+	              
+	              if(trnum > maxRows)
+	              {
+	                 $(this).hide();
+	              }
+	              if(trnum <= maxRows)
+	              {
+	                 $(this).show();
+	              }
+	    
+	
+	
+	});   //each function
+	
+	 if(totalRows > maxRows)
+	              {
+	              
+	              
+	              var pagenum =Math.ceil(totalRows/maxRows);
+	              
+	              for(var i=1;i<=pagenum;)
+	              {
+	                 $("#paginationInQCSearchTable").append('<li class="btn-sm" data-page="'+i+'">\<span>'+ i++ +'</span></li>').show();
+	              }  //for
+	                
+	              }   //if
+	              
+	              
+	              $('.pagination li:first-child').addClass('active');
+	             $('.pagination li').on('click',function(){
+	             
+	             var pageNum =  $(this).attr('data-page');
+	             var trIndex= 0;
+	             
+	             $('.pagination li').removeClass('active');
+	              $(this).addClass('active');
+	             $(table+' tr:gt(0)').each(function(e) {
+	             
+	                trIndex++;
+	                if(trIndex >(maxRows*pageNum) || trIndex<=((maxRows*pageNum)-maxRows))
+	                {
+	                    $(this).hide();
+	                }
+	                else
+	                {
+	                $(this).show();
+	                }
+	             
+	             
+	             
+	                }); // each function
+	             
+	             });  //  click function
+	             
+	             
+	
+		                                       
+		                // default 10 data - end
+					 
+		},   // end success
+	error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+		
+        });   // end ajax
+
+		}
+		
+	function completedOrderSearch()
+		{
+	
+
+      
+     // form data capture
+      var formData= { 
+        "buyerId" :$("#buyerId").val(),
+        "inquiryId" : $("#inquiryId").val(),
+        "qCById" : $("#qCById").val(),
+        "startDate" : $("#qCDoneStartDate").val(),
+        "endDate" : $("#qCDoneEndDate").val(),
+		"itemId"  : $("#itemId").val()
+        
+        };
+        
+        //  $('#table tbody').html('');
+        $('#QCSearchTable tbody').empty();
+           
+            $.ajax({
+            type : "GET",
+           // url :  "/api/inquiry_search",
+           url:"/qccontroller/getcompletedordersearch",
+            dataType : 'json',
+	    data: formData,
+            success: function(result){
+            if(result===null||result.length==0)
+            {
+            alert("No Records are found");
+            
+            }else{
+            
+	     $.each(result, function(i,modelQCCustomList){
+	     
+	    
+	 				
+	    var customerRow = '<tr>' +
+	    	'<td>' + '<a>Inquiry Order</a>' + '</td>' +
+			'<td>' + modelQCCustomList.inquiryId + '</td>' +   			
+			'<td>' + modelQCCustomList.inquiryDate + '</td>' +
+			'<td>' + modelQCCustomList.pOId + '</td>' +
+			'<td>' + modelQCCustomList.pODate + '</td>' +
+			'<td class="buyerId" hidden>' + modelQCCustomList.buyerId + '</td>' +
+			'<td class="buyerName">' + modelQCCustomList.buyerName + '</td>' +
+			'<td class="itemName">' + modelQCCustomList.itemName+'</td>' +
+			'<td class="qCPlanId" hidden>' + modelQCCustomList.qCPlanId + '</td>' +
+			'<td>' + modelQCCustomList.qCPlanDate+'</td>' +
+			'<td class="tdQCPlanQty">' + modelQCCustomList.qCPlanQty+'</td>' +
+			'<td class="uomId" hidden>' + modelQCCustomList.uomId +'</td>' +
+			'<td>' + modelQCCustomList.uomName +'</td>' +
+			'<td class="tdQCSearch">' + '<a  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#largeModal"  >QC</a>'+ '</td>' +
+			//'<td>' + modelQCCustomList.qCDate+'</td>' +
+			'<td class="tdQCQtySearch" data-toggle="modal" data-target="#largeModal15">' + modelQCCustomList.qCQty+'</td>' +
+			//'<td>' + modelQCCustomList.mendingRequiredQty+'</td>' +
+			//'<td>' + modelQCCustomList.bedNo+'</td>' +
+			//'<td class="tdQCQtySearch">' + '<a  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#largeModal15"  >QC</a>'+ '</td>' +
+			'<td class="qCQtyMax" hidden>' + modelQCCustomList.qCQtyMax + '</td>' +
+											        
+			'</tr>';
+				
+	      $('#QCSearchTable tbody').append(customerRow);
+	      
+	      
+			
+		});        // each
+		
+		}	//else
+					 
+		},   // end success
+	error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+										
+        });   // end ajax
+				
+		}	
+		
+		
+		/*
+
+
+	script for save QC Data
+*/
+		
+
+		$("#QCSearchTable").on('click','.tdQCSearch',function(){
+	
+		
+	    var $row = $(this).closest("tr");  
+	     
+	    //var $row = $(".tdQCSearch").closest("tr"); 
+	    var qCPlanId = $row.find(".qCPlanId").text();
+	    var itemName = $row.find(".itemName").text();
+	    var uomId = $row.find(".uomId").text();
+	    var max = $row.find(".qCQtyMax").text();
+	    var qCPlanQty = $row.find(".tdQCPlanQty").text();
+	    var n="";
+	     $(".modal-body #qCItemName").val( itemName );
+	     $(".modal-body #qCQtyMax").val( max );
+	     $(".modal-body #uomId").val( uomId );
+	     $(".modal-body #qCPlanId").val( qCPlanId );
+	     $(".modal-body #qCPlanQty").val( qCPlanQty );
+	     $(".modal-body #qCDoneQty").val( n );
+	     $(".modal-body #qCRemarks").val( n );
+	     $(".modal-body #mendingRequiredQty").val( n );
+	     $(".modal-body #bedNo").val( n );
+	     //$("#qcItemName").text(id);
+	
+
+
+		});
+		
+		
+	$('#saveQC').click(function(e) {
+		
+		
+		var qCDoneQty=$("#qCDoneQty").val();
+		var qCDate=$("#qCDate").val();
+		var qCQtyMax=$("#qCQtyMax").val();
+		var qCPlanId=$("#qCPlanId").val();
+		var uomId=$("#uomId").val();
+		var qCRemarks=$("#qCRemarks").val();
+		var mendingRequiredQty=$("#mendingRequiredQty").val();
+		var bedNo=$("#bedNo").val();
+		
+		
+		var check=document.getElementById("qCActive");
+		if(check.checked==true)
+		{
+		var activeStatus=1;
+		}
+		else
+		{
+		var activeStatus=0;
+		}
+		
+		if(parseFloat(qCDoneQty)>parseFloat(qCQtyMax)){
+		
+		alert("QC Quantity cannot be higher than "+parseFloat(qCQtyMax));
+		
+		}	// if condition
+		else if(parseFloat(mendingRequiredQty)>parseFloat(qCDoneQty))
+		{
+		alert("Mending Required Qty cannot be higher than "+parseFloat(qCDoneQty));
+		}
+		
+		else
+		{
+		 var formData= { 
+     				 		"qCDoneQty" :qCDoneQty,
+     				 		"qCDate" :qCDate,
+     				 		"qCPlanId" :qCPlanId,
+     				 		"uomId" :uomId,
+     				 		"mendingRequiredQty" :mendingRequiredQty,
+     				 		"bedNo" :bedNo,
+     				 		"activeStatus" :activeStatus,
+        					"qCRemarks" : qCRemarks
+       	 					
+						};
+			 $.ajax({
+		            type : "POST",	    		           
+		             url:"/qccontroller/saveqcentry",
+		            dataType : 'json',
+			        data: formData,
+		            success: function(result){
+		            	
+		              
+
+				    var text="Data saved successfully,press close button ";
+		            document.getElementById("qCModalMessage").innerHTML=text;
+		            	
+		            },
+			 });
+		
+		}	//else condition
+		
+		   });	//click function
+		   
+/*
+	scripts for qc view & calculating sum
+
+*/		   
+	
+		
+$("#QCSearchTable").on('click','.tdQCQtySearch',function(){
+	    var $row = $(this).closest("tr");   
+	    var id = $row.find(".qCPlanId").text();
+
+	    
+	    var formData={
+	    	"id":id
+	    
+	    };
+	   
+	 	
+	    
+	    //  $('#table tbody').html('');
+        $('#qCQtytable tbody').empty();
+		
+		$.ajax({
+		
+		 type : "GET",
+           // url :  "/api/inquiry_search",
+            url:"/qccontroller/getqcbyid",
+            dataType : 'json',
+	    	data: formData,
+		 success: function(result){
+	     $.each(result, function(i,modelQCList){
+	     
+	     
+	     
+	         var customerRow = '<tr>' +
+	    	
+	    	'<td class="qCId" >' +modelQCList.qCId+  '</td>' +
+			'<td>' +modelQCList.qCDate+  '</td>' +
+			'<td class="form-control qCQty"  onclick = "update(this.id)" contentEditable>' +modelQCList.qCQty+  '</td>' +
+			'<td>' +modelQCList.uomName + '</td>' +
+			'<td>' +modelQCList.userName+'('+modelQCList.qCBy+')' + '</td>' +
+			'<td class="form-control bedNo"  onclick = "update(this.id)" contentEditable>' +modelQCList.bedNo+  '</td>' +
+			'<td>' +modelQCList.qCPlanId+  '</td>' +
+			'<td class="form-control mendingRequiredQty"  onclick = "update(this.id)" contentEditable>' +modelQCList.mendingRequiredQty+  '</td>' +
+			'<td class="Selectbox text-center" >'+modelQCList.sActive+'</td>'+
+			'<td class="form-control qCRemarks"  onclick = "update(this.id)" contentEditable>' +modelQCList.qCRemarks + '</td>' +
+			'<td class="qCQtyMax" hidden>'+modelQCList.qCQtyMax+'</td>' +
+
+			'<td class="saveEditQCQty">'+'<button id="" class="btn btn-success btn-sm" >Save</button>'+'</td>' +
+			//'<td class="deleteQC">'+'<button id="" class="btn btn-danger btn-sm" >Delete</button>'+'</td>' +    
+								        
+			'</tr>';	
+			
+								
+	      $('#qCQtytable tbody').append(customerRow);
+	   		//function test();
+
+	     
+	     		
+		});        // each
+		
+		$(calculateSum);
+			 
+		},   // end success
+		error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+
+		});   // end ajax
+		
+		});		//click function		
+		
+		$("#qCQtytable").on('click','.form-control qCQty',function(){
+        function update(id){
+        document.getElementById(id).innerHTML = "<input type = 'text' name = 'txtNewInput' id = 'txtNewInput' value = '" + content + "'/>";
+        }
+    });
+    
+    $("#qCQtytable").on('click','.form-control qCRemarks',function(){
+        function update(id){
+        document.getElementById(id).innerHTML = "<input type = 'text' name = 'txtNewInput' id = 'txtNewInput' value = '" + content + "'/>";
+        }
+    });	
+    
+    
+    $("#qCQtytable").on('click','.form-control bedNo',function(){
+        function update(id){
+        document.getElementById(id).innerHTML = "<input type = 'text' name = 'txtNewInput' id = 'txtNewInput' value = '" + content + "'/>";
+        }
+    });
+    
+    $("#qCQtytable").on('click','.form-control mendingRequiredQty',function(){
+        function update(id){
+        document.getElementById(id).innerHTML = "<input type = 'text' name = 'txtNewInput' id = 'txtNewInput' value = '" + content + "'/>";
+        }
+    });	
+  
+  function calculateSum() {
+		
+			var sum = 0;
+			// iterate through each td based on class and add the values
+			$(".qCQty").each(function(i) {
+				
+    			var value = $(this).text();
+    			
+    		
+    			if(!isNaN(value) && value.length != 0){
+    			sum+=parseFloat(value);
+    			}
+    		
+ 
+    			// add only if the value is number
+    			//if(!isNaN(value) && value.length != 0) {
+        		//sum += parseFloat(value);
+    			//	}
+				});
+			
+			//$('#result').text(sum);   
+			
+			document.getElementById("result").value=sum; 
+			};	
+			
+			
+/*
+scripts for edit qc data & delete data
+
+*/			
+  
+ $("#qCQtytable").on('click','.saveEditQCQty',function(){
+   	     
+	    		
+	    		 var $row = $(this).closest("tr");    // Find the row
+	    		 
+	    		
+	    		      var qCQtyMax = $row.find('.qCQtyMax').text();
+		            
+		               var qCId = $row.find('.qCId').text();
+		               var qCQty = $row.find('.qCQty').text();
+		               var bedNo = $row.find('.bedNo').text();
+		               var mendingRequiredQty = $row.find('.mendingRequiredQty').text();
+		               var qCRemarks = $row.find('.qCRemarks').text();
+		           if(qCActive.checked==true)
+		           {
+		           var activeStatus=1;
+		           }
+		           else
+		           {
+		           var activeStatus=0;
+		           }
+		           
+//	  if(parseFloat(qCQty)>parseFloat(qCQtyMax))
+ //     {
+ //     alert("QC Quantity cannot be higher than "+parseFloat(qCQtyMax));
+ //     }
+ //     else if(parseFloat(mendingRequiredQty)>parseFloat(qCQty))
+ //     {
+ //     alert("Mending Required Quantity cannot be higher than "+parseFloat(qCQty));
+ //     }
+ //     else if((parseFloat(qCQty)<=parseFloat(qCQtyMax)) && (parseFloat(mendingRequiredQty)<=parseFloat(qCQty))){ 
+		               
+		               var formData= { 
+		                
+	    		                       "qCId" : qCId,
+	    			                   "qCQty" : qCQty,
+	    			                   "mendingRequiredQty" : mendingRequiredQty,
+	    			                   "bedNo" : bedNo,
+	    			            	   "qCRemarks" : qCRemarks
+	    			                   
+	    			                 };
+	    			                 
+	    	 $('#qCQtytable tbody').empty();		                 
+	    			         
+	    			          $.ajax({
+	    			          
+   		                               type : "POST",	    		           
+   		                               url:"/qccontroller/qcupdate",
+   		                               dataType : 'json',
+   			                           data: formData,
+   		                               success: function(result){
+   		                               
+   		                               
+   		                               	},   // end success
+
+   			                         });   //ajax
+	    		 
+
+			
+				$(this).closest("tr").remove();
+				
+//		}		//else
+
+				
+        });    //function(qCQtytable)
+        
+        
+
+	
+		</script>
+		
+		<script>
+	 
+		    
+	
+	var table='#QCSearchTable';
+	
+	
+	$('#maxRows').on('change',function(){
+	
+	$(".pagination").html('');
+	
+	var trnum =0;
+	var maxRows =parseInt($(this).val());
+	var  totalRows=$(table+' tbody tr').length;
+	
+	$(table+' tr:gt(0)').each(function(e) {
+	
+	              trnum++;
+	              
+	              if(trnum > maxRows)
+	              {
+	                 $(this).hide();
+	              }
+	              if(trnum <= maxRows)
+	              {
+	                 $(this).show();
+	              }
+	    
+	
+	
+	});   //each function
+	
+	 if(totalRows > maxRows)
+	              {
+	              
+	              
+	              var pagenum =Math.ceil(totalRows/maxRows);
+	              
+	              for(var i=1;i<=pagenum;)
+	              {
+	                 $("#paginationInQCSearchTable").append('<li class="btn-sm" data-page="'+i+'">\<span>'+ i++ +'</span></li>').show();
+	              }  //for
+	                
+	              }   //if
+	              
+	              
+	              $('.pagination li:first-child').addClass('active');
+	             $('.pagination li').on('click',function(){
+	             
+	             var pageNum =  $(this).attr('data-page');
+	             var trIndex= 0;
+	             
+	             $('.pagination li').removeClass('active');
+	              $(this).addClass('active');
+	             $(table+' tr:gt(0)').each(function(e) {
+	             
+	                trIndex++;
+	                if(trIndex >(maxRows*pageNum) || trIndex<=((maxRows*pageNum)-maxRows))
+	                {
+	                    $(this).hide();
+	                }
+	                else
+	                {
+	                $(this).show();
+	                }
+	             
+	             
+	             
+	                }); // each function
+	             
+	             });  //  click function
+	             
+	             
+	      });   //on change function
+	             
+	             
+	
+	            
+</script>
+		
+		
+		</script>
+
+
+ <script type="text/javascript" th:inline="javascript">
+		
+		var now = new Date();
+		var day = ("0" + now.getDate()).slice(-2);
+		var month = ("0" + (now.getMonth() + 1)).slice(-2);
+	
+	    var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+	    
+	    document.getElementById('endDate').value = today;
+	    document.getElementById('qCDoneEndDate').value = today;
+      
+    
+       
+	</script>
+		
+	
+      <style>
+   
+    .table td {
+    padding: 0 5px;
+          }
+
+   </style>
+												
+
+</body>
+
+</html>

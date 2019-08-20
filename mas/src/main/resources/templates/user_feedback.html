@@ -1,0 +1,2056 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html xmlns:th="http://www.thymeleaf.org">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>User Feedback</title>
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/themify-icons.css">
+    <link rel="stylesheet" href="/css/flag-icon.min.css">
+    <link rel="stylesheet" href="/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="/css/lib/datatable/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="/scss/style.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+   
+       
+
+    <style type="text/css">
+    
+    
+    
+        body{
+
+    background-color: #eee; 
+}
+
+table th , table td{
+    text-align: center;
+    
+}
+
+.pagination li:first-child(active){
+    background-color: #Red
+}
+
+.pagination li:hover{
+    cursor: pointer;
+    color:red;
+     border: 1px solid #4CAF50;
+    
+}
+	
+       
+       .pagination-container ul{
+        float:left;
+        padding:8 px 16px;
+        text-decoration: none;       
+
+        color:black;
+     }
+     
+     .pagination-container ul.active{
+        background-color: #Red;             
+        border: 1px solid #4CAF50;
+        color:white;
+     }
+    
+       
+       #calculate{
+     display:none;
+     }
+    
+        .modal-backdrop.show {
+            display: none;
+        }
+
+        .modal-backdrop.fade {
+            display: none;
+        }
+
+/*
+        div.dataTables_wrapper {
+            width: 100%;
+        }
+*/
+		.selected{
+			background-color: #eee;
+			color: #000;
+		}
+		
+		.dataTables_length, .dataTables_filter {
+			display: none !important;
+		}
+    </style>
+    
+    
+    <style>
+.custom-header-panel{
+    background-color: #004b8e !important;
+    border-color: #004b8e !important;
+    color: white;
+}
+
+
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading {
+  padding: 10px 15px;
+  margin: -15px -15px 15px;
+  font-size: 17.5px;
+  font-weight: 500;      
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-footer {
+  padding: 10px 15px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+} 
+
+.panel-primary {
+  border-color: #428bca;
+}
+
+.panel-primary .panel-heading {
+  color: #ffffff;
+  background-color: #428bca;
+  border-color: #428bca;
+}
+/* This kinda of works but now 
+.panel, .panel-group .panel-heading+.panel-collapse>.panel-body{
+    border: none;
+}
+*/
+.card-header{
+    /* background-color: #004b8e !important; */
+    background-color: #004b8e !important;
+    border-color: #004b8e !important;
+    color: white;
+
+    padding: 10px 15px;
+  /*margin: -15px -15px 15px; */
+
+  font-size: 17.5px;
+  font-weight: 500;      
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+
+ <style type="text/css">
+       
+       #calculate{
+      display:none;
+     }
+    
+        .modal-backdrop.show {
+            display: none;
+        }
+
+        .modal-backdrop.fade {
+            display: none;
+        }
+
+/*
+        div.dataTables_wrapper {
+            width: 100%;
+        }
+*/
+		.selected{
+			background-color: #eee;
+			color: #000;
+		}
+		
+		.dataTables_length, .dataTables_filter {
+			display: none !important;
+		}
+    </style>
+
+
+</head>
+
+<body>
+    	
+			<!-- Left Panel -->
+
+	<aside id="left-panel" class="left-panel">
+		<nav class="navbar navbar-expand-sm navbar-default">
+
+			<div class="navbar-header">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+					<i class="fa fa-bars"></i>
+				</button>
+				<a class="navbar-brand" href="./">MLFM</a>
+				<a class="navbar-brand hidden" href="./">BD</a>
+			</div>
+
+			<div id="main-menu" class="main-menu collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+				
+			
+                
+   <li class="menu-item-has-children dropdown" >
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <i class="menu-icon fa fa-laptop"></i>    Set Up
+          </a>
+        
+       <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown" >
+             <li th:each="s:${listModelUserObjectSetup}" 
+                   th:value="${s.userObjectId}">
+            <a class="dropdown-item" th:href="@{${s.modelObject.filePath}+'/'+${s.modelUser.userId}}" >
+               
+                    <span th:utext="${s.modelObject.objectName}">
+                   </span>
+                </a>
+            </li>
+          
+        </ul>
+        
+   </li>
+   
+      
+	 <li class="menu-item-has-children dropdown">
+     
+       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="menu-icon fa fa-laptop"></i> Transaction
+        </a>
+        
+           <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown">
+              <li th:each="t:${listModelUserObjectTransaction}"
+                   th:value="${t.userObjectId}">
+                   
+                   <a class="dropdown-item" th:href="@{${t.modelObject.filePath}+'/'+${t.modelUser.userId}}" >
+                 
+                         <span th:utext="${t.modelObject.objectName}">
+                         </span>
+                      </a>
+              </li>
+          </ul>
+      </li>			
+				
+        	
+		   	
+		<li class="menu-item-has-children dropdown">
+     
+             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="menu-icon fa fa-laptop"></i>   Tools
+             </a>
+        
+            <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown">
+                <li th:each="u:${listModelUserObjectTool}"
+                     th:value="${u.userObjectId}">
+                     
+                           <a class="dropdown-item" th:href="@{${u.modelObject.filePath}+'/'+${u.modelUser.userId}}" >
+                 
+                    <span th:utext="${u.modelObject.objectName}">
+                    </span>
+                 </a>
+               </li>
+          
+            </ul>
+       </li>	
+
+
+		<li class="menu-item-has-children dropdown">
+     
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="menu-icon fa fa-laptop"></i> Report
+              </a>
+        
+              <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown">
+                   <li th:each="r:${listModelUserObjectReport}"
+                        th:value="${r.userObjectId}">
+                        <a class="dropdown-item" th:href="@{${r.modelObject.filePath}+'/'+${r.modelUser.userId}}" >
+                     <!--  <a class="dropdown-item" th:href="${r.modelObject.filePath}"> -->
+                           <span th:utext="${r.modelObject.objectName}">
+                           </span>
+                       </a>
+                   </li>
+          
+              </ul>
+        </li>	
+					
+					
+					
+	             </ul>
+			</div>
+		</nav>
+	</aside>
+
+
+
+	<!-- Left Panel -->
+
+    <!-- Right Panel -->
+
+    <div id="" class="right-panel">
+
+       	<!-- Header-->
+		<header id="header" class="header">
+
+			<div class="header-menu">
+<!--
+				<div class="col-sm-4">
+					<a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
+					<div class="header-left">
+						<button class="search-trigger"><i class="fa fa-search"></i></button>
+						<div class="form-inline">
+							<form class="search-form">
+								<input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
+								<button class="search-close" type="submit"><i class="fa fa-close"></i></button>
+							</form>
+						</div>
+
+					</div>
+				</div>
+-->
+		<!--
+				<div class="col-sm-5">
+					<div class="user-area dropdown float-right">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">
+                        </a>
+
+						<div class="user-menu dropdown-menu">
+							<a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
+							
+							<input type="text" class="nav-link" th:value="${userId}" id="accessUserId" readonly>
+
+							<a class="nav-link" href="/logoncontroller/init"><i class="fa fa-power -off"></i>Logout</a>
+						</div>
+					</div>
+                </div>
+         -->       
+                  
+                        <div class="col-sm-4 text-right" >
+                         
+                      </div> 
+               
+                      <div class="col-sm-8 text-right" >
+                          
+                           <a class="nav-link" href="/logoncontroller/init"  style="float:right;" ><i class="fa fa-power -off"></i>Logout</a>
+                            <span class="nav-link" th:text="${name}"readonly style="color: black; float:right; padding-left:5px;"></span>  
+                            <span class="nav-link" style="color: black; float:right; padding-right:0px;">User : </span>  
+                           
+                          
+                         
+                       </div>
+                 
+			</div>
+
+		</header><!-- /header -->
+		<!-- Header-->
+        
+        <div class="container">
+
+ <!-- <div class="row">  -->
+
+
+<!-- <div class="col-md-offset-2 col-md-8"> -->
+	
+    <div class="panel">
+      <div class="panel-heading custom-header-panel">
+          <h5 class="panel-title roboto">Search</h3>
+      </div>
+  <div class="panel-body">
+
+
+
+  <!-- <h3> Patient Registration </h3>   -->
+  
+  
+  <div class="row">
+				<div class="col-12">
+				<!--  	<form th:action="@{/feedback/search}" class="needs-validation" novalidate> -->
+					
+					<form>
+						
+								<div class="row">
+									<div class="col-3">
+										<div class="form-group">
+											<label>Client Type</label>
+									<!-- 		<input type="text" class="form-control" placeholder="Int. Buyer" name="initial_Buyer">  -->
+										
+										 <select name="ownerType" id="ownerTypeSearch" class="form-control" aria-required="true" aria-invalid="false"required>															
+							
+									<option th:each="type:${ownerTypeList}"
+											th:value="${type.orderOwnerTypeId}"
+											th:utext="${type.orderOwnerTypeName}"
+																				
+											/>
+																				
+							             </select>
+										
+										
+										</div>
+									</div>
+									<div class="col-3">
+										<div class="form-group">
+											<label>Client Name</label>
+									<!-- 	<input type="text" class="form-control" placeholder="Int. Buyer" name="initial_Buyer">  -->
+									<select name="initial_Buyer" id="ownerSearch" class="form-control" placeholder="Select" >
+									</select>
+										
+										</div>
+									</div>
+									
+									<div class="col-3">
+										<div class="form-group">
+											<label>Ultimate Buyer</label>
+									<!-- 		<input type="text" class="form-control" placeholder="Ult Buyer" name="ultimate_Buyer">  -->
+											
+                       <select name="ultimate_Buyer" id="ultimate_Buyer" class="form-control" aria-required="true" aria-invalid="false">															
+							       <option value="">Select Ultimate Buyer</option>
+								        <option th:each="type:${ultimateBuyerList}"
+											th:value="${type.orderOwnerId}"
+											th:utext="${type.ownerName}"																			
+											/>	  
+																				
+							             </select>
+											
+										</div>
+									</div>
+									
+									<div class="col-3">
+										<div class="form-group">
+											<label>Inquery ID</label>
+											<input type="text" id="inquiryIdSearch" class="form-control" placeholder="Inq ID" name="inquery_ID">
+										</div>
+									</div>
+									<div class="col-3">
+										<div class="form-group">
+											<label>User</label>
+											<select class="form-control" name="user" id="userSearch">
+												<option value="">Select user</option>
+												<option th:each="u:${userList}"
+														th:value="${u.userId}"
+														th:utext="${u.userName}"																			
+												/> 
+											</select>
+										</div>
+									</div>
+									
+										<div class="col-3">
+										<div class="form-group">
+											<label>User Cluster</label>
+											<select class="form-control" name="userCluster" id="clusterSearch">
+											<option value="">Select Cluster</option>
+																		
+											</select>
+										</div>
+									</div>
+									
+									<div class="col-3">
+										<div class="form-group">
+											<label>Item</label>
+											<input type="text" id="itemSearch" class="form-control" placeholder="Item">
+										</div>
+									</div>
+									<div class="col-3">
+										<div class="form-group">
+											<label>Specification</label>
+											<input type="text" class="form-control" id="specSearch" placeholder="Seps">
+										</div>
+									</div>
+									
+									<!--
+                                        <div class="col-2">
+                                           <input type="submit" value="search" class="btn btn-secondery btn-md" style="margin-top: 32px">
+                                       </div>
+                                       
+				
+-->
+								</div>
+
+								<div class="row">
+									<div class="col-3">
+										<div class="form-group">
+											<label>Inquery From</label>
+											<input type="date" class="form-control" id="startDate" name="inquery_start_date">
+										</div>
+									</div>
+									<div class="col-3">
+										<div class="form-group">
+											<label>Inquery To</label>
+											<input type="date" class="form-control" id="endDate" name="inquery_end_date">
+										</div>
+									</div>
+							<!-- 		<div class="col-3">
+										<div class="form-group">
+											<label>Mail From</label>
+											<input type="date" name="mail_start_date" class="form-control" >
+										</div>
+									</div>
+									<div class="col-3">
+										<div class="form-group">
+											<label>Mail To</label>
+											<input name="mail_end_date" type="date" id="dateMail" class="form-control">
+										</div>
+									</div>  -->
+									<div class="col-3">
+										<div class="form-group">
+											<label>Mail ID</label>
+											<input type="text" class="form-control" id="mailId" placeholder="mail@gmail.com" name="mail_Id">
+										</div>
+									</div>
+									<div class="col-3">
+										<div class="form-group">
+											<label>User Inquery No</label>
+											<input type="text" class="form-control" id="inquiryNo" placeholder="User Inq No" name="user_inquery_no">
+										</div>
+									</div>
+									
+								</div>
+
+								
+								<div class="row">
+
+
+									<div class="col-3">
+										<div class="form-group">
+											<label class="control-label mb-1">Remarks</label>
+											<input type="text" rows="1" cols="20" placeholder="Remarks" id="remarksSearch" class="form-control" aria-required="true" aria-invalid="false" name="remarks">
+										
+										</div>
+									</div>
+
+
+									<div class="col-3">
+										<div class="form-group">
+											<label>Active</label>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="activeSearch" checked>
+												<label class="custom-control-label" for="activeSearch"></label>
+											</div>
+										</div>
+									</div>
+									
+									<div class="col-3">
+									<div class="form-group">
+											<label></label>
+											<input type="button" id="searchInquiry" value="Search" class="btn btn-primary" style="margin-top: 7px;">
+											<a class="btn btn-success"   th:href="@{'/user/feedback/'+${userId}}"  style="margin-top: 7px;">Refresh</a>
+															 
+										    
+										</div>
+										
+									</div>	
+									
+								</div>	
+										</form>
+										
+									
+									</div>
+								</div>
+								
+								 <h5> Select </h5>
+				<div class="form-group">
+				           <select  name="state" id="maxRows" class="form-control" style="width:150px;">
+									<option value="5000">Show ALL</option>
+						 <option value="5">5</option>
+						 <option value="10">10</option>
+						 <option value="15">15</option>
+						 <option value="20">20</option>
+						 <option value="50">50</option>
+						 <option value="70">70</option>
+						 <option value="100">100</option>
+				          </select>
+				</div>
+								
+								<div class="row">
+					<div class="col-lg-12">
+						<div class="card" style="width: 1100px; overflow: scroll">
+							<div class="card-header">
+								<strong class="card-title">Search Result</strong>
+							</div>
+							<div class="card-body">
+								<table id="inquirytable" class="table table-striped table-bordered display nowrap" style="width:100%">
+									<thead>
+										<tr>
+											<th scope="col">Inquery ID</th>
+											<th scope="col">User Reference No</th>
+											<th scope="col">Initial Buyer</th>
+											<th scope="col">Ultimate Buyer</th>
+											<th scope="col">Inquery date</th>
+											<th scope="col">Buyer Mail</th>
+											<th scope="col">Remarks</th>
+											<th scope="col">User</th>
+											<th scope="col">Active</th>
+											<th scope="col">Action</th>
+											<!--  <th scope="col">Report</th> -->
+										</tr>
+									</thead>
+									<tbody>
+									<!--  	<tr th:each="order : ${searchList}">
+											<td scope="row"><a type="text" th:href="@{/feedback/item/search/{id}(id=${order.orderId})}" th:text="${order.orderId}"></a></td>
+											<td scope="row"><span th:text="${order.userRefNo}"></span></td>
+											<td><span th:text="${order.modelOrderOwner.ownerName}"></span></td>
+											<td><span th:text="${order.ultimateOwner.ownerName}"></span></td>
+											<td><span th:text="${#calendars.format(order.orderDate, 'M/dd/yyyy')}"></span></td>
+											<td><span th:text="${order.refMailId}"></span></td>
+											<td><textarea th:text="${order.orderRemarks}" rows="1" readonly></textarea></td>
+											<td><span th:text="${order.enteredBy.userName}"></span></td>
+											<td><span th:text="${order.sActive}"></span></td>
+											<td>													
+												<a href="#"   type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#smallmodal987">Audit</a>
+											</td>
+											
+											<td><a href="#">report</a></td>
+										</tr>
+                                       -->
+									</tbody>
+
+								</table>
+								
+								<div class="pagination-container" style="float:right" >
+	           			
+	           			    <ul id="inquiryTableP" class="pagination"></ul>
+				        
+				                 </div>
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+				
+				
+				
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-header">
+								<strong class="card-title">Item</strong>
+							</div>
+							<div class="card-body">
+								<table id="itemtable" class="table table-striped table-bordered display nowrap" style="width:100%">
+									<thead>
+										<tr>
+										     <th scope="col">Item Order ID</th>
+											<th scope="col">Item ID</th>
+											<th scope="col">Item Name</th>
+											<th scope="col">Category</th>
+											<th scope="col">Remarks</th>
+											<th scope="col">Action</th>
+										</tr>
+									</thead>
+									<tbody>
+									<!--  	<tr th:each="item:${orderItemData}">
+											<td><a  scope="row" type="text" th:href="@{/feedback/itemQty/search/{id}(id=${item.itemOrderId})}" th:text="${item.itemOrderId}"></a></td>
+											<td th:text="${item.listModelItem.itemName}"></td>
+											<td th:text="${item.listModelItem.itemTypeId.itemTypeName}"></td>
+											<td><textarea th:text="${item.listModelItem.itemTypeId.remarks}" style="width: 100%" rows="1" readonly> </textarea></td>
+											
+											<td>
+												<a href="#"  type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#smallmodal987">Audit</a>
+											</td>
+										</tr>  -->
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+
+
+
+				</div>
+				
+				
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-header">
+								<strong class="card-title">Spec Master</strong>
+							</div>
+							<div class="card-body">
+								<table id="qtytable" class="table table-striped table-bordered display nowrap" style="width:100%">
+									<thead>
+										<tr>
+											<th scope="col">Quantity ID</th>
+											<th scope="col">Item Quantity</th>
+											<th scope="col">Remarks</th>
+											<th scope="col">Design ID</th>
+											<th scope="col">Action</th>
+											<th scope="col">Feedback</th>
+										</tr>
+									</thead>
+									<tbody>
+										<!--  <tr th:each="itemQty:${itemQtyList}">
+											<td  class="orderitemqtyid"><a th:href="@{/feedback/itemSpec/search/{id}(id=${itemQty.orderItemQtyId})}" th:text="${itemQty.orderItemQtyId}"></a></td>
+											<td th:text="${itemQty.itemQty}">15 Yards</td>
+											<td><textarea th:text="${itemQty.remarks}" style="width: 100%" rows="1" readonly></textarea></td>
+										    <td></td>
+											<td>
+												<a href="#"data-toggle="modal" data-target="#feedbackmodal"  class="btn btn-success btn-sm btn-block feedback" >Feedback</a>
+												
+
+
+											</td>
+										</tr> -->
+										
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+
+
+
+				</div>
+				
+				
+				
+				<div class="row">
+					<div class="col-12">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="card">
+									<div class="card-header">
+										<strong class="card-title">Specification </strong>
+									</div>
+									<div class="card-body">
+										<table id="specmastertable" class="table table-striped table-bordered display nowrap" style="width:100%">
+											<thead>
+												<tr>
+													<th scope="col">Specification ID</th>
+													<th scope="col">Specification</th>
+													<th scope="col">Value</th>
+													<th scope="col">Remarks</th>
+													<th scope="col">Action</th>
+												</tr>
+											</thead>
+											<tbody>
+											<tr th:each="itemQtySpec : ${itemSpecList}">
+											<td scope="row"><span  th:text="${itemQtySpec.orderItemQtySpecId}"></span></td>
+											<td scope="row"><span th:text="${itemQtySpec.modelSpec.specName}"></span></td>
+											<td scope="row"><span th:text="${itemQtySpec.specValue}"></span></td>
+											<td scope="row"><span th:text="${itemQtySpec.remarks}"></span></td>
+											<td>
+												<a href="#"  type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#smallmodal987">Audit</a>
+											</td>
+										
+											</tr>	
+												
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+
+
+
+						</div>
+					</div>
+					
+
+
+	</div>
+	
+	
+	<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-header">
+								<strong class="card-title">Feedback</strong>
+							</div>
+							<div class="card-body">
+								<table id="feedbacktable"class="table table-striped table-bordered display nowrap" style="width:100%">
+									<thead>
+										<tr>
+											<th scope="col">Feedback ID</th>
+										<th scope="col">Date</th>
+										<th scope="col">Order Status</th>
+										<th scope="col">Cancel Reason</th>
+										<th scope="col">Remarks</th>
+										<th scope="col">Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="feedback : ${feedbackList}">
+											<td scope="row" class="feedbackid"><span  th:text="${feedback.orderOwnerFeedbackId}"></span></td>
+											<td scope="row"><span  th:text="${#calendars.format(feedback.feedbackDate, 'M/dd/yyyy')}"></span></td>
+										    <td scope="row"><span  th:text="${feedback.orderStatus}"></span></td>
+										    <td scope="row"><span  th:text="${feedback.cancelReason}"></span></td>
+										    <td scope="row"><span  th:text="${feedback.remarks}"></span></td>
+										    	<td>
+												<a href="#"  type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#smallmodal987">Audit</a>
+												<a href="#"data-toggle="modal" data-target="#editfeedbackmodal" class="btn btn-success btn-sm editfeedback" >Edit</a>
+
+											</td>
+											</tr>	
+										
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+
+
+
+				</div>
+  
+
+        </div>   <!-- <div class="panel-body">  -->
+
+
+
+                   </div>   <!-- <div class="panel">  -->
+                     
+                     
+
+                </div>
+
+            </div>
+            
+            
+            
+            <!--=====================================================================
+				entry info modal
+=====================================================================-->
+	<div class="modal fade" id="smallmodal987" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true" style="z-index: 999999999999">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="smallmodalLabel" style="color: #000">Entry info</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+
+					<div class="row">
+						<div class="col-12">
+							<div class="form-group">
+								<label for="cc-payment" class="control-label mb-1">Entered By</label>
+								<p>Jamal Khan</p>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<div class="form-group">
+								<label for="cc-payment" class="control-label mb-1">Entered Time</label>
+								<p>2:30 am</p>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<div class="form-group">
+								<label for="cc-payment" class="control-label mb-1">Update By</label>
+								<p>active</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+
+
+						<div class="col-12">
+							<div class="form-group">
+								<label for="cc-payment" class="control-label mb-1">Update Time</label>
+								<p>active</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	
+	<!-- ====================================================Feedback modal====================================== -->
+	   
+
+<!-- Modal -->
+<div class="modal fade" id="feedbackmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="feedbackmodal">User Feedback</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <form  method="post" novalidate="novalidate">
+
+					<div col="row">
+      
+           <div class="col-6">
+				<div class="form-group">
+					<label for="" class="control-label mb-1">Feedback Id</label>
+					<input type="text" id="feedbackId" placeholder="Feedback Id" class="form-control"  readonly>
+				</div>
+          </div>
+          
+          <div class="col-6">
+				<div class="form-group">
+					<label for="" class="control-label mb-1">OrderItemQtyId</label>
+					<input type="text" id="orderItemQtyId" placeholder="Qty Id" class="form-control" readonly>
+				</div>
+          </div>
+      </div>
+      
+      <div col="row">
+         
+         <div class="col-6">
+				<div class="form-group">
+					<label for="" class="control-label mb-1">Order Status<span style="color:red">*</span></label>
+					<select class="form-control" id="orderStatus" aria-required="true" aria-invalid="false" name=""  required>
+										<option value="0">Select</option>
+										<option value="1">Accept</option>
+										<option value="2">Reject</option>
+					</select>
+				</div>
+          </div>
+          
+          <div class="col-6">
+				    <div class="form-group">
+						<label>Feedback Date<span style="color:red">*</span></label>
+						<input type="date" value="0" class="form-control" name="feedbackdate" id="feedbackdate">
+					</div>
+			</div>
+          
+      
+      </div>
+      
+      <div col="row">
+      
+       <div class="col-4">
+				<div class="form-group">
+					<label for="" class="control-label mb-1">Reject Reason</label>
+					<textarea id="reason" rows="3" placeholder="Reject reason...." class="form-control"  style="width: 100%" ></textarea>
+				</div>
+          </div>
+         
+        
+        <div class="col-6">
+			<div class="form-group">
+				<label for="" class="control-label mb-1">Remarks</label>
+					<textarea rows="3" id="remarks" placeholder="Remarks here..."  class="form-control" style="width: 100%" ></textarea>
+			</div>
+		</div>
+		
+		<div class="col-2">
+			<div class="form-group">
+				<label for="cc-payment" class="control-label mb-1">Status</label>
+					<div class="custom-control custom-checkbox">
+						<input type="checkbox" class="custom-control-input" id="status"checked>
+							<label class="custom-control-label" for="status"></label>
+					</div>
+			</div>
+	  </div>
+      
+      </div>
+					
+						
+
+					</form>
+      </div>
+      <div class="modal-footer">
+         <button type="button" id="feedbacksave" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+	   
+	<!-- =========================================================End============================================= -->
+	
+	
+	<!-- ====================================================Edit Feedback modal====================================== -->
+	   
+
+<!-- Modal -->
+<div class="modal fade" id="editfeedbackmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editfeedbackmodal">Edit user feedback</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       		<div col="row">
+      
+           <div class="col-6">
+				<div class="form-group">
+					<label for="" class="control-label mb-1">Feedback Id</label>
+					<input type="text" id="editfeedbackId" placeholder="Feedback Id" class="form-control"  readonly>
+				</div>
+          </div>
+          
+          <div class="col-6">
+				<div class="form-group">
+					<label for="" class="control-label mb-1">OrderItemQtyId</label>
+					<input type="text" id="editorderItemQtyId" placeholder="Qty Id" class="form-control" readonly>
+				</div>
+          </div>
+      </div>
+      
+      <div col="row">
+         
+         <div class="col-6">
+				<div class="form-group">
+					<label for="" class="control-label mb-1">Order Status</label>
+					<select class="form-control" id="editorderStatus" aria-required="true" aria-invalid="false" name=""  required>
+										<option value="0">Select</option>
+										<option value="1">Accept</option>
+										<option value="2">Reject</option>
+					</select>
+				</div>
+          </div>
+          
+          <div class="col-6">
+				    <div class="form-group">
+						<label>Feedback Date</label>
+						<input type="date" class="form-control" value="0" name="feedbackdate"  id="editfeedbackdate">
+					</div>
+			</div>
+          
+      
+      </div>
+      
+      <div col="row">
+      
+       <div class="col-4">
+				<div class="form-group">
+					<label for="" class="control-label mb-1">Reject Reason</label>
+					<textarea id="editreason" placeholder="Reject reason...."   class="form-control" row="3" style="width: 100%" ></textarea>
+				</div>
+          </div>
+         
+        
+        <div class="col-6">
+			<div class="form-group">
+				<label for="" class="control-label mb-1">Remarks</label>
+					<textarea rows="3" id="editremarks" placeholder="Remarks here..." class="form-control" style="width: 100%" ></textarea>
+			</div>
+		</div>
+		
+		<div class="col-2">
+			<div class="form-group">
+				<label for="cc-payment" class="control-label mb-1">Status</label>
+					<div class="custom-control custom-checkbox">
+						<input type="checkbox" class="custom-control-input" id="editstatus" checked>
+							<label class="custom-control-label" for="editstatus"></label>
+					</div>
+			</div>
+	  </div>
+      
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="editfeedbacksave" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+	   
+	<!-- =========================================================End============================================= -->
+            
+            
+            
+        
+            
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!--    <script type="text/javascript" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>-->
+
+    <script src="/js/vendor/jquery-2.1.4.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/plugins.js"></script>
+    <script src="/js/main.js"></script>
+
+
+    <script src="/js/lib/data-table/datatables.min.js"></script>
+    <script src="/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+    <script src="/js/lib/data-table/dataTables.buttons.min.js"></script>
+    <script src="/js/lib/data-table/buttons.bootstrap.min.js"></script>
+    <script src="/js/lib/data-table/jszip.min.js"></script>
+    <script src="/js/lib/data-table/pdfmake.min.js"></script>
+    <script src="/js/lib/data-table/vfs_fonts.js"></script>
+    <script src="/js/lib/data-table/buttons.html5.min.js"></script>
+    <script src="/js/lib/data-table/buttons.print.min.js"></script>
+    <script src="/js/lib/data-table/buttons.colVis.min.js"></script>
+    <script src="/js/lib/data-table/datatables-init.js"></script>
+    <script type="text/javascript">
+		
+		Date.prototype.toDateInputValue = (function() {
+		    var local = new Date(this);
+		    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+		    return local.toJSON().slice(0,10);
+		});
+		
+		//document.getElementById('datePicker').value = new Date().toDateInputValue();
+		//document.getElementById('dateMail').value = new Date().toDateInputValue();
+		
+		
+		</script>
+		
+		<script>
+		
+		   $(document).ready(function() {
+	           $('#inquirytable').DataTable({
+	              "scrollX": true
+	          });
+
+	     });
+		   
+		   $(document).ready(function() {
+	           $('#itemtable').DataTable({
+	              "scrollX": true
+	          });
+
+	     });
+		   
+		   $(document).ready(function() {
+	           $('#qtytable').DataTable({
+	              "scrollX": true
+	          });
+
+	     });
+		   
+		   $(document).ready(function() {
+	           $('#feedbacktable').DataTable({
+	             "scrollX": true
+	          });
+
+	     });
+		   
+		   $(document).ready(function() {
+	           $('#specmastertable').DataTable({
+	              "scrollX": true
+	          });
+
+	     });
+		   
+		
+		
+		</script>
+		
+		<script>
+		 
+		 $("#qtytable").on('click','.feedback',function(){
+	    	 
+			 refresh: true
+    	     var $row = $(this).closest("tr");    // Find the row
+		     var id = $row.find(".qtyId").text();
+		      //alert(id);
+		     document.getElementById('orderItemQtyId').value = id;
+		   
+     });
+		
+		</script>
+		
+		
+		<!-- ===============================================Feedback save with ajax================================ -->
+		
+		   <script type="text/javascript">
+		      
+		   $('#feedbacksave').click(function(e) {
+		   	        		 
+		    		 var qtyId= document.getElementById("orderItemQtyId").value;
+		    		 var orderStatus = document.getElementById("orderStatus").value;
+		    		 var reason= document.getElementById("reason").value;
+		    		 var remarks =document.getElementById("remarks").value;
+		    		 var status = document.getElementById("status");
+		    		 var feedbackdate = document.getElementById("feedbackdate").value;
+		    		 
+		    		 var active;
+		    		 
+		    		 if (status.checked == true){
+		    			 active='1';
+		    		 }
+		    		 else{
+		    			 active='0';
+		    		 }
+	   		       
+		    		 
+		    		 var indexCheck1=document.getElementById("orderStatus");
+		    		
+		    	     var statuscheck=indexCheck1.options[indexCheck1.selectedIndex].text;
+		    	     
+		    	   //  alert(statuscheck);
+		    	     
+		    	     if(statuscheck=="Select" || feedbackdate==0 ){
+		    	    	 
+		    	    	 alert("Please select statics(*) mark field");
+		    	     }
+		    	     
+		    	     else{
+		    	    	 
+		    	     
+		    		 
+		    		 var formData= { 
+		      			      "qtyId" : qtyId,	
+		      			      "orderStatus" : orderStatus,
+		      			      "reason" : reason,
+		      			      "remarks" : remarks,
+		      			      "active" : active,
+		      			      "feedbackdate" : feedbackdate
+		      		        };
+		    		 
+		    		 $('#feedbacktable tbody').empty();
+		   			 
+		   			 $.ajax({
+		   		            type : "POST",	    		           
+		   		             url:"/feedback/save",
+		   		            dataType : 'json',
+		   			        data: formData,
+		   		            success: function(result){
+		   		            	
+		   		            	$.each(result, function(i,feedback){
+		 		            		
+		   	 		         		
+		   	 		         		var status=feedback.orderStatus;
+		   		            		
+		   		            		//alert(status);
+		   		            		
+		   		            		if(status==1){
+		   		            			status="Accept";
+		   		            		}
+		   		            		
+		   		            		else{
+		   		            			status="Reject"
+		   		            		}
+		   		            		
+		   	 		         		
+		   	 		         		
+		   	 		         		
+		   	 		         		 var d = new Date(feedback.feedbackDate);
+		   	                         var n = d.getMonth();
+		   	                         var n = d.getMonth() + 1;
+		   	                         d= (n.length > 1 ? n : "0" + n) + "/" + d.getDate() + "/" + d.getFullYear();
+		   	 		            		
+		   	 		            		 var customerRow = '<tr>' +
+		   	 			          	        
+		   	 		            		 
+		   	 		            		    '<td class="feedbackid" >' + feedback.orderOwnerFeedbackId+ '</td>' + 
+		   									'<td class="" >' + d + '</td>' + 
+		   									'<td class="" >' +status + '</td>' +
+		   									'<td class="" >' + feedback.cancelReason+ '</td>' +
+		   									'<td class="" >' + feedback.remarks+ '</td>' +
+		   									'<td><a href="#" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#smallmodal987">Audit</a> <a href="#"data-toggle="modal" data-target="#editfeedbackmodal" class="btn btn-success btn-sm editfeedback" >Edit</a>'+ '</td>'+
+		   									
+		   									 
+		   									
+		   									'</tr>';
+		   								  
+		   								  
+		   			     				
+		   			                        $('#feedbacktable tbody').append(customerRow);
+
+		   	 								
+		   	 		            	});
+		   		            	
+		   		            },
+		   			 });
+		   			 
+		    	     }
+		    	
+	       });
+	     
+		   
+		   </script>
+		
+		
+		<!-- =====================================================End here========================================= -->
+	
+      <!-- =======================================================Feddback Edit================================== -->
+         
+         <script>
+         
+			 $("#feedbacktable").on('click','.editfeedback',function(){
+				    	 
+			    	     var $row = $(this).closest("tr");    // Find the row
+					     var id = $row.find(".feedbackid").text();
+					    //  alert(id);
+					      document.getElementById('editfeedbackId').value = id;
+					      
+					      var formData= { 
+					   			     "id" : id	
+					   			     			      
+					   		       };
+								 
+								 $.ajax({
+							            type : "GET",	    		           
+							             url:"/feedback/edit",
+							            dataType : 'json',
+								        data: formData,
+							            success: function(result){
+							            	$.each(result, function(i,feedback){
+                                                
+							            		
+							            		var d = new Date(feedback.feedbackDate);
+						                         var n = d.getMonth();
+						                         var n = d.getMonth() + 1;
+						                         d= (n.length > 1 ? n : "0" + n) + "/" + d.getDate() + "/" + d.getFullYear();
+						                         
+						                         
+						                        // alert(d);
+							            		
+							            		document.getElementById("editorderItemQtyId").value=feedback.modelOrderItemQty.orderItemQtyId;	
+							            		document.getElementById("editorderStatus").value=feedback.orderStatus;
+							            		document.getElementById("editfeedbackdate").value=d;
+							            		document.getElementById("editreason").value=feedback.cancelReason;
+							            		document.getElementById("editremarks").value=feedback.remarks;
+							            		
+							            		});
+							            	
+							            }
+							            
+							            
+								 });
+								
+					      
+					   
+			     });
+         
+         </script>
+         
+      <!-- ==========================================================End========================================== -->
+      
+        <!-- ===============================================Edit Feedback save with ajax================================ -->
+		
+		   <script type="text/javascript">
+		      
+		   $('#editfeedbacksave').click(function(e) {
+		   	        
+			       //  alert("working");
+			         
+			         var feedbackId= document.getElementById('editfeedbackId').value;
+			         var qtyId= document.getElementById("editorderItemQtyId").value;
+		    		 var orderStatus = document.getElementById("editorderStatus").value;
+		    		 var reason= document.getElementById("editreason").value;
+		    		 var remarks =document.getElementById("editremarks").value;
+		    		 var status = document.getElementById("editstatus");
+		    		 var feedbackdate = document.getElementById("editfeedbackdate").value;
+		    		
+		    		// alert(feedbackId);
+		    		 
+		    		 var active;
+		    		 
+		    		 if (status.checked == true){
+		    			 active='1';
+		    		 }
+		    		 else{
+		    			 active='2';
+		    		 }
+	   		       
+		    		var formData= { 
+		      			      "qtyId" : qtyId,	
+		      			      "orderStatus" : orderStatus,
+		      			      "reason" : reason,
+		      			      "remarks" : remarks,
+		      			      "active" : active,
+		      			      "feedbackdate" : feedbackdate,
+		      			      "feedbackId"   : feedbackId
+		      		       };
+		    		
+		    		
+		    	//	$('#feedbacktable tbody').empty();
+		   			 
+		   			 $.ajax({
+		   		            type : "POST",	    		           
+		   		             url:"/editfeedback/save",
+		   		            dataType : 'json',
+		   			        data: formData,
+		   		            success: function(result){
+		   		            	
+                            $.each(result, function(i,feedback){
+		 		            		
+		   	 		         		
+		   	 		         		var status=feedback.orderStatus;
+		   		            		
+		   		            		//alert(status);
+		   		            		
+		   		            		if(status==1){
+		   		            			status="Accept";
+		   		            		}
+		   		            		
+		   		            		else{
+		   		            			status="Reject"
+		   		            		}
+		   		            		
+		   	 		         		
+		   	 		         		
+		   	 		         		
+		   	 		         		 var d = new Date(feedback.feedbackDate);
+		   	                         var n = d.getMonth();
+		   	                         var n = d.getMonth() + 1;
+		   	                         d= (n.length > 1 ? n : "0" + n) + "/" + d.getDate() + "/" + d.getFullYear();
+		   	 		            		
+		   	 		            		 var customerRow = '<tr>' +
+		   	 			          	        
+		   	 		            		 
+		   	 		            		    '<td class="feedbackid" >' + feedback.orderOwnerFeedbackId+ '</td>' + 
+		   									'<td class="" >' + d + '</td>' + 
+		   									'<td class="" >' +status + '</td>' +
+		   									'<td class="" >' + feedback.cancelReason+ '</td>' +
+		   									'<td class="" >' + feedback.remarks+ '</td>' +
+		   									'<td><a href="#" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#smallmodal987">Audit</a> <a href="#"data-toggle="modal" data-target="#editfeedbackmodal" class="btn btn-success btn-sm editfeedback" >Edit</a>'+ '</td>'+
+		   									
+		   									 
+		   									
+		   									'</tr>';
+		   								  
+		   								  
+		   			     				
+		   			                        $('#feedbacktable tbody').append(customerRow);
+
+		   	 								
+		   	 		            	});
+                            
+                           
+		   		            	
+		   		           },
+		   			 });
+		   			 
+		   			 
+		   			$("#feedbacktable tbody tr").each(function(){
+					  	 // alert("find chd table");
+					  	   var $row = $(this).closest("tr");    // Find the row
+				 	       var checkingid = $row.find(".feedbackid").text(); // Find the text
+				 	      //alert(idtest);
+				 	       if(feedbackId==checkingid){
+				 	    	  $(this).closest("tr").remove();
+				 	    	  
+				 	    	
+				 	       }
+					  });
+		   			 
+		   			//$(this).closest('tr').remove();
+		    	
+	       });
+		   
+		   </script>
+		
+		
+		<!-- =====================================================End here========================================= -->
+     <script>
+       
+	   $(document).ready(function() {
+	        
+	        $.getJSON("/inquery/owner", {
+	            ownerType : $('#ownerTypeSearch').val(),
+	            ajax : 'true'
+	        }, function(data) {
+	            var html = '<option value="">Select Buyer</option>';
+	            var len = data.length;
+	            for ( var i = 0; i < len; i++) {
+	         
+	                  html += '<option value="' + data[i].orderOwnerId + '">'
+	                        + data[i].ownerName + '</option>';
+	            }
+	            html += '</option>';
+	            $('#ownerSearch').html(html);
+	        });
+
+
+	});
+	   
+	   
+	   $('#ownerTypeSearch').change(
+		        function() {
+		            $.getJSON("/inquery/owner", {
+		                ownerType : $(this).val(),
+		                ajax : 'true'
+		            }, function(data) {
+		                var html = '<option value="">Select Buyer Name</option>';
+		                var len = data.length;
+		                for ( var i = 0; i < len; i++) {
+		                    html += '<option value="' + data[i].orderOwnerId + '">'
+		                            + data[i].ownerName + '</option>';
+		                }
+		                html += '</option>';
+		                $('#ownerSearch').html(html);
+		            });
+		        });
+	   
+	   
+	   $('#userSearch').change(
+		        function() {
+		            $.getJSON("/inquery/user/cluster", {
+		               user : $(this).val(),
+		                ajax : 'true'
+		            }, function(data) {
+		                var html = '<option value="0">Select Cluster Name</option>';
+		                var len = data.length;
+		              
+		                for ( var i = 0; i < len; i++) {
+		                    html += '<option value="' + data[i].modelCluster.clusterId+ '">'
+		                            + data[i].modelCluster.clusterName + '</option>';
+		                }
+		                html += '</option>';
+		                $('#clusterSearch').html(html);
+		            });
+		        });
+     
+     </script>
+      
+      <!-- =========================================Inquiry search function================================ -->
+             
+             <script>
+             
+             $('#searchInquiry').click(function(e) {
+            	 
+            	// alert("Searching your inquiry.................");
+            	 
+            	 //var startDate= document.getElementById("startDate").value;
+        		// var endDate= document.getElementById("searchEnd").value;
+            	 
+            	 
+            	 var active=document.getElementById("activeSearch");
+           	  
+           	  var activeStatus;
+           	  
+           	  if(active.checked==true){
+           		  activeStatus="1";
+           	 }
+           	  
+           	  else{
+           		  activeStatus="0";
+           	  }
+            	 
+            	 var formData= { 
+ 	                    "ownerType" :$("#ownerTypeSearch").val(),
+ 	                    "owner" : $("#ownerSearch").val(),
+ 	                    "ultimateOwner" : $("#ultimate_Buyer").val(),
+ 	                    "inquiryId" : $("#inquiryIdSearch").val(),
+ 	                     "user" : $("#userSearch").val(),
+ 	                     "cluster" : $("#clusterSearch").val(),
+ 	                    "itemName" : $("#itemSearch").val(),
+	                     "specName" : $("#specSearch").val(),
+ 	                    "startDate" : $("#startDate").val(),
+ 	                    "endDate" : $("#endDate").val(),
+ 	                    "mail" :$("#mailId").val(),
+ 	                    "inquiryNo" : $("#inquiryNo").val(),
+ 	                    "remarks" : $("#remarksSearch").val(),
+ 	                    "status" : activeStatus
+ 	                    
+ 	                    };
+            	 
+            	 
+            	 $('#inquirytable tbody').empty();
+            	 $('#feedbacktable tbody').empty();
+            	 $('#itemtable tbody').empty();
+            	 $('#qtytable tbody').empty();
+            	 $('#specmastertable tbody').empty();
+    			 
+        	 	 $.ajax({
+        		            type : "Get",	    		           
+        		             url:"/userfeedbackcontroller/search/inquiry",
+        		            dataType : 'json',
+        			        data: formData,
+        		            success: function(result){
+        		            
+        		            	$.each(result, function(i,order){
+        		            		
+        		            		
+        		            		var status=order.activeStatus;
+        		            		
+        		            		//alert(status);
+        		            		
+        		            		if(status==1){
+        		            			status="Yes";
+        		            		}
+        		            		
+        		            		else{
+        		            			status="No"
+        		            		}
+        		            		
+        		            		
+        		            		 var d = new Date(order.orderDate);
+                                     var n = d.getMonth();
+                                     var n = d.getMonth() + 1;
+                                     d= (n.length > 1 ? n : "0" + n) + "/" + d.getDate() + "/" + d.getFullYear();
+        		            		
+        		            		 var customerRow = '<tr>' +
+        			          	        
+        		            		 
+     								
+     								'<td class="inquiryId" >' + order.orderId+ '</td>' + 
+     								'<td class="" >' + order.userRefNo+ '</td>' + 
+     								'<td class="" >' + order.modelOrderOwner.ownerName+ '</td>' + 
+     								//'<td class="" >' + order.ultimateOwner.ownerName+ '</td>' +
+     								
+     								'<td>'+ + '<td>'+
+     								'<td class="" >' + d + '</td>' + 
+     								'<td class="" >' + order.modelOrderOwner.ownerEmail+ '</td>' +
+     								'<td class="" >' + order.orderRemarks+ '</td>' +
+     								'<td class="" >' + order.enteredBy.userName+ '</td>' +
+     								'<td class="" >' + status + '</td>' +
+     								'<td><a href="#" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#smallmodal987">Audit</a>'+ '</td>'+
+     								
+     								 
+     								
+     								'</tr>';
+     							  
+     							  
+     		     				
+     		                        $('#inquirytable tbody').append(customerRow);
+
+        								
+        		            	});
+        		            	 
+        		            	
+        		            },
+        		            
+        		         
+        			 });
+            	 
+             });
+             
+             </script>
+             
+      <!-- ============================================End here============================================ -->
+      
+      
+       <!-- ================================================GetItem Data On Click inquiry Id========================== -->
+
+      <script type = "text/javascript">
+      
+      $("#inquirytable").on('click','.inquiryId',function(){
+    	  
+    	// alert("finding inquiry id.............");
+    	 
+    	 var $row = $(this).closest("tr");    // Find the row
+	     var id = $row.find(".inquiryId").text();
+    	 
+    	// alert("Inquiry id is : "+id);
+    	 
+    	 
+    	 var formData= { 
+                  "orderId" : id
+                                 
+                  };
+     	 
+     	 
+     	 $('#itemtable tbody').empty();
+     	 $('#qtytable tbody').empty();
+     	$('#specmastertable tbody').empty();
+     	$('#feedbacktable tbody').empty();
+			 
+ 	 	 $.ajax({
+ 		            type : "Get",	    		           
+ 		             url:"/userfeedbackcontroller/search/item/byorderid",
+ 		            dataType : 'json',
+ 			        data: formData,
+ 		            success: function(result){
+ 		            
+ 		          	$.each(result, function(i,item){
+ 		            		
+ 		            		
+		            	
+ 		            		
+ 		            		 var customerRow = '<tr>' +
+ 			          	        
+ 		            		 
+ 		            		    '<td class="itemOrderId" >' + item.itemOrderId+ '</td>' + 
+								'<td class="itemId" >' + item.listModelItem.itemId+ '</td>' + 
+								'<td class="" >' + item.listModelItem.itemName+ '</td>' + 
+								'<td class="" >' + item.listModelItem.itemTypeId.itemTypeName + '</td>' +	
+								'<td class="" >' + item.remarks+ '</td>' +								
+								'<td><a href="#" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#smallmodal987">Audit</a>'+ '</td>'+
+								
+								 
+								
+								'</tr>';
+							  
+							  
+		     				
+		                        $('#itemtable tbody').append(customerRow);
+
+ 								
+ 		            	});
+ 		            
+ 		            	
+ 		            },
+ 		            
+ 		         
+ 			 });
+    	    
+      });
+    </script>
+   
+   <!-- ======================================================End============================================== -->
+   
+   
+   
+    <!-- ================================================Get Qty Data On Click orderItem Id========================== -->
+
+      <script type = "text/javascript">
+      
+      $("#itemtable").on('click','.itemOrderId',function(){
+    	  
+    	// alert("finding itemOrder id.............");
+    	 
+    	 var $row = $(this).closest("tr");    // Find the row
+	     var id = $row.find(".itemOrderId").text();
+    	 
+    	// alert("itemOrder id is : "+id);
+    	 
+    	 
+    	 var formData= { 
+                  "itemOrderId" : id
+                                 
+                  };
+     	 
+     	 
+     	
+     	 $('#qtytable tbody').empty();
+      	$('#specmastertable tbody').empty();
+      	$('#feedbacktable tbody').empty();
+			 
+ 	 	 $.ajax({
+ 		            type : "Get",	    		           
+ 		             url:"/userfeedbackcontroller/search/qty/byitemorderid",
+ 		            dataType : 'json',
+ 			        data: formData,
+ 		            success: function(result){
+ 		            
+ 		          	$.each(result, function(i,qty){
+ 		            		
+ 		            		
+		            	//alert(qty.modelDesign.designId);
+ 		            		
+ 		            		 var customerRow = '<tr>' +
+ 			          	        
+ 		            		 
+ 		            		    '<td class="qtyId" >' + qty.orderItemQtyId+ '</td>' + 
+								'<td class="" >' + qty.itemQty+ '</td>' + 
+								'<td class="" >' + qty.remarks+ '</td>' +
+								'<td class="" >' + + '</td>' +
+								'<td><a href="#" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#smallmodal987">Audit</a>'+ '</td>'+
+								'<td><a href="#"data-toggle="modal" data-target="#feedbackmodal"  class="btn btn-success btn-sm btn-block feedback" >Feedback</a>'+ '</td>'+
+																
+								'</tr>';
+							  
+							  
+		     				
+		                        $('#qtytable tbody').append(customerRow);
+
+ 								
+ 		            	});
+ 		            
+ 		           	
+ 		            },
+ 		            
+ 		         
+ 			 });
+    	    
+      });
+    </script>
+   
+   <!-- ======================================================End============================================== -->
+   
+   
+   
+    <!-- ================================================Get Specification Data On Click specmst Id========================== -->
+
+      <script type = "text/javascript">
+      
+      $("#qtytable").on('click','.qtyId',function(){
+    	  
+    	// alert("finding itemOrder id.............");
+    	 
+    	 var $row = $(this).closest("tr");    // Find the row
+	     var id = $row.find(".qtyId").text();
+    	 
+    	// alert("itemQtyId id is : "+id);
+    	 
+    	 
+    	 var formData= { 
+                  "itemQtyId" : id
+                                 
+                  };
+     	 
+     	 
+     	
+     	$('#specmastertable tbody').empty();
+      	$('#feedbacktable tbody').empty();
+			 
+ 	 	 $.ajax({
+ 		            type : "Get",	    		           
+ 		             url:"/userfeedbackcontroller/search/specification/byitemQtyid",
+ 		            dataType : 'json',
+ 			        data: formData,
+ 		            success: function(result){
+ 		            
+ 		         	$.each(result, function(i,spec){
+ 		            		
+ 		            		
+ 		            		
+ 		            		 var customerRow = '<tr>' +
+ 			          	        
+ 		            		 
+ 		            		    '<td class="qtyId" >' + spec.orderItemQtySpecId+ '</td>' + 
+								'<td class="itemId" >' + spec.modelSpec.specName+ '</td>' + 
+								'<td class="" >' + spec.specValue+ '</td>' +
+								'<td class="" >' + spec.remarks+ '</td>' +
+								'<td><a href="#" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#smallmodal987">Audit</a>'+ '</td>'+
+								
+								 
+								
+								'</tr>';
+							  
+							  
+		     				
+		                        $('#specmastertable tbody').append(customerRow);
+
+ 								
+ 		            	});
+ 		            
+ 		           	
+ 		            },
+ 		            
+ 		         
+ 			 });
+    	    
+      });
+    </script>
+   
+   <!-- ======================================================End============================================== -->
+   
+   
+   
+    <!-- ================================================Get Specification Data On Click specmst Id========================== -->
+
+      <script type = "text/javascript">
+      
+      $("#qtytable").on('click','.qtyId',function(){
+    	  
+    	// alert("finding itemOrder id.............");
+    	 
+    	 var $row = $(this).closest("tr");    // Find the row
+	     var id = $row.find(".qtyId").text();
+    	 
+    	// alert("itemQtyId id is : "+id);
+    	 
+    	 
+    	 var formData= { 
+                  "itemQtyId" : id
+                                 
+                  };
+     	 
+     	 
+     	 $('#feedbacktable tbody').empty();
+			 
+ 	 	 $.ajax({
+ 		            type : "Get",	    		           
+ 		             url:"/userfeedbackcontroller/search/feedback/byitemQtyid",
+ 		            dataType : 'json',
+ 			        data: formData,
+ 		            success: function(result){
+ 		            
+ 		         	$.each(result, function(i,feedback){
+ 		            		
+ 		         		
+ 		         		var status=feedback.orderStatus;
+	            		
+	            		//alert(status);
+	            		
+	            		if(status==1){
+	            			status="Accept";
+	            		}
+	            		
+	            		else{
+	            			status="Reject"
+	            		}
+	            		
+ 		         		
+ 		         		
+ 		         		
+ 		         		 var d = new Date(feedback.feedbackDate);
+                         var n = d.getMonth();
+                         var n = d.getMonth() + 1;
+                         d= (n.length > 1 ? n : "0" + n) + "/" + d.getDate() + "/" + d.getFullYear();
+ 		            		
+ 		            		 var customerRow = '<tr>' +
+ 			          	        
+ 		            		 
+ 		            		    '<td class="feedbackid" >' + feedback.orderOwnerFeedbackId+ '</td>' + 
+								'<td class="" >' + d + '</td>' + 
+								'<td class="" >' +status + '</td>' +
+								'<td class="" >' + feedback.cancelReason+ '</td>' +
+								'<td class="" >' + feedback.remarks+ '</td>' +
+								'<td><a href="#" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#smallmodal987">Audit</a> <a href="#"data-toggle="modal" data-target="#editfeedbackmodal" class="btn btn-success btn-sm editfeedback" >Edit</a>'+ '</td>'+
+								
+								 
+								
+								'</tr>';
+							  
+							  
+		     				
+		                        $('#feedbacktable tbody').append(customerRow);
+
+ 								
+ 		            	});
+ 		            
+ 		           	
+ 		            },
+ 		            
+ 		         
+ 			 });
+    	    
+      });
+    </script>
+   
+   <!-- ======================================================End============================================== -->
+   
+   
+      <script type="text/javascript" th:inline="javascript">
+		
+		var now = new Date();
+		var day = ("0" + now.getDate()).slice(-2);
+		var month = ("0" + (now.getMonth() + 1)).slice(-2);
+	
+	    var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+	    
+	    document.getElementById('feedbackdate').value = today;
+       // document.getElementById('enddate').value=today;
+       
+       
+	</script>      
+	
+	
+	<!--pagination  Script-->
+	<script>
+	
+	var table='#inquirytable';
+	
+	
+	  $('#maxRows').on('change',function(){
+	
+	$('.pagination').html('');
+	
+	var trnum =0;
+	var maxRows =parseInt($(this).val());
+	var  totalRows=$(table+' tbody tr').length;
+	
+	$(table+' tr:gt(0)').each(function(e) {
+	
+	              trnum++;
+	              
+	              if(trnum > maxRows)
+	              {
+	                 $(this).hide();
+	              }
+	              if(trnum <= maxRows)
+	              {
+	                 $(this).show();
+	              }
+	    
+	
+	
+	});   //each function
+	
+	 if(totalRows > maxRows)
+	              {
+	              
+	              
+	              var pagenum =Math.ceil(totalRows/maxRows);
+	              
+	              for(var i=1;i<=pagenum;)
+	              {
+	                 $('#inquiryTableP').append('<li class="btn-sm" data-page="'+i+'">\<span>'+ i++ +'</span></li>').show();
+	              }  //for
+	                
+	              }   //if
+	              
+	              
+	              $('.pagination li:first-child').addClass('active');
+	             $('.pagination li').on('click',function(){
+	             
+	             var pageNum =  $(this).attr('data-page');
+	             var trIndex= 0;
+	             
+	             $('.pagination li').removeClass('active');
+	              $(this).addClass('active');
+	             $(table+' tr:gt(0)').each(function(e) {
+	             
+	                trIndex++;
+	                if(trIndex >(maxRows*pageNum) || trIndex<=((maxRows*pageNum)-maxRows))
+	                {
+	                    $(this).hide();
+	                }
+	                else
+	                {
+	                $(this).show();
+	                }
+	             
+	             
+	             
+	                }); // each function
+	             
+	             });  //  click function
+	             
+	             
+	      });   //on change function
+	             
+	  
+	/*             
+	    $(function () {
+	    
+	    
+	               $('table tr:gt(0)').prepend('<th>ID</th>');
+	               
+	               var id = 0;
+	               
+	               
+	               $('table tr:gt(0)').each(function(e) {
+	               
+	               id++;
+	               
+	                $(this).prepend('<th>'+id+'</th>');
+	               
+	               
+	              }); // each function
+	    
+	    });
+	    
+	*/    
+	            
+</script>
+      
+            
+</body>
+
+</html>
